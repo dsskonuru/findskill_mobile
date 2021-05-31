@@ -1,0 +1,58 @@
+name: find_skill
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  auto_route: ^2.2.0
+  camera: ^0.8.1+1
+  equatable: ^2.0.0
+  flutter_riverpod: ^0.14.0+3
+  flutter_svg: ^0.22.0
+  json_annotation: ^4.0.1
+  location: ^4.1.1
+  video_player: ^2.1.1
+  video_trimmer: ^0.5.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  auto_route_generator: ^2.1.0
+  build_runner: ^2.0.3
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/jpg/onboard1.jpg
+    - assets/png/FindSkill-Logo-Symbol.png
+    - assets/png/FindSkill-Logo-WithText.png
+    - assets/png/FindSkill-Logo.png
+    - assets/video/intro.mp4
+    - assets/video/sample.mp4
+    - assets/svg/onboarding-image.svg
+    - assets/svg/findskill-appbar.svg
+
+  fonts:
+    - family: Fruitger-Lt
+      fonts:
+        - asset: assets/fonts/Frutiger-Lt/Frutiger LT 45 Light.ttf
+          weight: 300
+        - asset: assets/fonts/Frutiger-Lt/Frutiger LT 55 Roman.ttf
+          style: normal
+        - asset: assets/fonts/Frutiger-Lt/Frutiger LT 65 Bold.ttf
+          weight: 700
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
+          style: normal
