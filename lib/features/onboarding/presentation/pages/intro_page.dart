@@ -1,7 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:find_skill/core/router/router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_player/video_player.dart';
-import 'package:auto_route/auto_route.dart';
 
 class IntroPage extends StatefulWidget {
   @override
@@ -25,6 +26,7 @@ class _IntroPageState extends State<IntroPage> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(MediaQuery.of(context).size.toString());
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -34,12 +36,12 @@ class _IntroPageState extends State<IntroPage> {
               padding: const EdgeInsets.all(12.0),
               child: Image.asset(
                 "assets/png/FindSkill-Logo.png",
-                width: 270,
+                height: 12.h,
               ),
             ),
             Container(
-              padding: EdgeInsets.all(20),
-              width: 270,
+              padding: const EdgeInsets.all(20),
+              height: 120.w,
               child: InkWell(
                 onTap: () {
                   setState(() {
@@ -58,14 +60,13 @@ class _IntroPageState extends State<IntroPage> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
                       _controller.pause();
                     });
-                    context.router.push(SampleVideoRoute());
+                    context.router.push(const SampleVideoRoute());
                   },
                   child: Text(
                     "Find Skills",
@@ -73,14 +74,14 @@ class _IntroPageState extends State<IntroPage> {
                   ),
                 ),
                 SizedBox(
-                  width: 9.0,
+                  width: 9.w,
                 ),
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
                       _controller.pause();
                     });
-                    context.router.push(SampleVideoRoute());
+                    context.router.push(const SampleVideoRoute());
                   },
                   child: Text(
                     "List Your Skills",

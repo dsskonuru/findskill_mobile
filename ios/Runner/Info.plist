@@ -46,6 +46,11 @@
   		<key>NSAllowsArbitraryLoads</key>
 	  	<true/>
 	</dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+  		<key>NSAllowsArbitraryLoads</key>
+  		<true/>
+	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Allow camera usage for video capture?</string>
 	<key>NSMicrophoneUsageDescription</key>

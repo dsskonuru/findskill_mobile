@@ -1,7 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:find_skill/core/router/router.gr.dart';
 import 'package:find_skill/features/onboarding/presentation/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_route/auto_route.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_player/video_player.dart';
 
 class SampleVideoPage extends StatefulWidget {
@@ -32,8 +33,8 @@ class _SampleVideoPageState extends State<SampleVideoPage> {
             child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
+              padding: EdgeInsets.only(top: 2.h),
+              child: const Text(
                 "Sample Video",
                 style: TextStyle(
                   color: Colors.black,
@@ -42,8 +43,8 @@ class _SampleVideoPageState extends State<SampleVideoPage> {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(12.0),
-              width: 270,
+              padding: EdgeInsets.all(2.h),
+              height: 64.h,
               child: InkWell(
                 onTap: () {
                   setState(() {
@@ -67,7 +68,7 @@ class _SampleVideoPageState extends State<SampleVideoPage> {
                     setState(() {
                       _controller.pause();
                     });
-                    context.router.push(VideoCaptureRoute());
+                    context.router.push(const VideoCaptureRoute());
                   },
                   child: Text(
                     "Create your video",

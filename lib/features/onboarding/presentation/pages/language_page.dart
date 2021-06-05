@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../core/router/router.gr.dart';
 
@@ -20,7 +21,7 @@ class LanguagePage extends ConsumerWidget {
             SvgPicture.asset(
               'assets/svg/onboarding-image.svg',
               placeholderBuilder: (BuildContext context) =>
-                  Container(child: const CircularProgressIndicator()),
+                  const CircularProgressIndicator(),
             ),
             // Image.asset("assets/jpg/onboard1.jpg"),
             Padding(
@@ -28,13 +29,14 @@ class LanguagePage extends ConsumerWidget {
               child: Image.asset(
                 "assets/png/FindSkill-Logo.png",
                 fit: BoxFit.scaleDown,
+                height: 12.h,
               ),
             ),
             DropdownButton<String>(
               focusColor: Colors.white,
               value: language.name,
               elevation: 5,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               iconEnabledColor: Colors.black,
               items: Language.values.map<DropdownMenuItem<String>>((value) {
                 return DropdownMenuItem<String>(
@@ -45,7 +47,7 @@ class LanguagePage extends ConsumerWidget {
                   ),
                 );
               }).toList(),
-              hint: Text(
+              hint: const Text(
                 "Please choose a langauage",
                 style: TextStyle(
                     color: Colors.black,
@@ -55,26 +57,25 @@ class LanguagePage extends ConsumerWidget {
               onChanged: (String? value) => language.setLanguage(value!),
             ),
             ElevatedButton(
-              onPressed: () => context.router.push(IntroRoute()),
+              onPressed: () => context.router.push(const IntroRoute()),
               child: Text(
                 "Set Language",
                 style: Theme.of(context).textTheme.button,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'Already have an account?',
                   style: TextStyle(fontSize: 14),
                 ),
                 TextButton(
-                    onPressed: () => context.router.push(IntroRoute()),
-                    child: Text(
+                    onPressed: () => context.router.push(const IntroRoute()),
+                    child: const Text(
                       'Login',
                       style: TextStyle(fontSize: 14),
                     ))

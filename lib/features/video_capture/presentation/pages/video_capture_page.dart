@@ -1,14 +1,19 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
+import 'package:find_skill/core/router/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../main.dart';
+
 class VideoCapturePage extends StatefulWidget {
   @override
-  _VideoCapturePageState createState() {
-    return _VideoCapturePageState();
+  _VideoCaptureState createState() {
+    return _VideoCaptureState();
   }
 }
 
@@ -26,18 +31,9 @@ IconData getCameraLensIcon(CameraLensDirection direction) {
   }
 }
 
-void logError(String code, String? message) {
-  if (message != null) {
-    print('Error: $code\nError Message: $message');
-  } else {
-    print('Error: $code');
-  }
-}
-
-class _VideoCapturePageState extends State<VideoCapturePage>
+class _VideoCaptureState extends State<VideoCapturePage>
     with WidgetsBindingObserver, TickerProviderStateMixin {
   CameraController? controller;
-  XFile? imageFile;
   XFile? videoFile;
   VideoPlayerController? videoController;
   VoidCallback? videoPlayerListener;
@@ -78,49 +74,27 @@ class _VideoCapturePageState extends State<VideoCapturePage>
     }
   }
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        title: const Text('Camera example'),
-      ),
       body: Column(
         children: <Widget>[
           Expanded(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: Center(
-                  child: _cameraPreviewWidget(),
-                ),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.black,
-                border: Border.all(
-                  color:
-                      controller != null && controller!.value.isRecordingVideo
-                          ? Colors.redAccent
-                          : Colors.grey,
-                  width: 3.0,
-                ),
-              ),
+            child: Center(
+              child: _cameraPreviewWidget(),
             ),
           ),
-          _captureControlRowWidget(),
-          // _modeControlRowWidget(),
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                _cameraTogglesRowWidget(),
-                _thumbnailWidget(),
-              ],
-            ),
-          ),
+          Row(
+            children: [
+              Column(
+                children: [
+                  _captureControlRowWidget(),
+                  _cameraTogglesRowWidget(),
+                ],
+              ),
+              _thumbnailWidget(),
+            ],
+          )
         ],
       ),
     );
@@ -185,24 +159,28 @@ class _VideoCapturePageState extends State<VideoCapturePage>
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            localVideoController == null && imageFile == null
-                ? Container()
-                : SizedBox(
-                    child: (localVideoController == null)
-                        ? Image.file(File(imageFile!.path))
-                        : Container(
-                            child: Center(
-                              child: AspectRatio(
-                                  aspectRatio:
-                                      localVideoController.value.aspectRatio,
-                                  child: VideoPlayer(localVideoController)),
-                            ),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.pink)),
-                          ),
-                    width: 64.0,
-                    height: 64.0,
+            if (localVideoController == null)
+              Container()
+            else
+              InkWell(
+                onTap: () async {
+                  final File file = File(videoFile!.path);
+                  await context.router.navigate(VideoTrimmerRoute(file: file));
+                },
+                child: SizedBox(
+                  width: 64.0,
+                  height: 64.0,
+                  child: Container(
+                    decoration:
+                        BoxDecoration(border: Border.all(color: Colors.pink)),
+                    child: Center(
+                      child: AspectRatio(
+                          aspectRatio: localVideoController.value.aspectRatio,
+                          child: VideoPlayer(localVideoController)),
+                    ),
                   ),
+                ),
+              ),
           ],
         ),
       ),
@@ -215,17 +193,7 @@ class _VideoCapturePageState extends State<VideoCapturePage>
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      mainAxisSize: MainAxisSize.max,
       children: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.camera_alt),
-          color: Colors.blue,
-          onPressed: cameraController != null &&
-                  cameraController.value.isInitialized &&
-                  !cameraController.value.isRecordingVideo
-              ? onTakePictureButtonPressed
-              : null,
-        ),
         IconButton(
           icon: const Icon(Icons.videocam),
           color: Colors.blue,
@@ -238,8 +206,8 @@ class _VideoCapturePageState extends State<VideoCapturePage>
         IconButton(
           icon: cameraController != null &&
                   cameraController.value.isRecordingPaused
-              ? Icon(Icons.play_arrow)
-              : Icon(Icons.pause),
+              ? const Icon(Icons.play_arrow)
+              : const Icon(Icons.pause),
           color: Colors.blue,
           onPressed: cameraController != null &&
                   cameraController.value.isInitialized &&
@@ -266,18 +234,17 @@ class _VideoCapturePageState extends State<VideoCapturePage>
   Widget _cameraTogglesRowWidget() {
     final List<Widget> toggles = <Widget>[];
 
-    final onChanged = (CameraDescription? description) {
+    void onChanged(CameraDescription? description) {
       if (description == null) {
         return;
       }
-
       onNewCameraSelected(description);
-    };
+    }
 
     if (cameras.isEmpty) {
       return const Text('No camera found');
     } else {
-      for (CameraDescription cameraDescription in cameras) {
+      for (final CameraDescription cameraDescription in cameras) {
         toggles.add(
           SizedBox(
             width: 90.0,
@@ -298,13 +265,6 @@ class _VideoCapturePageState extends State<VideoCapturePage>
     return Row(children: toggles);
   }
 
-  String timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
-
-  void showInSnackBar(String message) {
-    // ignore: deprecated_member_use
-    _scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(message)));
-  }
-
   void onViewFinderTap(TapDownDetails details, BoxConstraints constraints) {
     if (controller == null) {
       return;
@@ -320,7 +280,7 @@ class _VideoCapturePageState extends State<VideoCapturePage>
     cameraController.setFocusPoint(offset);
   }
 
-  void onNewCameraSelected(CameraDescription cameraDescription) async {
+  Future<void> onNewCameraSelected(CameraDescription cameraDescription) async {
     if (controller != null) {
       await controller!.dispose();
     }
@@ -336,8 +296,7 @@ class _VideoCapturePageState extends State<VideoCapturePage>
     cameraController.addListener(() {
       if (mounted) setState(() {});
       if (cameraController.value.hasError) {
-        showInSnackBar(
-            'Camera error ${cameraController.value.errorDescription}');
+        log('Camera error ${cameraController.value.errorDescription}');
       }
     });
 
@@ -360,19 +319,6 @@ class _VideoCapturePageState extends State<VideoCapturePage>
     }
   }
 
-  void onTakePictureButtonPressed() {
-    takePicture().then((XFile? file) {
-      if (mounted) {
-        setState(() {
-          imageFile = file;
-          videoController?.dispose();
-          videoController = null;
-        });
-        if (file != null) showInSnackBar('Picture saved to ${file.path}');
-      }
-    });
-  }
-
   void onVideoRecordButtonPressed() {
     startVideoRecording().then((_) {
       if (mounted) setState(() {});
@@ -383,7 +329,7 @@ class _VideoCapturePageState extends State<VideoCapturePage>
     stopVideoRecording().then((file) {
       if (mounted) setState(() {});
       if (file != null) {
-        showInSnackBar('Video recorded to ${file.path}');
+        log('Video recorded to ${file.path}');
         videoFile = file;
         _startVideoPlayer();
       }
@@ -393,14 +339,14 @@ class _VideoCapturePageState extends State<VideoCapturePage>
   void onPauseButtonPressed() {
     pauseVideoRecording().then((_) {
       if (mounted) setState(() {});
-      showInSnackBar('Video recording paused');
+      log('Video recording paused');
     });
   }
 
   void onResumeButtonPressed() {
     resumeVideoRecording().then((_) {
       if (mounted) setState(() {});
-      showInSnackBar('Video recording resumed');
+      log('Video recording resumed');
     });
   }
 
@@ -408,7 +354,7 @@ class _VideoCapturePageState extends State<VideoCapturePage>
     final CameraController? cameraController = controller;
 
     if (cameraController == null || !cameraController.value.isInitialized) {
-      showInSnackBar('Error: select a camera first.');
+      log('Error: select a camera first.');
       return;
     }
 
@@ -444,7 +390,7 @@ class _VideoCapturePageState extends State<VideoCapturePage>
     final CameraController? cameraController = controller;
 
     if (cameraController == null || !cameraController.value.isRecordingVideo) {
-      return null;
+      return;
     }
 
     try {
@@ -459,7 +405,7 @@ class _VideoCapturePageState extends State<VideoCapturePage>
     final CameraController? cameraController = controller;
 
     if (cameraController == null || !cameraController.value.isRecordingVideo) {
-      return null;
+      return;
     }
 
     try {
@@ -490,58 +436,14 @@ class _VideoCapturePageState extends State<VideoCapturePage>
     await videoController?.dispose();
     if (mounted) {
       setState(() {
-        imageFile = null;
         videoController = vController;
       });
     }
     await vController.play();
   }
 
-  Future<XFile?> takePicture() async {
-    final CameraController? cameraController = controller;
-    if (cameraController == null || !cameraController.value.isInitialized) {
-      showInSnackBar('Error: select a camera first.');
-      return null;
-    }
-
-    if (cameraController.value.isTakingPicture) {
-      // A capture is already pending, do nothing.
-      return null;
-    }
-
-    try {
-      XFile file = await cameraController.takePicture();
-      return file;
-    } on CameraException catch (e) {
-      _showCameraException(e);
-      return null;
-    }
-  }
-
   void _showCameraException(CameraException e) {
     logError(e.code, e.description);
-    showInSnackBar('Error: ${e.code}\n${e.description}');
+    log('Error: ${e.code}\n${e.description}');
   }
-}
-
-class CameraApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: VideoCapturePage(),
-    );
-  }
-}
-
-List<CameraDescription> cameras = [];
-
-Future<void> main() async {
-  // Fetch the available cameras before initializing the app.
-  try {
-    WidgetsFlutterBinding.ensureInitialized();
-    cameras = await availableCameras();
-  } on CameraException catch (e) {
-    logError(e.code, e.description);
-  }
-  runApp(CameraApp());
 }

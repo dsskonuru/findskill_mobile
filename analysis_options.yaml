@@ -1,0 +1,16 @@
+include: package:lint/analysis_options.yaml
+
+linter:
+  rules:
+    parameter_assignments: true
+    sort_pub_dependencies: false
+
+analyzer:
+  exclude:
+    - lib/client.dart
+    - lib/server/*.g.dart
+    - test/_data/**
+  errors:
+    missing_return: error
+    missing_required_param: error
+    parameter_assignments: error

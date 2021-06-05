@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class FindSkillAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -10,11 +11,11 @@ class FindSkillAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final double _statusbarHeight = MediaQuery.of(context).padding.top;
     return Container(
-      height: 140.0,
+      height: 16.h,
       padding: EdgeInsets.only(
         top: _statusbarHeight,
-        right: 27.0,
-        left: 27.0,
+        right: 7.w,
+        left: 7.w,
       ),
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -24,49 +25,47 @@ class FindSkillAppBar extends StatelessWidget implements PreferredSizeWidget {
             ],
             begin: const FractionalOffset(0.0, 0.0),
             end: const FractionalOffset(0.5, 0.0),
-            stops: [0.0, 1.0],
-            tileMode: TileMode.clamp),
+            stops: const [0.0, 1.0]),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            height: 36.0,
-            width: 36.0,
+            height: 9.w,
+            width: 9.w,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.0),
+              borderRadius: BorderRadius.circular(1.w),
               color: Colors.white.withOpacity(0.15),
             ),
             child: IconButton(
               color: Colors.white,
               onPressed: () => context.router.pop(),
-              icon: Icon(Icons.arrow_back_ios_new),
-              iconSize: 18.0,
+              icon: const Icon(Icons.arrow_back_ios_new),
+              iconSize: 3.w,
             ),
           ),
           SvgPicture.asset(
             'assets/svg/findskill-appbar.svg',
-            height: 42.0,
+            height: 7.5.h,
           ),
           Container(
-            height: 36.0,
-            width: 36.0,
+            height: 9.w,
+            width: 9.w,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.0),
+              borderRadius: BorderRadius.circular(1.w),
               color: Colors.white,
             ),
             child: TextButton(
+              onPressed: () {
+                //TODO: Add Option to change language
+              },
               child: Text(
                 'EN',
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
-                  fontSize: 12.0,
+                  fontSize: 3.w,
                 ),
               ),
-              onPressed: () {
-                //TODO: Add Option to change language
-              },
             ),
           ),
         ],

@@ -4,17 +4,23 @@
 // AutoRouteGenerator
 // **************************************************************************
 
+import 'dart:io' as _i10;
+
 import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
 
-import '../../features/onboarding/presentation/pages/intro_page.dart' as _i6;
-import '../../features/onboarding/presentation/pages/language_page.dart' as _i5;
+import '../../features/onboarding/presentation/pages/intro_page.dart' as _i5;
+import '../../features/onboarding/presentation/pages/language_page.dart' as _i4;
 import '../../features/onboarding/presentation/pages/sample_video_page.dart'
-    as _i7;
+    as _i6;
 import '../../features/registration/presentation/pages/registration_page.dart'
-    as _i4;
-import '../../features/video_capture/presentation/pages/camera_page.dart'
     as _i3;
+import '../../features/video_capture/presentation/pages/video_capture_page.dart'
+    as _i7;
+import '../../features/video_capture/presentation/pages/video_preview_page.dart'
+    as _i9;
+import '../../features/video_capture/presentation/pages/video_trimmer_page.dart'
+    as _i8;
 
 class AppRouter extends _i1.RootStackRouter {
   AppRouter([_i2.GlobalKey<_i2.NavigatorState>? navigatorKey])
@@ -27,30 +33,47 @@ class AppRouter extends _i1.RootStackRouter {
         builder: (_) {
           return const _i1.EmptyRouterPage();
         }),
-    VideoCaptureRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+    VideoRouter.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i3.VideoCapturePage();
+          return const _i1.EmptyRouterPage();
         }),
     RegistrationRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i4.RegistrationPage();
+          return _i3.RegistrationPage();
         }),
     LanguageRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i5.LanguagePage();
+          return _i4.LanguagePage();
         }),
     IntroRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i6.IntroPage();
+          return _i5.IntroPage();
         }),
     SampleVideoRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i7.SampleVideoPage();
+          return _i6.SampleVideoPage();
+        }),
+    VideoCaptureRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i7.VideoCapturePage();
+        }),
+    VideoTrimmerRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (data) {
+          final args = data.argsAs<VideoTrimmerRouteArgs>();
+          return _i8.VideoTrimmerPage(args.file);
+        }),
+    VideoPreviewRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (data) {
+          final args = data.argsAs<VideoPreviewRouteArgs>();
+          return _i9.VideoPreviewPage(args.outputVideoPath);
         })
   };
 
@@ -65,7 +88,15 @@ class AppRouter extends _i1.RootStackRouter {
           _i1.RouteConfig('*#redirect',
               path: '*', redirectTo: '', fullMatch: true)
         ]),
-        _i1.RouteConfig(VideoCaptureRoute.name, path: '/video-capture'),
+        _i1.RouteConfig(VideoRouter.name, path: '/video', children: [
+          _i1.RouteConfig('#redirect',
+              path: '', redirectTo: 'capture', fullMatch: true),
+          _i1.RouteConfig(VideoCaptureRoute.name, path: 'capture'),
+          _i1.RouteConfig(VideoTrimmerRoute.name, path: 'trim'),
+          _i1.RouteConfig(VideoPreviewRoute.name, path: 'preview'),
+          _i1.RouteConfig('*#redirect',
+              path: '*', redirectTo: '', fullMatch: true)
+        ]),
         _i1.RouteConfig(RegistrationRoute.name, path: '/registration')
       ];
 }
@@ -77,10 +108,11 @@ class OnBoardingRouter extends _i1.PageRouteInfo {
   static const String name = 'OnBoardingRouter';
 }
 
-class VideoCaptureRoute extends _i1.PageRouteInfo {
-  const VideoCaptureRoute() : super(name, path: '/video-capture');
+class VideoRouter extends _i1.PageRouteInfo {
+  const VideoRouter({List<_i1.PageRouteInfo>? children})
+      : super(name, path: '/video', initialChildren: children);
 
-  static const String name = 'VideoCaptureRoute';
+  static const String name = 'VideoRouter';
 }
 
 class RegistrationRoute extends _i1.PageRouteInfo {
@@ -105,4 +137,38 @@ class SampleVideoRoute extends _i1.PageRouteInfo {
   const SampleVideoRoute() : super(name, path: 'sample');
 
   static const String name = 'SampleVideoRoute';
+}
+
+class VideoCaptureRoute extends _i1.PageRouteInfo {
+  const VideoCaptureRoute() : super(name, path: 'capture');
+
+  static const String name = 'VideoCaptureRoute';
+}
+
+class VideoTrimmerRoute extends _i1.PageRouteInfo<VideoTrimmerRouteArgs> {
+  VideoTrimmerRoute({required _i10.File file})
+      : super(name, path: 'trim', args: VideoTrimmerRouteArgs(file: file));
+
+  static const String name = 'VideoTrimmerRoute';
+}
+
+class VideoTrimmerRouteArgs {
+  const VideoTrimmerRouteArgs({required this.file});
+
+  final _i10.File file;
+}
+
+class VideoPreviewRoute extends _i1.PageRouteInfo<VideoPreviewRouteArgs> {
+  VideoPreviewRoute({required String? outputVideoPath})
+      : super(name,
+            path: 'preview',
+            args: VideoPreviewRouteArgs(outputVideoPath: outputVideoPath));
+
+  static const String name = 'VideoPreviewRoute';
+}
+
+class VideoPreviewRouteArgs {
+  const VideoPreviewRouteArgs({required this.outputVideoPath});
+
+  final String? outputVideoPath;
 }
