@@ -1,13 +1,25 @@
 import 'package:camera/camera.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'core/router/router.gr.dart';
-import 'core/theme_data.dart';
+import 'core/services/services.dart';
+import 'core/theme/theme_data.dart';
 
 List<CameraDescription> cameras = [];
+final container = ProviderContainer();
+
 Future<void> main() async {
+  final dio = Dio(); // Provide a dio instance
+  dio.options.headers["Demo-Header"] =
+      "demo header"; // config your dio headers globally
+  final client = RestClient(dio);
+
+  _setupLogging();
+
   try {
     WidgetsFlutterBinding.ensureInitialized();
     cameras = await availableCameras();
@@ -20,6 +32,15 @@ Future<void> main() async {
     ProviderScope(
       child: FindSkillApp(),
     ),
+  );
+}
+
+void _setupLogging() {
+  Logger.root.level = Level.ALL;
+  Logger.root.onRecord.listen(
+    (event) {
+      debugPrint('${event.level.name}: ${event.time}: ${event.message}');
+    },
   );
 }
 

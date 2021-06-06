@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:find_skill/features/onboarding/presentation/pages/intro_page.dart';
-import 'package:find_skill/features/onboarding/presentation/pages/sample_video_page.dart';
-import 'package:find_skill/features/video_capture/presentation/pages/video_capture_page.dart';
-import 'package:find_skill/features/video_capture/presentation/pages/video_preview_page.dart';
-import 'package:find_skill/features/video_capture/presentation/pages/video_trimmer_page.dart';
 
+import '../../features/onboarding/presentation/pages/intro_page.dart';
 import '../../features/onboarding/presentation/pages/language_page.dart';
+import '../../features/onboarding/presentation/pages/sample_video_page.dart';
 import '../../features/registration/presentation/pages/registration_page.dart';
+import '../../features/video_capture/presentation/pages/video_capture_page.dart';
+import '../../features/video_capture/presentation/pages/video_preview_page.dart';
+import '../../features/video_capture/presentation/pages/video_trimmer_page.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
