@@ -5,10 +5,10 @@ import 'package:find_skill/features/onboarding/domain/repositories/language_list
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';
 
-class GetRandomNumberTrivia implements UseCase<LanguagesListModel, NoParams> {
+class GetLanguages implements UseCase<LanguagesListModel, NoParams> {
   final LanguagesListRepository repository;
 
-  GetRandomNumberTrivia(this.repository);
+  GetLanguages(this.repository);
 
   @override
   Future<Either<Failure, LanguagesListModel>> call(NoParams params) {

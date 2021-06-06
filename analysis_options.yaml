@@ -7,10 +7,14 @@ linter:
 
 analyzer:
   exclude:
-    - lib/client.dart
-    - lib/server/*.g.dart
-    - test/_data/**
+    - /*.g.dart
+    - /*.gr.dart
+    - /*.config.dart
+    - lib/generated_plugin_registrant.dart
+    # - test/**
+
   errors:
     missing_return: error
     missing_required_param: error
     parameter_assignments: error
+    must_be_immutable: error

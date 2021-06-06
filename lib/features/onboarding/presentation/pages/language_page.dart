@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:find_skill/features/onboarding/presentation/provider/onboarding_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../core/router/router.gr.dart';
+import '../provider/onboarding_provider.dart';
 
 class LanguagePage extends ConsumerWidget {
   @override

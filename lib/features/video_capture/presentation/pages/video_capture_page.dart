@@ -4,10 +4,10 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
-import 'package:find_skill/core/router/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../core/router/router.gr.dart';
 import '../../../../main.dart';
 
 class VideoCapturePage extends StatefulWidget {

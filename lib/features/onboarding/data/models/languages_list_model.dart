@@ -8,7 +8,7 @@ part 'languages_list_model.g.dart';
 @JsonSerializable(explicitToJson: true)
 class LanguagesListModel extends LanguagesList {
   const LanguagesListModel({
-    required List<LanguageModel> language,
+    required List<LanguageModel> language, // TODO: make language plural 
   }) : super(
           language: language,
         );

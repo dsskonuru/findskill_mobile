@@ -1,0 +1,24 @@
+{
+  "language": [
+    {
+      "code": "en",
+      "name": "english",
+      "local_name": "english"
+    },
+    {
+      "code": "en-us",
+      "name": "english",
+      "local_name": "english"
+    },
+    {
+      "code": "it",
+      "name": "italian",
+      "local_name": "italiana"
+    },
+    {
+      "code": "hi",
+      "name": "hindi",
+      "local_name": "हिंदी"
+    }
+  ]
+}

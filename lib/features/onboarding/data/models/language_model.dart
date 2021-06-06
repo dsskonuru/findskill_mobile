@@ -1,5 +1,6 @@
-import 'package:find_skill/features/onboarding/domain/entities/language.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import '../../domain/entities/language.dart';
 
 part 'language_model.g.dart';
 
@@ -8,11 +9,12 @@ class LanguageModel extends Language {
   const LanguageModel({
     required String code,
     required String name,
-    required String localName,
+    // ignore: non_constant_identifier_names
+    required String local_name,
   }) : super(
           code: code,
           name: name,
-          localName: localName,
+          local_name: local_name,
         );
 
   factory LanguageModel.fromJson(Map<String, dynamic> json) =>
@@ -20,4 +22,3 @@ class LanguageModel extends Language {
 
   Map<String, dynamic> toJson() => _$LanguageModelToJson(this);
 }
-

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:find_skill/core/error/exceptions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../core/error/exceptions.dart';
 import '../models/languages_list_model.dart';
 
 abstract class LanguagesListLocalDataSource {

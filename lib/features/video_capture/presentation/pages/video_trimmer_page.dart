@@ -1,9 +1,10 @@
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:find_skill/core/router/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:video_trimmer/video_trimmer.dart';
+
+import '../../../../core/router/router.gr.dart';
 
 class VideoTrimmerPage extends StatefulWidget {
   final File file;

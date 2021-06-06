@@ -1,9 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:find_skill/core/router/router.gr.dart';
-import 'package:find_skill/features/onboarding/presentation/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_player/video_player.dart';
+
+import '../../../../core/router/router.gr.dart';
+import '../widgets/app_bar.dart';
 
 class SampleVideoPage extends StatefulWidget {
   @override

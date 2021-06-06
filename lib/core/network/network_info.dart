@@ -1,29 +1,23 @@
 import 'dart:async';
 
 import 'package:connectivity/connectivity.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-Future<ConnectivityResult> getConnectivity() {
-  return Connectivity().checkConnectivity();
+abstract class NetworkInfo {
+  Future<bool> get isConnected;
 }
 
-final connectivityProvider = Provider.autoDispose((ref) {
-  bool isConnected = false;
-  final connectivity = Connectivity().onConnectivityChanged;
-  
-  final streamController = connectivity.listen((event) {
-    if (event != ConnectivityResult.none) {
-      isConnected = true;
+class NetworkInfoImpl implements NetworkInfo {
+  final Connectivity connectivity;
+
+  NetworkInfoImpl(this.connectivity);
+
+  @override
+  Future<bool> get isConnected async {
+    final connectivityResult = await connectivity.checkConnectivity();
+    if (connectivityResult != ConnectivityResult.none) {
+      return true;
     } else {
-      isConnected = false;
+      return false;
     }
-  });
-
-  ref.onDispose(
-    () {
-      streamController.cancel();
-    },
-  );
-
-  return isConnected;
-});
+  }
+}

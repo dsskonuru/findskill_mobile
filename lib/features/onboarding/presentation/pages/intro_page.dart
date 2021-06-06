@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:find_skill/core/router/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_player/video_player.dart';
+
+import '../../../../core/router/router.gr.dart';
 
 class IntroPage extends StatefulWidget {
   @override
