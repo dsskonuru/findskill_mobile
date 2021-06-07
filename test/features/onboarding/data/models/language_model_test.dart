@@ -1,61 +1,55 @@
-// import 'dart:convert'; 
-// TODO: Language Model Test
-// import 'package:flutter_test/flutter_test.dart';
+import 'dart:convert';
+import 'package:find_skill/features/onboarding/data/models/language_model.dart';
+import 'package:find_skill/features/onboarding/domain/entities/language.dart';
+import 'package:flutter_test/flutter_test.dart';
 
-// import '../../../../fixtures/fixture_reader.dart';
+import '../../../../fixtures/fixture_reader.dart';
 
-// void main() {
-//   final tNumberTriviaModel = NumberTriviaModel(number: 1, text: 'Test Text');
+void main() {
+  const tLanguageModel = LanguageModel(
+    code: "en",
+    name: "english",
+    local_name: 'english',
+  );
 
-//   test(
-//     'should be a subclass of NumberTrivia entity',
-//     () async {
-//       // assert
-//       expect(tNumberTriviaModel, isA<NumberTrivia>());
-//     },
-//   );
+  group(
+    'LanguageModel',
+    () {
+      test(
+        'should be a subclass of Language entity',
+        () async {
+          // assert
+          expect(tLanguageModel, isA<Language>());
+        },
+      );
 
-//   group('fromJson', () {
-//     test(
-//       'should return a valid model when the JSON number is an integer',
-//       () async {
-//         // arrange
-//         final Map<String, dynamic> jsonMap =
-//             json.decode(fixture('trivia.json'));
-//         // act
-//         final result = NumberTriviaModel.fromJson(jsonMap);
-//         // assert
-//         expect(result, tNumberTriviaModel);
-//       },
-//     );
+      test(
+        'should return a valid model when input Language JSON',
+        () async {
+          // arrange
+          final Map<String, dynamic> jsonMap =
+              json.decode(fixture('language.json')) as Map<String, dynamic>;
+          // act
+          final result = LanguageModel.fromJson(jsonMap);
+          // assert
+          expect(result, tLanguageModel);
+        },
+      );
 
-//     test(
-//       'should return a valid model when the JSON number is regarded as a double',
-//       () async {
-//         // arrange
-//         final Map<String, dynamic> jsonMap =
-//             json.decode(fixture('trivia_double.json'));
-//         // act
-//         final result = NumberTriviaModel.fromJson(jsonMap);
-//         // assert
-//         expect(result, tNumberTriviaModel);
-//       },
-//     );
-//   });
-
-//   group('toJson', () {
-//     test(
-//       'should return a JSON map containing the proper data',
-//       () async {
-//         // act
-//         final result = tNumberTriviaModel.toJson();
-//         // assert
-//         final expectedMap = {
-//           "text": "Test Text",
-//           "number": 1,
-//         };
-//         expect(result, expectedMap);
-//       },
-//     );
-//   });
-// }
+      test(
+        'should return a JSON map containing the proper data',
+        () async {
+          // act
+          final result = tLanguageModel.toJson();
+          // assert
+          final expectedMap = {
+            "code": "en",
+            "name": "english",
+            "local_name": 'english',
+          };
+          expect(result, expectedMap);
+        },
+      );
+    },
+  );
+}

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,7 +10,6 @@ enum Language {
   malyalam,
   konkan,
 }
-
 
 class LanguageNotifier extends ChangeNotifier {
   Language _language = Language.english;
