@@ -9,3 +9,11 @@ abstract class Failure extends Equatable {
 class ServerFailure extends Failure {}
 
 class CacheFailure extends Failure {}
+
+class LocationFailure extends Failure {
+  final String errorMessage;
+  LocationFailure({
+    required this.errorMessage,
+  });
+
+}
