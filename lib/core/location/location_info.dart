@@ -1,5 +1,3 @@
-
-
 import 'package:location/location.dart';
 
 abstract class LocationInfo {
@@ -9,7 +7,6 @@ abstract class LocationInfo {
   Future<PermissionStatus> get requestPermission;
   Future<LocationData> get getLocation;
 }
-
 
 class LocationInfoImpl extends LocationInfo {
 

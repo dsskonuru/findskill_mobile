@@ -1,7 +1,7 @@
 import 'package:find_skill/core/location/location_info.dart';
+import 'package:find_skill/features/registration/data/models/user_location_model.dart';
 import 'package:geocoding/geocoding.dart' as geo;
 import 'package:location/location.dart';
-import 'package:find_skill/features/registration/data/models/user_location_model.dart';
 
 abstract class LocationServiceDataSource {
   Future<UserLocationModel> getUserLocation();

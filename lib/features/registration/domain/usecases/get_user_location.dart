@@ -10,6 +10,6 @@ class GetUserLocation {
   });
 
   Future<Either<Failure, UserLocation>> call() async {
-    return await locationServiceRepository.getUserLocation();
+    return locationServiceRepository.getUserLocation();
   }
 }

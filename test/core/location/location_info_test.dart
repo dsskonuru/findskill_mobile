@@ -8,7 +8,7 @@ class MockLocation extends Mock implements Location {}
 
 void main() {
   late LocationInfoImpl locationInfoImpl;
-  late MockLocation mockLocation = MockLocation();
+  final MockLocation mockLocation = MockLocation();
 
   setUp(() {
     //mockLocation = MockLocation();

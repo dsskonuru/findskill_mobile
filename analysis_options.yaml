@@ -7,9 +7,9 @@ linter:
 
 analyzer:
   exclude:
-    - /*.g.dart
-    - /*.gr.dart
-    - /*.config.dart
+    - "**/*.g.dart"
+    - "**/*.gr.dart"
+    - "**/*.config.dart"
     - lib/generated_plugin_registrant.dart
     # - test/**
 
