@@ -6,6 +6,7 @@
 // import 'package:mocktail/mocktail.dart';
 
 // class MockLocationInfo extends Mock implements LocationInfo {}
+//class MockGeolocation extends Mock implements Gee
 
 // void main() {
 //   final MockLocationInfo mockLocationInfo = MockLocationInfo();
@@ -17,31 +18,32 @@
 //         LocationServiceDataSourceImpl(locationInfo: mockLocationInfo);
 //   });
 
-//   const UserLocationModel userLocation = UserLocationModel(
-//     latitude: "12.50",
-//     longitude: "34.2",
-//     country: "India",
-//     state: "Maharashtra",
-//     district: "Pune",
-//     placeName: "Viman Nagar",
-//   );
+  // const UserLocationModel userLocation = UserLocationModel(
+  //   latitude: "18.664811124117733",
+  //   longitude: "73.71325537623963",
+  //   country: "India",
+  //   state: "Maharashtra",
+  //   district: "Pune",
+  //   placeName: "Kunal Iconia, Survey #10/1, Kiwale - Mamurdi Rd Nr. Symbiosis open university  and  Express highway",
+  // );  
 
-//   group('getLocation', () {
-//     when(() => mockLocationInfo.getLocation).thenAnswer((_) async {
-//       return LocationData.fromMap(<String, dynamic>{
-//         'latitude': 48.8534,
-//         'longitude': 2.3488,
-//       });
-//     });
+  // group('getLocation', () {
+  //   when(() => mockLocationInfo.getLocation).thenAnswer((_) async {
+  //     return LocationData.fromMap(<String, dynamic>{
+  //       'latitude': 18.664811124117733,
+  //       'longitude': 73.71325537623963,
+  //     });
+  //   });
 
-//     when(() => mockLocationInfo.serviceEnabled).thenAnswer((_) async => true);
-//     when(() => mockLocationInfo.hasPermission).thenAnswer((_) async => PermissionStatus.granted);
+    //when(() => mockLocationInfo.serviceEnabled).thenAnswer((_) async => true);
+    //when(() => mockLocationInfo.hasPermission).thenAnswer((_) async => PermissionStatus.granted);
 
 //     test('getLocation should convert results correctly', () async {
 //       final receivedLocation =
 //           await locationServiceDataSourceImpl.getUserLocation();
-//       expect(receivedLocation.latitude, 48.8534);
-//       //expect(receivedLocation.longitude, 2.3488);
+//       expect(receivedLocation.latitude, userLocation.latitude);
+//       expect(receivedLocation.country, userLocation.country);
+//       expect(receivedLocation.state, userLocation.state);
 //     });
 //   });
 // }
