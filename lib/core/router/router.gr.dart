@@ -88,7 +88,7 @@ class AppRouter extends _i1.RootStackRouter {
 
   @override
   List<_i1.RouteConfig> get routes => [
-        _i1.RouteConfig(OnBoardingRouter.name, path: '/onboarding', children: [
+        _i1.RouteConfig(OnBoardingRouter.name, path: '/', children: [
           _i1.RouteConfig('#redirect',
               path: '', redirectTo: 'language', fullMatch: true),
           _i1.RouteConfig(LanguageRoute.name, path: 'language'),
@@ -106,14 +106,14 @@ class AppRouter extends _i1.RootStackRouter {
           _i1.RouteConfig('*#redirect',
               path: '*', redirectTo: '', fullMatch: true)
         ]),
-        _i1.RouteConfig(RegistrationRoute.name, path: '/'),
+        _i1.RouteConfig(RegistrationRoute.name, path: '/registration'),
         _i1.RouteConfig(JobsCategoryRoute.name, path: '/skills')
       ];
 }
 
 class OnBoardingRouter extends _i1.PageRouteInfo {
   const OnBoardingRouter({List<_i1.PageRouteInfo>? children})
-      : super(name, path: '/onboarding', initialChildren: children);
+      : super(name, path: '/', initialChildren: children);
 
   static const String name = 'OnBoardingRouter';
 }
@@ -127,7 +127,8 @@ class VideoRouter extends _i1.PageRouteInfo {
 
 class RegistrationRoute extends _i1.PageRouteInfo<RegistrationRouteArgs> {
   RegistrationRoute({_i2.Key? key})
-      : super(name, path: '/', args: RegistrationRouteArgs(key: key));
+      : super(name,
+            path: '/registration', args: RegistrationRouteArgs(key: key));
 
   static const String name = 'RegistrationRoute';
 }

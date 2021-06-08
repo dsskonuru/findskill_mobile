@@ -15,7 +15,7 @@ import '../../features/video_capture/presentation/pages/video_trimmer_page.dart'
     AutoRoute(
       name: "OnBoardingRouter",
       page: EmptyRouterPage,
-      path: "/onboarding",
+      path: "/",
       children: [
         AutoRoute(page: LanguagePage, path: "language", initial: true),
         AutoRoute(page: IntroPage, path: "intro"),
@@ -34,7 +34,7 @@ import '../../features/video_capture/presentation/pages/video_trimmer_page.dart'
         RedirectRoute(path: '*', redirectTo: ''),
       ],
     ),
-    AutoRoute(page: RegistrationPage, path: "/"),
+    AutoRoute(page: RegistrationPage, path: "/registration"),
     AutoRoute(page: JobsCategoryPage, path: "/skills")
   ],
 )
