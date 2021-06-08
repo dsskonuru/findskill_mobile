@@ -53,7 +53,7 @@ class _VideoPreviewState extends State<VideoPreviewPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.router.navigate(const RegistrationRoute()),
+        onPressed: () => context.router.navigate(RegistrationRoute()),
         child: const Icon(Icons.cloud_upload_rounded),
       ),
     );

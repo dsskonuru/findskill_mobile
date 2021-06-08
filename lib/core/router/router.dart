@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:find_skill/features/registration/presentation/pages/jobs_category_page.dart';
 
 import '../../features/onboarding/presentation/pages/intro_page.dart';
 import '../../features/onboarding/presentation/pages/language_page.dart';
@@ -14,7 +15,7 @@ import '../../features/video_capture/presentation/pages/video_trimmer_page.dart'
     AutoRoute(
       name: "OnBoardingRouter",
       page: EmptyRouterPage,
-      path: "/",
+      path: "/onboarding",
       children: [
         AutoRoute(page: LanguagePage, path: "language", initial: true),
         AutoRoute(page: IntroPage, path: "intro"),
@@ -33,7 +34,8 @@ import '../../features/video_capture/presentation/pages/video_trimmer_page.dart'
         RedirectRoute(path: '*', redirectTo: ''),
       ],
     ),
-    AutoRoute(page: RegistrationPage, path: "/registration"),
+    AutoRoute(page: RegistrationPage, path: "/"),
+    AutoRoute(page: JobsCategoryPage, path: "/skills")
   ],
 )
 class $AppRouter {}

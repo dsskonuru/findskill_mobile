@@ -17,7 +17,7 @@ Future<void> main() async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
     cameras = await availableCameras();
-    debugPrint(cameras.toString());
+    Logger.root.fine(cameras);
     container
         .read(sharedPreferencesProvider)
         .setSharedPreferences(await SharedPreferences.getInstance());
