@@ -69,7 +69,8 @@ class _SampleVideoPageState extends State<SampleVideoPage> {
                     setState(() {
                       _controller.pause();
                     });
-                    context.router.push(const VideoCaptureRoute());
+                    context.router.navigate(
+                        const VideoRouter(children: [VideoCaptureRoute()]));
                   },
                   child: Text(
                     "Create your video",

@@ -7,7 +7,7 @@ class DioConnectivityRequestRetrier {
   final Dio dio;
   final Connectivity connectivity;
 
-  DioConnectivityRequestRetrier({
+  const DioConnectivityRequestRetrier({
     required this.dio,
     required this.connectivity,
   });

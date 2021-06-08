@@ -8,12 +8,12 @@ import 'network_info_test.mocks.dart';
 
 @GenerateMocks([Connectivity])
 void main() {
-  late NetworkInfoImpl networkInfo;
+  late NetworkInfo networkInfo;
   late MockConnectivity mockConnectivity;
 
   setUp(() {
     mockConnectivity = MockConnectivity();
-    networkInfo = NetworkInfoImpl(mockConnectivity);
+    networkInfo = NetworkInfo(connectivity: mockConnectivity);
   });
 
   group('isConnected', () {

@@ -6,7 +6,7 @@ part of 'user_location_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserLocationModel _$UserLocationModelFromJson(json) {
+UserLocationModel _$UserLocationModelFromJson(Map<String, dynamic> json) {
   return UserLocationModel(
     latitude: json['latitude'] as String,
     longitude: json['longitude'] as String,

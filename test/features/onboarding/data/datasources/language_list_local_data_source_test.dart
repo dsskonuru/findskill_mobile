@@ -14,12 +14,12 @@ import 'language_list_local_data_source_test.mocks.dart';
 
 @GenerateMocks([SharedPreferences])
 void main() {
-  late LanguagesListLocalDataSourceImpl dataSource;
+  late LanguagesListLocalDataSource dataSource;
   late MockSharedPreferences mockSharedPreferences;
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
-    dataSource = LanguagesListLocalDataSourceImpl(
+    dataSource = LanguagesListLocalDataSource(
       sharedPreferences: mockSharedPreferences,
     );
   });

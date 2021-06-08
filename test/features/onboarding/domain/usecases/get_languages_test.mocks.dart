@@ -2,14 +2,19 @@
 // in find_skill/test/features/onboarding/domain/usecases/get_languages_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i4;
+import 'dart:async' as _i7;
 
-import 'package:dartz/dartz.dart' as _i2;
-import 'package:find_skill/core/error/failures.dart' as _i5;
-import 'package:find_skill/features/onboarding/data/models/languages_list_model.dart'
-    as _i6;
-import 'package:find_skill/features/onboarding/domain/repositories/language_list_repo.dart'
+import 'package:dartz/dartz.dart' as _i5;
+import 'package:find_skill/core/error/failures.dart' as _i8;
+import 'package:find_skill/core/network/network_info.dart' as _i4;
+import 'package:find_skill/features/onboarding/data/datasources/language_list_local_data_source.dart'
     as _i3;
+import 'package:find_skill/features/onboarding/data/datasources/language_list_remote_data_source.dart'
+    as _i2;
+import 'package:find_skill/features/onboarding/data/models/languages_list_model.dart'
+    as _i9;
+import 'package:find_skill/features/onboarding/data/repositories/language_list_repo.dart'
+    as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -18,23 +23,45 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: unnecessary_parenthesis
 
-class _FakeEither<L, R> extends _i1.Fake implements _i2.Either<L, R> {}
+class _FakeLanguagesListRemoteDataSource extends _i1.Fake
+    implements _i2.LanguagesListRemoteDataSource {}
+
+class _FakeLanguagesListLocalDataSource extends _i1.Fake
+    implements _i3.LanguagesListLocalDataSource {}
+
+class _FakeNetworkInfo extends _i1.Fake implements _i4.NetworkInfo {}
+
+class _FakeEither<L, R> extends _i1.Fake implements _i5.Either<L, R> {}
 
 /// A class which mocks [LanguagesListRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockLanguagesListRepository extends _i1.Mock
-    implements _i3.LanguagesListRepository {
+    implements _i6.LanguagesListRepository {
   MockLanguagesListRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.LanguagesListModel>>
+  _i2.LanguagesListRemoteDataSource get remoteDataSource =>
+      (super.noSuchMethod(Invocation.getter(#remoteDataSource),
+              returnValue: _FakeLanguagesListRemoteDataSource())
+          as _i2.LanguagesListRemoteDataSource);
+  @override
+  _i3.LanguagesListLocalDataSource get localDataSource =>
+      (super.noSuchMethod(Invocation.getter(#localDataSource),
+              returnValue: _FakeLanguagesListLocalDataSource())
+          as _i3.LanguagesListLocalDataSource);
+  @override
+  _i4.NetworkInfo get networkInfo =>
+      (super.noSuchMethod(Invocation.getter(#networkInfo),
+          returnValue: _FakeNetworkInfo()) as _i4.NetworkInfo);
+  @override
+  _i7.Future<_i5.Either<_i8.Failure, _i9.LanguagesListModel>>
       getLanguagesList() => (super.noSuchMethod(
               Invocation.method(#getLanguagesList, []),
               returnValue:
-                  Future<_i2.Either<_i5.Failure, _i6.LanguagesListModel>>.value(
-                      _FakeEither<_i5.Failure, _i6.LanguagesListModel>()))
-          as _i4.Future<_i2.Either<_i5.Failure, _i6.LanguagesListModel>>);
+                  Future<_i5.Either<_i8.Failure, _i9.LanguagesListModel>>.value(
+                      _FakeEither<_i8.Failure, _i9.LanguagesListModel>()))
+          as _i7.Future<_i5.Either<_i8.Failure, _i9.LanguagesListModel>>);
 }

@@ -14,12 +14,12 @@ import 'language_list_remote_data_source_test.mocks.dart';
 
 @GenerateMocks([RestClient])
 void main() {
-  late LanguagesListRemoteDataSourceImpl dataSource;
+  late LanguagesListRemoteDataSource dataSource;
   late MockRestClient mockRestClient;
 
   setUp(() {
     mockRestClient = MockRestClient();
-    dataSource = LanguagesListRemoteDataSourceImpl(client: mockRestClient);
+    dataSource = LanguagesListRemoteDataSource(client: mockRestClient);
   });
 
   void setUpMockRestClientSuccess() {

@@ -22,7 +22,7 @@ class UserLocationModel extends UserLocation {
           placeName: placeName,
         );
   
-  factory UserLocationModel.fromJson(json) => _$UserLocationModelFromJson(json);
+  factory UserLocationModel.fromJson(json) => _$UserLocationModelFromJson(json as Map<String, dynamic>);
 
   Map<String, dynamic> toJson() => _$UserLocationModelToJson(this);
 }

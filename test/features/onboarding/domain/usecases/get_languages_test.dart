@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:find_skill/core/usecases/usecase.dart';
 import 'package:find_skill/features/onboarding/data/models/language_model.dart';
 import 'package:find_skill/features/onboarding/data/models/languages_list_model.dart';
-import 'package:find_skill/features/onboarding/domain/repositories/language_list_repo.dart';
+import 'package:find_skill/features/onboarding/data/repositories/language_list_repo.dart';
 import 'package:find_skill/features/onboarding/domain/usecases/get_languages.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -17,7 +17,7 @@ void main() {
 
   setUp(() {
     mockLanguagesListRepository = MockLanguagesListRepository();
-    getLanguages = GetLanguages(mockLanguagesListRepository);
+    getLanguages = GetLanguages(repository: mockLanguagesListRepository);
   });
 
   const tLanguagesList = LanguagesListModel(

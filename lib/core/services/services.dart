@@ -15,14 +15,13 @@ abstract class RestClient {
 
   @GET("/language-list")
   Future<LanguagesListModel> getLanguages();
-
 }
 
-final dioClientProvider = Provider<RestClient>((ref) {
-  final dio = Dio(); 
-  dio.options.headers["Demo-Header"] =
-      "demo header"; 
-  dio.interceptors.add(
+final dioClientProvider = Provider<RestClient>(
+  (ref) {
+    final dio = Dio();
+    dio.options.headers["Demo-Header"] = "demo header";
+    dio.interceptors.add(
       RetryOnConnectionChangeInterceptor(
         requestRetrier: DioConnectivityRequestRetrier(
           dio: dio,
@@ -30,7 +29,7 @@ final dioClientProvider = Provider<RestClient>((ref) {
         ),
       ),
     );
-  final client = RestClient(dio);
-  return client;
-});
-
+    final client = RestClient(dio);
+    return client;
+  },
+);

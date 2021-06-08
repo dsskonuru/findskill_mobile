@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../core/router/router.gr.dart';
@@ -311,7 +312,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
             .then((value) => _minAvailableZoom = value),
       ]);
     } on CameraException catch (e) {
-      _showCameraException(e);
+      Logger.root.severe(e);
     }
 
     if (mounted) {
@@ -366,7 +367,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
     try {
       await cameraController.startVideoRecording();
     } on CameraException catch (e) {
-      _showCameraException(e);
+      Logger.root.severe(e);
       return;
     }
   }
@@ -381,7 +382,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
     try {
       return cameraController.stopVideoRecording();
     } on CameraException catch (e) {
-      _showCameraException(e);
+      Logger.root.severe(e);
       return null;
     }
   }
@@ -396,7 +397,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
     try {
       await cameraController.pauseVideoRecording();
     } on CameraException catch (e) {
-      _showCameraException(e);
+      Logger.root.severe(e);
       rethrow;
     }
   }
@@ -411,7 +412,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
     try {
       await cameraController.resumeVideoRecording();
     } on CameraException catch (e) {
-      _showCameraException(e);
+      Logger.root.severe(e);
       rethrow;
     }
   }
@@ -440,10 +441,5 @@ class _VideoCaptureState extends State<VideoCapturePage>
       });
     }
     await vController.play();
-  }
-
-  void _showCameraException(CameraException e) {
-    logError(e.code, e.description);
-    log('Error: ${e.code}\n${e.description}');
   }
 }

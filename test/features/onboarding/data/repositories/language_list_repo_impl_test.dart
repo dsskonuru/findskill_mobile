@@ -6,7 +6,7 @@ import 'package:find_skill/features/onboarding/data/datasources/language_list_lo
 import 'package:find_skill/features/onboarding/data/datasources/language_list_remote_data_source.dart';
 import 'package:find_skill/features/onboarding/data/models/language_model.dart';
 import 'package:find_skill/features/onboarding/data/models/languages_list_model.dart';
-import 'package:find_skill/features/onboarding/data/repositories/language_list_repo_impl.dart';
+import 'package:find_skill/features/onboarding/data/repositories/language_list_repo.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -16,7 +16,7 @@ import 'language_list_repo_impl_test.mocks.dart';
 @GenerateMocks(
     [LanguagesListRemoteDataSource, LanguagesListLocalDataSource, NetworkInfo])
 void main() {
-  late LanguagesListRepositoryImpl repository;
+  late LanguagesListRepository repository;
   late MockLanguagesListRemoteDataSource mockRemoteDataSource;
   late MockLanguagesListLocalDataSource mockLocalDataSource;
   late MockNetworkInfo mockNetworkInfo;
@@ -25,7 +25,7 @@ void main() {
     mockRemoteDataSource = MockLanguagesListRemoteDataSource();
     mockLocalDataSource = MockLanguagesListLocalDataSource();
     mockNetworkInfo = MockNetworkInfo();
-    repository = LanguagesListRepositoryImpl(
+    repository = LanguagesListRepository(
       remoteDataSource: mockRemoteDataSource,
       localDataSource: mockLocalDataSource,
       networkInfo: mockNetworkInfo,

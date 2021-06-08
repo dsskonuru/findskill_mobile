@@ -1,11 +1,11 @@
 import 'package:camera/camera.dart';
+import 'package:find_skill/features/onboarding/data/datasources/language_list_local_data_source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:injectable/injectable.dart';
 import 'package:logging/logging.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'core/injection/injection.dart';
 import 'core/router/router.gr.dart';
 import 'core/theme/theme_data.dart';
 
@@ -13,14 +13,16 @@ List<CameraDescription> cameras = [];
 final container = ProviderContainer();
 
 Future<void> main() async {
-  configureInjection(Environment.prod);
   _setupLogging();
   try {
     WidgetsFlutterBinding.ensureInitialized();
     cameras = await availableCameras();
     debugPrint(cameras.toString());
-  } on CameraException catch (e) {
-    logError(e.code, e.description);
+    container
+        .read(sharedPreferencesProvider)
+        .setSharedPreferences(await SharedPreferences.getInstance());
+  } on Exception catch (e) {
+    Logger.root.severe(e);
   }
 
   runApp(
@@ -37,14 +39,6 @@ void _setupLogging() {
       debugPrint('${event.level.name}: ${event.time}: ${event.message}');
     },
   );
-}
-
-void logError(String code, String? message) {
-  if (message != null) {
-    debugPrint('Error: $code\nError Message: $message');
-  } else {
-    debugPrint('Error: $code');
-  }
 }
 
 class FindSkillApp extends StatelessWidget {

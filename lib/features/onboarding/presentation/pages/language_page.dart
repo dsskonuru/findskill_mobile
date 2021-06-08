@@ -1,8 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:find_skill/core/usecases/usecase.dart';
+import 'package:find_skill/features/onboarding/domain/usecases/get_languages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:logging/logging.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../core/router/router.gr.dart';
@@ -12,6 +15,10 @@ class LanguagePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final language = watch(languageProvider);
+    
+    final listOfLang = watch(languagesProvider).call(NoParams());
+    listOfLang.then((value) => Logger.root.fine(value.toString()));
+
     return Scaffold(
       body: SafeArea(
         child: Center(

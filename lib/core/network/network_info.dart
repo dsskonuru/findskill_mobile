@@ -1,17 +1,13 @@
 import 'dart:async';
 
 import 'package:connectivity/connectivity.dart';
+import 'package:riverpod/riverpod.dart';
 
-abstract class NetworkInfo {
-  Future<bool> get isConnected;
-}
-
-class NetworkInfoImpl implements NetworkInfo {
+class NetworkInfo {
   final Connectivity connectivity;
 
-  NetworkInfoImpl(this.connectivity);
+  const NetworkInfo({required this.connectivity});
 
-  @override
   Future<bool> get isConnected async {
     final connectivityResult = await connectivity.checkConnectivity();
     if (connectivityResult != ConnectivityResult.none) {
@@ -21,3 +17,11 @@ class NetworkInfoImpl implements NetworkInfo {
     }
   }
 }
+
+final networkInfoProvider = Provider<NetworkInfo>(
+  (ref) {
+    final _connectivity = Connectivity();
+    final _networkInfo = NetworkInfo(connectivity: _connectivity);
+    return _networkInfo;
+  },
+);
