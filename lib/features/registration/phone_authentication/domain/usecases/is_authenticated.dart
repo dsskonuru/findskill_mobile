@@ -9,7 +9,7 @@ class IsAuthenticated {
   });
 
   Future<Either<Failure, bool>> call(String phoneNumber) async {
-    return await phoneAuthneticationRepository.isAuthenticated(phoneNumber);
+    return phoneAuthneticationRepository.isAuthenticated(phoneNumber);
   }
   
 }

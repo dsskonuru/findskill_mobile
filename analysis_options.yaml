@@ -10,6 +10,7 @@ analyzer:
     - "**/*.g.dart"
     - "**/*.gr.dart"
     - "**/*.config.dart"
+    - "**/*.mocks.dart"
     - lib/generated_plugin_registrant.dart
     # - test/**
 

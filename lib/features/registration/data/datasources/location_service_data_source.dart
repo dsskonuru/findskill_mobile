@@ -16,9 +16,9 @@ class LocationServiceDataSourceImpl extends LocationServiceDataSource {
 
   @override
   Future<UserLocationModel> getUserLocation() async {
-    final LocationData locationData = await locationInfo.getLocation;
+    final LocationData locationData = await locationInfo.getLocation; //returned null
     final address =
-        await _getAddress(locationData.latitude!, locationData.longitude!);
+        await _getAddress(locationData.latitude!, locationData.longitude!); 
 
     return address;
   }
@@ -29,30 +29,11 @@ class LocationServiceDataSourceImpl extends LocationServiceDataSource {
   ) async {
     //GeoCode geoCode = GeoCode();
     // 18.664811124117733, 73.71325537623963
+    
      final List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
      final Placemark placemak = placemarks[0];
     
     try {
-      // final Address address = await geoCode.reverseGeocoding(
-      //     latitude: latitude, longitude: longitude);
-      // final String _region = address.region!;
-      // bool flag = false;
-      // bool firstCharacter = false;
-      // String region = "";
-
-      // for (var i = 0; i < _region.length; i++) {
-      //   if (_region[i] == ",") {
-      //     flag = true;
-      //   }
-
-      //   if (((_region[i] != " ") & (_region[i] != ",")) & flag) {
-      //     firstCharacter = true;
-      //   }
-      //   if (flag & firstCharacter) {
-      //     region = region + _region[i];
-      //   }
-      // }
-
       return UserLocationModel(
         latitude: latitude.toString(),
         longitude: longitude.toString(),
