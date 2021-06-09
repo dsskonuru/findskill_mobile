@@ -32,6 +32,8 @@ dependencies:
   shared_preferences: ^2.0.6
   video_player: ^2.1.1
   video_trimmer: ^0.5.1
+  firebase_core: 
+  firebase_auth: 
 
 dev_dependencies:
   flutter_test:

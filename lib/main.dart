@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:find_skill/features/onboarding/data/datasources/language_list_local_data_source.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
@@ -24,6 +25,8 @@ Future<void> main() async {
   } on Exception catch (e) {
     Logger.root.severe(e);
   }
+
+  await Firebase.initializeApp();
 
   runApp(
     ProviderScope(
