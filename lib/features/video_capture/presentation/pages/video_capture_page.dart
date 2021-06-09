@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
+import 'package:find_skill/core/localization/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:video_player/video_player.dart';
@@ -106,9 +107,10 @@ class _VideoCaptureState extends State<VideoCapturePage>
     final CameraController? cameraController = controller;
 
     if (cameraController == null || !cameraController.value.isInitialized) {
-      return const Text(
-        'Tap a camera',
-        style: TextStyle(
+      return  Text(
+        AppLocalizations.of(context)!.translate("tap a camera") as String,
+        //'Tap a camera',
+        style: const TextStyle(
           color: Colors.white,
           fontSize: 24.0,
           fontWeight: FontWeight.w900,
@@ -243,7 +245,9 @@ class _VideoCaptureState extends State<VideoCapturePage>
     }
 
     if (cameras.isEmpty) {
-      return const Text('No camera found');
+      return Text(AppLocalizations.of(context)!.translate("no camera found") as String,
+      //'No camera found'
+      );
     } else {
       for (final CameraDescription cameraDescription in cameras) {
         toggles.add(

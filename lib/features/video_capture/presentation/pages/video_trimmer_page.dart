@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:find_skill/core/localization/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:video_trimmer/video_trimmer.dart';
 
@@ -90,7 +91,9 @@ class _VideoTrimmerState extends State<VideoTrimmerPage> {
                               },
                             );
                           },
-                    child: const Text("SAVE"),
+                    child:  Text(AppLocalizations.of(context)!.translate("save") as String,
+                    //"SAVE"
+                    ),
                   ),
                   Expanded(
                     child: VideoViewer(trimmer: _trimmer),

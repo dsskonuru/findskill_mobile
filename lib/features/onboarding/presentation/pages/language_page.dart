@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:find_skill/core/localization/localization.dart';
 import 'package:find_skill/core/usecases/usecase.dart';
 import 'package:find_skill/features/onboarding/domain/usecases/get_languages.dart';
+import 'package:find_skill/features/registration/domain/usecases/get_user_location.dart';
+import 'package:find_skill/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,13 +14,23 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../core/router/router.gr.dart';
 import '../provider/onboarding_provider.dart';
 
+late String _value;
 class LanguagePage extends ConsumerWidget {
+   
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final language = watch(languageProvider);
-    
+
     final listOfLang = watch(languagesProvider).call(NoParams());
     listOfLang.then((value) => Logger.root.fine(value.toString()));
+
+    void _changeLanguage(LanguageCode language) async {
+
+      Locale _temp = await setLocale(language.languageCode);
+
+
+      FindSkillApp.setLocale(context, _temp);
+    }
 
     return Scaffold(
       body: SafeArea(
@@ -54,19 +67,29 @@ class LanguagePage extends ConsumerWidget {
                   ),
                 );
               }).toList(),
-              hint: const Text(
-                "Please choose a langauage",
-                style: TextStyle(
+              hint:  Text(
+                AppLocalizations.of(context)!.translate("please choose a langauage") as String,
+                //"Please choose a langauage",
+                style: const TextStyle(
                     color: Colors.black,
                     fontSize: 14,
                     fontWeight: FontWeight.w500),
               ),
-              onChanged: (String? value) => language.setLanguage(value!),
+              onChanged: (String? value) async {
+                //=> language.setLanguage(value!)
+                _value = value!;
+                //_changeLanguage(LanguageCode(value!));
+              },
             ),
             ElevatedButton(
-              onPressed: () => context.router.push(const IntroRoute()),
+              onPressed: () //=> context.router.push(const IntroRoute()),
+              {
+                _changeLanguage(LanguageCode(_value));
+                context.router.push(const IntroRoute());
+              },
               child: Text(
-                "Set Language",
+                //"Set Language",
+                AppLocalizations.of(context)!.translate("set language") as String,
                 style: Theme.of(context).textTheme.button,
               ),
             ),
@@ -76,15 +99,17 @@ class LanguagePage extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Already have an account?',
-                  style: TextStyle(fontSize: 14),
+                 Text(
+                  AppLocalizations.of(context)!.translate("already have an account?") as String,
+                  //'Already have an account?',
+                  style: const TextStyle(fontSize: 14),
                 ),
                 TextButton(
                     onPressed: () => context.router.push(const IntroRoute()),
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(fontSize: 14),
+                    child:  Text(
+                      AppLocalizations.of(context)!.translate("login") as String,
+                      //'Login',
+                      style: const TextStyle(fontSize: 14),
                     ))
               ],
             )

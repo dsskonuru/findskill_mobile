@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:find_skill/core/localization/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_player/video_player.dart';
@@ -35,9 +36,10 @@ class _SampleVideoPageState extends State<SampleVideoPage> {
           children: [
             Padding(
               padding: EdgeInsets.only(top: 2.h),
-              child: const Text(
-                "Sample Video",
-                style: TextStyle(
+              child:  Text(
+                AppLocalizations.of(context)!.translate("sample video") as String,
+                //"Sample Video",
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
@@ -73,7 +75,8 @@ class _SampleVideoPageState extends State<SampleVideoPage> {
                         const VideoRouter(children: [VideoCaptureRoute()]));
                   },
                   child: Text(
-                    "Create your video",
+                    AppLocalizations.of(context)!.translate("create your video") as String,
+                    //"Create your video",
                     style: Theme.of(context).textTheme.button,
                   )),
             )

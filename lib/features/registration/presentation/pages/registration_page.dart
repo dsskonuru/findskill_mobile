@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:find_skill/core/localization/localization.dart';
 import 'package:find_skill/features/onboarding/presentation/widgets/app_bar.dart';
 import 'package:find_skill/features/registration/presentation/provider/registration_form_provider.dart';
 import 'package:find_skill/features/registration/presentation/widgets/chips.dart';
@@ -28,14 +29,16 @@ class RegistrationPage extends ConsumerWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 8.w, right: 8.w, top: 4.h),
                     child: Text(
-                      "Registration",
+                      AppLocalizations.of(context)!.translate("registration") as String,
+                      //"Registration",
                       style: Theme.of(context).textTheme.headline4,
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 2.h),
                     child: Text(
-                      "Mobile Number",
+                      AppLocalizations.of(context)!.translate("mobile number") as String,
+                      //"Mobile Number",
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
                   ),
@@ -64,7 +67,8 @@ class RegistrationPage extends ConsumerWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 2.h),
                     child: Text(
-                      "Password",
+                      AppLocalizations.of(context)!.translate("password") as String,
+                      //"Password",
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
                   ),
@@ -93,7 +97,8 @@ class RegistrationPage extends ConsumerWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 2.h),
                     child: Text(
-                      "Full Name",
+                      AppLocalizations.of(context)!.translate("full Name") as String,
+                      //"Full Name",
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
                   ),
@@ -121,7 +126,8 @@ class RegistrationPage extends ConsumerWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 2.h),
                     child: Text(
-                      "City Name",
+                      AppLocalizations.of(context)!.translate("city name") as String,
+                      //"City Name",
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
                   ),
@@ -149,7 +155,8 @@ class RegistrationPage extends ConsumerWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 2.h),
                     child: Text(
-                      "What jobs are you interested in?",
+                      AppLocalizations.of(context)!.translate("what jobs are you intersted in?") as String,
+                      //"What jobs are you interested in?",
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
                   ),
@@ -185,7 +192,8 @@ class RegistrationPage extends ConsumerWidget {
                     child: ElevatedButton(
                         onPressed: () => {},
                         child: Text(
-                          'SUBMIT',
+                          AppLocalizations.of(context)!.translate("submit") as String,
+                          //'SUBMIT',
                           style: Theme.of(context).textTheme.button,
                         )),
                   )
