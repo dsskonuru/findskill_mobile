@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:find_skill/features/onboarding/presentation/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+
 import '../../../../core/router/router.gr.dart';
+import '../../../onboarding/presentation/widgets/app_bar.dart';
 
 class VideoPreviewPage extends StatefulWidget {
   final String? outputVideoPath;

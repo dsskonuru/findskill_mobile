@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../core/localization/localization.dart';
 import '../../../../core/router/router.gr.dart';
 
 class IntroPage extends StatefulWidget {
@@ -70,7 +71,8 @@ class _IntroPageState extends State<IntroPage> {
                     context.router.push(const SampleVideoRoute());
                   },
                   child: Text(
-                    "Find Skills",
+                    AppLocalizations.of(context)!.translate("find skills") as String,
+                    //"Find Skills",
                     style: Theme.of(context).textTheme.button,
                   ),
                 ),
@@ -85,7 +87,8 @@ class _IntroPageState extends State<IntroPage> {
                     context.router.push(const SampleVideoRoute());
                   },
                   child: Text(
-                    "List Your Skills",
+                    AppLocalizations.of(context)!.translate("list your skills") as String,
+                    //"List Your Skills",
                     style: Theme.of(context).textTheme.button,
                   ),
                 ),

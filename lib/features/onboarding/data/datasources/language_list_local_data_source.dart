@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:find_skill/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,6 +7,7 @@ import 'package:riverpod/riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/error/exceptions.dart';
+import '../../../../main.dart';
 import '../models/languages_list_model.dart';
 
 const String cachedLanguagesList = 'CACHED_LANGUAGES_LIST';

@@ -1,6 +1,7 @@
 
-import 'package:find_skill/features/registration/domain/entities/user_location.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import '../../domain/entities/user_location.dart';
 
 part 'user_location_model.g.dart';
 

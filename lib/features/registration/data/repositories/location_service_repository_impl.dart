@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
-
-import 'package:find_skill/core/error/failures.dart';
-import 'package:find_skill/core/location/location_info.dart';
-import 'package:find_skill/features/registration/data/datasources/location_service_data_source.dart';
-import 'package:find_skill/features/registration/data/models/user_location_model.dart';
-import 'package:find_skill/features/registration/domain/entities/user_location.dart';
-import 'package:find_skill/features/registration/domain/repositories/location_service_repository.dart';
 import 'package:location/location.dart';
+
+import '../../../../core/error/failures.dart';
+import '../../../../core/location/location_info.dart';
+import '../../domain/entities/user_location.dart';
+import '../../domain/repositories/location_service_repository.dart';
+import '../datasources/location_service_data_source.dart';
+import '../models/user_location_model.dart';
 
 class LocationServiceRepositoryImpl extends LocationServiceRepository {
   final LocationServiceDataSource locationServiceDataSource;

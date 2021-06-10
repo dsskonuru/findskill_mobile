@@ -1,5 +1,6 @@
-import 'package:find_skill/core/constant/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../../../../core/constant/authentication.dart';
 
 abstract class AuthneticationServiceDataSource {
   Future<bool> isAuthenticated(final String phoneNumber);

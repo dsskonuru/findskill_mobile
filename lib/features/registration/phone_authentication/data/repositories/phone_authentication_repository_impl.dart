@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 
-import 'package:find_skill/core/error/failures.dart';
-import 'package:find_skill/core/network/network_info.dart';
-import 'package:find_skill/features/registration/phone_authentication/data/datasources/phone_autentication_service_data_source.dart';
-import 'package:find_skill/features/registration/phone_authentication/domain/repositories/phone_authentication_repository.dart';
+import '../../../../../core/error/failures.dart';
+import '../../../../../core/network/network_info.dart';
+import '../../domain/repositories/phone_authentication_repository.dart';
+import '../datasources/phone_autentication_service_data_source.dart';
 
 class AuthneticationServiceRepositoryImpl
     extends AuthneticationServiceRepository {

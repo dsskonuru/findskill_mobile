@@ -1,8 +1,9 @@
-import 'package:find_skill/core/error/failures.dart';
-import 'package:find_skill/core/location/location_info.dart';
-import 'package:find_skill/features/registration/data/models/user_location_model.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:location/location.dart';
+
+import '../../../../core/error/failures.dart';
+import '../../../../core/location/location_info.dart';
+import '../models/user_location_model.dart';
 
 abstract class LocationServiceDataSource {
   Future<UserLocationModel> getUserLocation();
