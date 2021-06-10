@@ -62,31 +62,30 @@ void main() {
         // act
         final result = await locationServiceRepositoryImpl.getUserLocation();
         // assert
-        verify(() =>mockLocationServiceDataSource.getUserLocation());
+        verify(() => mockLocationServiceDataSource.getUserLocation());
         expect(result, equals(const Right(userLocation)));
       },
     );
   });
 
   test(
-      'should return UserLocation when location service is enabled when requested and permission is granted',
-      () async {
-        // arrange
-        when(() => mockLocationInfo.serviceEnabled)
-            .thenAnswer((_) async => false);
-        when(() => mockLocationInfo.requestService)
-          .thenAnswer((_) async => true);
-        when(() => mockLocationInfo.hasPermission)
-            .thenAnswer((_) async => PermissionStatus.granted);
-        when(() => mockLocationServiceDataSource.getUserLocation())
-            .thenAnswer((_) async => userLocationModel);
-        // act
-        final result = await locationServiceRepositoryImpl.getUserLocation();
-        // assert
-        verify(() =>mockLocationServiceDataSource.getUserLocation());
-        expect(result, equals(const Right(userLocation)));
-      },
-    );
+    'should return UserLocation when location service is enabled when requested and permission is granted',
+    () async {
+      // arrange
+      when(() => mockLocationInfo.serviceEnabled)
+          .thenAnswer((_) async => false);
+      when(() => mockLocationInfo.requestService).thenAnswer((_) async => true);
+      when(() => mockLocationInfo.hasPermission)
+          .thenAnswer((_) async => PermissionStatus.granted);
+      when(() => mockLocationServiceDataSource.getUserLocation())
+          .thenAnswer((_) async => userLocationModel);
+      // act
+      final result = await locationServiceRepositoryImpl.getUserLocation();
+      // assert
+      verify(() => mockLocationServiceDataSource.getUserLocation());
+      expect(result, equals(const Right(userLocation)));
+    },
+  );
 
   test(
     'should return location sevice not enabled error message',

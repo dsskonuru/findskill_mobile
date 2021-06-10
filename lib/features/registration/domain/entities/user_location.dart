@@ -1,5 +1,6 @@
+import 'package:equatable/equatable.dart';
 
-class UserLocation {
+class UserLocation extends Equatable {
   final String latitude;
   final String longitude;
   final String country;
@@ -15,4 +16,14 @@ class UserLocation {
     required this.district,
     required this.placeName,
   });
+
+  @override
+  List<Object?> get props => [
+        latitude,
+        longitude,
+        country,
+        state,
+        district,
+        placeName,
+      ];
 }

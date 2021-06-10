@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:find_skill/features/registration/data/models/user_location_model.dart';
 
 import '../../../../core/error/failures.dart';
-import '../entities/user_location.dart';
 import '../repositories/location_service_repository.dart';
 
 class GetUserLocation {
@@ -10,7 +10,7 @@ class GetUserLocation {
     required this.locationServiceRepository,
   });
 
-  Future<Either<Failure, UserLocation>> call() async {
+  Future<Either<Failure, UserLocationModel>> call() async {
     return locationServiceRepository.getUserLocation();
   }
 }

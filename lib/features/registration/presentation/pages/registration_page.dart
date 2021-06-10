@@ -190,7 +190,7 @@ class RegistrationPage extends ConsumerWidget {
                   ),
                   Center(
                     child: ElevatedButton(
-                        onPressed: () => {},
+                        onPressed: () => context.router.navigate(OtpVerificationRoute()),
                         child: Text(
                           AppLocalizations.of(context)!.translate("submit") as String,
                           //'SUBMIT',

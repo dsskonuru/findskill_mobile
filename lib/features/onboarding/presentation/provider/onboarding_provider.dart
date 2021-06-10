@@ -3,12 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 enum Language {
   english,
-  urdu,
   hindi,
-  telugu,
-  tamil,
-  malyalam,
-  konkan,
 }
 
 class LanguageNotifier extends ChangeNotifier {
@@ -19,7 +14,8 @@ class LanguageNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  final List<String> _languages = Language.values.map((e) => e.toString()).toList();
+  final List<String> _languages =
+      Language.values.map((e) => e.toString()).toList();
   List<String> get languages => _languages;
 }
 

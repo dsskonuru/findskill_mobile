@@ -5,9 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppLocalizations {
-  AppLocalizations(this.locale);
-
   final Locale locale;
+   AppLocalizations({required this.locale});
+
   static AppLocalizations? of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
@@ -17,8 +17,8 @@ class AppLocalizations {
   Future<void> load() async {
     final String jsonStringValues =
         await rootBundle.loadString('lang/${locale.languageCode}.json');
-    final Map<String, String> mappedJson =
-        json.decode(jsonStringValues) as Map<String, String>;
+    final Map<String, dynamic> mappedJson =
+        json.decode(jsonStringValues) as Map<String, dynamic>;
     _localizedValues =
         mappedJson.map((key, value) => MapEntry(key, value.toString()));
     //var response = (await Dio().get('http://198.23.196.159:8000/api/auth/static-string?language=${locale.languageCode}')).data;
@@ -45,7 +45,7 @@ class _DemoLocalizationsDelegate
 
   @override
   Future<AppLocalizations> load(Locale locale) async {
-    final AppLocalizations localization = AppLocalizations(locale);
+    final AppLocalizations localization = AppLocalizations(locale: locale);
     await localization.load();
     return localization;
   }
@@ -56,7 +56,6 @@ class _DemoLocalizationsDelegate
 
 class LanguageCode {
   final String languageCode;
-
   LanguageCode(this.languageCode);
 }
 

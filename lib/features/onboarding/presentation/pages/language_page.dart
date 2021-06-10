@@ -13,21 +13,16 @@ import '../../../../main.dart';
 import '../../domain/usecases/get_languages.dart';
 import '../provider/onboarding_provider.dart';
 
-late String _value;
 class LanguagePage extends ConsumerWidget {
-   
+  const LanguagePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final language = watch(languageProvider);
-
     final listOfLang = watch(languagesProvider).call(NoParams());
     listOfLang.then((value) => Logger.root.fine(value.toString()));
 
     Future<void> _changeLanguage(LanguageCode language) async {
-
       final Locale _temp = await setLocale(language.languageCode);
-
-
       FindSkillApp.setLocale(context, _temp);
     }
 
@@ -42,7 +37,6 @@ class LanguagePage extends ConsumerWidget {
               placeholderBuilder: (BuildContext context) =>
                   const CircularProgressIndicator(),
             ),
-            // Image.asset("assets/jpg/onboard1.jpg"),
             Padding(
               padding: const EdgeInsets.fromLTRB(40, 30, 40, 30),
               child: Image.asset(
@@ -53,7 +47,7 @@ class LanguagePage extends ConsumerWidget {
             ),
             DropdownButton<String>(
               focusColor: Colors.white,
-              value: language.name,
+              value: watch(languageProvider).name,
               elevation: 5,
               style: const TextStyle(color: Colors.white),
               iconEnabledColor: Colors.black,
@@ -66,8 +60,9 @@ class LanguagePage extends ConsumerWidget {
                   ),
                 );
               }).toList(),
-              hint:  Text(
-                AppLocalizations.of(context)!.translate("please choose a langauage") as String,
+              hint: Text(
+                AppLocalizations.of(context)!
+                    .translate("please choose a langauage") as String,
                 //"Please choose a langauage",
                 style: const TextStyle(
                     color: Colors.black,
@@ -75,20 +70,15 @@ class LanguagePage extends ConsumerWidget {
                     fontWeight: FontWeight.w500),
               ),
               onChanged: (String? value) async {
-                //=> language.setLanguage(value!)
-                _value = value!;
-                //_changeLanguage(LanguageCode(value!));
+                watch(languageProvider).setLanguage(value!);
+                _changeLanguage(LanguageCode(value));
               },
             ),
             ElevatedButton(
-              onPressed: () //=> context.router.push(const IntroRoute()),
-              {
-                _changeLanguage(LanguageCode(_value));
-                context.router.push(const IntroRoute());
-              },
+              onPressed: () => context.router.push(const IntroRoute()),
               child: Text(
-                //"Set Language",
-                AppLocalizations.of(context)!.translate("set language") as String,
+                AppLocalizations.of(context)!.translate("register") as String,
+                //"REGISTER",
                 style: Theme.of(context).textTheme.button,
               ),
             ),
@@ -98,17 +88,19 @@ class LanguagePage extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                 Text(
-                  AppLocalizations.of(context)!.translate("already have an account?") as String,
+                Text(
+                  AppLocalizations.of(context)!
+                      .translate("already have an account?") as String,
                   //'Already have an account?',
-                  style: const TextStyle(fontSize: 14),
+                  style: TextStyle(fontSize: 14.sp),
                 ),
                 TextButton(
-                    onPressed: () => context.router.push(const IntroRoute()),
-                    child:  Text(
-                      AppLocalizations.of(context)!.translate("login") as String,
+                    onPressed: () => context.router.push(LoginRoute()),
+                    child: Text(
+                      AppLocalizations.of(context)!.translate("login")
+                          as String,
                       //'Login',
-                      style: const TextStyle(fontSize: 14),
+                      style: TextStyle(fontSize: 14.sp),
                     ))
               ],
             )

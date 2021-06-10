@@ -15,9 +15,9 @@ class RegistrationFormNotifier extends ChangeNotifier {
   final Map<String, List<String>> skillsList = skillsMap;
 
   int? get mobileNumber => _mobileNumber;
-  String? get smsCode => _password;
-  String? get codeSent => _name;
-  String? get phoneNo => _cityName;
+  String? get password => _password;
+  String? get name => _name;
+  String? get cityName => _cityName;
   List<String> get selectedJobs => _selectedJobs;
 
   void setMobileNo({required int number}) {

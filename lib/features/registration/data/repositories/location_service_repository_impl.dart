@@ -1,12 +1,11 @@
 import 'package:dartz/dartz.dart';
+import 'package:find_skill/features/registration/data/models/user_location_model.dart';
 import 'package:location/location.dart';
 
 import '../../../../core/error/failures.dart';
 import '../../../../core/location/location_info.dart';
-import '../../domain/entities/user_location.dart';
 import '../../domain/repositories/location_service_repository.dart';
 import '../datasources/location_service_data_source.dart';
-import '../models/user_location_model.dart';
 
 class LocationServiceRepositoryImpl extends LocationServiceRepository {
   final LocationServiceDataSource locationServiceDataSource;
@@ -17,7 +16,7 @@ class LocationServiceRepositoryImpl extends LocationServiceRepository {
   });
 
   @override
-  Future<Either<Failure, UserLocation>> getUserLocation() async {
+  Future<Either<Failure, UserLocationModel>> getUserLocation() async {
     /// Test if location services are enabled.
     bool _serviceEnabled = await locationInfo.serviceEnabled;
 

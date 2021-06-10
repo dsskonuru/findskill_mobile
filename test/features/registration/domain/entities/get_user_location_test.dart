@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:find_skill/features/registration/domain/entities/user_location.dart';
+import 'package:find_skill/features/registration/data/models/user_location_model.dart';
 import 'package:find_skill/features/registration/domain/repositories/location_service_repository.dart';
 import 'package:find_skill/features/registration/domain/usecases/get_user_location.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,7 +18,7 @@ void main() {
         locationServiceRepository: mockLocationServiceRepository);
   });
 
-  const UserLocation userLocation = UserLocation(
+  const UserLocationModel userLocation = UserLocationModel(
     latitude: "12.50",
     longitude: "34.2",
     country: "India",
