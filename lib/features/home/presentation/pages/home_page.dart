@@ -14,13 +14,16 @@ class HomePage extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(
+                height: 10.h,
+              ),
               SvgPicture.asset(
                 'assets/svg/under-construction.svg',
                 placeholderBuilder: (BuildContext context) =>
                     const CircularProgressIndicator(),
               ),
               SizedBox(
-                height: 4.h,
+                height: 10.h,
               ),
               Text(
                 "App under development",

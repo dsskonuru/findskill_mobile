@@ -44,6 +44,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
   double _maxAvailableZoom = 1.0;
   double _currentScale = 1.0;
   double _baseScale = 1.0;
+  int _selectedCameraIndex = 0;
 
   // Counting pointers (number of user fingers on screen)
   int _pointers = 0;
@@ -52,6 +53,16 @@ class _VideoCaptureState extends State<VideoCapturePage>
   void initState() {
     super.initState();
     WidgetsBinding.instance?.addObserver(this);
+    if (cameras.isNotEmpty) {
+      controller = CameraController(cameras[0], ResolutionPreset.max);
+      controller!.initialize().then((_) {
+        if (!mounted) {
+          return;
+        }
+        setState(() {});
+      });
+      onNewCameraSelected(cameras[0]);
+    }
   }
 
   @override
@@ -78,24 +89,75 @@ class _VideoCaptureState extends State<VideoCapturePage>
 
   @override
   Widget build(BuildContext context) {
+    final CameraController? cameraController = controller;
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Expanded(
-            child: Center(
-              child: _cameraPreviewWidget(),
-            ),
-          ),
-          Row(
-            children: [
-              Column(
-                children: [
-                  _captureControlRowWidget(),
-                  _cameraTogglesRowWidget(),
+          _cameraPreviewWidget(),
+          Container(
+            color: Colors.lightBlue.withOpacity(0.5),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  IconButton(
+                    icon: const Icon(Icons.videocam),
+                    color: Colors.blue,
+                    onPressed: cameraController != null &&
+                            cameraController.value.isInitialized &&
+                            !cameraController.value.isRecordingVideo
+                        ? onVideoRecordButtonPressed
+                        : null,
+                  ),
+                  IconButton(
+                    icon: cameraController != null &&
+                            cameraController.value.isRecordingPaused
+                        ? const Icon(Icons.play_arrow)
+                        : const Icon(Icons.pause),
+                    color: Colors.blue,
+                    onPressed: cameraController != null &&
+                            cameraController.value.isInitialized &&
+                            cameraController.value.isRecordingVideo
+                        ? (cameraController.value.isRecordingPaused)
+                            ? onResumeButtonPressed
+                            : onPauseButtonPressed
+                        : null,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.stop),
+                    color: Colors.red,
+                    onPressed: cameraController != null &&
+                            cameraController.value.isInitialized &&
+                            cameraController.value.isRecordingVideo
+                        ? onStopButtonPressed
+                        : null,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.cameraswitch_outlined),
+                    color: Colors.red,
+                    onPressed: () {
+                      setState(
+                        () async {
+                          if (!(controller != null &&
+                              controller!.value.isRecordingVideo)) {
+                            if (cameras.isNotEmpty) {
+                              _selectedCameraIndex =
+                                  (_selectedCameraIndex + 1) % cameras.length;
+                              Logger.root.shout(_selectedCameraIndex);
+                              await onNewCameraSelected(
+                                  cameras[_selectedCameraIndex]);
+                            }
+                          }
+                        },
+                      );
+                    },
+                  ),
+                  _thumbnailWidget(),
                 ],
               ),
-              _thumbnailWidget(),
-            ],
+            ),
           )
         ],
       ),
@@ -107,7 +169,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
     final CameraController? cameraController = controller;
 
     if (cameraController == null || !cameraController.value.isInitialized) {
-      return  Text(
+      return Text(
         AppLocalizations.of(context)!.translate("tap a camera") as String,
         //'Tap a camera',
         style: const TextStyle(
@@ -152,40 +214,53 @@ class _VideoCaptureState extends State<VideoCapturePage>
     await controller!.setZoomLevel(_currentScale);
   }
 
+  void onViewFinderTap(TapDownDetails details, BoxConstraints constraints) {
+    if (controller == null) {
+      return;
+    }
+
+    final CameraController cameraController = controller!;
+
+    final offset = Offset(
+      details.localPosition.dx / constraints.maxWidth,
+      details.localPosition.dy / constraints.maxHeight,
+    );
+    cameraController.setExposurePoint(offset);
+    cameraController.setFocusPoint(offset);
+  }
+
   /// Display the thumbnail of the captured image or video.
   Widget _thumbnailWidget() {
     final VideoPlayerController? localVideoController = videoController;
 
-    return Expanded(
-      child: Align(
-        alignment: Alignment.centerRight,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            if (localVideoController == null)
-              Container()
-            else
-              InkWell(
-                onTap: () async {
-                  final File file = File(videoFile!.path);
-                  await context.router.navigate(VideoTrimmerRoute(file: file));
-                },
-                child: SizedBox(
-                  width: 64.0,
-                  height: 64.0,
-                  child: Container(
-                    decoration:
-                        BoxDecoration(border: Border.all(color: Colors.pink)),
-                    child: Center(
-                      child: AspectRatio(
-                          aspectRatio: localVideoController.value.aspectRatio,
-                          child: VideoPlayer(localVideoController)),
-                    ),
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          if (localVideoController == null)
+            Container()
+          else
+            InkWell(
+              onTap: () async {
+                final File file = File(videoFile!.path);
+                await context.router.navigate(VideoTrimmerRoute(file: file));
+              },
+              child: SizedBox(
+                width: 64.0,
+                height: 64.0,
+                child: Container(
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.pink)),
+                  child: Center(
+                    child: AspectRatio(
+                        aspectRatio: localVideoController.value.aspectRatio,
+                        child: VideoPlayer(localVideoController)),
                   ),
                 ),
               ),
-          ],
-        ),
+            ),
+        ],
       ),
     );
   }
@@ -193,9 +268,8 @@ class _VideoCaptureState extends State<VideoCapturePage>
   /// Display the control bar with buttons to take pictures and record videos.
   Widget _captureControlRowWidget() {
     final CameraController? cameraController = controller;
-
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         IconButton(
           icon: const Icon(Icons.videocam),
@@ -228,6 +302,22 @@ class _VideoCaptureState extends State<VideoCapturePage>
                   cameraController.value.isRecordingVideo
               ? onStopButtonPressed
               : null,
+        ),
+        IconButton(
+          icon: const Icon(Icons.cameraswitch_outlined),
+          color: Colors.red,
+          onPressed: () {
+            setState(
+              () async {
+                if (cameras.isNotEmpty) {
+                  _selectedCameraIndex =
+                      (_selectedCameraIndex + 1) % cameras.length;
+                  Logger.root.shout(_selectedCameraIndex);
+                  await onNewCameraSelected(cameras[_selectedCameraIndex]);
+                }
+              },
+            );
+          },
         )
       ],
     );
@@ -245,8 +335,9 @@ class _VideoCaptureState extends State<VideoCapturePage>
     }
 
     if (cameras.isEmpty) {
-      return Text(AppLocalizations.of(context)!.translate("no camera found") as String,
-      //'No camera found'
+      return Text(
+        AppLocalizations.of(context)!.translate("no camera found") as String,
+        //'No camera found'
       );
     } else {
       for (final CameraDescription cameraDescription in cameras) {
@@ -268,21 +359,6 @@ class _VideoCaptureState extends State<VideoCapturePage>
     }
 
     return Row(children: toggles);
-  }
-
-  void onViewFinderTap(TapDownDetails details, BoxConstraints constraints) {
-    if (controller == null) {
-      return;
-    }
-
-    final CameraController cameraController = controller!;
-
-    final offset = Offset(
-      details.localPosition.dx / constraints.maxWidth,
-      details.localPosition.dy / constraints.maxHeight,
-    );
-    cameraController.setExposurePoint(offset);
-    cameraController.setFocusPoint(offset);
   }
 
   Future<void> onNewCameraSelected(CameraDescription cameraDescription) async {
@@ -436,7 +512,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
       }
     };
     vController.addListener(videoPlayerListener!);
-    await vController.setLooping(true);
+    await vController.setLooping(false);
     await vController.initialize();
     await videoController?.dispose();
     if (mounted) {

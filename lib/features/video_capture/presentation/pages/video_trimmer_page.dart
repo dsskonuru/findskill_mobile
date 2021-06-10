@@ -79,22 +79,6 @@ class _VideoTrimmerState extends State<VideoTrimmerPage> {
                       backgroundColor: Colors.red,
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: _progressVisibility
-                        ? null
-                        : () async {
-                            _saveVideo().then(
-                              (outputPath) {
-                                debugPrint('OUTPUT PATH: $outputPath');
-                                context.router.navigate(VideoPreviewRoute(
-                                    outputVideoPath: outputPath));
-                              },
-                            );
-                          },
-                    child:  Text(AppLocalizations.of(context)!.translate("save") as String,
-                    //"SAVE"
-                    ),
-                  ),
                   Expanded(
                     child: VideoViewer(trimmer: _trimmer),
                   ),
@@ -138,7 +122,28 @@ class _VideoTrimmerState extends State<VideoTrimmerPage> {
                             size: 80.0,
                             color: Colors.white,
                           ),
-                  )
+                  ),
+                  ElevatedButton(
+                    onPressed: () async =>
+                        // context.router.navigate(RegistrationRoute()),
+                        _progressVisibility
+                            ? null
+                            : () async {
+                                _saveVideo().then(
+                                  (outputPath) {
+                                    debugPrint('OUTPUT PATH: $outputPath');
+                                    context.router.navigate(
+                                      VideoPreviewRoute(
+                                          outputVideoPath: outputPath),
+                                    );
+                                  },
+                                );
+                              },
+                    child: Text(
+                      AppLocalizations.of(context)!.translate("save") as String,
+                      //"SAVE"
+                    ),
+                  ),
                 ],
               ),
             ),
