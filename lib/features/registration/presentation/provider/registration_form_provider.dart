@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final registrationFormProvider =
-    ChangeNotifierProvider.autoDispose<RegistrationFormNotifier>(
+    ChangeNotifierProvider<RegistrationFormNotifier>(
         (ref) => RegistrationFormNotifier());
 
 class RegistrationFormNotifier extends ChangeNotifier {

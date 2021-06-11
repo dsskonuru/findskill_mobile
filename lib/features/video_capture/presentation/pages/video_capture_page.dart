@@ -6,6 +6,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../core/localization/localization.dart';
@@ -45,6 +46,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
   double _currentScale = 1.0;
   double _baseScale = 1.0;
   int _selectedCameraIndex = 0;
+  AnimationController? animationController;
 
   // Counting pointers (number of user fingers on screen)
   int _pointers = 0;
@@ -53,14 +55,12 @@ class _VideoCaptureState extends State<VideoCapturePage>
   void initState() {
     super.initState();
     WidgetsBinding.instance?.addObserver(this);
+    animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 400),
+      reverseDuration: const Duration(milliseconds: 400),
+    );
     if (cameras.isNotEmpty) {
-      controller = CameraController(cameras[0], ResolutionPreset.max);
-      controller!.initialize().then((_) {
-        if (!mounted) {
-          return;
-        }
-        setState(() {});
-      });
       onNewCameraSelected(cameras[0]);
     }
   }
@@ -91,76 +91,95 @@ class _VideoCaptureState extends State<VideoCapturePage>
   Widget build(BuildContext context) {
     final CameraController? cameraController = controller;
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          _cameraPreviewWidget(),
-          Container(
-            color: Colors.lightBlue.withOpacity(0.5),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  IconButton(
-                    icon: const Icon(Icons.videocam),
-                    color: Colors.blue,
-                    onPressed: cameraController != null &&
-                            cameraController.value.isInitialized &&
-                            !cameraController.value.isRecordingVideo
-                        ? onVideoRecordButtonPressed
-                        : null,
+      body: cameras.isEmpty
+          ? Text(
+              AppLocalizations.of(context)!.translate("no camera found")
+                  as String,
+              //'No camera found'
+            )
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                _cameraPreviewWidget(),
+                Container(
+                  color: Colors.lightBlue.withOpacity(0.5),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        IconButton(
+                          icon: AnimatedIcon(
+                            icon: AnimatedIcons.pause_play,
+                            color: Colors.blue,
+                            progress: animationController!,
+                          ),
+                          onPressed: () {
+                            setState(
+                              () {
+                                if (cameraController != null &&
+                                    cameraController.value.isInitialized &&
+                                    cameraController.value.isRecordingVideo) {
+                                  if (cameraController
+                                      .value.isRecordingPaused) {
+                                    animationController!.reverse();
+                                    onResumeButtonPressed();
+                                  } else {
+                                    animationController!.forward();
+                                    onPauseButtonPressed();
+                                  }
+                                }
+                              },
+                            );
+                          },
+                        ),
+                        IconButton(
+                          icon: cameraController != null &&
+                                  !cameraController.value.isRecordingVideo
+                              ? const Icon(Icons.videocam)
+                              : const Icon(
+                                  Icons.stop,
+                                  color: Colors.red,
+                                ),
+                          color: Colors.blue,
+                          onPressed: cameraController != null &&
+                                  cameraController.value.isInitialized
+                              ? (cameraController.value.isRecordingVideo)
+                                  ? onStopButtonPressed
+                                  : onVideoRecordButtonPressed
+                              : null,
+                        ),
+                        IconButton(
+                          icon: const Icon(
+                            Icons.cameraswitch_outlined,
+                            color: Colors.blueGrey,
+                          ),
+                          color: Colors.red,
+                          onPressed: () {
+                            setState(
+                              () async {
+                                if (!(controller != null &&
+                                    controller!.value.isRecordingVideo)) {
+                                  if (cameras.isNotEmpty) {
+                                    _selectedCameraIndex =
+                                        (_selectedCameraIndex + 1) %
+                                            cameras.length;
+                                    Logger.root.shout(_selectedCameraIndex);
+                                    await onNewCameraSelected(
+                                        cameras[_selectedCameraIndex]);
+                                  }
+                                }
+                              },
+                            );
+                          },
+                        ),
+                        _thumbnailWidget(),
+                      ],
+                    ),
                   ),
-                  IconButton(
-                    icon: cameraController != null &&
-                            cameraController.value.isRecordingPaused
-                        ? const Icon(Icons.play_arrow)
-                        : const Icon(Icons.pause),
-                    color: Colors.blue,
-                    onPressed: cameraController != null &&
-                            cameraController.value.isInitialized &&
-                            cameraController.value.isRecordingVideo
-                        ? (cameraController.value.isRecordingPaused)
-                            ? onResumeButtonPressed
-                            : onPauseButtonPressed
-                        : null,
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.stop),
-                    color: Colors.red,
-                    onPressed: cameraController != null &&
-                            cameraController.value.isInitialized &&
-                            cameraController.value.isRecordingVideo
-                        ? onStopButtonPressed
-                        : null,
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.cameraswitch_outlined),
-                    color: Colors.red,
-                    onPressed: () {
-                      setState(
-                        () async {
-                          if (!(controller != null &&
-                              controller!.value.isRecordingVideo)) {
-                            if (cameras.isNotEmpty) {
-                              _selectedCameraIndex =
-                                  (_selectedCameraIndex + 1) % cameras.length;
-                              Logger.root.shout(_selectedCameraIndex);
-                              await onNewCameraSelected(
-                                  cameras[_selectedCameraIndex]);
-                            }
-                          }
-                        },
-                      );
-                    },
-                  ),
-                  _thumbnailWidget(),
-                ],
-              ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
     );
   }
 
@@ -247,15 +266,18 @@ class _VideoCaptureState extends State<VideoCapturePage>
                 await context.router.navigate(VideoTrimmerRoute(file: file));
               },
               child: SizedBox(
-                width: 64.0,
-                height: 64.0,
+                width: 9.h,
+                height: 9.h,
                 child: Container(
-                  decoration:
-                      BoxDecoration(border: Border.all(color: Colors.pink)),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                    color: const Color.fromRGBO(0, 163, 225, 1),
+                  )),
                   child: Center(
                     child: AspectRatio(
-                        aspectRatio: localVideoController.value.aspectRatio,
-                        child: VideoPlayer(localVideoController)),
+                      aspectRatio: localVideoController.value.aspectRatio,
+                      child: VideoPlayer(localVideoController),
+                    ),
                   ),
                 ),
               ),
@@ -263,102 +285,6 @@ class _VideoCaptureState extends State<VideoCapturePage>
         ],
       ),
     );
-  }
-
-  /// Display the control bar with buttons to take pictures and record videos.
-  Widget _captureControlRowWidget() {
-    final CameraController? cameraController = controller;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.videocam),
-          color: Colors.blue,
-          onPressed: cameraController != null &&
-                  cameraController.value.isInitialized &&
-                  !cameraController.value.isRecordingVideo
-              ? onVideoRecordButtonPressed
-              : null,
-        ),
-        IconButton(
-          icon: cameraController != null &&
-                  cameraController.value.isRecordingPaused
-              ? const Icon(Icons.play_arrow)
-              : const Icon(Icons.pause),
-          color: Colors.blue,
-          onPressed: cameraController != null &&
-                  cameraController.value.isInitialized &&
-                  cameraController.value.isRecordingVideo
-              ? (cameraController.value.isRecordingPaused)
-                  ? onResumeButtonPressed
-                  : onPauseButtonPressed
-              : null,
-        ),
-        IconButton(
-          icon: const Icon(Icons.stop),
-          color: Colors.red,
-          onPressed: cameraController != null &&
-                  cameraController.value.isInitialized &&
-                  cameraController.value.isRecordingVideo
-              ? onStopButtonPressed
-              : null,
-        ),
-        IconButton(
-          icon: const Icon(Icons.cameraswitch_outlined),
-          color: Colors.red,
-          onPressed: () {
-            setState(
-              () async {
-                if (cameras.isNotEmpty) {
-                  _selectedCameraIndex =
-                      (_selectedCameraIndex + 1) % cameras.length;
-                  Logger.root.shout(_selectedCameraIndex);
-                  await onNewCameraSelected(cameras[_selectedCameraIndex]);
-                }
-              },
-            );
-          },
-        )
-      ],
-    );
-  }
-
-  /// Display a row of toggle to select the camera (or a message if no camera is available).
-  Widget _cameraTogglesRowWidget() {
-    final List<Widget> toggles = <Widget>[];
-
-    void onChanged(CameraDescription? description) {
-      if (description == null) {
-        return;
-      }
-      onNewCameraSelected(description);
-    }
-
-    if (cameras.isEmpty) {
-      return Text(
-        AppLocalizations.of(context)!.translate("no camera found") as String,
-        //'No camera found'
-      );
-    } else {
-      for (final CameraDescription cameraDescription in cameras) {
-        toggles.add(
-          SizedBox(
-            width: 90.0,
-            child: RadioListTile<CameraDescription>(
-              title: Icon(getCameraLensIcon(cameraDescription.lensDirection)),
-              groupValue: controller?.description,
-              value: cameraDescription,
-              onChanged:
-                  controller != null && controller!.value.isRecordingVideo
-                      ? null
-                      : onChanged,
-            ),
-          ),
-        );
-      }
-    }
-
-    return Row(children: toggles);
   }
 
   Future<void> onNewCameraSelected(CameraDescription cameraDescription) async {
@@ -513,12 +439,15 @@ class _VideoCaptureState extends State<VideoCapturePage>
     };
     vController.addListener(videoPlayerListener!);
     await vController.setLooping(false);
+    await vController.pause();
     await vController.initialize();
     await videoController?.dispose();
     if (mounted) {
-      setState(() {
-        videoController = vController;
-      });
+      setState(
+        () {
+          videoController = vController;
+        },
+      );
     }
     await vController.play();
   }

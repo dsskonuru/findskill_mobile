@@ -1,10 +1,10 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:find_skill/features/registration/presentation/provider/otp_verification_provider.dart';
+import 'package:find_skill/features/registration/presentation/provider/user_firestore_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../core/localization/localization.dart';
-import '../../../../core/router/router.gr.dart';
 import '../../../onboarding/presentation/widgets/app_bar.dart';
 import '../widgets/pin_input.dart';
 
@@ -52,21 +52,21 @@ class OtpVerificationPage extends ConsumerWidget {
               ),
               Center(
                 child: ElevatedButton(
-                    onPressed: () =>
-                        context.router.root.navigate(const HomeRoute()),
-                    // if (_otpFormKey.currentState!.validate()) {
-                    //   await context.read(userFirestoreProvider).signInWithOTP(
-                    //         context.read(otpFormProvider).smsCode!,
-                    //         context.read(otpFormProvider).verificationId!,
-                    //       );
-                    //   await context.read(userProvider).handleAuth(context);
-                    // }
-                    child: Text(
-                      AppLocalizations.of(context)!.translate("submit")
-                          as String,
-                      //'SUBMIT',
-                      style: Theme.of(context).textTheme.button,
-                    )),
+                  onPressed: () async {
+                    if (_otpFormKey.currentState!.validate()) {
+                      context.read(userFirestoreProvider).signInWithOTP(
+                            context.read(otpFormProvider).smsCode!,
+                            context.read(otpFormProvider).verificationId!,
+                          );
+                      context.read(userProvider).handleAuth(context);
+                    }
+                  },
+                  child: Text(
+                    AppLocalizations.of(context)!.translate("submit") as String,
+                    //'SUBMIT',
+                    style: Theme.of(context).textTheme.button,
+                  ),
+                ),
               )
             ],
           ),

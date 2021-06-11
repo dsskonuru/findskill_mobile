@@ -1,15 +1,14 @@
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:find_skill/core/localization/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:video_trimmer/video_trimmer.dart';
 
-import '../../../../core/localization/localization.dart';
 import '../../../../core/router/router.gr.dart';
 
 class VideoTrimmerPage extends StatefulWidget {
   final File file;
-
   const VideoTrimmerPage(this.file);
   @override
   _VideoTrimmerState createState() => _VideoTrimmerState();
@@ -17,17 +16,13 @@ class VideoTrimmerPage extends StatefulWidget {
 
 class _VideoTrimmerState extends State<VideoTrimmerPage> {
   final Trimmer _trimmer = Trimmer();
-
   double _startValue = 0.0;
   double _endValue = 0.0;
-
   bool _isPlaying = false;
   bool _progressVisibility = false;
-
   @override
   void initState() {
     super.initState();
-
     _loadVideo();
   }
 
@@ -39,9 +34,7 @@ class _VideoTrimmerState extends State<VideoTrimmerPage> {
     setState(() {
       _progressVisibility = true;
     });
-
     String? _value;
-
     await _trimmer
         .saveTrimmedVideo(startValue: _startValue, endValue: _endValue)
         .then((value) {
@@ -50,7 +43,6 @@ class _VideoTrimmerState extends State<VideoTrimmerPage> {
         _value = value;
       });
     });
-
     return _value;
   }
 
@@ -124,21 +116,17 @@ class _VideoTrimmerState extends State<VideoTrimmerPage> {
                           ),
                   ),
                   ElevatedButton(
-                    onPressed: () async =>
-                        // context.router.navigate(RegistrationRoute()),
-                        _progressVisibility
-                            ? null
-                            : () async {
-                                _saveVideo().then(
-                                  (outputPath) {
-                                    debugPrint('OUTPUT PATH: $outputPath');
-                                    context.router.navigate(
-                                      VideoPreviewRoute(
-                                          outputVideoPath: outputPath),
-                                    );
-                                  },
-                                );
+                    onPressed: _progressVisibility
+                        ? null
+                        : () async {
+                            _saveVideo().then(
+                              (outputPath) {
+                                debugPrint('OUTPUT PATH: $outputPath');
+                                context.router.navigate(VideoPreviewRoute(
+                                    outputVideoPath: outputPath));
                               },
+                            );
+                          },
                     child: Text(
                       AppLocalizations.of(context)!.translate("save") as String,
                       //"SAVE"

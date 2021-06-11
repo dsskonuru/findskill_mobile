@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,7 +7,6 @@ import '../../../../core/error/failures.dart';
 import '../../../../core/router/router.gr.dart';
 import '../../data/datasources/users_firestore.dart';
 import '../../data/models/user_model.dart';
-import 'otp_verification_provider.dart';
 
 final userFirestoreProvider = Provider((ref) => UserFirestore());
 
@@ -30,26 +28,26 @@ class UserNotifier extends ChangeNotifier {
     try {
       _userFirestore.auth.authStateChanges().listen(
         (authUser) async {
-          if (authUser == null) {
-            _user = null;
-            debugPrint('User is currently signed out!');
-            context.router.root.navigate(const LanguageRoute());
-          } else {
-            context.read(otpFormProvider).setUid(authUser.uid);
-            await _userFirestore.usersRef.doc(authUser.uid).get().then(
-              (DocumentSnapshot<UserModel> userSnapshot) async {
-                if (userSnapshot.exists) {
-                  _user = userSnapshot.data();
-                  await context.router.root.navigate(const HomeRoute());
-                } else {
-                  debugPrint('User requires registration');
-                  await context.router.navigate(
-                    RegistrationRoute(),
-                  );
-                }
-              },
-            );
-          }
+          context.router.root.navigate(const HomeRoute());
+          // if (authUser == null) {
+          //   _user = null;
+          //   debugPrint('User is currently signed out!');
+          //   context.router.root.navigate(const LanguageRoute());
+          // } else {
+          //   context.read(otpFormProvider).setUid(authUser.uid);
+          //   await _userFirestore.usersRef.doc(authUser.uid).get().then(
+          //     (DocumentSnapshot<UserModel> userSnapshot) async {
+          //       if (userSnapshot.exists) {
+          //         _user = userSnapshot.data();
+          //         await context.router.root.navigate(const HomeRoute());
+          //       } else {
+          //         debugPrint('User requires registration');
+          //         await context.router.navigate(
+          //           RegistrationRoute(),
+          //         );
+          //       }
+          //     },
+          //   );
         },
       );
       return const Right(null);
