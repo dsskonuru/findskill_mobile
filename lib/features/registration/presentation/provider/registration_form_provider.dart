@@ -6,7 +6,7 @@ final registrationFormProvider =
         (ref) => RegistrationFormNotifier());
 
 class RegistrationFormNotifier extends ChangeNotifier {
-  int? _mobileNumber;
+  String? _mobileNumber;
   String? _password;
   String? _name;
   String? _cityName;
@@ -14,14 +14,14 @@ class RegistrationFormNotifier extends ChangeNotifier {
   bool jobMenuPressed = false;
   final Map<String, List<String>> skillsList = skillsMap;
 
-  int? get mobileNumber => _mobileNumber;
+  String? get mobileNumber => _mobileNumber;
   String? get password => _password;
   String? get name => _name;
   String? get cityName => _cityName;
   List<String> get selectedJobs => _selectedJobs;
 
-  void setMobileNo({required int number}) {
-    _mobileNumber = number;
+  void setMobileNo({required String number}) {
+    _mobileNumber = "+$number";
     notifyListeners();
   }
 

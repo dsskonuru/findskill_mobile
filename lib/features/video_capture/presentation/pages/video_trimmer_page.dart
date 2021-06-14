@@ -116,17 +116,19 @@ class _VideoTrimmerState extends State<VideoTrimmerPage> {
                           ),
                   ),
                   ElevatedButton(
-                    onPressed: _progressVisibility
-                        ? null
-                        : () async {
-                            _saveVideo().then(
-                              (outputPath) {
-                                debugPrint('OUTPUT PATH: $outputPath');
-                                context.router.navigate(VideoPreviewRoute(
-                                    outputVideoPath: outputPath));
-                              },
-                            );
-                          },
+                    onPressed: () async =>
+                        context.router.navigate(RegistrationRoute()),
+                    // _progressVisibility
+                    //     ? null
+                    //     : () async {
+                    //         _saveVideo().then(
+                    //           (outputPath) {
+                    //             debugPrint('OUTPUT PATH: $outputPath');
+                    //             context.router.navigate(VideoPreviewRoute(
+                    //                 outputVideoPath: outputPath));
+                    //           },
+                    //         );
+                    //       },
                     child: Text(
                       AppLocalizations.of(context)!.translate("save") as String,
                       //"SAVE"
