@@ -3,14 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:logging/logging.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../core/localization/localization.dart';
 import '../../../../core/router/router.gr.dart';
-import '../../../../core/usecases/usecase.dart';
 import '../../../../main.dart';
-import '../../domain/usecases/get_languages.dart';
 import '../provider/onboarding_provider.dart';
 
 class LanguagePage extends ConsumerWidget {
@@ -18,8 +15,8 @@ class LanguagePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final listOfLang = watch(languagesProvider).call(NoParams());
-    listOfLang.then((value) => Logger.root.fine(value.toString()));
+    // final listOfLang = watch(languagesProvider).call(NoParams());
+    // listOfLang.then((value) => Logger.root.fine(value.toString()));
 
     Future<void> _changeLanguage(LanguageCode language) async {
       final Locale _temp = await setLocale(language.languageCode);
@@ -47,7 +44,7 @@ class LanguagePage extends ConsumerWidget {
             ),
             DropdownButton<String>(
               focusColor: Colors.white,
-              value: watch(languageProvider).name,
+              value: watch(languageProvider).language.toString(),
               elevation: 5,
               style: const TextStyle(color: Colors.white),
               iconEnabledColor: Colors.black,
@@ -70,7 +67,7 @@ class LanguagePage extends ConsumerWidget {
                     fontWeight: FontWeight.w500),
               ),
               onChanged: (String? value) async {
-                watch(languageProvider).setLanguage(value!);
+                watch(languageProvider).language = value!;
                 _changeLanguage(LanguageCode(value));
               },
             ),

@@ -31,9 +31,7 @@ Future<void> main() async {
   await Firebase.initializeApp();
 
   runApp(
-    ProviderScope(
-      child: FindSkillApp(),
-    ),
+    FindSkillApp(),
   );
 }
 
@@ -78,40 +76,50 @@ class _FindSkillAppState extends State<FindSkillApp> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    // disposing the globally self managed container.
+    container.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return ResponsiveSizer(
-      builder: (context, orientation, deviceType) {
-        return MaterialApp.router(
-          locale: _locale,
-          supportedLocales: const [
-            Locale('en', 'US'),
-            Locale('hi', 'IN'),
-          ],
-          // These delegates make sure that the localization data for the proper language is loaded
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          // Returns a locale which will be used by the app
-          localeResolutionCallback: (locale, supportedLocales) {
-            // Check if the current device locale is supported
-            for (final supportedLocale in supportedLocales) {
-              if (supportedLocale.languageCode == locale!.languageCode &&
-                  supportedLocale.countryCode == locale.countryCode) {
-                return supportedLocale;
+    return UncontrolledProviderScope(
+      container: container,
+      child: ResponsiveSizer(
+        builder: (context, orientation, deviceType) {
+          return MaterialApp.router(
+            locale: _locale,
+            supportedLocales: const [
+              Locale('en', 'US'),
+              Locale('hi', 'IN'),
+            ],
+            // These delegates make sure that the localization data for the proper language is loaded
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            // Returns a locale which will be used by the app
+            localeResolutionCallback: (locale, supportedLocales) {
+              // Check if the current device locale is supported
+              for (final supportedLocale in supportedLocales) {
+                if (supportedLocale.languageCode == locale!.languageCode &&
+                    supportedLocale.countryCode == locale.countryCode) {
+                  return supportedLocale;
+                }
               }
-            }
-            // If the locale of the device is not supported, use the first one
-            // from the list (English, in this case).
-            return supportedLocales.first;
-          },
-          routerDelegate: _appRouter.delegate(),
-          routeInformationParser: _appRouter.defaultRouteParser(),
-          theme: theme,
-        );
-      },
+              // If the locale of the device is not supported, use the first one
+              // from the list (English, in this case).
+              return supportedLocales.first;
+            },
+            routerDelegate: _appRouter.delegate(),
+            routeInformationParser: _appRouter.defaultRouteParser(),
+            theme: theme,
+          );
+        },
+      ),
     );
   }
 }

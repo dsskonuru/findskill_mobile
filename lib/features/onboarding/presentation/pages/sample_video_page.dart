@@ -20,6 +20,7 @@ class _SampleVideoPageState extends State<SampleVideoPage> {
   @override
   void initState() {
     super.initState();
+    debugPrint(container.read(languageProvider).getSampleVideoPath());
 
     _controller = VideoPlayerController.asset(
         'assets/video/${container.read(languageProvider).getSampleVideoPath()}')

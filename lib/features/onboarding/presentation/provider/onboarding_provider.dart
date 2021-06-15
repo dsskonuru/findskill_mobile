@@ -6,10 +6,14 @@ enum Language {
   hindi,
 }
 
+final languageProvider = ChangeNotifierProvider((ref) => LanguageNotifier());
+
 class LanguageNotifier extends ChangeNotifier {
   Language _language = Language.english;
-  String get name => _language.toString();
-  void setLanguage(String language) {
+  
+  String get language => _language.toString();
+
+  set language(String language) {
     _language = Language.values.firstWhere((e) => e.toString() == language);
     notifyListeners();
   }
@@ -35,4 +39,3 @@ class LanguageNotifier extends ChangeNotifier {
   }
 }
 
-final languageProvider = ChangeNotifierProvider((ref) => LanguageNotifier());
