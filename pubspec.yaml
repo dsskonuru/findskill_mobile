@@ -59,8 +59,11 @@ flutter:
     - assets/png/FindSkill-Logo-Symbol.png
     - assets/png/FindSkill-Logo-WithText.png
     - assets/png/FindSkill-Logo.png
-    - assets/video/intro.mp4
-    - assets/video/sample.mp4
+    - assets/video/Onboarding.mp4
+    - assets/video/FindSkill-English-Intro.mp4
+    - assets/video/FindSkill-Hindi-Intro.mp4
+    - assets/video/FindSkill-English-Notice.mp4
+    - assets/video/FindSkill-Hindi-Notice.mp4
     - assets/svg/onboarding-image.svg
     - assets/svg/findskill-appbar.svg
     - assets/svg/under-construction.svg

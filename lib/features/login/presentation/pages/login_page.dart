@@ -111,7 +111,7 @@ class LoginPage extends ConsumerWidget {
                 ),
                 Center(
                   child: ElevatedButton(
-                      onPressed: () =>  context.router.root.navigate(const HomeRoute()),
+                      onPressed: () =>  context.router.root.navigate(const NoticeRoute()),
                       child: Text(
                         AppLocalizations.of(context)!.translate("login")
                             as String,

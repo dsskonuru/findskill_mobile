@@ -64,7 +64,7 @@ class RegistrationPage extends ConsumerWidget {
                     validator: (value) {
                       value = value.toString();
                       if (value.contains(RegExp(r"\[A-Z]|[a-z]"))) {
-                        return "Please include the country code followed by +";
+                        return "Please include the country code";
                       }
                       return null;
                     },

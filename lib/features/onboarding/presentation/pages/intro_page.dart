@@ -18,7 +18,7 @@ class _IntroPageState extends State<IntroPage> {
   void initState() {
     super.initState();
     _controller = VideoPlayerController.asset(
-      'assets/video/intro.mp4',
+      'assets/video/Onboarding.mp4',
     )..initialize().then((_) {
         setState(() {
           _controller.play();
@@ -63,34 +63,62 @@ class _IntroPageState extends State<IntroPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      _controller.pause();
-                    });
-                    context.router.push(const SampleVideoRoute());
-                  },
-                  child: Text(
-                    AppLocalizations.of(context)!.translate("find skills") as String,
-                    //"Find Skills",
-                    style: Theme.of(context).textTheme.button,
-                  ),
+                Column(
+                  children: [
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            const Color.fromRGBO(76, 95, 113, 1)),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _controller.pause();
+                        });
+                        context.router.navigate(const SampleVideoRoute());
+                      },
+                      child: Text(
+                        AppLocalizations.of(context)!.translate("find skills")
+                            as String,
+                        //"Find Skills",
+                        style: Theme.of(context).textTheme.button,
+                      ),
+                    ),
+                    SizedBox(height: 1.h),
+                    Text(
+                      AppLocalizations.of(context)!.translate("employer")
+                          as String,
+                      //"Employer",
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
+                  ],
                 ),
                 SizedBox(
                   width: 9.w,
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      _controller.pause();
-                    });
-                    context.router.push(const SampleVideoRoute());
-                  },
-                  child: Text(
-                    AppLocalizations.of(context)!.translate("list your skills") as String,
-                    //"List Your Skills",
-                    style: Theme.of(context).textTheme.button,
-                  ),
+                Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _controller.pause();
+                        });
+                        context.router.navigate(const SampleVideoRoute());
+                      },
+                      child: Text(
+                        AppLocalizations.of(context)!
+                            .translate("list your skills") as String,
+                        //"List Your Skills",
+                        style: Theme.of(context).textTheme.button,
+                      ),
+                    ),
+                    SizedBox(height: 1.h),
+                    Text(
+                      AppLocalizations.of(context)!.translate("job seeker")
+                          as String,
+                      //"Employer",
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
+                  ],
                 ),
               ],
             )

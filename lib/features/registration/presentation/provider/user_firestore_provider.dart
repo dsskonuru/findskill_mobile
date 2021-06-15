@@ -28,7 +28,7 @@ class UserNotifier extends ChangeNotifier {
     try {
       _userFirestore.auth.authStateChanges().listen(
         (authUser) async {
-          context.router.root.navigate(const HomeRoute());
+          context.router.root.navigate(const UnderProcessingRoute());
           // if (authUser == null) {
           //   _user = null;
           //   debugPrint('User is currently signed out!');
