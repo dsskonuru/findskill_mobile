@@ -63,151 +63,157 @@ class _VideoTrimmerState extends State<VideoTrimmerPage> {
         }
       },
       child: Scaffold(
-        body:  SafeArea(
-            child: Stack(
-              children: <Widget>[
-                Transform.scale(
-                  scale: (_trimmer.videoPlayerController!.value.aspectRatio)/(MediaQuery.of(context).size.width / MediaQuery.of(context).size.height),
-                  child: VideoViewer(trimmer: _trimmer),
-                ),
-                Align(
-                    alignment: Alignment.topCenter,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          color: Colors.white,
-                          icon: const Icon(Icons.cancel),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          color: Colors.white,
-                          icon: const Icon(Icons.settings),
-                        ),
-                      ],
+        body: SafeArea(
+          child: Stack(
+            children: <Widget>[
+              Transform.scale(
+                scale: (_trimmer.videoPlayerController!.value.aspectRatio) /
+                    (MediaQuery.of(context).size.width /
+                        MediaQuery.of(context).size.height),
+                child: VideoViewer(trimmer: _trimmer),
+              ),
+              Align(
+                alignment: Alignment.topCenter,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      color: Colors.white,
+                      icon: const Icon(Icons.cancel),
                     ),
-                  ),
-                Visibility(
-                  visible: _progressVisibility,
-                  child: const LinearProgressIndicator(
-                    backgroundColor: Colors.red,
-                  ),
+                    IconButton(
+                      onPressed: () {},
+                      color: Colors.white,
+                      icon: const Icon(Icons.settings),
+                    ),
+                  ],
                 ),
-                Align(
+              ),
+              Visibility(
+                visible: _progressVisibility,
+                child: const LinearProgressIndicator(
+                  backgroundColor: Colors.red,
+                ),
+              ),
+              Expanded(
+                child: Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.35,
+                    height: MediaQuery.of(context).size.height * 0.42,
                     child: Column(
-                     // mainAxisAlignment: MainAxisAlignment.end,
+                      // mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        SizedBox(
-                          width: 100.w,
-                          child: Center(
-                            child: TrimEditor(
-                              trimmer: _trimmer,
-                              //viewerWidth: MediaQuery.of(context).size.width,
-                              maxVideoLength: const Duration(seconds: 30),
-                              onChangeStart: (value) {
-                                _startValue = value;
-                              },
-                              onChangeEnd: (value) {
-                                _endValue = value;
-                              },
-                              onChangePlaybackState: (value) {
-                                setState(() {
-                                  _isPlaying = value;
-                                });
-                              },
+                        Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.blueAccent)),
+
+                         // width: 100.w,
+                          child: TrimEditor(
+                            trimmer: _trimmer,
+                            viewerWidth: 95.w,
+                            viewerHeight: 50,
+                            borderPaintColor: Colors.blue,
+                            circlePaintColor: Colors.blue,
+                            scrubberPaintColor: Colors.blue,
+                            maxVideoLength: const Duration(seconds: 30),
+                            onChangeStart: (value) {
+                              _startValue = value;
+                            },
+                            onChangeEnd: (value) {
+                              _endValue = value;
+                            },
+                            onChangePlaybackState: (value) {
+                              setState(() {
+                                _isPlaying = value;
+                              });
+                            },
+                          ),
+                        ),
+
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 30),
+                            child: Text(
+                              "${(((_endValue - _startValue) % 60000) / 1000).toStringAsFixed(2)}s Selected",
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 16),
                             ),
                           ),
                         ),
-                       
-                       SizedBox(
-                         height: 4.h,
-                       ),
-                                    Center(
-                                      child: Container(
-                                        child: Text(
-                                          "${(((_endValue - _startValue) % 60000) / 1000).toStringAsFixed(2)}s Selected",
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w900,
-                                              fontSize: 16),
-                                        ),
-                                      ),
-                                    ),
-                                    // TextButton(
-                                    //   onPressed: () async {
-                                    //     final bool playbackState =
-                                    //         await _trimmer.videPlaybackControl(
-                                    //       startValue: _startValue,
-                                    //       endValue: _endValue,
-                                    //     );
-                                    //     setState(() {
-                                    //       _isPlaying = playbackState;
-                                    //     });
-                                    //   },
-                                    //   child: _isPlaying
-                                    //       ? const Icon(
-                                    //           Icons.pause,
-                                    //           size: 80.0,
-                                    //           color: Colors.white,
-                                    //         )
-                                    //       : const Icon(
-                                    //           Icons.play_arrow,
-                                    //           size: 80.0,
-                                    //           color: Colors.white,
-                                    //         ),
-                                    // ),
-                                    SizedBox(
-                         height: 9.h,
-                       ),
-                                    Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: Center(
-                                        child: ConstrainedBox(
-                                          constraints: const BoxConstraints.tightFor(
-                                              width: 160, height: 50),
-                                          child: ElevatedButton(
-                                            style: ButtonStyle(
-                                                shape: MaterialStateProperty.all<
-                                                        RoundedRectangleBorder>(
-                                                    RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(10.0),
-                                            ))),
-                                            onPressed: () async =>
-                                                context.router.navigate(RegistrationRoute()),
-                                            // _progressVisibility
-                                            //     ? null
-                                            //     : () async {
-                                            //         _saveVideo().then(
-                                            //           (outputPath) {
-                                            //             debugPrint('OUTPUT PATH: $outputPath');
-                                            //             context.router.navigate(VideoPreviewRoute(
-                                            //                 outputVideoPath: outputPath));
-                                            //           },
-                                            //         );
-                                            //       },
-                                            child: Text(
-                                              AppLocalizations.of(context)!.translate("done")
-                                                  as String,
-                                              //"Done"
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                        // TextButton(
+                        //   onPressed: () async {
+                        //     final bool playbackState =
+                        //         await _trimmer.videPlaybackControl(
+                        //       startValue: _startValue,
+                        //       endValue: _endValue,
+                        //     );
+                        //     setState(() {
+                        //       _isPlaying = playbackState;
+                        //     });
+                        //   },
+                        //   child: _isPlaying
+                        //       ? const Icon(
+                        //           Icons.pause,
+                        //           size: 80.0,
+                        //           color: Colors.white,
+                        //         )
+                        //       : const Icon(
+                        //           Icons.play_arrow,
+                        //           size: 80.0,
+                        //           color: Colors.white,
+                        //         ),
+                        // ),
+
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Center(
+                              child: ConstrainedBox(
+                                constraints: const BoxConstraints.tightFor(
+                                    width: 160, height: 50),
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                      shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ))),
+                                  onPressed: () async => context.router
+                                      .navigate(RegistrationRoute()),
+                                  // _progressVisibility
+                                  //     ? null
+                                  //     : () async {
+                                  //         _saveVideo().then(
+                                  //           (outputPath) {
+                                  //             debugPrint('OUTPUT PATH: $outputPath');
+                                  //             context.router.navigate(VideoPreviewRoute(
+                                  //                 outputVideoPath: outputPath));
+                                  //           },
+                                  //         );
+                                  //       },
+                                  child: Text(
+                                    AppLocalizations.of(context)!
+                                        .translate("done") as String,
+                                    //"Done"
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
-        
+        ),
       ),
     );
   }

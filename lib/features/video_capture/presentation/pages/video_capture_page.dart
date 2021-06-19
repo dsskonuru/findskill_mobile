@@ -40,8 +40,9 @@ class _VideoCaptureState extends State<VideoCapturePage>
   int _start = 10;
   int _current = 10;
 
-  int _counter = 0;
+  int _counter = 30;
   late Timer _timer;
+  bool a=true;
 
   // Counting pointers (number of user fingers on screen)
   int _pointers = 0;
@@ -302,11 +303,12 @@ class _VideoCaptureState extends State<VideoCapturePage>
   }
 
   void startTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic( const Duration(seconds: 1), (timer) {
       setState(() {
-        if (_counter < 30) {
-          _counter++;
+        if (_counter > 0) {
+          _counter--;
         } else {
+          sleep(const Duration(seconds: 1));
           timer.cancel();
           onStopButtonPressed();
         }
@@ -492,7 +494,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
   }
 
   void onVideoRecordButtonPressed() {
-    _counter = 0;
+    _counter = 30;
     startTimer();
     startVideoRecording().then((_) {
       if (mounted) setState(() {});
