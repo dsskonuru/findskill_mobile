@@ -33,10 +33,13 @@ Future<void> main() async {
 
   await Firebase.initializeApp();
 
-  runApp(DevicePreview(
-    builder: (context) => FindSkillApp(),
+  runApp(
+    //DevicePreview(
+    //builder: (context) => 
+    FindSkillApp(),
     //enabled: !kReleaseMode,
-  ));
+  //),
+  );
 }
 
 void _setupLogging() {
@@ -94,7 +97,7 @@ class _FindSkillAppState extends State<FindSkillApp> {
         builder: (context, orientation, deviceType) {
           return MaterialApp.router(
             locale: _locale,
-            builder: DevicePreview.appBuilder,
+            //builder: DevicePreview.appBuilder,
             supportedLocales: const [
               Locale('en', 'US'),
               Locale('hi', 'IN'),
