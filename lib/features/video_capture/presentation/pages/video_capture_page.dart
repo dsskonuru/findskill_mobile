@@ -35,8 +35,10 @@ class _VideoCaptureState extends State<VideoCapturePage>
   bool enableAudio = true;
   bool isVideoRecording = false;
 
+
   int _counter = 30;
   late Timer _timer;
+  bool a=true;
 
   // Counting pointers (number of user fingers on screen)
   int _pointers = 0;
@@ -369,7 +371,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
   }
 
   void onVideoRecordButtonPressed() {
-    _counter = 0;
+    _counter = 30;
     startTimer();
     startVideoRecording().then((_) {
       if (mounted) setState(() {});

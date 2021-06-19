@@ -59,45 +59,48 @@ class _VideoTrimmerState extends State<VideoTrimmerPage> {
         }
       },
       child: Scaffold(
-        body:  SafeArea(
-            child: Stack(
-              children: <Widget>[
-                Transform.scale(
-                  scale: (_trimmer.videoPlayerController!.value.aspectRatio)/(MediaQuery.of(context).size.width / MediaQuery.of(context).size.height),
-                  child: VideoViewer(trimmer: _trimmer),
-                ),
-                Align(
-                    alignment: Alignment.topCenter,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          color: Colors.white,
-                          icon: const Icon(Icons.cancel),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          color: Colors.white,
-                          icon: const Icon(Icons.settings),
-                        ),
-                      ],
+        body: SafeArea(
+          child: Stack(
+            children: <Widget>[
+              Transform.scale(
+                scale: (_trimmer.videoPlayerController!.value.aspectRatio) /
+                    (MediaQuery.of(context).size.width /
+                        MediaQuery.of(context).size.height),
+                child: VideoViewer(trimmer: _trimmer),
+              ),
+              Align(
+                alignment: Alignment.topCenter,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      color: Colors.white,
+                      icon: const Icon(Icons.cancel),
                     ),
-                  ),
-                Visibility(
-                  visible: _progressVisibility,
-                  child: const LinearProgressIndicator(
-                    backgroundColor: Colors.red,
-                  ),
+                    IconButton(
+                      onPressed: () {},
+                      color: Colors.white,
+                      icon: const Icon(Icons.settings),
+                    ),
+                  ],
                 ),
-                Align(
+              ),
+              Visibility(
+                visible: _progressVisibility,
+                child: const LinearProgressIndicator(
+                  backgroundColor: Colors.red,
+                ),
+              ),
+              Expanded(
+                child: Align(
                   alignment: Alignment.bottomCenter,
                   child: SizedBox(
                     height: 35.h,
                     child: Column(
-                     // mainAxisAlignment: MainAxisAlignment.end,
+                      // mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         SizedBox(
                           width: 100.w,
@@ -196,11 +199,11 @@ class _VideoTrimmerState extends State<VideoTrimmerPage> {
                       ],
                     ),
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
-        
+        ),
       ),
     );
   }
