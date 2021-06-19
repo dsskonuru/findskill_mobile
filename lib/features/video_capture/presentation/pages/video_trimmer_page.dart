@@ -1,13 +1,10 @@
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:camera/camera.dart';
 import 'package:find_skill/core/localization/localization.dart';
-import 'package:find_skill/main.dart';
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
-import 'package:video_trimmer/video_trimmer.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:video_trimmer/video_trimmer.dart';
 
 import '../../../../core/router/router.gr.dart';
 
@@ -22,7 +19,6 @@ class _VideoTrimmerState extends State<VideoTrimmerPage> {
   final Trimmer _trimmer = Trimmer();
   double _startValue = 0.0;
   double _endValue = 0.0;
-  bool _isPlaying = false;
   bool _progressVisibility = false;
   late var controller;
   @override
@@ -98,8 +94,8 @@ class _VideoTrimmerState extends State<VideoTrimmerPage> {
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.35,
+                  child: SizedBox(
+                    height: 35.h,
                     child: Column(
                      // mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -118,7 +114,6 @@ class _VideoTrimmerState extends State<VideoTrimmerPage> {
                               },
                               onChangePlaybackState: (value) {
                                 setState(() {
-                                  _isPlaying = value;
                                 });
                               },
                             ),
@@ -129,14 +124,12 @@ class _VideoTrimmerState extends State<VideoTrimmerPage> {
                          height: 4.h,
                        ),
                                     Center(
-                                      child: Container(
-                                        child: Text(
-                                          "${(((_endValue - _startValue) % 60000) / 1000).toStringAsFixed(2)}s Selected",
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w900,
-                                              fontSize: 16),
-                                        ),
+                                      child: Text(
+                                        "${(((_endValue - _startValue) % 60000) / 1000).toStringAsFixed(2)}s Selected",
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w900,
+                                            fontSize: 16),
                                       ),
                                     ),
                                     // TextButton(
