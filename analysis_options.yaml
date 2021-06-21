@@ -12,7 +12,7 @@ analyzer:
     - "**/*.config.dart"
     - "**/*.mocks.dart"
     - lib/generated_plugin_registrant.dart
-    # - test/**
+    - test/** # TODO: Repair the tests
 
   errors:
     missing_return: error

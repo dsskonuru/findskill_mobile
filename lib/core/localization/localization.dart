@@ -14,7 +14,7 @@ class AppLocalizations {
 
   late Map<String, String> _localizedValues;
 
-  Future<void> load() async {
+  Future<void> load() async { // TODO: Load the localization maps from backend
     final String jsonStringValues =
         await rootBundle.loadString('lang/${locale.languageCode}.json');
     final Map<String, dynamic> mappedJson =

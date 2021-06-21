@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:find_skill/core/localization/localization.dart';
-import 'package:find_skill/features/onboarding/presentation/provider/onboarding_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../core/localization/localization.dart';
 import '../../../../core/router/router.gr.dart';
 import '../../../../main.dart';
+import '../provider/onboarding_provider.dart';
 import '../widgets/app_bar.dart';
 
 class SampleVideoPage extends StatefulWidget {
@@ -78,7 +78,10 @@ class _SampleVideoPageState extends State<SampleVideoPage> {
                       _controller.pause();
                     });
                     context.router.navigate(
-                        const VideoRouter(children: [VideoCaptureRoute()]));
+                      const JobSeekerRouter(children: [
+                        VideoRouter(children: [VideoCaptureRoute()])
+                      ]),
+                    );
                   },
                   child: Text(
                     AppLocalizations.of(context)!.translate("create your video")

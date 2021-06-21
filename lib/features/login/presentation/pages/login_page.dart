@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:find_skill/features/login/presentation/provider/login_form_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../core/localization/localization.dart';
 import '../../../../core/router/router.gr.dart';
+import '../provider/login_form_provider.dart';
 
 class LoginPage extends ConsumerWidget {
   LoginPage({Key? key}) : super(key: key);
