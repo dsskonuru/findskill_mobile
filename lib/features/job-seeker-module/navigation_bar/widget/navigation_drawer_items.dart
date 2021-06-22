@@ -10,32 +10,29 @@ class NavigationDrawerItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //color: Colors.red,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 1.h),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(
-              height: 0.5.h,
-            ),
-             Divider(
-              height: 4.h,
-              thickness: 1.5,
-              endIndent: 30,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 1.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
               color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
             ),
-          ],
-        ),
+          ),
+          SizedBox(
+            height: 0.5.h,
+          ),
+           Divider(
+            height: 4.h,
+            thickness: 1.5,
+            endIndent: 30,
+            color: Colors.white,
+          ),
+        ],
       ),
     );
   }

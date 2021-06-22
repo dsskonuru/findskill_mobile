@@ -20,6 +20,7 @@ class _SideBarNavigationDrawerState extends State<SideBarNavigationDrawer> {
   late bool isDrawerOpen;
   bool isDragging = false;
 
+  @override
   void initState() {
     super.initState();
     closeDrawer();
@@ -107,7 +108,7 @@ class _SideBarNavigationDrawerState extends State<SideBarNavigationDrawer> {
           child: Stack(
         alignment: Alignment.centerLeft,
         children: [
-          Container(
+          SizedBox(
             width: xOffset,
             height: 63.h,//490,
             child: navigationDrawer(),

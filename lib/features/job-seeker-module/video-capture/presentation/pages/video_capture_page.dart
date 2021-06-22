@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
+import 'package:find_skill/core/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -12,7 +13,6 @@ import 'package:video_player/video_player.dart';
 import '../../../../../core/localization/localization.dart';
 import '../../../../../core/router/router.gr.dart';
 import '../../../../../main.dart';
-
 
 class VideoCapturePage extends StatefulWidget {
   @override
@@ -33,13 +33,11 @@ class _VideoCaptureState extends State<VideoCapturePage>
   double _maxAvailableZoom = 1.0;
   double _currentScale = 1.0;
   double _baseScale = 1.0;
-  bool enableAudio = true;
   bool isVideoRecording = false;
-
 
   int _counter = 30;
   late Timer _timer;
-  bool a=true;
+  bool a = true;
 
   // Counting pointers (number of user fingers on screen)
   int _pointers = 0;
@@ -88,102 +86,104 @@ class _VideoCaptureState extends State<VideoCapturePage>
                   as String,
               //'No camera found'
             )
-          : SafeArea(
-              child: Stack(
-                fit: StackFit.expand,
-                children: <Widget>[
-                  _cameraPreviewWidget(),
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () => context.router.pop(),
-                          color: Colors.white,
-                          icon: const Icon(Icons.cancel),
-                        ),
-                        IconButton(
-                          //TODO: Implement Settings
-                          onPressed: () {},
-                          color: Colors.white,
-                          icon: const Icon(Icons.settings),
-                        ),
-                      ],
-                    ),
+          : Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                _cameraPreviewWidget(),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        padding: const EdgeInsets.only(top: 18, left: 18),
+                        onPressed: () => context.router.pop(),
+                        color: Colors.white,
+                        icon: const Icon(Icons.cancel),
+                      ),
+                      IconButton(
+                        //TODO: Implement Settings
+                        padding: const EdgeInsets.only(top: 18, right: 18),
+                        onPressed: () {},
+                        color: Colors.white,
+                        icon: const Icon(Icons.settings),
+                      ),
+                    ],
                   ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
+                ),
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.all(18.0),
                     child: SizedBox(
-                      height: 15.h,
-                      width: 100.w,
-                      //color: Colors.green,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            SizedBox(
-                              width: 7.h,
-                              //color: Colors.yellow,
-                              child: Center(
-                                child: Text(
-                                  _counter.toString(),
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 8.w),
-                            SizedBox(
-                              height: 100,
-                              width: 100,
-                              child: ElevatedButton(
-                                onPressed: cameraController != null &&
-                                        cameraController.value.isInitialized
-                                    ? (cameraController.value.isRecordingVideo)
-                                        ? onStopButtonPressed
-                                        : onVideoRecordButtonPressed
-                                    : null,
-                                style: ElevatedButton.styleFrom(
-                                  shape: const CircleBorder(),
-                                  padding: const EdgeInsets.all(20),
-                                  primary: Colors.white.withOpacity(
-                                      0.5), //Colors.blue, // <-- Button color
-                                ),
-                                child: cameraController != null &&
-                                        !cameraController.value.isRecordingVideo
-                                    ? Container(
-                                        width: 150,
-                                        height: 150,
-                                        decoration: const BoxDecoration(
-                                          color: Colors.red,
-                                          shape: BoxShape.circle,
-                                        ),
-                                      )
-                                    : Container(
-                                        width: 50,
-                                        height: 50,
-                                        decoration: const BoxDecoration(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            _thumbnailWidget(),
-                          ],
+                      height: 18.w,
+                      width: 18.w,
+                      //color: Colors.yellow,
+                      child: Center(
+                        child: Text(
+                          "00:${_counter.toString()}",
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 18),
+                    child: SizedBox(
+                      height: 18.w,
+                      width: 18.w,
+                      child: ElevatedButton(
+                        onPressed: cameraController != null &&
+                                cameraController.value.isInitialized
+                            ? (cameraController.value.isRecordingVideo)
+                                ? onStopButtonPressed
+                                : onVideoRecordButtonPressed
+                            : null,
+                        style: ElevatedButton.styleFrom(
+                          shape: const CircleBorder(),
+                          padding: const EdgeInsets.all(20),
+                          primary: Colors.white.withOpacity(0.5),
+                        ),
+                        child: cameraController != null &&
+                                !cameraController.value.isRecordingVideo
+                            ? Container(
+                                width: 9.w,
+                                height: 9.w,
+                                decoration: const BoxDecoration(
+                                  color: Colors.red,
+                                  shape: BoxShape.circle,
+                                ),
+                              )
+                            : Container(
+                                width: 9.w,
+                                height: 9.w,
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                ),
+                              ),
+                      ),
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: SizedBox(
+                      height: 18.w,
+                      width: 18.w,
+                      child: _thumbnailWidget(),
+                    ),
+                  ),
+                ),
+              ],
             ),
     );
   }
@@ -274,61 +274,45 @@ class _VideoCaptureState extends State<VideoCapturePage>
   Widget _thumbnailWidget() {
     final VideoPlayerController? localVideoController = videoController;
 
-    return Align(
-      alignment: Alignment.centerRight,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          if (localVideoController == null)
-            Container()
-          else
-            InkWell(
-              onTap: () async {
-                final File file = File(videoFile!.path);
-                await context.router.navigate(VideoTrimmerRoute(file: file));
-              },
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      height: 1.h,
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        if (localVideoController == null)
+          Container()
+        else
+          InkWell(
+            onTap: () async {
+              final File file = File(videoFile!.path);
+              await context.router.navigate(VideoTrimmerRoute(file: file));
+            },
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 12.w,
+                    width: 12.w,
+                    foregroundDecoration: BoxDecoration(
+                      border: Border.all(color: vandylBlue),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    Expanded(
-                      flex: 4,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: const Color.fromRGBO(0, 163, 225, 1),
-                            ),
-                          ),
-                          child: Center(
-                            child: SizedBox(
-                                height: 10.w,
-                                width: 10.w,
-                                child: VideoPlayer(localVideoController)),
-                          ),
-                        ),
-                      ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: VideoPlayer(localVideoController),
                     ),
-                    const Expanded(
-                      child: Text(
-                        "Upload",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                  Text(
+                    "Upload",
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .copyWith(color: Colors.white),
+                  ),
+                ],
               ),
             ),
-        ],
-      ),
+          ),
+      ],
     );
   }
 
@@ -338,8 +322,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
     }
     final CameraController cameraController = CameraController(
       cameraDescription,
-      ResolutionPreset.medium,
-      enableAudio: enableAudio,
+      ResolutionPreset.high,
       imageFormatGroup: ImageFormatGroup.jpeg,
     );
     controller = cameraController;

@@ -19,10 +19,11 @@ dependencies:
   connectivity: ^3.0.6
   dartz: ^0.10.0-nullsafety.2
   dio: ^4.0.0
+  drawerbehavior: ^2.1.2
   equatable: ^2.0.3
   firebase_auth: ^1.4.1
   firebase_core: ^1.3.0
-  firebase_crashlytics: ^2.0.6 # TODO: iOS Platform Integration
+  firebase_crashlytics: ^2.0.6
   flutter_riverpod: ^0.14.0+3
   flutter_svg: ^0.22.0
   freezed_annotation: ^0.14.2
@@ -71,7 +72,6 @@ flutter:
     - assets/svg/under-construction.svg
     - lang/en.json
     - lang/hi.json
-
   # fonts: TODO: Check with Cristus about replacing Frutiger with one from Google Fonts
   #   - family: Fruitger-Lt
   #     fonts:

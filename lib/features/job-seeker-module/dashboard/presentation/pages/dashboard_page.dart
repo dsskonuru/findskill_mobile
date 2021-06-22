@@ -38,22 +38,20 @@ class _DashBoardPageState extends State<DashBoardPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: RichText(
-                      text: TextSpan(
-                        text: 'Hello ',
-                        style: Theme.of(context).textTheme.headline6,
-                        children: const <TextSpan>[
-                          TextSpan(
-                            text: 'John Doe',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Hello ',
+                      style: Theme.of(context).textTheme.headline6,
+                      children: const <TextSpan>[
+                        TextSpan(
+                          text: 'John Doe',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -66,14 +64,14 @@ class _DashBoardPageState extends State<DashBoardPage> {
                     ),
                   ),
                   child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
                     child: Column(
                       //mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        _text(
-                            "Your profile has been \nviwed", 22, FontWeight.w500),
+                        _text("Your profile has been \nviwed", 22,
+                            FontWeight.w500),
                         _text("250", 40, FontWeight.w600),
                         _text("times", 20, FontWeight.w500),
                       ],
@@ -83,11 +81,10 @@ class _DashBoardPageState extends State<DashBoardPage> {
                 SizedBox(
                   height: 0.5.h,
                 ),
-                Container(
+                SizedBox(
                   height: 200,
                   //color: Colors.orange,
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Expanded(
@@ -100,9 +97,8 @@ class _DashBoardPageState extends State<DashBoardPage> {
                                   Radius.circular(20),
                                 ),
                               ),
-                              padding: EdgeInsets.all(15),
+                              padding: const EdgeInsets.all(15),
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(
@@ -139,24 +135,25 @@ class _DashBoardPageState extends State<DashBoardPage> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.blue.withOpacity(0.6),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(20),
-                                ),
+                            decoration: BoxDecoration(
+                              color: Colors.blue.withOpacity(0.6),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(20),
                               ),
-                              padding: EdgeInsets.all(15),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Icon(
-                                    Icons.message,
-                                    color: Colors.white,
-                                  ),
-                                  Text("Refer and Earn"),
-                                ],
-                              )),
+                            ),
+                            padding: const EdgeInsets.all(15),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                Icon(
+                                  Icons.message,
+                                  color: Colors.white,
+                                ),
+                                Text("Refer and Earn"),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ],
