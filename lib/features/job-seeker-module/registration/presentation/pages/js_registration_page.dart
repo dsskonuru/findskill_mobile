@@ -52,8 +52,20 @@ class JobSeekerRegistrationPage extends ConsumerWidget {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     style: Theme.of(context).textTheme.bodyText2,
                     keyboardType: TextInputType.phone,
-                    decoration: const InputDecoration(
-                      hintText: '919876543210',
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey.withOpacity(0.4),
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey.withOpacity(0.4),
+                        ),
+                      ),
+                      hintText: '+919876543210',
                     ),
                     autocorrect: false,
                     initialValue: watch(registrationFormProvider)
@@ -85,8 +97,20 @@ class JobSeekerRegistrationPage extends ConsumerWidget {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     style: Theme.of(context).textTheme.bodyText2,
                     keyboardType: TextInputType.visiblePassword,
-                    decoration: const InputDecoration(
-                      hintText: 'Password',
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey.withOpacity(0.4),
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey.withOpacity(0.4),
+                        ),
+                      ),
+                      hintText: '*********',
                     ),
                     obscureText: true,
                     autocorrect: false,
@@ -117,8 +141,20 @@ class JobSeekerRegistrationPage extends ConsumerWidget {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     style: Theme.of(context).textTheme.bodyText2,
                     keyboardType: TextInputType.visiblePassword,
-                    decoration: const InputDecoration(
-                      hintText: 'Arjun Kumar',
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey.withOpacity(0.4),
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey.withOpacity(0.4),
+                        ),
+                      ),
+                      hintText: 'Firstname Lastname',
                     ),
                     autocorrect: false,
                     initialValue: watch(registrationFormProvider).name,
@@ -148,7 +184,19 @@ class JobSeekerRegistrationPage extends ConsumerWidget {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     style: Theme.of(context).textTheme.bodyText2,
                     keyboardType: TextInputType.visiblePassword,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey.withOpacity(0.4),
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey.withOpacity(0.4),
+                        ),
+                      ),
                       hintText: 'Mumbai',
                     ),
                     autocorrect: false,

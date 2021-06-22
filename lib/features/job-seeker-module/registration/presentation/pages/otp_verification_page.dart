@@ -62,7 +62,7 @@ class OtpVerificationPage extends ConsumerWidget {
                     }
                   },
                   child: Text(
-                    AppLocalizations.of(context)!.translate("submit") as String,
+                    AppLocalizations.of(context)!.translate("verify") as String,
                     //'SUBMIT',
                     style: Theme.of(context).textTheme.button,
                   ),
