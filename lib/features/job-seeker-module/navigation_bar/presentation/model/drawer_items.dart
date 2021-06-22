@@ -13,7 +13,6 @@ mixin DrawerItems {
     accountSettings,
     notifications,
     referAndEarn,
-    singOut,
   ];
 
 }
