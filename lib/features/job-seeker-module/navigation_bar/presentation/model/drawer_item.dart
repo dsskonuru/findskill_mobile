@@ -1,7 +1,7 @@
 
 class DrawerItem {
-  final String title;
+  final String? title;
   const DrawerItem({
-    required this.title,
+    this.title,
   });
 }

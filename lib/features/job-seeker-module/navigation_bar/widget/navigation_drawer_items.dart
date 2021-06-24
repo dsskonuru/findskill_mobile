@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'package:find_skill/features/job-seeker-module/navigation_bar/presentation/model/drawer_item.dart';
+
 class NavigationDrawerItemWidget extends StatelessWidget {
   final String title;
   const NavigationDrawerItemWidget({

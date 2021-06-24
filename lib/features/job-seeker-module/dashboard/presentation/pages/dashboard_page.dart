@@ -43,7 +43,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
                   child: RichText(
                     text: TextSpan(
                       text: 'Hello ',
-                      style: Theme.of(context).textTheme.headline6,
+                      style: Theme.of(context).textTheme.bodyText1,
                       children: const <TextSpan>[
                         TextSpan(
                           text: 'John Doe',
@@ -67,7 +67,6 @@ class _DashBoardPageState extends State<DashBoardPage> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),
                     child: Column(
-                      //mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         _text("Your profile has been \nviwed", 22,
@@ -79,17 +78,16 @@ class _DashBoardPageState extends State<DashBoardPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 0.5.h,
+                  height: 1.3.h,
                 ),
                 SizedBox(
-                  height: 200,
-                  //color: Colors.orange,
+                  height: 24.h,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.only(right: 8.0),
                           child: Container(
                               decoration: BoxDecoration(
                                 color: Colors.grey.withOpacity(0.2),
@@ -105,7 +103,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
                                     height: 1.h,
                                   ),
                                   Icon(
-                                    Icons.local_post_office,
+                                    Icons.work_outlined,
                                     size: 5.h,
                                   ),
                                   SizedBox(
@@ -133,21 +131,27 @@ class _DashBoardPageState extends State<DashBoardPage> {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.only(right: 8.0),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Colors.blue.withOpacity(0.6),
+                              gradient:   LinearGradient(colors: [
+                                 Theme.of(context).colorScheme.primary,
+                                 Colors.lightBlueAccent,
+                                 Colors.blue.shade200,
+                              ]),
+                              //color: Theme.of(context).colorScheme.primary,//Colors.blue.withOpacity(0.6),
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(20),
                               ),
                             ),
                             padding: const EdgeInsets.all(15),
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              //mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
+                              children:  [
                                 Icon(
                                   Icons.message,
+                                  size: 5.h,
                                   color: Colors.white,
                                 ),
                                 Text("Refer and Earn"),
@@ -160,7 +164,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 0.5.h, //3,
+                  height: 1.3.h, //3,
                 ),
                 Container(
                   height: 11.h, //100,
@@ -175,7 +179,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
                       "Get More opportunities",
                       style: TextStyle(
                         fontSize: 18,
-                        fontWeight: FontWeight.w300,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
