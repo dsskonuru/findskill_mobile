@@ -13,7 +13,7 @@ class JobsCategoryPage extends ConsumerWidget {
     final Map<String, List<String>> skillsMap =
         context.read(registrationFormProvider).skillsList;
     return Scaffold(
-      appBar: FindSkillAppBar(),
+      appBar: const FindSkillAppBar(),
       body: ListView.builder(
         itemBuilder: (context, key) {
           return ExpansionTile(

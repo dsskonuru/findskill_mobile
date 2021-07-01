@@ -20,7 +20,7 @@ class JobSeekerRegistrationPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return Scaffold(
-      appBar: FindSkillAppBar(),
+      appBar: const FindSkillAppBar(),
       body: SafeArea(
         child: Form(
           key: _registrationFormKey,

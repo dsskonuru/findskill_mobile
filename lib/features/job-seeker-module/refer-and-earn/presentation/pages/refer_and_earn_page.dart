@@ -4,7 +4,7 @@ import 'package:find_skill/core/localization/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:find_skill/features/onboarding/presentation/widgets/app_bar.dart';
+import '../../../../onboarding/presentation/widgets/app_bar.dart';
 
 class ReferAndEarn extends StatefulWidget {
   final VoidCallback openDrawer;
@@ -21,7 +21,7 @@ class _ReferAndEarnState extends State<ReferAndEarn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: Key("hello"),
+        key: const Key("hello"),
         appBar: FindSkillAppBar(
           enableMenu: true,
           onsSelectedItem: widget.openDrawer,

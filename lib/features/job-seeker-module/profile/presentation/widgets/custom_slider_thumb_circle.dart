@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui;
 
 class CustomSliderThumbCircle extends SliderComponentShape {
   final BoxConstraints constraints;
@@ -106,7 +105,7 @@ class CustomSliderThumbCircle extends SliderComponentShape {
     //   }
     // }
 
-    for (var i in _distances) {
+    for (final i in _distances) {
       canvas.drawLine(Offset(i.toDouble(), centerLine + 16),
           Offset(i.toDouble(), centerLine + 30), distancedTravelledLinePaint);
       lineValue = i.toString();

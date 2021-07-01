@@ -13,7 +13,7 @@ class UnderProcessingPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return Scaffold(
-      appBar: FindSkillAppBar(),
+      appBar: const FindSkillAppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

@@ -34,7 +34,7 @@ class _SampleVideoPageState extends State<SampleVideoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: FindSkillAppBar(),
+      appBar: const FindSkillAppBar(),
       body: SafeArea(
         child: Center(
           child: Column(

@@ -40,7 +40,7 @@ class _VideoPreviewState extends State<VideoPreviewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: FindSkillAppBar(),
+      appBar: const FindSkillAppBar(),
       body: Center(
         child: AspectRatio(
           aspectRatio: _controller.value.aspectRatio,

@@ -1,10 +1,9 @@
 // TODO: Build the UI along with appropriate tests for Account Settings Page @dheerajv09
 
 import 'package:find_skill/core/localization/app_localization.dart';
+import 'package:find_skill/features/onboarding/presentation/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
-import 'package:find_skill/features/onboarding/presentation/widgets/app_bar.dart';
 
 class AccountSettingsPage extends StatefulWidget {
   final VoidCallback openDrawer;

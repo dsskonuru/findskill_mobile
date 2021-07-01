@@ -1,12 +1,12 @@
 // TODO: Build the UI along with appropriate tests for Profile Page @dheerajv09
 
-import 'package:find_skill/core/localization/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:find_skill/features/job-seeker-module/profile/presentation/model/interested_in.dart';
-import 'package:find_skill/features/job-seeker-module/profile/presentation/widgets/custom_slider.dart';
-import 'package:find_skill/features/onboarding/presentation/widgets/app_bar.dart';
+import '../../../../../core/localization/app_localization.dart';
+import '../../../../onboarding/presentation/widgets/app_bar.dart';
+import '../model/interested_in.dart';
+import '../widgets/custom_slider.dart';
 
 class ProfilePage extends StatefulWidget {
   final VoidCallback openDrawer;
@@ -53,7 +53,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _videoEditor() {
-    return Container(
+    return SizedBox(
       //color: Colors.red,
       height: 300,
       child: Row(
@@ -64,95 +64,92 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           Expanded(
-            child: Container(
-              //color: Colors.red,
-              child: Padding(
-                padding: EdgeInsets.only(left: 10.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      height: 1.h,
-                    ),
-                    SizedBox(
-                      height: 7.36.h,
-                      width: 31.84.w,
-                      child: OutlinedButton(
-                        onPressed: () {},
-                        style: OutlinedButton.styleFrom(
-                          alignment: Alignment.center,
-                          side: BorderSide(
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
+            child: Padding(
+              padding: EdgeInsets.only(left: 10.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  SizedBox(
+                    height: 1.h,
+                  ),
+                  SizedBox(
+                    height: 7.36.h,
+                    width: 31.84.w,
+                    child: OutlinedButton(
+                      onPressed: () {},
+                      style: OutlinedButton.styleFrom(
+                        alignment: Alignment.center,
+                        side: BorderSide(
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
-                        child: Text(
-                          AppLocalizations.of(context)!
-                              .translate("record new video"),
-                          style:
-                              Theme.of(context).textTheme.bodyText1!.copyWith(
-                                    color: Colors.grey,
-                                  ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
-                    SizedBox(
-                      height: 7.36.h,
-                      width: 31.84.w,
-                      child: OutlinedButton(
-                        onPressed: () {},
-                        style: OutlinedButton.styleFrom(
-                          alignment: Alignment.center,
-                          side: BorderSide(
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                        ),
-                        child: Text(
-                          AppLocalizations.of(context)!.translate("trim video"),
-                          style:
-                              Theme.of(context).textTheme.bodyText1!.copyWith(
-                                    color: Colors.grey,
-                                  ),
-                        ),
+                      child: Text(
+                        AppLocalizations.of(context)!
+                            .translate("record new video"),
+                        style:
+                            Theme.of(context).textTheme.bodyText1!.copyWith(
+                                  color: Colors.grey,
+                                ),
                       ),
                     ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
-                    SizedBox(
-                      height: 7.36.h,
-                      width: 31.84.w,
-                      child: OutlinedButton(
-                        onPressed: () {},
-                        style: OutlinedButton.styleFrom(
-                          alignment: Alignment.center,
-                          side: BorderSide(
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
+                  ),
+                  SizedBox(
+                    height: 1.h,
+                  ),
+                  SizedBox(
+                    height: 7.36.h,
+                    width: 31.84.w,
+                    child: OutlinedButton(
+                      onPressed: () {},
+                      style: OutlinedButton.styleFrom(
+                        alignment: Alignment.center,
+                        side: BorderSide(
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
-                        child: Text(
-                          AppLocalizations.of(context)!
-                              .translate("delete video"),
-                          style:
-                              Theme.of(context).textTheme.bodyText1!.copyWith(
-                                    color: Colors.grey,
-                                  ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
                         ),
                       ),
+                      child: Text(
+                        AppLocalizations.of(context)!.translate("trim video"),
+                        style:
+                            Theme.of(context).textTheme.bodyText1!.copyWith(
+                                  color: Colors.grey,
+                                ),
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 1.h,
+                  ),
+                  SizedBox(
+                    height: 7.36.h,
+                    width: 31.84.w,
+                    child: OutlinedButton(
+                      onPressed: () {},
+                      style: OutlinedButton.styleFrom(
+                        alignment: Alignment.center,
+                        side: BorderSide(
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                      child: Text(
+                        AppLocalizations.of(context)!
+                            .translate("delete video"),
+                        style:
+                            Theme.of(context).textTheme.bodyText1!.copyWith(
+                                  color: Colors.grey,
+                                ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -171,13 +168,12 @@ class _ProfilePageState extends State<ProfilePage> {
         crossAxisCount: 4,
         children: _interstedDays
             .map(
+              // ignore: avoid_unnecessary_containers
               (InterestedIn interestedIn) => Container(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
                     border: Border.all(
                       color: Theme.of(context).colorScheme.secondary,
-                      width: 1,
                     ),
                     borderRadius: BorderRadius.circular(10),
                     gradient: interestedIn.isSelected
@@ -237,49 +233,46 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 SizedBox(
                   height: 8.h,
-                  child: Container(
-                    //color: Colors.yellow,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          flex: 6,
-                          fit: FlexFit.tight,
-                          child: Text(
-                            AppLocalizations.of(context)!
-                                .translate("edit profile"),
-                            style:
-                                Theme.of(context).textTheme.headline5!.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                          ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        flex: 6,
+                        fit: FlexFit.tight,
+                        child: Text(
+                          AppLocalizations.of(context)!
+                              .translate("edit profile"),
+                          style:
+                              Theme.of(context).textTheme.headline5!.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
-                        Flexible(
-                          flex: 2,
-                          fit: FlexFit.tight,
-                          child: InkWell(
-                            onTap: () {},
-                            child: Container(
-                              alignment: Alignment.center,
-                              //color: Colors.blue,
-                              height: 64.6,
-                              width: 70,
-                              child: Text(
-                                AppLocalizations.of(context)!.translate("save"),
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline5!
-                                    .copyWith(
-                                      color: Colors.red,
-                                      fontSize: 20,
-                                    ),
-                              ),
+                      ),
+                      Flexible(
+                        flex: 2,
+                        fit: FlexFit.tight,
+                        child: InkWell(
+                          onTap: () {},
+                          child: Container(
+                            alignment: Alignment.center,
+                            //color: Colors.blue,
+                            height: 64.6,
+                            width: 70,
+                            child: Text(
+                              AppLocalizations.of(context)!.translate("save"),
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5!
+                                  .copyWith(
+                                    color: Colors.red,
+                                    fontSize: 20,
+                                  ),
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 const Divider(
@@ -291,28 +284,25 @@ class _ProfilePageState extends State<ProfilePage> {
                     top: 3.h,
                     left: 5.w,
                   ),
-                  child: Container(
-                    //color: Colors.red,
-                    child: Row(
-                      children: [
-                        const CircleAvatar(
-                          maxRadius: 35,
-                          backgroundColor: Colors.blue,
-                          child: Icon(
-                            Icons.person,
-                            size: 35,
-                          ),
+                  child: Row(
+                    children: [
+                      const CircleAvatar(
+                        maxRadius: 35,
+                        backgroundColor: Colors.blue,
+                        child: Icon(
+                          Icons.person,
+                          size: 35,
                         ),
-                        SizedBox(
-                          width: 10.w,
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.translate("john doe"),
-                          style:
-                              Theme.of(context).textTheme.headline5!.copyWith(),
-                        ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      Text(
+                        AppLocalizations.of(context)!.translate("john doe"),
+                        style:
+                            Theme.of(context).textTheme.headline5!.copyWith(),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(

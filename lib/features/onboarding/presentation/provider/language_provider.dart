@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:find_skill/features/onboarding/data/repositories/languages_map_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,6 +10,7 @@ import '../../../../core/providers/shared_preferences_provider.dart';
 import '../../../../main.dart';
 import '../../data/models/language.dart';
 import '../../data/repositories/languages_list_repository.dart';
+import '../../data/repositories/languages_map_repository.dart';
 
 const String cachedLanguage = 'CACHED_LANGUAGE';
 const String cachedLanguages = 'CACHED_LANGUAGES';

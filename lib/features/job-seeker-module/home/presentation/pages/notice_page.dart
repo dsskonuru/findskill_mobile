@@ -33,7 +33,7 @@ class _NoticePageState extends State<NoticePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: FindSkillAppBar(),
+      appBar: const FindSkillAppBar(),
       body: SafeArea(
         child: Stack(
           children: [

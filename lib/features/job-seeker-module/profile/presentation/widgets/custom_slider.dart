@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:find_skill/features/job-seeker-module/profile/presentation/widgets/custom_slider_thumb_circle.dart';
-import 'package:find_skill/features/job-seeker-module/profile/presentation/widgets/custom_track_shape.dart';
+import 'custom_slider_thumb_circle.dart';
+import 'custom_track_shape.dart';
 
 class CustomSlider extends StatefulWidget {
   final BoxConstraints constraints;

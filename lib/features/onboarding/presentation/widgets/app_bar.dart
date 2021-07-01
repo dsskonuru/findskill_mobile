@@ -1,9 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class FindSkillAppBar extends StatelessWidget implements PreferredSizeWidget {
+import '../../../../core/theme/theme_data.dart';
+import '../../data/models/language.dart';
+import '../pages/language_page.dart';
+import '../provider/language_provider.dart';
+
+class FindSkillAppBar extends ConsumerWidget implements PreferredSizeWidget {
   final bool enableMenu;
   final VoidCallback? onsSelectedItem;
   const FindSkillAppBar({
@@ -18,10 +24,10 @@ class FindSkillAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(180);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     final double _statusbarHeight = MediaQuery.of(context).padding.top;
     return Container(
-      height: 13.5.h,
+      height: 14.h,
       padding: EdgeInsets.only(
         top: _statusbarHeight,
         right: 7.w,
@@ -29,10 +35,7 @@ class FindSkillAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-            colors: [
-              Theme.of(context).primaryColor,
-              Theme.of(context).secondaryHeaderColor,
-            ],
+            colors: [vandylBlue, scubaBlue],
             begin: const FractionalOffset(0.0, 0.0),
             end: const FractionalOffset(0.5, 0.0),
             stops: const [0.0, 1.0]),
@@ -59,7 +62,7 @@ class FindSkillAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           SvgPicture.asset(
             'assets/svg/findskill-appbar.svg',
-            height: 7.5.h,
+            height: 7.h,
           ),
           Container(
             height: 9.w,
@@ -68,17 +71,29 @@ class FindSkillAppBar extends StatelessWidget implements PreferredSizeWidget {
               borderRadius: BorderRadius.circular(1.w),
               color: Colors.white,
             ),
-            child: TextButton(
-              onPressed: () {
-                //TODO: Add Option to change language
-              },
-              child: Text(
-                'EN',
+            child: PopupMenuButton<String>(
+              icon: Text(
+                watch(languageProvider).language.code.toUpperCase(),
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
-                  fontSize: 3.w,
+                  fontSize: 2.5.w,
                 ),
               ),
+              itemBuilder: (BuildContext context) {
+                final LanguagesList _languages =
+                    watch(languageProvider).languages;
+                return _languages.list
+                    .map((_language) => PopupMenuItem<String>(
+                          value: _language.name,
+                          child: Text(
+                            _language.name,
+                            style: Theme.of(context).textTheme.overline,
+                          ),
+                        ))
+                    .toList();
+              },
+              onSelected: (_languageName) =>
+                  changeLanguage(_languageName, context),
             ),
           ),
         ],

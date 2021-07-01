@@ -1,13 +1,14 @@
-import 'package:find_skill/features/job-seeker-module/account_settings/presentation/pages/account_settings_page.dart';
-import 'package:find_skill/features/job-seeker-module/dashboard/presentation/pages/dashboard_page.dart';
-import 'package:find_skill/features/job-seeker-module/navigation_bar/presentation/model/drawer_item.dart';
-import 'package:find_skill/features/job-seeker-module/navigation_bar/presentation/model/drawer_items.dart';
-import 'package:find_skill/features/job-seeker-module/navigation_bar/side_navigation_bar/drawer.dart';
-import 'package:find_skill/features/job-seeker-module/navigation_bar/widget/navigation_drawer_items.dart';
-import 'package:find_skill/features/job-seeker-module/profile/presentation/pages/profile_page.dart';
-import 'package:find_skill/features/job-seeker-module/refer-and-earn/presentation/pages/refer_and_earn_page.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
+import '../../account_settings/presentation/pages/account_settings_page.dart';
+import '../../dashboard/presentation/pages/dashboard_page.dart';
+import '../../profile/presentation/pages/profile_page.dart';
+import '../../refer-and-earn/presentation/pages/refer_and_earn_page.dart';
+import '../presentation/model/drawer_item.dart';
+import '../presentation/model/drawer_items.dart';
+import '../widget/navigation_drawer_items.dart';
+import 'drawer.dart';
 
 class SideBarNavigationDrawer extends StatefulWidget {
   const SideBarNavigationDrawer({Key? key}) : super(key: key);
