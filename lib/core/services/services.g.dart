@@ -16,17 +16,31 @@ class _RestClient implements RestClient {
   String? baseUrl;
 
   @override
-  Future<LanguagesListModel> getLanguages() async {
+  Future<LanguagesList> getLanguagesList() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<LanguagesListModel>(
+        _setStreamType<LanguagesList>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/language-list',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = LanguagesListModel.fromJson(_result.data!);
+    final value = LanguagesList.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<String> getLanguageJson(languageCode) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
+        Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+            .compose(_dio.options, '/static-string?language=$languageCode',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
     return value;
   }
 

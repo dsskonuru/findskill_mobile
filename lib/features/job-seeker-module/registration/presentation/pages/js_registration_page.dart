@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../../../core/localization/localization.dart';
+import '../../../../../core/localization/app_localization.dart';
 import '../../../../../core/router/router.gr.dart';
 import '../../../../onboarding/presentation/widgets/app_bar.dart';
 import '../provider/otp_verification_provider.dart';
@@ -31,8 +31,7 @@ class JobSeekerRegistrationPage extends ConsumerWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 8.w, right: 8.w, top: 4.h),
                   child: Text(
-                    AppLocalizations.of(context)!.translate("registration")
-                        as String,
+                    AppLocalizations.of(context)!.translate("registration"),
                     //"Registration",
                     style: Theme.of(context).textTheme.headline4,
                   ),
@@ -40,8 +39,7 @@ class JobSeekerRegistrationPage extends ConsumerWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 2.h),
                   child: Text(
-                    AppLocalizations.of(context)!.translate("mobile number")
-                        as String,
+                    AppLocalizations.of(context)!.translate("mobile number"),
                     //"Mobile Number",
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
@@ -85,8 +83,7 @@ class JobSeekerRegistrationPage extends ConsumerWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 2.h),
                   child: Text(
-                    AppLocalizations.of(context)!.translate("password")
-                        as String,
+                    AppLocalizations.of(context)!.translate("password"),
                     //"Password",
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
@@ -129,8 +126,7 @@ class JobSeekerRegistrationPage extends ConsumerWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 2.h),
                   child: Text(
-                    AppLocalizations.of(context)!.translate("full Name")
-                        as String,
+                    AppLocalizations.of(context)!.translate("full Name"),
                     //"Full Name",
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
@@ -172,8 +168,7 @@ class JobSeekerRegistrationPage extends ConsumerWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 2.h),
                   child: Text(
-                    AppLocalizations.of(context)!.translate("city name")
-                        as String,
+                    AppLocalizations.of(context)!.translate("city name"),
                     //"City Name",
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
@@ -216,7 +211,7 @@ class JobSeekerRegistrationPage extends ConsumerWidget {
                   padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 2.h),
                   child: Text(
                     AppLocalizations.of(context)!
-                        .translate("what jobs are you intersted in?") as String,
+                        .translate("what jobs are you intersted in?"),
                     //"What jobs are you interested in?",
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
@@ -260,8 +255,7 @@ class JobSeekerRegistrationPage extends ConsumerWidget {
                         }
                       },
                       child: Text(
-                        AppLocalizations.of(context)!.translate("submit")
-                            as String,
+                        AppLocalizations.of(context)!.translate("submit"),
                         //'SUBMIT',
                         style: Theme.of(context).textTheme.button,
                       )),

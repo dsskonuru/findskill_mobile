@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../../core/localization/localization.dart';
+import '../../../../core/localization/app_localization.dart';
 import '../../../../core/router/router.gr.dart';
 import '../provider/login_form_provider.dart';
 
@@ -33,7 +33,7 @@ class LoginPage extends ConsumerWidget {
                 Padding(
                   padding: EdgeInsets.fromLTRB(8.w, 4.h, 8.w, 4.h),
                   child: Text(
-                    AppLocalizations.of(context)!.translate("login") as String,
+                    AppLocalizations.of(context)!.translate("login"),
                     //"Login",
                     style: Theme.of(context).textTheme.headline4,
                   ),
@@ -43,8 +43,7 @@ class LoginPage extends ConsumerWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      AppLocalizations.of(context)!.translate("mobile number")
-                          as String,
+                      AppLocalizations.of(context)!.translate("mobile number"),
                       //"Mobile Number",
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
@@ -77,8 +76,7 @@ class LoginPage extends ConsumerWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      AppLocalizations.of(context)!.translate("password")
-                          as String,
+                      AppLocalizations.of(context)!.translate("password"),
                       //"Password",
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
@@ -113,8 +111,7 @@ class LoginPage extends ConsumerWidget {
                   child: ElevatedButton(
                       onPressed: () =>  context.router.root.navigate(const NoticeRoute()),
                       child: Text(
-                        AppLocalizations.of(context)!.translate("login")
-                            as String,
+                        AppLocalizations.of(context)!.translate("login"),
                         //'Login',
                         style: Theme.of(context).textTheme.button,
                       )),

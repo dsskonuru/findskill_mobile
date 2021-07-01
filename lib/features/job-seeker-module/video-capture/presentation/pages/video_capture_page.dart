@@ -4,14 +4,14 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
-import 'package:find_skill/core/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../../../../core/localization/localization.dart';
+import '../../../../../core/localization/app_localization.dart';
 import '../../../../../core/router/router.gr.dart';
+import '../../../../../core/theme/theme_data.dart';
 import '../../../../../main.dart';
 
 class VideoCapturePage extends StatefulWidget {
@@ -82,8 +82,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
     return Scaffold(
       body: cameras.isEmpty
           ? Text(
-              AppLocalizations.of(context)!.translate("no camera found")
-                  as String,
+              AppLocalizations.of(context)!.translate("no camera found"),
               //'No camera found'
             )
           : Stack(
@@ -212,7 +211,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
 
     if (cameraController == null || !cameraController.value.isInitialized) {
       return Text(
-        AppLocalizations.of(context)!.translate("tap a camera") as String,
+        AppLocalizations.of(context)!.translate("tap a camera"),
         //'Tap a camera',
         style: const TextStyle(
           color: Colors.white,

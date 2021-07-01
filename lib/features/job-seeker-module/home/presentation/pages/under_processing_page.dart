@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../../../../core/localization/localization.dart';
+import '../../../../../core/localization/app_localization.dart';
 import '../../../../../core/router/router.gr.dart';
 import '../../../../onboarding/presentation/widgets/app_bar.dart';
 
@@ -28,8 +28,7 @@ class UnderProcessingPage extends ConsumerWidget {
                   padding: EdgeInsets.all(4.w),
                   color: const Color.fromRGBO(0, 163, 225, 1),
                   child: Text(
-                    AppLocalizations.of(context)!.translate("under-processing")
-                        as String,
+                    AppLocalizations.of(context)!.translate("under-processing"),
                     // "under processing text",
                     style: Theme.of(context).textTheme.button,
                   ),
@@ -49,7 +48,7 @@ class UnderProcessingPage extends ConsumerWidget {
                   );
                 },
                 child: Text(
-                  AppLocalizations.of(context)!.translate("sign out") as String,
+                  AppLocalizations.of(context)!.translate("sign out"),
                   //"Sign out",
                   style: Theme.of(context).textTheme.button,
                 ),

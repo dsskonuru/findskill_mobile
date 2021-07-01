@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../../../../core/localization/localization.dart';
+import '../../../../../core/localization/app_localization.dart';
 import '../../../../../core/router/router.gr.dart';
 import '../../../../../main.dart';
-import '../../../../onboarding/presentation/provider/onboarding_provider.dart';
+import '../../../../onboarding/presentation/provider/language_provider.dart';
 import '../../../../onboarding/presentation/widgets/app_bar.dart';
 
 class NoticePage extends StatefulWidget {
@@ -72,7 +72,7 @@ class _NoticePageState extends State<NoticePage> {
                       color: const Color.fromRGBO(0, 163, 225, 1),
                       child: Text(
                         AppLocalizations.of(context)!
-                            .translate("under-processing") as String,
+                            .translate("under-processing"),
                         // "under processing text",
                         style: Theme.of(context).textTheme.button,
                       ),
@@ -95,8 +95,7 @@ class _NoticePageState extends State<NoticePage> {
                       );
                     },
                     child: Text(
-                      AppLocalizations.of(context)!.translate("sign out")
-                          as String,
+                      AppLocalizations.of(context)!.translate("sign out"),
                       //"Sign out",
                       style: Theme.of(context).textTheme.button,
                     ),

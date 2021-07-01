@@ -1,11 +1,12 @@
-import 'package:find_skill/features/job-seeker-module/dashboard/presentation/pages/dashboard_page.dart';
-import 'package:find_skill/features/job-seeker-module/navigation_bar/presentation/model/drawer_item.dart';
-import 'package:find_skill/features/job-seeker-module/navigation_bar/presentation/model/drawer_items.dart';
-import 'package:find_skill/features/job-seeker-module/navigation_bar/side_navigation_bar/drawer.dart';
-import 'package:find_skill/features/job-seeker-module/navigation_bar/widget/navigation_drawer_items.dart';
-import 'package:find_skill/features/job-seeker-module/refer-and-earn/presentation/pages/refer_and_earn_page.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
+import '../../dashboard/presentation/pages/dashboard_page.dart';
+import '../../refer-and-earn/presentation/pages/refer_and_earn_page.dart';
+import '../presentation/model/drawer_item.dart';
+import '../presentation/model/drawer_items.dart';
+import '../widget/navigation_drawer_items.dart';
+import 'drawer.dart';
 
 class SideBarNavigationDrawer extends StatefulWidget {
   const SideBarNavigationDrawer({Key? key}) : super(key: key);
@@ -108,14 +109,14 @@ class _SideBarNavigationDrawerState extends State<SideBarNavigationDrawer> {
   Widget getDrawerPage() {
     switch (_drawerItem) {
       case DrawerItems.editProfile:
-        return Profile();//EditProfile;
+        return const Profile(); //EditProfile;
       case DrawerItems.accountSettings:
-        return Accounts();
+        return const Accounts();
       // add notffication screen
       // case DrawerItems.accountSettings:
       //   return Accounts();
       case DrawerItems.referAndEarn:
-        return ReferAndEarn();
+        return const ReferAndEarn();
       default:
         return dashBoardPage();
     }
@@ -150,7 +151,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(color: Colors.red,height: 300,child: Text("profile"),),
+      body: Container(color: Colors.red,height: 300,child: const Text("profile"),),
     );
   }
 }
@@ -162,7 +163,7 @@ class Accounts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(color: Colors.red,height: 300,child: Text("accoounnt"),),
+      body: Container(color: Colors.red,height: 300,child: const Text("accoounnt"),),
     );
   }
 }

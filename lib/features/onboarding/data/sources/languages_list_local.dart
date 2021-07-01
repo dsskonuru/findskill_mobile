@@ -1,14 +1,13 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/error/exceptions.dart';
+import '../../../../core/providers/shared_preferences_provider.dart';
 import '../../../../main.dart';
-import '../models/languages_list_model.dart';
+import '../models/language.dart';
 
 const String cachedLanguagesList = 'CACHED_LANGUAGES_LIST';
 
@@ -22,17 +21,17 @@ class LanguagesListLocalDataSource {
 
   LanguagesListLocalDataSource({required this.sharedPreferences});
 
-  Future<LanguagesListModel> getLastLanguages() {
+  Future<LanguagesList> getLastLanguages() {
     final jsonString = sharedPreferences.getString(cachedLanguagesList);
     if (jsonString != null) {
       final jsonValue = json.decode(jsonString) as Map<String, dynamic>;
-      return Future.value(LanguagesListModel.fromJson(jsonValue));
+      return Future.value(LanguagesList.fromJson(jsonValue));
     } else {
       throw CacheException();
     }
   }
 
-  Future<void> cacheLanguages(LanguagesListModel languagesToCache) {
+  Future<void> cacheLanguages(LanguagesList languagesToCache) {
     return sharedPreferences.setString(
       cachedLanguagesList,
       json.encode(languagesToCache.toJson()),
@@ -40,25 +39,12 @@ class LanguagesListLocalDataSource {
   }
 }
 
-final languagesListLocalDataSourceProvider =
+final languagesListLocalProvider =
     Provider<LanguagesListLocalDataSource>(
   (ref) {
     final _languagesListLocalDataSource = LanguagesListLocalDataSource(
-        sharedPreferences:
-            container.read(sharedPreferencesProvider).sharedPreferences!);
+      sharedPreferences: container.read(cacheProvider).sharedPreferences!,
+    );
     return _languagesListLocalDataSource;
   },
 );
-
-class SharedPreferencesNotifier extends ChangeNotifier {
-  SharedPreferences? _sharedPreferences;
-  SharedPreferences? get sharedPreferences => _sharedPreferences;
-  void setSharedPreferences(SharedPreferences sharedPreferences) {
-    _sharedPreferences = sharedPreferences;
-    notifyListeners();
-  }
-}
-
-final sharedPreferencesProvider =
-    ChangeNotifierProvider<SharedPreferencesNotifier>(
-        (ref) => SharedPreferencesNotifier());

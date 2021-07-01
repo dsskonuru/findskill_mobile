@@ -154,7 +154,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
                                   size: 5.h,
                                   color: Colors.white,
                                 ),
-                                Text("Refer and Earn"),
+                                const Text("Refer and Earn"),
                               ],
                             ),
                           ),

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../../../core/localization/localization.dart';
+import '../../../../core/localization/app_localization.dart';
 import '../../../../core/router/router.gr.dart';
 import '../../../../main.dart';
-import '../provider/onboarding_provider.dart';
+import '../provider/language_provider.dart';
 import '../widgets/app_bar.dart';
 
 class SampleVideoPage extends StatefulWidget {
@@ -42,8 +42,7 @@ class _SampleVideoPageState extends State<SampleVideoPage> {
               Padding(
                 padding: EdgeInsets.only(top: 2.h),
                 child: Text(
-                  AppLocalizations.of(context)!.translate("sample video")
-                      as String,
+                  AppLocalizations.of(context)!.translate("sample video"),
                   //"Sample Video",
                   style: const TextStyle(
                     color: Colors.black,
@@ -84,8 +83,7 @@ class _SampleVideoPageState extends State<SampleVideoPage> {
                     );
                   },
                   child: Text(
-                    AppLocalizations.of(context)!.translate("create your video")
-                        as String,
+                    AppLocalizations.of(context)!.translate("create your video"),
                     //"Create your video",
                     style: Theme.of(context).textTheme.button,
                   ),

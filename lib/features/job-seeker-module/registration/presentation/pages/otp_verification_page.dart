@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../../../core/localization/localization.dart';
+import '../../../../../core/localization/app_localization.dart';
 import '../../../../onboarding/presentation/widgets/app_bar.dart';
 import '../provider/otp_verification_provider.dart';
 import '../provider/user_firestore_provider.dart';
@@ -33,8 +33,7 @@ class OtpVerificationPage extends ConsumerWidget {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    AppLocalizations.of(context)!.translate("enter otp")
-                        as String,
+                    AppLocalizations.of(context)!.translate("enter otp"),
                     //"Enter OTP",
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
@@ -62,7 +61,7 @@ class OtpVerificationPage extends ConsumerWidget {
                     }
                   },
                   child: Text(
-                    AppLocalizations.of(context)!.translate("verify") as String,
+                    AppLocalizations.of(context)!.translate("verify"),
                     //'SUBMIT',
                     style: Theme.of(context).textTheme.button,
                   ),

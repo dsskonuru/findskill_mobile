@@ -1,5 +1,5 @@
 
-import 'package:find_skill/features/job-seeker-module/navigation_bar/presentation/model/drawer_item.dart';
+import 'drawer_item.dart';
 
 mixin DrawerItems {
   static const DrawerItem dashboard = DrawerItem();

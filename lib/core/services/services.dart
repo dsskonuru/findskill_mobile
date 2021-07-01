@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:riverpod/riverpod.dart';
 
-import '../../features/onboarding/data/models/languages_list_model.dart';
+import '../../features/onboarding/data/models/language.dart';
 import '../network/dio_connectivity_request_retrier.dart';
 import '../network/retry_interceptor.dart';
 
@@ -14,7 +14,10 @@ abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 
   @GET("/language-list")
-  Future<LanguagesListModel> getLanguages();
+  Future<LanguagesList> getLanguagesList();
+
+  @GET("/static-string?language={languageCode}")
+  Future<String> getLanguageJson(@Path("languageCode") String languageCode);
 }
 
 final dioClientProvider = Provider<RestClient>(

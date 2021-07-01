@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:find_skill/features/job-seeker-module/navigation_bar/presentation/model/drawer_item.dart';
-
 class NavigationDrawerItemWidget extends StatelessWidget {
   final String title;
   const NavigationDrawerItemWidget({
@@ -28,7 +26,7 @@ class NavigationDrawerItemWidget extends StatelessWidget {
           SizedBox(
             height: 0.5.h,
           ),
-           Divider(
+          Divider(
             height: 4.h,
             thickness: 1.5,
             endIndent: 30,

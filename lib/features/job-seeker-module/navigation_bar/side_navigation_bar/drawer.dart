@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:find_skill/features/job-seeker-module/navigation_bar/presentation/model/drawer_item.dart';
-import 'package:find_skill/features/job-seeker-module/navigation_bar/presentation/model/drawer_items.dart';
-import 'package:find_skill/features/job-seeker-module/navigation_bar/widget/navigation_drawer_items.dart';
+import '../presentation/model/drawer_item.dart';
+import '../presentation/model/drawer_items.dart';
+import '../widget/navigation_drawer_items.dart';
 
 class NavigationDrawer extends StatelessWidget {
   final ValueChanged<DrawerItem> onSelecteditem;
