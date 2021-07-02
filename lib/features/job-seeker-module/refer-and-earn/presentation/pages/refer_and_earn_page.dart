@@ -1,11 +1,16 @@
 // TODO: Build the UI along with appropriate tests for Refer and Earn Page @dheerajv09
 
-import 'package:find_skill/features/onboarding/presentation/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'package:find_skill/features/onboarding/presentation/widgets/app_bar.dart';
+
 class ReferAndEarn extends StatefulWidget {
-  const ReferAndEarn({Key? key}) : super(key: key);
+  final VoidCallback openDrawer;
+  const ReferAndEarn({
+    Key? key,
+    required this.openDrawer,
+  }) : super(key: key);
 
   @override
   _ReferAndEarnState createState() => _ReferAndEarnState();
@@ -15,50 +20,54 @@ class _ReferAndEarnState extends State<ReferAndEarn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: FindSkillAppBar(),
+        key: Key("hello"),
+        appBar: FindSkillAppBar(
+          enableMenu: true,
+          onsSelectedItem: widget.openDrawer,
+        ),
         body: SafeArea(
-          child: Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.4.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  Text(
-                    "Refer & Earn",
-                    style: Theme.of(context).textTheme.headline5!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  SizedBox(
-                    height: 1.5.h,
-                  ),
-                  Container(
-                    height: 11.h,
-                    padding: EdgeInsets.symmetric(horizontal: 4.w),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondaryVariant,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(20),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5.4.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 4.h,
+                ),
+                Text(
+                  "Refer & Earn",
+                  style: Theme.of(context).textTheme.headline5!.copyWith(
+                        fontWeight: FontWeight.bold,
                       ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Invite your friends to join FINDSKILL & Earn Continously",
-                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500
-                            ),
-                      ),
+                ),
+                SizedBox(
+                  height: 1.5.h,
+                ),
+                Container(
+                  height: 11.h,
+                  padding: EdgeInsets.symmetric(horizontal: 4.w),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondaryVariant,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(20),
                     ),
                   ),
-                  SizedBox(
-                    height: 7.h,
+                  child: Center(
+                    child: Text(
+                      "Invite your friends to join FINDSKILL & Earn Continously",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1!
+                          .copyWith(fontSize: 18, fontWeight: FontWeight.w500),
+                    ),
                   ),
-                  SizedBox(
-                    height: 26.h,
+                ),
+                SizedBox(
+                  height: 7.h,
+                ),
+                SizedBox(
+                  height: 26.h,
+                  child: Expanded(
                     child: Row(
                       children: [
                         Expanded(
@@ -152,86 +161,88 @@ class _ReferAndEarnState extends State<ReferAndEarn> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 5.h,
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+                ClipRRect(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(20),
                   ),
-                  ClipRRect(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(20),
+                  child: Container(
+                    height: 11.h, //100,
+
+                    width: 90.w,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.secondaryVariant,
                     ),
-                    child: Container(
-                      height: 11.h, //100,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.secondaryVariant,
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 4,
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 5.w, vertical: 4),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "You have Earned",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline6!
-                                        .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            letterSpacing: 0,
-                                            fontSize: 19,
-                                            height: 2),
-                                  ),
-                                  Text(
-                                    "Rs. 1000",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline6!
-                                        .copyWith(
-                                          fontSize: 35,
-                                          color: Colors.grey,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 4,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 5.w, vertical: 4),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "You have Earned",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6!
+                                      .copyWith(
                                           fontWeight: FontWeight.bold,
-                                          height: 1,
-                                        ),
-                                  ),
-                                ],
-                              ),
+                                          letterSpacing: 0,
+                                          fontSize: 19,
+                                          height: 2),
+                                ),
+                                Text(
+                                  "Rs. 1000",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6!
+                                      .copyWith(
+                                        fontSize: 35,
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.bold,
+                                        height: 1,
+                                      ),
+                                ),
+                              ],
                             ),
                           ),
-                          Expanded(
-                            flex: 2,
-                            child: Material(
-                              child: InkWell(
-                                onTap: () {
-                                },
-                                splashColor: Colors.white,
-                                focusColor: Colors.white,
-                                child: Container(
-                                  color: Colors.black,
-                                  child: Center(
-                                    child: Text(
-                                      "Redeem",
-                                      textAlign: TextAlign.center,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1!
-                                          .copyWith(color: Colors.white),
-                                    ),
+                        ),
+                        Expanded(
+                          key: const Key("redeem"),
+                          flex: 2,
+                          child: Material(
+                            child: InkWell(
+                              onTap: () {},
+                              splashColor: Colors.white,
+                              focusColor: Colors.white,
+                              child: Container(
+                                color: Colors.black,
+                                child: Center(
+                                  child: Text(
+                                    "Redeem",
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1!
+                                        .copyWith(color: Colors.white),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ));
