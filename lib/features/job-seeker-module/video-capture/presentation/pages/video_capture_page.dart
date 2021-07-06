@@ -301,7 +301,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
                     ),
                   ),
                   Text(
-                    "Upload",
+                    AppLocalizations.of(context)!.translate("upload"),
                     style: Theme.of(context)
                         .textTheme
                         .caption!

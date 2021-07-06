@@ -24,7 +24,7 @@ class OtpVerificationPage extends ConsumerWidget {
               Padding(
                 padding: EdgeInsets.fromLTRB(8.w, 4.h, 8.w, 4.h),
                 child: Text(
-                  "Verification",
+                  AppLocalizations.of(context)!.translate("verification"),
                   style: Theme.of(context).textTheme.headline4,
                 ),
               ),
@@ -61,7 +61,7 @@ class OtpVerificationPage extends ConsumerWidget {
                     }
                   },
                   child: Text(
-                    AppLocalizations.of(context)!.translate("verify"),
+                    AppLocalizations.of(context)!.translate("submit"),
                     //'SUBMIT',
                     style: Theme.of(context).textTheme.button,
                   ),

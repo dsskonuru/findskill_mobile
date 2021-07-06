@@ -1,5 +1,6 @@
 // TODO: Build the UI along with appropriate tests for Dashboard Page @dheerajv09
 
+import 'package:find_skill/core/localization/app_localization.dart';
 import 'package:find_skill/features/onboarding/presentation/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -111,9 +112,11 @@ class _DashBoardPageState extends State<DashBoardPage> {
                                 SizedBox(
                                   height: 0.5.h,
                                 ),
-                                const Text(
-                                  "Electrician \nJobs",
-                                  style: TextStyle(
+                                Text(
+                                  AppLocalizations.of(context)!
+                                      .translate("electrician jobs"),
+                                  //"Electrician \nJobs",
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
                                   ),
@@ -156,7 +159,10 @@ class _DashBoardPageState extends State<DashBoardPage> {
                                 size: 5.h,
                                 color: Colors.white,
                               ),
-                              Text("Refer and Earn"),
+                              Text(
+                                AppLocalizations.of(context)!
+                                    .translate("refer and earn"),
+                              ),
                             ],
                           ),
                         ),
@@ -176,10 +182,11 @@ class _DashBoardPageState extends State<DashBoardPage> {
                     Radius.circular(20),
                   ),
                 ),
-                child: const Center(
+                child: Center(
                   child: Text(
-                    "Get More opportunities",
-                    style: TextStyle(
+                    AppLocalizations.of(context)!
+                        .translate("get more opportunities"),
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),

@@ -1,5 +1,6 @@
 // TODO: Build the UI along with appropriate tests for Account Settings Page @dheerajv09
 
+import 'package:find_skill/core/localization/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -39,7 +40,8 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                       flex: 6,
                       fit: FlexFit.tight,
                       child: Text(
-                        "Account Information",
+                        AppLocalizations.of(context)!
+                            .translate("account information"),
                         style: Theme.of(context).textTheme.headline5!.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
@@ -55,7 +57,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                           height: 64.6,
                           width: 70,
                           child: Text(
-                            "SAVE",
+                            AppLocalizations.of(context)!.translate("save"),
                             textAlign: TextAlign.center,
                             style:
                                 Theme.of(context).textTheme.headline5!.copyWith(
@@ -80,7 +82,8 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 ),
                 child: Center(
                   child: Text(
-                    "Enter your bank account information to redeem/transfer your earnings.",
+                    AppLocalizations.of(context)!.translate(
+                        "enter your bank account information to redeem/transfer your earnings."),
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1!
@@ -124,7 +127,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               Padding(
                 padding: EdgeInsets.only(bottom: 0.6.h),
                 child: Text(
-                  "Bank Name",
+                  AppLocalizations.of(context)!.translate("bank name"),
                   style: Theme.of(context).textTheme.headline6!.copyWith(
                         fontSize: 17,
                       ),
@@ -157,7 +160,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               Padding(
                 padding: EdgeInsets.only(bottom: 0.6.h),
                 child: Text(
-                  "Account Name",
+                  AppLocalizations.of(context)!.translate("account name"),
                   style: Theme.of(context).textTheme.headline6!.copyWith(
                         fontSize: 17,
                       ),

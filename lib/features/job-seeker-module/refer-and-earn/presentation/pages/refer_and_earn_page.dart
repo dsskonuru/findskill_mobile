@@ -1,5 +1,6 @@
 // TODO: Build the UI along with appropriate tests for Refer and Earn Page @dheerajv09
 
+import 'package:find_skill/core/localization/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -35,7 +36,7 @@ class _ReferAndEarnState extends State<ReferAndEarn> {
                   height: 4.h,
                 ),
                 Text(
-                  "Refer & Earn",
+                  AppLocalizations.of(context)!.translate("refer and earn"),
                   style: Theme.of(context).textTheme.headline5!.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -54,7 +55,8 @@ class _ReferAndEarnState extends State<ReferAndEarn> {
                   ),
                   child: Center(
                     child: Text(
-                      "Invite your friends to join FINDSKILL & Earn Continously",
+                      AppLocalizations.of(context)!.translate(
+                          "invite your friends to join findskill & earn continously"),
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1!
@@ -76,7 +78,8 @@ class _ReferAndEarnState extends State<ReferAndEarn> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Text(
-                                "Your Referral ID",
+                                AppLocalizations.of(context)!
+                                    .translate("your referral id"),
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline6!
@@ -96,7 +99,10 @@ class _ReferAndEarnState extends State<ReferAndEarn> {
                                     onPressed: () {},
                                     //TODO: have to add original icon
                                     icon: const Icon(Icons.copy),
-                                    label: const Text("Invite"),
+                                    label: Text(
+                                      AppLocalizations.of(context)!
+                                          .translate("invite"),
+                                    ),
                                     style: ButtonStyle(
                                       backgroundColor:
                                           MaterialStateProperty.all(
@@ -124,7 +130,10 @@ class _ReferAndEarnState extends State<ReferAndEarn> {
                                   child: ElevatedButton.icon(
                                       onPressed: () {},
                                       icon: const Icon(Icons.copy),
-                                      label: const Text("Copy"),
+                                      label: Text(
+                                        AppLocalizations.of(context)!
+                                            .translate("copy"),
+                                      ),
                                       style: ButtonStyle(
                                         backgroundColor:
                                             MaterialStateProperty.all(
@@ -148,7 +157,8 @@ class _ReferAndEarnState extends State<ReferAndEarn> {
                             color: Colors.black,
                             child: Center(
                               child: Text(
-                                "QR CODE",
+                                AppLocalizations.of(context)!
+                                    .translate("qr code"),
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
@@ -188,7 +198,8 @@ class _ReferAndEarnState extends State<ReferAndEarn> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "You have Earned",
+                                  AppLocalizations.of(context)!
+                                      .translate("you have earned"),
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline6!
@@ -226,7 +237,8 @@ class _ReferAndEarnState extends State<ReferAndEarn> {
                                 color: Colors.black,
                                 child: Center(
                                   child: Text(
-                                    "Redeem",
+                                    AppLocalizations.of(context)!
+                                        .translate("redeem"),
                                     textAlign: TextAlign.center,
                                     style: Theme.of(context)
                                         .textTheme

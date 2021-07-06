@@ -89,7 +89,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         child: Text(
-                          'Record new video',
+                          AppLocalizations.of(context)!
+                              .translate("record new video"),
                           style:
                               Theme.of(context).textTheme.bodyText1!.copyWith(
                                     color: Colors.grey,
@@ -115,7 +116,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         child: Text(
-                          'Trim Video',
+                          AppLocalizations.of(context)!.translate("trim video"),
                           style:
                               Theme.of(context).textTheme.bodyText1!.copyWith(
                                     color: Colors.grey,
@@ -141,7 +142,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         child: Text(
-                          'Delete Video',
+                          AppLocalizations.of(context)!
+                              .translate("delete video"),
                           style:
                               Theme.of(context).textTheme.bodyText1!.copyWith(
                                     color: Colors.grey,
@@ -244,7 +246,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           flex: 6,
                           fit: FlexFit.tight,
                           child: Text(
-                            "Edit Profile",
+                            AppLocalizations.of(context)!
+                                .translate("edit profile"),
                             style:
                                 Theme.of(context).textTheme.headline5!.copyWith(
                                       fontWeight: FontWeight.bold,
@@ -262,7 +265,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               height: 64.6,
                               width: 70,
                               child: Text(
-                                "SAVE",
+                                AppLocalizations.of(context)!.translate("save"),
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
@@ -304,7 +307,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           width: 10.w,
                         ),
                         Text(
-                          "John Doe",
+                          AppLocalizations.of(context)!.translate("john doe"),
                           style:
                               Theme.of(context).textTheme.headline5!.copyWith(),
                         ),
@@ -316,7 +319,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 3.5.h,
                 ),
                 Text(
-                  "Your Video",
+                  AppLocalizations.of(context)!.translate("your video"),
                   style: Theme.of(context).textTheme.headline5!.copyWith(
                         fontWeight: FontWeight.w500,
                       ),
@@ -331,8 +334,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 Padding(
                   padding: EdgeInsets.all(0.6.h),
                   child: Text(
-                    AppLocalizations.of(context)!.translate("mobile number")
-                        as String,
+                    AppLocalizations.of(context)!.translate("mobile number"),
                     style: Theme.of(context)
                         .textTheme
                         .subtitle1!
@@ -363,8 +365,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 0.6.h, top: 3.h),
                   child: Text(
-                    AppLocalizations.of(context)!.translate("location")
-                        as String,
+                    AppLocalizations.of(context)!.translate("location"),
                     style: Theme.of(context)
                         .textTheme
                         .subtitle1!
@@ -398,7 +399,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 Row(
                   children: [
                     Text(
-                      "What jobs are you interested in?",
+                      AppLocalizations.of(context)!
+                          .translate("what jobs are you interested in?"),
                       style: TextStyle(fontSize: 12.5.sp),
                     ),
                     SizedBox(
@@ -437,7 +439,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         SizedBox(
                           height: 1.h,
                         ),
-                        Text("All Jobs"),
+                        Text(
+                          AppLocalizations.of(context)!.translate("all jobs"),
+                        ),
                       ],
                     ),
                     SizedBox(
@@ -467,7 +471,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         SizedBox(
                           height: 1.h,
                         ),
-                        Text("Choose Job")
+                        Text(
+                          AppLocalizations.of(context)!.translate("choose job"),
+                        )
                       ],
                     ),
                   ],
@@ -475,8 +481,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 0.6.h, top: 3.h),
                   child: Text(
-                    AppLocalizations.of(context)!.translate("experience")
-                        as String,
+                    AppLocalizations.of(context)!.translate("experience"),
                     style: Theme.of(context)
                         .textTheme
                         .subtitle1!
@@ -487,8 +492,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 0.6.h, top: 3.h),
                   child: Text(
-                    AppLocalizations.of(context)!.translate("interested in")
-                        as String,
+                    AppLocalizations.of(context)!.translate("interested in"),
                     style: Theme.of(context)
                         .textTheme
                         .subtitle1!
@@ -523,9 +527,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           Padding(
                             padding: EdgeInsets.only(bottom: 0.5.h, top: 1.5.h),
-                            child: const Text(
-                              "Min",
-                              style: TextStyle(
+                            child: Text(
+                              AppLocalizations.of(context)!.translate("min"),
+                              style: const TextStyle(
                                 color: Colors.grey,
                               ),
                             ),
@@ -565,9 +569,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           Padding(
                             padding: EdgeInsets.only(bottom: 0.5.h, top: 1.5.h),
-                            child: const Text(
-                              "Max",
-                              style: TextStyle(
+                            child: Text(
+                              AppLocalizations.of(context)!.translate("max"),
+                              style: const TextStyle(
                                 color: Colors.grey,
                               ),
                             ),
@@ -603,7 +607,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 0.7.h, top: 4.5.h),
                   child: Text(
-                    "Minimum distance willing to travel",
+                    AppLocalizations.of(context)!
+                        .translate("minimum distance willing to travel"),
                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
