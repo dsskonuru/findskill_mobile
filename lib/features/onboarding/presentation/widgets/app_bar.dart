@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:find_skill/features/job-seeker-module/navigation_bar/presentation/model/drawer_item.dart';
-
 class FindSkillAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool enableMenu;
   final VoidCallback? onsSelectedItem;

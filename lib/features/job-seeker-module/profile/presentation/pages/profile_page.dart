@@ -1,10 +1,9 @@
 // TODO: Build the UI along with appropriate tests for Profile Page @dheerajv09
 
+import 'package:find_skill/core/localization/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:find_skill/core/localization/localization.dart';
-import 'package:find_skill/features/job-seeker-module/navigation_bar/presentation/model/drawer_item.dart';
 import 'package:find_skill/features/job-seeker-module/profile/presentation/model/interested_in.dart';
 import 'package:find_skill/features/job-seeker-module/profile/presentation/widgets/custom_slider.dart';
 import 'package:find_skill/features/onboarding/presentation/widgets/app_bar.dart';
