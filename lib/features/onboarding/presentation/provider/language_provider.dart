@@ -71,7 +71,7 @@ class LanguageNotifier extends ChangeNotifier {
             await rootBundle.loadString('assets/language/en.json');
         languageMap = json.decode(jsonString) as Map<String, String>;
       },
-      (languageJson) => languageMap = languageJson,
+      (languageMap) => languageMap = languageMap,
     );
   }
 
@@ -82,7 +82,7 @@ class LanguageNotifier extends ChangeNotifier {
     return _supportedLanguageCodes;
   }
 
-  Future<List<String>> get languageNamesList async {
+  List<String> get languageNamesList {
     final List<String> _languageNamesList = [];
     for (final Language language in languages.list) {
       _languageNamesList.add(language.name); // TODO: Capitalize Local names

@@ -7,7 +7,7 @@ import 'package:logging/logging.dart';
 import '../../features/onboarding/presentation/provider/language_provider.dart';
 import '../../main.dart';
 import '../providers/firebase_provider.dart';
-import '../services/services.dart';
+import '../services/auth_services.dart';
 
 class AppLocalizations {
   final Locale locale;
@@ -23,8 +23,8 @@ class AppLocalizations {
   Future<bool> load() async {
     try {
       final String _jsonString = await container
-          .read(dioClientProvider)
-          .getLanguageJson(locale.languageCode);
+          .read(authClientProvider)
+          .getLanguageMap(locale.languageCode);
       final Map<String, dynamic> _jsonMap =
           json.decode(_jsonString) as Map<String, dynamic>;
       _localizedStrings = _jsonMap.map(

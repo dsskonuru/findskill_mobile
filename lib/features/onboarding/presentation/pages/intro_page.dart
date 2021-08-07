@@ -5,6 +5,7 @@ import 'package:video_player/video_player.dart';
 
 import '../../../../core/localization/app_localization.dart';
 import '../../../../core/router/router.gr.dart';
+import '../../../../core/theme/raised_gradient_button.dart';
 
 class IntroPage extends StatefulWidget {
   @override
@@ -37,7 +38,7 @@ class _IntroPageState extends State<IntroPage> {
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Image.asset(
-                "assets/png/FindSkill-Logo.png",
+                "assets/png/findskill-logo-side-text.png",
                 height: 12.h,
               ),
             ),
@@ -65,55 +66,41 @@ class _IntroPageState extends State<IntroPage> {
               children: [
                 Column(
                   children: [
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color.fromRGBO(76, 95, 113, 1)),
-                      ),
+                    RaisedGradientButton(
                       onPressed: () {
                         setState(() {
                           _controller.pause();
                         });
-                        context.router.navigate(const SampleVideoRoute());
+                        context.router.root.push(const RegistrationRoute());
                       },
                       child: Text(
-                        AppLocalizations.of(context)!.translate("find skills"),
+                        AppLocalizations.of(context)!.translate("Find Skills"),
                         //"Find Skills",
                         style: Theme.of(context).textTheme.button,
                       ),
                     ),
-                    SizedBox(height: 1.h),
-                    Text(
-                      AppLocalizations.of(context)!.translate("employer"),
-                      //"Employer",
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
                   ],
                 ),
-                SizedBox(
-                  width: 9.w,
-                ),
+                SizedBox(width: 4.w),
                 Column(
                   children: [
-                    ElevatedButton(
+                    RaisedGradientButton(
+                      width: 36.w,
                       onPressed: () {
                         setState(() {
                           _controller.pause();
                         });
-                        context.router.navigate(const SampleVideoRoute());
+                        context.router.root
+                            .push(const JobSeekerRouter(children: [
+                          VideoRouter(children: [SampleVideoRoute()])
+                        ]));
                       },
                       child: Text(
                         AppLocalizations.of(context)!
-                            .translate("list your skills"),
+                            .translate("List your Skills"),
                         //"List Your Skills",
                         style: Theme.of(context).textTheme.button,
                       ),
-                    ),
-                    SizedBox(height: 1.h),
-                    Text(
-                      AppLocalizations.of(context)!.translate("job seeker"),
-                      //"Employer",
-                      style: Theme.of(context).textTheme.bodyText2,
                     ),
                   ],
                 ),

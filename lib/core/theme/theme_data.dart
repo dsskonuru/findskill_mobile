@@ -25,40 +25,40 @@ final buttonStyle = ButtonStyle(
 );
 
 final TextTheme textTheme = TextTheme(
-  headline1: GoogleFonts.hind(
+  headline1: GoogleFonts.montserrat(
     fontSize: 100,
     fontWeight: FontWeight.w300,
     letterSpacing: -1.5,
   ),
-  headline2: GoogleFonts.hind(
+  headline2: GoogleFonts.montserrat(
     fontSize: 62,
     fontWeight: FontWeight.w300,
     letterSpacing: -0.5,
   ),
-  headline3: GoogleFonts.hind(
+  headline3: GoogleFonts.montserrat(
     fontSize: 50,
     fontWeight: FontWeight.w400,
   ),
-  headline4: GoogleFonts.hind(
+  headline4: GoogleFonts.montserrat(
     fontSize: 35,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.25,
   ),
-  headline5: GoogleFonts.hind(
+  headline5: GoogleFonts.montserrat(
     fontSize: 25,
     fontWeight: FontWeight.w400,
   ),
-  headline6: GoogleFonts.hind(
+  headline6: GoogleFonts.montserrat(
     fontSize: 21,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.15,
   ),
-  subtitle1: GoogleFonts.hind(
+  subtitle1: GoogleFonts.montserrat(
     fontSize: 17,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.15,
   ),
-  subtitle2: GoogleFonts.hind(
+  subtitle2: GoogleFonts.montserrat(
     fontSize: 15,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.1,

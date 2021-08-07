@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,14 +24,17 @@ class LanguageMapLocalDataSource {
   Future<Map<String, String>> getLastLanguageMap() {
     final jsonString = sharedPreferences.getString(cachedLanguageMap);
     if (jsonString != null) {
-      final jsonValue = json.decode(jsonString) as Map<String, String>;
+      final Map<String, String> jsonValue =
+          json.decode(jsonString) as Map<String, String>;
+      Logger.root.fine("Last Language Map : ${jsonValue.toString()}");
       return Future.value(jsonValue);
     } else {
+      Logger.root.severe("Error fetching local langauge map");
       throw CacheException();
     }
   }
 
-  Future<void> cacheLanguageMap(Map<String,String> languageMapToCache) {
+  Future<void> cacheLanguageMap(Map<String, String> languageMapToCache) {
     return sharedPreferences.setString(
       cachedLanguageMap,
       json.encode(languageMapToCache),
@@ -38,8 +42,7 @@ class LanguageMapLocalDataSource {
   }
 }
 
-final languageMapLocalProvider =
-    Provider<LanguageMapLocalDataSource>(
+final languageMapLocalProvider = Provider<LanguageMapLocalDataSource>(
   (ref) {
     final _languageMapLocalDataSource = LanguageMapLocalDataSource(
       sharedPreferences: container.read(cacheProvider).sharedPreferences!,

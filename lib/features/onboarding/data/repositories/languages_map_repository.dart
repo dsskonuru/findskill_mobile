@@ -24,7 +24,7 @@ class LanguageMapRepository {
     if (await networkInfo.isConnected) {
       try {
         final _remoteLanguageMap =
-            await remoteDataSource.getLanguageJson(languageCode);
+            await remoteDataSource.getLanguageMap(languageCode);
         localDataSource.cacheLanguageMap(_remoteLanguageMap);
         return Right(_remoteLanguageMap);
       } on ServerException {
@@ -32,8 +32,7 @@ class LanguageMapRepository {
       }
     } else {
       try {
-        final _localLanguageMap =
-            await localDataSource.getLastLanguageMap();
+        final _localLanguageMap = await localDataSource.getLastLanguageMap();
         return Right(_localLanguageMap);
       } on CacheException {
         return Left(CacheFailure());

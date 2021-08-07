@@ -1,8 +1,9 @@
+import 'package:logging/logging.dart';
 import 'package:riverpod/riverpod.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/providers/firebase_provider.dart';
-import '../../../../core/services/services.dart';
+import '../../../../core/services/auth_services.dart';
 import '../../../../main.dart';
 import '../models/language.dart';
 
@@ -11,15 +12,17 @@ class LanguagesListRemoteDataSource {
   ///
   /// Throws a [ServerException] for all error codes.
 
-  final RestClient client;
+  final AuthClient client;
 
   LanguagesListRemoteDataSource({required this.client});
 
   Future<LanguagesList> getLanguages() async {
     try {
       final LanguagesList _languages = await client.getLanguagesList();
+      Logger.root.fine("Remote Languages List : $_languages");
       return _languages;
     } catch (exception, stack) {
+      Logger.root.severe("Error fetching remote languages list");
       container.read(crashlyticsProvider).recordError(exception, stack);
       throw ServerException();
     }
@@ -28,9 +31,9 @@ class LanguagesListRemoteDataSource {
 
 final languagesListRemoteProvider = Provider<LanguagesListRemoteDataSource>(
   (ref) {
-    final _restClient = container.read(dioClientProvider);
+    final _authClient = container.read(authClientProvider);
     final _languagesListRemoteDataSource =
-        LanguagesListRemoteDataSource(client: _restClient);
+        LanguagesListRemoteDataSource(client: _authClient);
     return _languagesListRemoteDataSource;
   },
 );

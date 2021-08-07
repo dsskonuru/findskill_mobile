@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,11 +23,17 @@ class LanguagesListLocalDataSource {
   LanguagesListLocalDataSource({required this.sharedPreferences});
 
   Future<LanguagesList> getLastLanguages() {
-    final jsonString = sharedPreferences.getString(cachedLanguagesList);
-    if (jsonString != null) {
-      final jsonValue = json.decode(jsonString) as Map<String, dynamic>;
-      return Future.value(LanguagesList.fromJson(jsonValue));
+    final _jsonString = sharedPreferences.getString(cachedLanguagesList);
+    if (_jsonString != null) {
+      final Map<String, dynamic> _jsonMap =
+          json.decode(_jsonString) as Map<String, dynamic>;
+      final Map<String, String> _localizedLanguagesList = _jsonMap.map(
+        (key, value) => MapEntry(key.toString(), value.toString()),
+      );
+      Logger.root.fine("Localized Languages List : $_localizedLanguagesList");
+      return Future.value(LanguagesList.fromJson(_localizedLanguagesList));
     } else {
+      Logger.root.severe("Error fetching local langauges list");
       throw CacheException();
     }
   }

@@ -4,6 +4,7 @@ linter:
   rules:
     parameter_assignments: true
     sort_pub_dependencies: false
+    invalid_annotation_target: false
 
 analyzer:
   exclude:
@@ -11,6 +12,7 @@ analyzer:
     - "**/*.gr.dart"
     - "**/*.config.dart"
     - "**/*.mocks.dart"
+    - "**/*.freezed.dart"
     - lib/generated_plugin_registrant.dart
     - test/** # TODO: Repair the tests
 

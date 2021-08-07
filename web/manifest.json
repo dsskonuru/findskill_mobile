@@ -1,6 +1,6 @@
 {
-    "name": "find_skill",
-    "short_name": "find_skill",
+    "name": "findskill",
+    "short_name": "findskill",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
