@@ -6,9 +6,10 @@
     "configurations": [
 
         {
-            "name": "findskill_mobile",
+            "name": "findskill_mobile (debug mode)",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "flutterMode": "debug",
         },
         {
             "name": "findskill_mobile (profile mode)",
