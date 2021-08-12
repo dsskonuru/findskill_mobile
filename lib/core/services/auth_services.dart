@@ -3,7 +3,9 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:riverpod/riverpod.dart';
 
+import '../../features/login/data/models/user_login.dart';
 import '../../features/onboarding/data/models/language.dart';
+import '../../features/registration/data/models/otp_verification.dart';
 import '../network/dio_connectivity_request_retrier.dart';
 import '../network/retry_interceptor.dart';
 
@@ -13,6 +15,10 @@ part 'auth_services.g.dart';
 abstract class AuthClient {
   factory AuthClient(Dio dio, {String baseUrl}) = _AuthClient;
 
+  @POST("/login")
+  Future<LoginResponse> login(@Body() UserLogin userLogin);
+  // ! try catch to show incorrect password
+
   @GET("/language-list")
   Future<LanguagesList> getLanguagesList();
 
@@ -20,16 +26,14 @@ abstract class AuthClient {
   Future<String> getLanguageMap(@Path("languageCode") String languageCode);
 
   @PUT("/otp-verification")
-  Future<String> otpVerification(@Body() Map<String, dynamic> map);
-
-  @POST("/login")
-  Future<String> login(@Body() Map<String, dynamic> map);
+  Future<AuthResponse> otpVerification(@Body() OtpVerification otpVerification);
 
   @GET("/logout")
-  Future<String> logout(@Body() Map<String, dynamic> map);
+  Future<AuthResponse> logout(@Header("Authorization") String token);
 
-  @POST("//update-static-string")
-  Future<String> updateStaticString(@Body() Map<String, dynamic> map);
+  @GET("/id-types-list")
+  Future<String> idTypesList(@Header("Authorization") String token);
+  // TODO: Once check the backend
 }
 
 final authClientProvider = Provider<AuthClient>(

@@ -7,34 +7,32 @@
 import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
 
-import '../../features/job-seeker-module/presentation/account_settings/pages/account_settings_page.dart'
+import '../../features/job-seeker-module/presentation/screens/account_settings/pages/account_settings_page.dart'
     as _i8;
-import '../../features/job-seeker-module/presentation/contact_information/pages/contact_information_page.dart'
-    as _i9;
-import '../../features/job-seeker-module/presentation/edit_profile/pages/edit_profile_page.dart'
+import '../../features/job-seeker-module/presentation/screens/dashboard/pages/dashboard_page.dart'
     as _i10;
-import '../../features/job-seeker-module/presentation/home/pages/home_page.dart'
-    as _i11;
-import '../../features/job-seeker-module/presentation/home/pages/under_processing_page.dart'
-    as _i17;
-import '../../features/job-seeker-module/presentation/job_preferences/pages/job_preferences_page.dart'
-    as _i12;
-import '../../features/job-seeker-module/presentation/notifications/pages/notifications_page.dart'
-    as _i13;
-import '../../features/job-seeker-module/presentation/refer-and-earn/pages/refer_and_earn_page.dart'
-    as _i14;
-import '../../features/job-seeker-module/presentation/scan_your_id/pages/scan_your_id_page.dart'
-    as _i15;
-import '../../features/job-seeker-module/presentation/skills_choice/pages/skills_choice_page.dart'
+import '../../features/job-seeker-module/presentation/screens/dashboard/pages/under_processing_page.dart'
     as _i16;
+import '../../features/job-seeker-module/presentation/screens/edit_profile/pages/edit_profile_page.dart'
+    as _i9;
+import '../../features/job-seeker-module/presentation/screens/edit_profile/pages/job_preferences/pages/job_preferences_page.dart'
+    as _i11;
+import '../../features/job-seeker-module/presentation/screens/edit_profile/pages/scan_your_id/pages/scan_your_id_page.dart'
+    as _i14;
+import '../../features/job-seeker-module/presentation/screens/edit_profile/pages/skills_choice/pages/skills_choice_page.dart'
+    as _i15;
+import '../../features/job-seeker-module/presentation/screens/notifications/pages/notifications_page.dart'
+    as _i12;
+import '../../features/job-seeker-module/presentation/screens/refer-and-earn/pages/refer_and_earn_page.dart'
+    as _i13;
 import '../../features/job-seeker-module/presentation/video/pages/sample_video_page.dart'
-    as _i18;
+    as _i17;
 import '../../features/job-seeker-module/presentation/video/pages/video_capture_page.dart'
-    as _i19;
+    as _i18;
 import '../../features/job-seeker-module/presentation/video/pages/video_preview_page.dart'
-    as _i21;
-import '../../features/job-seeker-module/presentation/video/pages/video_trimmer_page.dart'
     as _i20;
+import '../../features/job-seeker-module/presentation/video/pages/video_trimmer_page.dart'
+    as _i19;
 import '../../features/login/presentation/pages/login_page.dart' as _i5;
 import '../../features/onboarding/presentation/pages/intro_page.dart' as _i4;
 import '../../features/onboarding/presentation/pages/onboarding_page.dart'
@@ -89,80 +87,68 @@ class AppRouter extends _i1.RootStackRouter {
         }),
     AccountSettingsRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
-        builder: (data) {
-          final args = data.argsAs<AccountSettingsRouteArgs>(
-              orElse: () => const AccountSettingsRouteArgs());
-          return _i8.AccountSettingsPage(
-              key: args.key, openDrawer: args.openDrawer);
-        }),
-    ContactInformationRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
-        routeData: routeData,
         builder: (_) {
-          return const _i9.ContactInformationPage();
+          return const _i8.AccountSettingsPage();
         }),
     EditProfileRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
-        builder: (data) {
-          final args = data.argsAs<EditProfileRouteArgs>();
-          return _i10.EditProfilePage(
-              key: args.key, openDrawer: args.openDrawer);
+        builder: (_) {
+          return const _i9.EditProfilePage();
         }),
-    HomeRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+    DashboardRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i11.HomePage();
+          return _i10.DashboardPage();
         }),
     JobPreferencesRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i12.JobPreferencesPage();
+          return const _i11.JobPreferencesPage();
         }),
     NotificationsRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i13.NotificationsPage();
+          return _i12.NotificationsPage();
         }),
     ReferAndEarnRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
-        builder: (data) {
-          final args = data.argsAs<ReferAndEarnRouteArgs>();
-          return _i14.ReferAndEarnPage(
-              key: args.key, openDrawer: args.openDrawer);
+        builder: (_) {
+          return const _i13.ReferAndEarnPage();
         }),
     ScanYourIdRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i15.ScanYourIdPage();
+          return const _i14.ScanYourIdPage();
         }),
     SkillsChoiceRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i16.SkillsChoicePage();
+          return const _i15.SkillsChoicePage();
         }),
     UnderProcessingRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i17.UnderProcessingPage();
+          return const _i16.UnderProcessingPage();
         }),
     SampleVideoRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i18.SampleVideoPage();
+          return _i17.SampleVideoPage();
         }),
     VideoCaptureRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i19.VideoCapturePage();
+          return _i18.VideoCapturePage();
         }),
     VideoTrimmerRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i20.VideoTrimmerPage();
+          return const _i19.VideoTrimmerPage();
         }),
     VideoPreviewRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i21.VideoPreviewPage();
+          return const _i20.VideoPreviewPage();
         })
   };
 
@@ -187,10 +173,8 @@ class AppRouter extends _i1.RootStackRouter {
                 path: '*', redirectTo: '', fullMatch: true)
           ]),
           _i1.RouteConfig(AccountSettingsRoute.name, path: 'account-settings'),
-          _i1.RouteConfig(ContactInformationRoute.name,
-              path: 'contact-information'),
           _i1.RouteConfig(EditProfileRoute.name, path: 'edit-profile'),
-          _i1.RouteConfig(HomeRoute.name, path: 'home'),
+          _i1.RouteConfig(DashboardRoute.name, path: 'home'),
           _i1.RouteConfig(JobPreferencesRoute.name, path: 'job-preferences'),
           _i1.RouteConfig(NotificationsRoute.name, path: 'notifications'),
           _i1.RouteConfig(ReferAndEarnRoute.name, path: 'refer-and-earn'),
@@ -255,50 +239,22 @@ class VideoRouter extends _i1.PageRouteInfo {
   static const String name = 'VideoRouter';
 }
 
-class AccountSettingsRoute extends _i1.PageRouteInfo<AccountSettingsRouteArgs> {
-  AccountSettingsRoute({_i2.Key? key, void Function()? openDrawer})
-      : super(name,
-            path: 'account-settings',
-            args: AccountSettingsRouteArgs(key: key, openDrawer: openDrawer));
+class AccountSettingsRoute extends _i1.PageRouteInfo {
+  const AccountSettingsRoute() : super(name, path: 'account-settings');
 
   static const String name = 'AccountSettingsRoute';
 }
 
-class AccountSettingsRouteArgs {
-  const AccountSettingsRouteArgs({this.key, this.openDrawer});
-
-  final _i2.Key? key;
-
-  final void Function()? openDrawer;
-}
-
-class ContactInformationRoute extends _i1.PageRouteInfo {
-  const ContactInformationRoute() : super(name, path: 'contact-information');
-
-  static const String name = 'ContactInformationRoute';
-}
-
-class EditProfileRoute extends _i1.PageRouteInfo<EditProfileRouteArgs> {
-  EditProfileRoute({_i2.Key? key, required void Function() openDrawer})
-      : super(name,
-            path: 'edit-profile',
-            args: EditProfileRouteArgs(key: key, openDrawer: openDrawer));
+class EditProfileRoute extends _i1.PageRouteInfo {
+  const EditProfileRoute() : super(name, path: 'edit-profile');
 
   static const String name = 'EditProfileRoute';
 }
 
-class EditProfileRouteArgs {
-  const EditProfileRouteArgs({this.key, required this.openDrawer});
+class DashboardRoute extends _i1.PageRouteInfo {
+  const DashboardRoute() : super(name, path: 'home');
 
-  final _i2.Key? key;
-
-  final void Function() openDrawer;
-}
-
-class HomeRoute extends _i1.PageRouteInfo {
-  const HomeRoute() : super(name, path: 'home');
-
-  static const String name = 'HomeRoute';
+  static const String name = 'DashboardRoute';
 }
 
 class JobPreferencesRoute extends _i1.PageRouteInfo {
@@ -313,21 +269,10 @@ class NotificationsRoute extends _i1.PageRouteInfo {
   static const String name = 'NotificationsRoute';
 }
 
-class ReferAndEarnRoute extends _i1.PageRouteInfo<ReferAndEarnRouteArgs> {
-  ReferAndEarnRoute({_i2.Key? key, required void Function() openDrawer})
-      : super(name,
-            path: 'refer-and-earn',
-            args: ReferAndEarnRouteArgs(key: key, openDrawer: openDrawer));
+class ReferAndEarnRoute extends _i1.PageRouteInfo {
+  const ReferAndEarnRoute() : super(name, path: 'refer-and-earn');
 
   static const String name = 'ReferAndEarnRoute';
-}
-
-class ReferAndEarnRouteArgs {
-  const ReferAndEarnRouteArgs({this.key, required this.openDrawer});
-
-  final _i2.Key? key;
-
-  final void Function() openDrawer;
 }
 
 class ScanYourIdRoute extends _i1.PageRouteInfo {

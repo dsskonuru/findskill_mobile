@@ -146,14 +146,6 @@ class _VideoTrimmerPageState extends State<VideoTrimmerPage> {
                         SizedBox(height: 10.h),
                         RaisedGradientButton(
                           onPressed: () async {
-                            Logger.root.fine("LOLOLOL");
-                            // return _progressVisibility
-                            //     ? null
-                            //     : () async {
-                            //         setState(() {
-                            //           _progressVisibility = true;
-                            //         });
-
                             final String trimmedOutputPath =
                                 await _trimmer.saveTrimmedVideo(
                                     startValue: _startValue,
@@ -162,7 +154,7 @@ class _VideoTrimmerPageState extends State<VideoTrimmerPage> {
                             File video = File(trimmedOutputPath);
                             final String dir = path.dirname(video.path);
                             final String newPath =
-                                path.join(dir, 'video_test1.mp4');
+                                path.join(dir, 'video_file.mp4');
                             video = await video.rename(newPath);
 
                             Logger.root.fine(video.path);

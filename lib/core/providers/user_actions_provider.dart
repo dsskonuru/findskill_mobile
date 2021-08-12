@@ -1,18 +1,18 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:findskill/features/onboarding/presentation/provider/language_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 
 import '../../core/router/router.gr.dart';
-import '../../features/job-seeker-module/data/models/user_login.dart';
-import '../../features/job-seeker-module/data/sources/users_firestore.dart';
+import '../../features/login/data/models/user_login.dart';
 import '../../features/onboarding/data/models/language.dart';
+import '../../features/onboarding/presentation/provider/language_provider.dart';
 import '../../features/registration/presentation/provider/phone_auth_provider.dart';
 import '../../main.dart';
 import '../error/failures.dart';
+import 'users_firestore.dart';
 
 final userActionsProvider = ChangeNotifierProvider((ref) => UserNotifier());
 final userFirestoreProvider = Provider((ref) => UserFirestore());
@@ -57,13 +57,13 @@ class UserNotifier extends ChangeNotifier {
               (DocumentSnapshot<UserLogin> userSnapshot) async {
                 if (userSnapshot.exists) {
                   _user = userSnapshot.data();
-                  await context.router.root
-                      .navigate(const JobSeekerRouter(children: [HomeRoute()]));
+                  await context.router.root.navigate(
+                      const JobSeekerRouter(children: [DashboardRoute()]));
                 } else {
                   debugPrint('User requires registration');
                   // TODO: Repairs
-                  await context.router.root
-                      .navigate(const JobSeekerRouter(children: [HomeRoute()]));
+                  await context.router.root.navigate(
+                      const JobSeekerRouter(children: [DashboardRoute()]));
                   // await context.router
                   //     .navigate(const JobSeekerRouter(children: [
                   //   VideoRouter(children: [SampleVideoRoute()])

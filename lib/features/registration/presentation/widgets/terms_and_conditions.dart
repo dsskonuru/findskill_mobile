@@ -1,7 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:findskill/core/localization/app_localization.dart';
-import 'package:findskill/core/theme/raised_gradient_button.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../core/localization/app_localization.dart';
+import '../../../../core/theme/raised_gradient_button.dart';
 
 class PopupDialog extends StatelessWidget {
   const PopupDialog({Key? key}) : super(key: key);

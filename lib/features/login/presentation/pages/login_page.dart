@@ -9,6 +9,7 @@ import '../../../../core/localization/app_localization.dart';
 import '../../../../core/router/router.gr.dart';
 import '../../../../core/theme/app_bar.dart';
 import '../../../../core/theme/raised_gradient_button.dart';
+import '../../data/models/user_login.dart';
 import '../provider/login_form_provider.dart';
 
 // TODO: Check if primarily JS / Emp
@@ -209,9 +210,7 @@ class _LoginPageState extends State<LoginPage> {
                               initialCountryCode: 'IN',
                               onChanged: (number) => context
                                   .read(loginFormProvider)
-                                  .setMobileNo(
-                                      number:
-                                          int?.parse(number.completeNumber)),
+                                  .phoneNumber = number.completeNumber,
                             ),
                           ),
                           SizedBox(height: 1.h),
@@ -231,7 +230,7 @@ class _LoginPageState extends State<LoginPage> {
                               autocorrect: false,
                               onChanged: (password) => context
                                   .read(loginFormProvider)
-                                  .setPassword(password: password),
+                                  .password = password,
                               validator: (value) {
                                 value = value.toString();
                                 if (value.length <= 8) {
@@ -244,9 +243,17 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(height: 2.h),
                           Center(
                             child: RaisedGradientButton(
-                              onPressed: () => context.router.navigate(
-                                const JobSeekerRouter(children: [HomeRoute()]),
-                              ),
+                              onPressed: () async {
+                                // TODO: Validate the form first
+                                final LoginResponse? response =
+                                    await watch(loginFormProvider).login();
+                                if (response != null) {
+                                  return context.router.navigate(
+                                    const JobSeekerRouter(
+                                        children: [DashboardRoute()]),
+                                  );
+                                }
+                              },
                               child: Text(
                                 AppLocalizations.of(context)!
                                     .translate("Login"),

@@ -76,7 +76,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       value: watch(languageProvider)
                           .language
                           .name
-                          .toLowerCase(), // TODO: Remove to lowerCase post capitalization of local name
+                          .toLowerCase(), 
+// TODO: Remove to lowerCase post capitalization of local name
                       elevation: 5,
                       style: Theme.of(context).textTheme.subtitle2,
                       iconEnabledColor: Colors.black,

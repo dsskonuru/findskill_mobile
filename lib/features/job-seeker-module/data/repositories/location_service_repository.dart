@@ -5,7 +5,7 @@ import 'package:riverpod/riverpod.dart';
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/services/location_service.dart';
 import '../../../../../main.dart';
-import '../models/user_location.dart';
+import '../../../registration/data/models/user_location.dart';
 import '../sources/location_service_data_source.dart';
 
 class LocationServiceRepository {

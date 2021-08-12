@@ -1,4 +1,4 @@
-package com.example.find_skill
+package world.findskill.app
 
 import io.flutter.embedding.android.FlutterActivity
 

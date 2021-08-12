@@ -222,8 +222,6 @@ class _VideoCaptureState extends State<VideoCapturePage>
                                     final String newPath =
                                         path.join(dir, fileName);
                                     video = await video.rename(newPath);
-
-                                    Logger.root.fine(video.path);
                                     container.read(videoServiceProvider).video =
                                         video;
                                   } catch (e) {
@@ -371,7 +369,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
       if (mounted) setState(() {});
       if (cameraController.value.hasError) {
         Logger.root
-            .fine('Camera error ${cameraController.value.errorDescription}');
+            .severe('Camera error ${cameraController.value.errorDescription}');
       }
     });
 
@@ -460,11 +458,10 @@ class _VideoCaptureState extends State<VideoCapturePage>
 
       File video = File(videoX.path);
       final String dir = path.dirname(video.path);
-      final String fileName = '${container.read(userActionsProvider).uid}.mp4';
+      // final String fileName = '${container.read(userActionsProvider).uid}.mp4';
+      const String fileName = 'video_file.mp4';
       final String newPath = path.join(dir, fileName);
       video = await video.rename(newPath);
-
-      Logger.root.fine(video.path);
       container.read(videoServiceProvider).video = video;
 
       // return video;

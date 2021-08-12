@@ -17,6 +17,14 @@ class VideoServiceNotifier extends ChangeNotifier {
   File? get video => _video;
   set video(File? video) {
     _video = video;
+    Logger.root.fine(video!.absolute);
+    notifyListeners();
+  }
+
+  String? _videoLink;
+  String? get videoLink => _videoLink;
+  set videoLink(String? videoLink) {
+    _videoLink = videoLink;
     notifyListeners();
   }
 

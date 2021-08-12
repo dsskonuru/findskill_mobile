@@ -10,13 +10,13 @@ import 'theme_data.dart';
 
 class FindSkillAppBar extends ConsumerWidget implements PreferredSizeWidget {
   final bool enableMenu;
-  final VoidCallback? onsSelectedItem;
+  final VoidCallback? onNavigationSelection;
   const FindSkillAppBar({
     Key? key,
     this.enableMenu = false,
-    this.onsSelectedItem,
-  })  : assert((enableMenu == false && onsSelectedItem == null) ||
-            (enableMenu == true && onsSelectedItem != null)),
+    this.onNavigationSelection,
+  })  : assert((enableMenu == false && onNavigationSelection == null) ||
+            (enableMenu == true && onNavigationSelection != null)),
         super(key: key);
 
   @override
@@ -52,7 +52,7 @@ class FindSkillAppBar extends ConsumerWidget implements PreferredSizeWidget {
             child: IconButton(
               color: Colors.white,
               onPressed:
-                  enableMenu ? onsSelectedItem : () => context.router.pop(),
+                  enableMenu ? onNavigationSelection : () => context.router.pop(),
               icon: enableMenu
                   ? const Icon(Icons.menu)
                   : const Icon(Icons.arrow_back_ios_new),

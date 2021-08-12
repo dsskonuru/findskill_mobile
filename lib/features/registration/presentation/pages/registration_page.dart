@@ -1,6 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:findskill/core/theme/theme_data.dart';
-import 'package:findskill/features/registration/presentation/widgets/terms_and_conditions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -10,8 +8,10 @@ import '../../../../../core/localization/app_localization.dart';
 import '../../../../core/router/router.gr.dart';
 import '../../../../core/theme/app_bar.dart';
 import '../../../../core/theme/raised_gradient_button.dart';
+import '../../../../core/theme/theme_data.dart';
 import '../provider/phone_auth_provider.dart';
 import '../provider/registration_provider.dart';
+import '../widgets/terms_and_conditions.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
@@ -271,7 +271,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             if (_registrationKey.currentState!.validate() &&
                                 isChecked) {
                               final String number =
-                                  watch(registrationProvider).phoneNumber;
+                                  watch(registrationProvider).phoneNumber!;
                               await watch(phoneAuthProvider)
                                   .verifyPhone(context, number);
                               await context.router.navigate(OtpFormRoute());
@@ -292,5 +292,3 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
   }
 }
-
-// TODO: this is repeated in mobile_form_page

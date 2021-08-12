@@ -16,6 +16,22 @@ class _AuthClient implements AuthClient {
   String? baseUrl;
 
   @override
+  Future<LoginResponse> login(userLogin) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(userLogin.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<LoginResponse>(
+            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/login',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = LoginResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<LanguagesList> getLanguagesList() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -45,61 +61,50 @@ class _AuthClient implements AuthClient {
   }
 
   @override
-  Future<String> otpVerification(map) async {
+  Future<AuthResponse> otpVerification(otpVerification) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(map);
-    final _result = await _dio.fetch<String>(_setStreamType<String>(
-        Options(method: 'PUT', headers: <String, dynamic>{}, extra: _extra)
-            .compose(_dio.options, '/otp-verification',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data!;
+    _data.addAll(otpVerification.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AuthResponse>(
+            Options(method: 'PUT', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/otp-verification',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AuthResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<String> login(map) async {
+  Future<AuthResponse> logout(token) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(map);
-    final _result = await _dio.fetch<String>(_setStreamType<String>(
-        Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
-            .compose(_dio.options, '/login',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data!;
-    return value;
-  }
-
-  @override
-  Future<String> logout(map) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(map);
-    final _result = await _dio.fetch<String>(_setStreamType<String>(
-        Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AuthResponse>(Options(
+                method: 'GET',
+                headers: <String, dynamic>{r'Authorization': token},
+                extra: _extra)
             .compose(_dio.options, '/logout',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data!;
+    final value = AuthResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<String> updateStaticString(map) async {
+  Future<String> idTypesList(token) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(map);
-    final _result = await _dio.fetch<String>(_setStreamType<String>(
-        Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
-            .compose(_dio.options, '//update-static-string',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
+            method: 'GET',
+            headers: <String, dynamic>{r'Authorization': token},
+            extra: _extra)
+        .compose(_dio.options, '/id-types-list',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data!;
     return value;
   }

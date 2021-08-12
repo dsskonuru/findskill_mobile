@@ -1,21 +1,29 @@
 import 'package:dartz/dartz.dart';
-import 'package:findskill/core/error/failures.dart';
-import 'package:findskill/features/job-seeker-module/data/models/user_location.dart';
-import 'package:findskill/features/job-seeker-module/data/repositories/location_service_repository.dart';
-import 'package:findskill/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
+
+import '../../../../core/error/failures.dart';
+import '../../../../main.dart';
+import '../../../job-seeker-module/data/repositories/location_service_repository.dart';
+import '../../data/models/user_location.dart';
 
 final registrationProvider =
     ChangeNotifierProvider.autoDispose<RegistrationNotifier>(
         (ref) => RegistrationNotifier());
 
 class RegistrationNotifier extends ChangeNotifier {
+  String? _userName;
+  String? get userName => _userName;
+  set userName(String? userName) {
+    _userName = userName;
+    notifyListeners();
+  }
+
   String? _phoneNumber;
-  String get phoneNumber => _phoneNumber ?? '';
+  String? get phoneNumber => _phoneNumber;
   set phoneNumber(String? number) {
-    _phoneNumber = number; // TODO: number should include +countryCode
+    _phoneNumber = number;
     notifyListeners();
   }
 
@@ -41,6 +49,27 @@ class RegistrationNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool? _hasAcceptedTerms;
+  bool? get hasAcceptedTerms => _hasAcceptedTerms;
+  set hasAcceptedTerms(bool? hasAcceptedTerms) {
+    _hasAcceptedTerms = hasAcceptedTerms;
+    notifyListeners();
+  }
+
+  bool? _isEmployer;
+  bool? get isEmployer => _isEmployer;
+  set isEmployer(bool? isEmployer) {
+    _isEmployer = isEmployer;
+    notifyListeners();
+  }
+
+  bool? _isJobseeker;
+  bool? get isJobseeker => _isJobseeker;
+  set isJobseeker(bool? isJobseeker) {
+    _isJobseeker = isJobseeker;
+    notifyListeners();
+  }
+
   Future<void> getUserLocation() async {
     final Either<Failure, UserLocation> locationRunner =
         await container.read(locationProvider).getUserLocation();
@@ -49,27 +78,6 @@ class RegistrationNotifier extends ChangeNotifier {
       (location) => userLocation = location,
     );
     return Future.value(null);
-  }
-
-  String? _videoLink;
-  String? get videoLink => _videoLink;
-  set videoLink(String? videoLink) {
-    _videoLink = videoLink;
-    notifyListeners();
-  }
-
-  String? _thumbnail;
-  String? get thumbnail => _thumbnail;
-  set thumbnail(String? thumbnail) {
-    _thumbnail = thumbnail;
-    notifyListeners();
-  }
-
-  Set<String>? _selectedSkills;
-  Set<String>? get selectedSkills => _selectedSkills;
-  set selectedSkills(Set<String>? selectedSkills) {
-    _selectedSkills = selectedSkills;
-    notifyListeners();
   }
 
   String? _primaryLanguage;

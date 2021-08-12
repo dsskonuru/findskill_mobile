@@ -1,18 +1,27 @@
 {
   "project_info": {
     "project_number": "155580148232",
+    "firebase_url": "https://findskill-mobile-default-rtdb.firebaseio.com",
     "project_id": "findskill-mobile",
     "storage_bucket": "findskill-mobile.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:155580148232:android:722aa029f35d264c847fbd",
+        "mobilesdk_app_id": "1:155580148232:android:9211889bceb7b0f9847fbd",
         "android_client_info": {
-          "package_name": "com.example.find_skill"
+          "package_name": "world.findskill.app"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "155580148232-ks7u53ehagqvanhu35kgg455purp247g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "world.findskill.app",
+            "certificate_hash": "a9deb10859cd0fe81694b49eef7c94d76825fe50"
+          }
+        },
         {
           "client_id": "155580148232-imdkd8et4d3uocs1b4f557d4jco3jf9b.apps.googleusercontent.com",
           "client_type": 3

@@ -77,7 +77,7 @@ class _SampleVideoPageState extends State<SampleVideoPage> {
                 height: 12.h,
                 child: Center(
                   child: RaisedGradientButton(
-                    width: 50.w,
+                    width: 60.w,
                     onPressed: () {
                       setState(() {
                         _controller.pause();
