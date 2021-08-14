@@ -209,7 +209,7 @@ AuthResponse _$AuthResponseFromJson(Map<String, dynamic> json) {
 class _$AuthResponseTearOff {
   const _$AuthResponseTearOff();
 
-  _AuthResponse call({String? status, required String detail}) {
+  _AuthResponse call({bool? status, required String detail}) {
     return _AuthResponse(
       status: status,
       detail: detail,
@@ -226,7 +226,7 @@ const $AuthResponse = _$AuthResponseTearOff();
 
 /// @nodoc
 mixin _$AuthResponse {
-  String? get status => throw _privateConstructorUsedError;
+  bool? get status => throw _privateConstructorUsedError;
   String get detail => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -240,7 +240,7 @@ abstract class $AuthResponseCopyWith<$Res> {
   factory $AuthResponseCopyWith(
           AuthResponse value, $Res Function(AuthResponse) then) =
       _$AuthResponseCopyWithImpl<$Res>;
-  $Res call({String? status, String detail});
+  $Res call({bool? status, String detail});
 }
 
 /// @nodoc
@@ -260,7 +260,7 @@ class _$AuthResponseCopyWithImpl<$Res> implements $AuthResponseCopyWith<$Res> {
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as bool?,
       detail: detail == freezed
           ? _value.detail
           : detail // ignore: cast_nullable_to_non_nullable
@@ -276,7 +276,7 @@ abstract class _$AuthResponseCopyWith<$Res>
           _AuthResponse value, $Res Function(_AuthResponse) then) =
       __$AuthResponseCopyWithImpl<$Res>;
   @override
-  $Res call({String? status, String detail});
+  $Res call({bool? status, String detail});
 }
 
 /// @nodoc
@@ -298,7 +298,7 @@ class __$AuthResponseCopyWithImpl<$Res> extends _$AuthResponseCopyWithImpl<$Res>
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as bool?,
       detail: detail == freezed
           ? _value.detail
           : detail // ignore: cast_nullable_to_non_nullable
@@ -317,7 +317,7 @@ class _$_AuthResponse implements _AuthResponse {
       _$_$_AuthResponseFromJson(json);
 
   @override
-  final String? status;
+  final bool? status;
   @override
   final String detail;
 
@@ -354,14 +354,14 @@ class _$_AuthResponse implements _AuthResponse {
 }
 
 abstract class _AuthResponse implements AuthResponse {
-  factory _AuthResponse({String? status, required String detail}) =
+  factory _AuthResponse({bool? status, required String detail}) =
       _$_AuthResponse;
 
   factory _AuthResponse.fromJson(Map<String, dynamic> json) =
       _$_AuthResponse.fromJson;
 
   @override
-  String? get status => throw _privateConstructorUsedError;
+  bool? get status => throw _privateConstructorUsedError;
   @override
   String get detail => throw _privateConstructorUsedError;
   @override

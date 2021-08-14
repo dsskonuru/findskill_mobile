@@ -6,6 +6,7 @@ import '../../../../../core/error/failures.dart';
 import '../../../../../core/services/location_service.dart';
 import '../../../../../main.dart';
 import '../../../registration/data/models/user_location.dart';
+import 'country_codes.dart';
 
 class LocationServiceDataSource {
   final LocationService locationService;
@@ -22,26 +23,20 @@ class LocationServiceDataSource {
     return address;
   }
 
-  Future<UserLocation> _getAddress(
-    double latitude,
-    double longitude,
-  ) async {
-    //GeoCode geoCode = GeoCode();
-    // 18.664811124117733, 73.71325537623963
-
+  Future<UserLocation> _getAddress(double latitude, double longitude) async {
     final List<Placemark> placemarks =
         await placemarkFromCoordinates(latitude, longitude);
-    final Placemark placemak = placemarks[0];
+    final Placemark placemark = placemarks[0];
 
     try {
       return UserLocation(
-        latitude: latitude.toString(),
-        longitude: longitude.toString(),
-        country: placemak.country.toString(), //address.countryName.toString(),
-        state: placemak.administrativeArea.toString(), //region,
-        district: placemak.locality.toString(), //address.city.toString(),
-        placeName:
-            placemak.subLocality.toString(), //address.streetAddress.toString(),
+        latitude: latitude,
+        longitude: longitude,
+        country: placemark.country!,
+        state: placemark.administrativeArea!,
+        district: placemark.locality!,
+        placeName: placemark.subLocality!,
+        countryCode: countryCode[placemark.isoCountryCode!]!,
       );
     } catch (e) {
       throw CacheFailure();

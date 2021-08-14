@@ -16,13 +16,21 @@ class Registration with _$Registration {
     required String district,
     required String state,
     required String country,
-    required String latitude,
-    required String longitude,
-    @JsonKey(name: "terms_accept") required bool hasAccepetedTerms,
+    required num latitude,
+    required num longitude,
+    @JsonKey(name: "terms_accept") required bool hasAcceptedTerms,
     @JsonKey(name: "is_employer") required bool isEmployer,
-    // @JsonKey(name: "is_jobseeker") required bool isJobseeker,
-    @JsonKey(name: "user_language.language") required String primaryLanguage,
+    @JsonKey(name: "user_language") required LanguageCode primaryLanguage,
   }) = _Registration;
   factory Registration.fromJson(Map<String, dynamic> json) =>
       _$RegistrationFromJson(json);
+}
+
+@freezed
+class LanguageCode with _$LanguageCode {
+  @JsonSerializable(explicitToJson: true)
+  factory LanguageCode({
+    @JsonKey(name: "language") required String lanuageCode,
+  }) = _LanguageCode;
+  factory LanguageCode.fromJson(Map<String, dynamic> json) => _$LanguageCodeFromJson(json);
 }

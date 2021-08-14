@@ -25,8 +25,9 @@ class _$UserLocationTearOff {
       required String district,
       required String state,
       required String country,
-      required String latitude,
-      required String longitude}) {
+      required double latitude,
+      required double longitude,
+      required String countryCode}) {
     return _UserLocation(
       placeName: placeName,
       district: district,
@@ -34,6 +35,7 @@ class _$UserLocationTearOff {
       country: country,
       latitude: latitude,
       longitude: longitude,
+      countryCode: countryCode,
     );
   }
 
@@ -52,8 +54,9 @@ mixin _$UserLocation {
   String get district => throw _privateConstructorUsedError;
   String get state => throw _privateConstructorUsedError;
   String get country => throw _privateConstructorUsedError;
-  String get latitude => throw _privateConstructorUsedError;
-  String get longitude => throw _privateConstructorUsedError;
+  double get latitude => throw _privateConstructorUsedError;
+  double get longitude => throw _privateConstructorUsedError;
+  String get countryCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -71,8 +74,9 @@ abstract class $UserLocationCopyWith<$Res> {
       String district,
       String state,
       String country,
-      String latitude,
-      String longitude});
+      double latitude,
+      double longitude,
+      String countryCode});
 }
 
 /// @nodoc
@@ -91,6 +95,7 @@ class _$UserLocationCopyWithImpl<$Res> implements $UserLocationCopyWith<$Res> {
     Object? country = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
+    Object? countryCode = freezed,
   }) {
     return _then(_value.copyWith(
       placeName: placeName == freezed
@@ -112,10 +117,14 @@ class _$UserLocationCopyWithImpl<$Res> implements $UserLocationCopyWith<$Res> {
       latitude: latitude == freezed
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       longitude: longitude == freezed
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      countryCode: countryCode == freezed
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -133,8 +142,9 @@ abstract class _$UserLocationCopyWith<$Res>
       String district,
       String state,
       String country,
-      String latitude,
-      String longitude});
+      double latitude,
+      double longitude,
+      String countryCode});
 }
 
 /// @nodoc
@@ -155,6 +165,7 @@ class __$UserLocationCopyWithImpl<$Res> extends _$UserLocationCopyWithImpl<$Res>
     Object? country = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
+    Object? countryCode = freezed,
   }) {
     return _then(_UserLocation(
       placeName: placeName == freezed
@@ -176,10 +187,14 @@ class __$UserLocationCopyWithImpl<$Res> extends _$UserLocationCopyWithImpl<$Res>
       latitude: latitude == freezed
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       longitude: longitude == freezed
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      countryCode: countryCode == freezed
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -195,7 +210,8 @@ class _$_UserLocation implements _UserLocation {
       required this.state,
       required this.country,
       required this.latitude,
-      required this.longitude});
+      required this.longitude,
+      required this.countryCode});
 
   factory _$_UserLocation.fromJson(Map<String, dynamic> json) =>
       _$_$_UserLocationFromJson(json);
@@ -210,13 +226,15 @@ class _$_UserLocation implements _UserLocation {
   @override
   final String country;
   @override
-  final String latitude;
+  final double latitude;
   @override
-  final String longitude;
+  final double longitude;
+  @override
+  final String countryCode;
 
   @override
   String toString() {
-    return 'UserLocation(placeName: $placeName, district: $district, state: $state, country: $country, latitude: $latitude, longitude: $longitude)';
+    return 'UserLocation(placeName: $placeName, district: $district, state: $state, country: $country, latitude: $latitude, longitude: $longitude, countryCode: $countryCode)';
   }
 
   @override
@@ -239,7 +257,10 @@ class _$_UserLocation implements _UserLocation {
                     .equals(other.latitude, latitude)) &&
             (identical(other.longitude, longitude) ||
                 const DeepCollectionEquality()
-                    .equals(other.longitude, longitude)));
+                    .equals(other.longitude, longitude)) &&
+            (identical(other.countryCode, countryCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryCode, countryCode)));
   }
 
   @override
@@ -250,7 +271,8 @@ class _$_UserLocation implements _UserLocation {
       const DeepCollectionEquality().hash(state) ^
       const DeepCollectionEquality().hash(country) ^
       const DeepCollectionEquality().hash(latitude) ^
-      const DeepCollectionEquality().hash(longitude);
+      const DeepCollectionEquality().hash(longitude) ^
+      const DeepCollectionEquality().hash(countryCode);
 
   @JsonKey(ignore: true)
   @override
@@ -269,8 +291,9 @@ abstract class _UserLocation implements UserLocation {
       required String district,
       required String state,
       required String country,
-      required String latitude,
-      required String longitude}) = _$_UserLocation;
+      required double latitude,
+      required double longitude,
+      required String countryCode}) = _$_UserLocation;
 
   factory _UserLocation.fromJson(Map<String, dynamic> json) =
       _$_UserLocation.fromJson;
@@ -285,9 +308,11 @@ abstract class _UserLocation implements UserLocation {
   @override
   String get country => throw _privateConstructorUsedError;
   @override
-  String get latitude => throw _privateConstructorUsedError;
+  double get latitude => throw _privateConstructorUsedError;
   @override
-  String get longitude => throw _privateConstructorUsedError;
+  double get longitude => throw _privateConstructorUsedError;
+  @override
+  String get countryCode => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UserLocationCopyWith<_UserLocation> get copyWith =>

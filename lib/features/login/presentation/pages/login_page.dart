@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../core/localization/app_localization.dart';
@@ -58,14 +57,17 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               Flexible(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
                   child: Column(
                     children: [
                       Align(
                         alignment: Alignment.topLeft,
                         child: Text(
                           AppLocalizations.of(context)!.translate("REGISTER"),
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6!
+                              .copyWith(color: Colors.grey.shade700),
                         ),
                       ),
                       SizedBox(height: 2.h),
@@ -75,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                           Flexible(
                             child: InkWell(
                               onTap: () => context.router.push(
-                                const JobSeekerRouter(
+                                const JobseekerRouter(
                                   children: [
                                     VideoRouter(
                                       children: [
@@ -99,22 +101,26 @@ class _LoginPageState extends State<LoginPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          jobseekerImage,
-                                          const SizedBox(height: 8.0),
                                           Text(
                                             AppLocalizations.of(context)!.translate(
                                                 "I want to find job opportunities"),
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .caption,
+                                                .caption!
+                                                .copyWith(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                             maxLines: 2,
                                             textAlign: TextAlign.center,
                                           ),
+                                          const SizedBox(height: 8.0),
+                                          jobseekerImage,
                                         ],
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(height: 10.0),
+                                  const SizedBox(height: 2.0),
                                   Text(
                                     AppLocalizations.of(context)!
                                         .translate("JOBSEEKER"),
@@ -143,22 +149,26 @@ class _LoginPageState extends State<LoginPage> {
                                       padding: const EdgeInsets.all(12.0),
                                       child: Column(
                                         children: [
-                                          employerImage,
-                                          const SizedBox(height: 8.0),
                                           Text(
                                             AppLocalizations.of(context)!.translate(
                                                 "I want to hire skills to get my job done"),
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .caption,
+                                                .caption!
+                                                .copyWith(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                             maxLines: 2,
                                             textAlign: TextAlign.center,
                                           ),
+                                          const SizedBox(height: 8.0),
+                                          employerImage,
                                         ],
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(height: 10.0),
+                                  const SizedBox(height: 2.0),
                                   Text(
                                     AppLocalizations.of(context)!
                                         .translate("EMPLOYER"),
@@ -180,7 +190,7 @@ class _LoginPageState extends State<LoginPage> {
                   color: const Color.fromRGBO(204, 204, 204, 1),
                   child: Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+                        EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
                     child: Form(
                       key: _loginFormKey,
                       child: Column(
@@ -189,59 +199,72 @@ class _LoginPageState extends State<LoginPage> {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              AppLocalizations.of(context)!.translate("LOGIN"),
-                              style: Theme.of(context).textTheme.headline6,
+                              AppLocalizations.of(context)!.translate("LOG IN"),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6!
+                                  .copyWith(color: Colors.grey.shade700),
                             ),
                           ),
                           SizedBox(height: 2.h),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 4.w),
-                            child: IntlPhoneField(
-                              style: Theme.of(context).textTheme.bodyText1,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                counterStyle:
-                                    Theme.of(context).textTheme.overline,
-                                hintText: AppLocalizations.of(context)!
-                                    .translate("Mobile Number"),
-                                border: const OutlineInputBorder(),
+                          TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            style: Theme.of(context).textTheme.bodyText2,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10.0),
+                                ),
                               ),
-                              initialCountryCode: 'IN',
-                              onChanged: (number) => context
-                                  .read(loginFormProvider)
-                                  .phoneNumber = number.completeNumber,
+                              hintText: "1234567890",
                             ),
+                            autocorrect: false,
+                            initialValue: watch(loginFormProvider).phoneNumber,
+                            onChanged: (phoneNumber) => watch(loginFormProvider)
+                                .phoneNumber = phoneNumber,
+                            validator: (value) {
+                              value = value.toString();
+                              if (value.length != 10) {
+                                return "Please enter the 10 digit mobile number";
+                              }
+                              return null;
+                            },
                           ),
                           SizedBox(height: 1.h),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 4.w),
-                            child: TextFormField(
-                              style: Theme.of(context).textTheme.bodyText1,
-                              keyboardType: TextInputType.visiblePassword,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                hintText: AppLocalizations.of(context)!
-                                    .translate("Password"),
-                                border: const OutlineInputBorder(),
+                          TextFormField(
+                            style: Theme.of(context).textTheme.bodyText1,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              hintText: AppLocalizations.of(context)!
+                                  .translate("Password"),
+                              border: const OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10.0),
+                                ),
                               ),
-                              obscureText: true,
-                              autocorrect: false,
-                              onChanged: (password) => context
-                                  .read(loginFormProvider)
-                                  .password = password,
-                              validator: (value) {
-                                value = value.toString();
-                                if (value.length <= 8) {
-                                  return "Password too short";
-                                }
-                                return null;
-                              },
                             ),
+                            obscureText: true,
+                            autocorrect: false,
+                            onChanged: (password) => context
+                                .read(loginFormProvider)
+                                .password = password,
+                            validator: (value) {
+                              value = value.toString();
+                              if (value.length <= 8) {
+                                return "Password too short";
+                              }
+                              return null;
+                            },
                           ),
                           SizedBox(height: 2.h),
-                          Center(
+                          Align(
+                            alignment: Alignment.centerLeft,
                             child: RaisedGradientButton(
                               onPressed: () async {
                                 // TODO: Validate the form first
@@ -249,14 +272,13 @@ class _LoginPageState extends State<LoginPage> {
                                     await watch(loginFormProvider).login();
                                 if (response != null) {
                                   return context.router.navigate(
-                                    const JobSeekerRouter(
-                                        children: [DashboardRoute()]),
+                                    const JobseekerRoute(),
                                   );
                                 }
                               },
                               child: Text(
                                 AppLocalizations.of(context)!
-                                    .translate("Login"),
+                                    .translate("Log In"),
                                 style: Theme.of(context).textTheme.button,
                               ),
                             ),

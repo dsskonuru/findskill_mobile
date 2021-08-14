@@ -21,7 +21,7 @@ Map<String, dynamic> _$_$_OtpVerificationToJson(_$_OtpVerification instance) =>
 
 _$_AuthResponse _$_$_AuthResponseFromJson(Map<String, dynamic> json) {
   return _$_AuthResponse(
-    status: json['status'] as String?,
+    status: json['status'] as bool?,
     detail: json['detail'] as String,
   );
 }

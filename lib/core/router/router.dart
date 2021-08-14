@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 
+import '../../features/employer-module/employer_page.dart';
+import '../../features/job-seeker-module/presentation/jobseeker_page.dart';
 import '../../features/job-seeker-module/presentation/screens/account_settings/pages/account_settings_page.dart';
 import '../../features/job-seeker-module/presentation/screens/dashboard/pages/dashboard_page.dart';
 import '../../features/job-seeker-module/presentation/screens/dashboard/pages/under_processing_page.dart';
@@ -22,15 +24,18 @@ import '../../features/registration/presentation/pages/registration_page.dart';
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
-    // AutoRoute(page: JobseekerScaffold, path: "/", initial: true),
+    // AutoRoute(page: JobseekerPage, path: "/", initial: true),
+    // AutoRoute(page: OnboardingPage, path: "/onboarding"),
     AutoRoute(page: OnboardingPage, path: "/", initial: true),
     AutoRoute(page: IntroPage, path: "/intro"),
     AutoRoute(page: LoginPage, path: "/login"),
     AutoRoute(page: RegistrationPage, path: "/registration"),
     AutoRoute(page: OtpFormPage, path: "/otp-verification"),
+    AutoRoute(page: JobseekerPage, path: "/js"),
+    AutoRoute(page: EmployerPage, path: "/employer"),
     // * Job Seeker Router
     AutoRoute(
-      name: "JobSeekerRouter",
+      name: "JobseekerRouter",
       page: EmptyRouterPage,
       path: "/job-seeker",
       children: [
@@ -50,7 +55,11 @@ import '../../features/registration/presentation/pages/registration_page.dart';
         AutoRoute(page: AccountSettingsPage, path: "account-settings"),
         // AutoRoute(page: ContactInformationPage, path: "contact-information"),
         AutoRoute(page: EditProfilePage, path: "edit-profile"),
-        AutoRoute(page: DashboardPage, path: "home", initial: true,),
+        AutoRoute(
+          page: DashboardPage,
+          path: "home",
+          initial: true,
+        ),
         AutoRoute(page: JobPreferencesPage, path: "job-preferences"),
         AutoRoute(page: NotificationsPage, path: "notifications"),
         AutoRoute(page: ReferAndEarnPage, path: "refer-and-earn"),
@@ -59,7 +68,7 @@ import '../../features/registration/presentation/pages/registration_page.dart';
         // AutoRoute(page: NoticePage, path: "notice"),
         AutoRoute(page: UnderProcessingPage, path: "under-processing"),
         RedirectRoute(path: '*', redirectTo: ''),
-    ],
+      ],
     ),
   ],
 )

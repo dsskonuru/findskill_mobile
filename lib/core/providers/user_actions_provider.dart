@@ -1,21 +1,14 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 
-import '../../core/router/router.gr.dart';
 import '../../features/login/data/models/user_login.dart';
 import '../../features/onboarding/data/models/language.dart';
 import '../../features/onboarding/presentation/provider/language_provider.dart';
-import '../../features/registration/presentation/provider/phone_auth_provider.dart';
+import '../../features/registration/data/models/firebase_user.dart';
 import '../../main.dart';
-import '../error/failures.dart';
-import 'users_firestore.dart';
 
 final userActionsProvider = ChangeNotifierProvider((ref) => UserNotifier());
-final userFirestoreProvider = Provider((ref) => UserFirestore());
 
 class UserNotifier extends ChangeNotifier {
   Language? _primaryLanguage;
@@ -25,59 +18,19 @@ class UserNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  final UserFirestore _userFirestore = UserFirestore();
-
   // TODO: Merge into single User Class
-  UserLogin? _user;
-  UserLogin? get user => _user;
-  set user(UserLogin? user) {
-    _user = user;
+  UserLogin? _userLogin;
+  UserLogin? get user => _userLogin;
+  set user(UserLogin? userLogin) {
+    _userLogin = userLogin;
     notifyListeners();
   }
 
-  String? _uid;
-  String? get uid => _uid;
-  set uid(String? uid) {
-    _uid = uid;
+  FirebaseUser? _firebaseUser;
+  FirebaseUser? get firebaseUser => _firebaseUser;
+  set firebaseUser(FirebaseUser? firebaseUser) {
+    _firebaseUser = firebaseUser;
     notifyListeners();
-  }
-
-  Future<Either<ServerFailure, void>> handleAuth(BuildContext context) async {
-    try {
-      _userFirestore.auth.authStateChanges().listen(
-        (authUser) async {
-          if (authUser == null) {
-            _user = null;
-            debugPrint('User is currently signed out!');
-            context.router.root.navigate(const OnboardingRoute());
-          } else {
-            uid = authUser.uid;
-            context.read(phoneAuthProvider).uid = authUser.uid;
-            await _userFirestore.usersRef.doc(authUser.uid).get().then(
-              (DocumentSnapshot<UserLogin> userSnapshot) async {
-                if (userSnapshot.exists) {
-                  _user = userSnapshot.data();
-                  await context.router.root.navigate(
-                      const JobSeekerRouter(children: [DashboardRoute()]));
-                } else {
-                  debugPrint('User requires registration');
-                  // TODO: Repairs
-                  await context.router.root.navigate(
-                      const JobSeekerRouter(children: [DashboardRoute()]));
-                  // await context.router
-                  //     .navigate(const JobSeekerRouter(children: [
-                  //   VideoRouter(children: [SampleVideoRoute()])
-                  // ]));
-                }
-              },
-            );
-          }
-        },
-      );
-      return const Right(null);
-    } on Exception {
-      return Left(ServerFailure());
-    }
   }
 
   // TODO: resolve primary language here and language from provider

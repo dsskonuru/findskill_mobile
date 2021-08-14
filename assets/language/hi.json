@@ -1,4 +1,50 @@
 {
+    "Select Langauage": "भाषा चुनें",
+    "Register": "रजिस्टर करें",
+    "Log In": "लॉग इन करें",
+    "Already have an account?": "पहले से ही एक खाता है?",
+    
+    "REGISTER": "रजिस्टर करें",
+    "I want to find job opportunities": "मैं नौकरी के अवसर खोजना चाहता हूँ",
+    "JOBSEEKER": "नौकरी खोजने वाला",
+    "I want to hire skills to get my job done": "मैं अपना काम पूरा करने के लिए कौशल किराए पर लेना चाहता हूं",
+    "EMPLOYER": "नियोक्ता",
+    "LOG IN": "लॉग इन करें",
+    "Password": "कुंजिका",
+
+    "Find Skills": "कौशल खोजें",
+    "List your skills": "अपने कौशल की सूची बनाएं",
+    
+    "Sample Video": "नमूना वीडियो",
+    "Create your video": "अपना वीडियो बनाएं",
+    
+    "No camera was found": "कोई कैमरा नहीं मिला",
+    "Upload": "डालना",
+    
+    "Video Preview": "वीडियो पूर्वावलोकन",
+    "Trim": "ट्रिम",
+    "Remake Video": "रीमेक वीडियो",
+    "Publish Video": "वीडियो प्रकाशित करें",
+    
+    "Done": "किया हुआ",
+
+    "Registration": "पंजीकरण",
+    "Need help registering?": "पंजीकरण में मदद चाहिए?",
+    "Mobile Number": "मोबाइल नंबर",
+    "Name": "नाम",
+    "FirstName LastName": "प्रथम नाम अंतिम नाम",
+    "Location": "स्थान",
+    "City Name": "शहर का नाम",
+    "I accept the": "मुझे स्वीकार है",
+    "terms & conditions": "नियम एवं शर्तें",
+    "to use the app.": "ऐप का उपयोग करने के लिए।",
+
+
+    "Verification": "सत्यापन",
+    "Enter OTP": "ओटीपी दर्ज करें",
+    "Resend OTP": "ओटीपी पुनः भेजें",
+    "Verify": "सत्यापित करें",
+
     "language":	"भाषा",
     "login":	"लॉग इन करें",
     "find skills":	"कौशल खोजें",

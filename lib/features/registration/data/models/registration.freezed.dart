@@ -21,24 +21,18 @@ class _$RegistrationTearOff {
   const _$RegistrationTearOff();
 
   _Registration call(
-      {@JsonKey(name: "user_name")
-          required String userName,
-      @JsonKey(name: "phone_number")
-          required String phoneNumber,
+      {@JsonKey(name: "user_name") required String userName,
+      @JsonKey(name: "phone_number") required String phoneNumber,
       required String password,
-      @JsonKey(name: "place_name")
-          required String placeName,
+      @JsonKey(name: "place_name") required String placeName,
       required String district,
       required String state,
       required String country,
-      required String latitude,
-      required String longitude,
-      @JsonKey(name: "terms_accept")
-          required bool hasAccepetedTerms,
-      @JsonKey(name: "is_employer")
-          required bool isEmployer,
-      @JsonKey(name: "user_language.language")
-          required String primaryLanguage}) {
+      required num latitude,
+      required num longitude,
+      @JsonKey(name: "terms_accept") required bool hasAcceptedTerms,
+      @JsonKey(name: "is_employer") required bool isEmployer,
+      @JsonKey(name: "user_language") required LanguageCode primaryLanguage}) {
     return _Registration(
       userName: userName,
       phoneNumber: phoneNumber,
@@ -49,7 +43,7 @@ class _$RegistrationTearOff {
       country: country,
       latitude: latitude,
       longitude: longitude,
-      hasAccepetedTerms: hasAccepetedTerms,
+      hasAcceptedTerms: hasAcceptedTerms,
       isEmployer: isEmployer,
       primaryLanguage: primaryLanguage,
     );
@@ -75,15 +69,14 @@ mixin _$Registration {
   String get district => throw _privateConstructorUsedError;
   String get state => throw _privateConstructorUsedError;
   String get country => throw _privateConstructorUsedError;
-  String get latitude => throw _privateConstructorUsedError;
-  String get longitude => throw _privateConstructorUsedError;
+  num get latitude => throw _privateConstructorUsedError;
+  num get longitude => throw _privateConstructorUsedError;
   @JsonKey(name: "terms_accept")
-  bool get hasAccepetedTerms => throw _privateConstructorUsedError;
+  bool get hasAcceptedTerms => throw _privateConstructorUsedError;
   @JsonKey(name: "is_employer")
-  bool get isEmployer =>
-      throw _privateConstructorUsedError; // @JsonKey(name: "is_jobseeker") required bool isJobseeker,
-  @JsonKey(name: "user_language.language")
-  String get primaryLanguage => throw _privateConstructorUsedError;
+  bool get isEmployer => throw _privateConstructorUsedError;
+  @JsonKey(name: "user_language")
+  LanguageCode get primaryLanguage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -104,11 +97,13 @@ abstract class $RegistrationCopyWith<$Res> {
       String district,
       String state,
       String country,
-      String latitude,
-      String longitude,
-      @JsonKey(name: "terms_accept") bool hasAccepetedTerms,
+      num latitude,
+      num longitude,
+      @JsonKey(name: "terms_accept") bool hasAcceptedTerms,
       @JsonKey(name: "is_employer") bool isEmployer,
-      @JsonKey(name: "user_language.language") String primaryLanguage});
+      @JsonKey(name: "user_language") LanguageCode primaryLanguage});
+
+  $LanguageCodeCopyWith<$Res> get primaryLanguage;
 }
 
 /// @nodoc
@@ -130,7 +125,7 @@ class _$RegistrationCopyWithImpl<$Res> implements $RegistrationCopyWith<$Res> {
     Object? country = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
-    Object? hasAccepetedTerms = freezed,
+    Object? hasAcceptedTerms = freezed,
     Object? isEmployer = freezed,
     Object? primaryLanguage = freezed,
   }) {
@@ -166,14 +161,14 @@ class _$RegistrationCopyWithImpl<$Res> implements $RegistrationCopyWith<$Res> {
       latitude: latitude == freezed
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
-              as String,
+              as num,
       longitude: longitude == freezed
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
-              as String,
-      hasAccepetedTerms: hasAccepetedTerms == freezed
-          ? _value.hasAccepetedTerms
-          : hasAccepetedTerms // ignore: cast_nullable_to_non_nullable
+              as num,
+      hasAcceptedTerms: hasAcceptedTerms == freezed
+          ? _value.hasAcceptedTerms
+          : hasAcceptedTerms // ignore: cast_nullable_to_non_nullable
               as bool,
       isEmployer: isEmployer == freezed
           ? _value.isEmployer
@@ -182,8 +177,15 @@ class _$RegistrationCopyWithImpl<$Res> implements $RegistrationCopyWith<$Res> {
       primaryLanguage: primaryLanguage == freezed
           ? _value.primaryLanguage
           : primaryLanguage // ignore: cast_nullable_to_non_nullable
-              as String,
+              as LanguageCode,
     ));
+  }
+
+  @override
+  $LanguageCodeCopyWith<$Res> get primaryLanguage {
+    return $LanguageCodeCopyWith<$Res>(_value.primaryLanguage, (value) {
+      return _then(_value.copyWith(primaryLanguage: value));
+    });
   }
 }
 
@@ -202,11 +204,14 @@ abstract class _$RegistrationCopyWith<$Res>
       String district,
       String state,
       String country,
-      String latitude,
-      String longitude,
-      @JsonKey(name: "terms_accept") bool hasAccepetedTerms,
+      num latitude,
+      num longitude,
+      @JsonKey(name: "terms_accept") bool hasAcceptedTerms,
       @JsonKey(name: "is_employer") bool isEmployer,
-      @JsonKey(name: "user_language.language") String primaryLanguage});
+      @JsonKey(name: "user_language") LanguageCode primaryLanguage});
+
+  @override
+  $LanguageCodeCopyWith<$Res> get primaryLanguage;
 }
 
 /// @nodoc
@@ -230,7 +235,7 @@ class __$RegistrationCopyWithImpl<$Res> extends _$RegistrationCopyWithImpl<$Res>
     Object? country = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
-    Object? hasAccepetedTerms = freezed,
+    Object? hasAcceptedTerms = freezed,
     Object? isEmployer = freezed,
     Object? primaryLanguage = freezed,
   }) {
@@ -266,14 +271,14 @@ class __$RegistrationCopyWithImpl<$Res> extends _$RegistrationCopyWithImpl<$Res>
       latitude: latitude == freezed
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
-              as String,
+              as num,
       longitude: longitude == freezed
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
-              as String,
-      hasAccepetedTerms: hasAccepetedTerms == freezed
-          ? _value.hasAccepetedTerms
-          : hasAccepetedTerms // ignore: cast_nullable_to_non_nullable
+              as num,
+      hasAcceptedTerms: hasAcceptedTerms == freezed
+          ? _value.hasAcceptedTerms
+          : hasAcceptedTerms // ignore: cast_nullable_to_non_nullable
               as bool,
       isEmployer: isEmployer == freezed
           ? _value.isEmployer
@@ -282,7 +287,7 @@ class __$RegistrationCopyWithImpl<$Res> extends _$RegistrationCopyWithImpl<$Res>
       primaryLanguage: primaryLanguage == freezed
           ? _value.primaryLanguage
           : primaryLanguage // ignore: cast_nullable_to_non_nullable
-              as String,
+              as LanguageCode,
     ));
   }
 }
@@ -301,9 +306,9 @@ class _$_Registration implements _Registration {
       required this.country,
       required this.latitude,
       required this.longitude,
-      @JsonKey(name: "terms_accept") required this.hasAccepetedTerms,
+      @JsonKey(name: "terms_accept") required this.hasAcceptedTerms,
       @JsonKey(name: "is_employer") required this.isEmployer,
-      @JsonKey(name: "user_language.language") required this.primaryLanguage});
+      @JsonKey(name: "user_language") required this.primaryLanguage});
 
   factory _$_Registration.fromJson(Map<String, dynamic> json) =>
       _$_$_RegistrationFromJson(json);
@@ -326,22 +331,22 @@ class _$_Registration implements _Registration {
   @override
   final String country;
   @override
-  final String latitude;
+  final num latitude;
   @override
-  final String longitude;
+  final num longitude;
   @override
   @JsonKey(name: "terms_accept")
-  final bool hasAccepetedTerms;
+  final bool hasAcceptedTerms;
   @override
   @JsonKey(name: "is_employer")
   final bool isEmployer;
-  @override // @JsonKey(name: "is_jobseeker") required bool isJobseeker,
-  @JsonKey(name: "user_language.language")
-  final String primaryLanguage;
+  @override
+  @JsonKey(name: "user_language")
+  final LanguageCode primaryLanguage;
 
   @override
   String toString() {
-    return 'Registration(userName: $userName, phoneNumber: $phoneNumber, password: $password, placeName: $placeName, district: $district, state: $state, country: $country, latitude: $latitude, longitude: $longitude, hasAccepetedTerms: $hasAccepetedTerms, isEmployer: $isEmployer, primaryLanguage: $primaryLanguage)';
+    return 'Registration(userName: $userName, phoneNumber: $phoneNumber, password: $password, placeName: $placeName, district: $district, state: $state, country: $country, latitude: $latitude, longitude: $longitude, hasAcceptedTerms: $hasAcceptedTerms, isEmployer: $isEmployer, primaryLanguage: $primaryLanguage)';
   }
 
   @override
@@ -374,9 +379,9 @@ class _$_Registration implements _Registration {
             (identical(other.longitude, longitude) ||
                 const DeepCollectionEquality()
                     .equals(other.longitude, longitude)) &&
-            (identical(other.hasAccepetedTerms, hasAccepetedTerms) ||
+            (identical(other.hasAcceptedTerms, hasAcceptedTerms) ||
                 const DeepCollectionEquality()
-                    .equals(other.hasAccepetedTerms, hasAccepetedTerms)) &&
+                    .equals(other.hasAcceptedTerms, hasAcceptedTerms)) &&
             (identical(other.isEmployer, isEmployer) ||
                 const DeepCollectionEquality()
                     .equals(other.isEmployer, isEmployer)) &&
@@ -397,7 +402,7 @@ class _$_Registration implements _Registration {
       const DeepCollectionEquality().hash(country) ^
       const DeepCollectionEquality().hash(latitude) ^
       const DeepCollectionEquality().hash(longitude) ^
-      const DeepCollectionEquality().hash(hasAccepetedTerms) ^
+      const DeepCollectionEquality().hash(hasAcceptedTerms) ^
       const DeepCollectionEquality().hash(isEmployer) ^
       const DeepCollectionEquality().hash(primaryLanguage);
 
@@ -424,14 +429,14 @@ abstract class _Registration implements Registration {
       required String district,
       required String state,
       required String country,
-      required String latitude,
-      required String longitude,
+      required num latitude,
+      required num longitude,
       @JsonKey(name: "terms_accept")
-          required bool hasAccepetedTerms,
+          required bool hasAcceptedTerms,
       @JsonKey(name: "is_employer")
           required bool isEmployer,
-      @JsonKey(name: "user_language.language")
-          required String primaryLanguage}) = _$_Registration;
+      @JsonKey(name: "user_language")
+          required LanguageCode primaryLanguage}) = _$_Registration;
 
   factory _Registration.fromJson(Map<String, dynamic> json) =
       _$_Registration.fromJson;
@@ -454,20 +459,174 @@ abstract class _Registration implements Registration {
   @override
   String get country => throw _privateConstructorUsedError;
   @override
-  String get latitude => throw _privateConstructorUsedError;
+  num get latitude => throw _privateConstructorUsedError;
   @override
-  String get longitude => throw _privateConstructorUsedError;
+  num get longitude => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "terms_accept")
-  bool get hasAccepetedTerms => throw _privateConstructorUsedError;
+  bool get hasAcceptedTerms => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "is_employer")
   bool get isEmployer => throw _privateConstructorUsedError;
-  @override // @JsonKey(name: "is_jobseeker") required bool isJobseeker,
-  @JsonKey(name: "user_language.language")
-  String get primaryLanguage => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "user_language")
+  LanguageCode get primaryLanguage => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$RegistrationCopyWith<_Registration> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+LanguageCode _$LanguageCodeFromJson(Map<String, dynamic> json) {
+  return _LanguageCode.fromJson(json);
+}
+
+/// @nodoc
+class _$LanguageCodeTearOff {
+  const _$LanguageCodeTearOff();
+
+  _LanguageCode call({@JsonKey(name: "language") required String lanuageCode}) {
+    return _LanguageCode(
+      lanuageCode: lanuageCode,
+    );
+  }
+
+  LanguageCode fromJson(Map<String, Object> json) {
+    return LanguageCode.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $LanguageCode = _$LanguageCodeTearOff();
+
+/// @nodoc
+mixin _$LanguageCode {
+  @JsonKey(name: "language")
+  String get lanuageCode => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LanguageCodeCopyWith<LanguageCode> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $LanguageCodeCopyWith<$Res> {
+  factory $LanguageCodeCopyWith(
+          LanguageCode value, $Res Function(LanguageCode) then) =
+      _$LanguageCodeCopyWithImpl<$Res>;
+  $Res call({@JsonKey(name: "language") String lanuageCode});
+}
+
+/// @nodoc
+class _$LanguageCodeCopyWithImpl<$Res> implements $LanguageCodeCopyWith<$Res> {
+  _$LanguageCodeCopyWithImpl(this._value, this._then);
+
+  final LanguageCode _value;
+  // ignore: unused_field
+  final $Res Function(LanguageCode) _then;
+
+  @override
+  $Res call({
+    Object? lanuageCode = freezed,
+  }) {
+    return _then(_value.copyWith(
+      lanuageCode: lanuageCode == freezed
+          ? _value.lanuageCode
+          : lanuageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$LanguageCodeCopyWith<$Res>
+    implements $LanguageCodeCopyWith<$Res> {
+  factory _$LanguageCodeCopyWith(
+          _LanguageCode value, $Res Function(_LanguageCode) then) =
+      __$LanguageCodeCopyWithImpl<$Res>;
+  @override
+  $Res call({@JsonKey(name: "language") String lanuageCode});
+}
+
+/// @nodoc
+class __$LanguageCodeCopyWithImpl<$Res> extends _$LanguageCodeCopyWithImpl<$Res>
+    implements _$LanguageCodeCopyWith<$Res> {
+  __$LanguageCodeCopyWithImpl(
+      _LanguageCode _value, $Res Function(_LanguageCode) _then)
+      : super(_value, (v) => _then(v as _LanguageCode));
+
+  @override
+  _LanguageCode get _value => super._value as _LanguageCode;
+
+  @override
+  $Res call({
+    Object? lanuageCode = freezed,
+  }) {
+    return _then(_LanguageCode(
+      lanuageCode: lanuageCode == freezed
+          ? _value.lanuageCode
+          : lanuageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$_LanguageCode implements _LanguageCode {
+  _$_LanguageCode({@JsonKey(name: "language") required this.lanuageCode});
+
+  factory _$_LanguageCode.fromJson(Map<String, dynamic> json) =>
+      _$_$_LanguageCodeFromJson(json);
+
+  @override
+  @JsonKey(name: "language")
+  final String lanuageCode;
+
+  @override
+  String toString() {
+    return 'LanguageCode(lanuageCode: $lanuageCode)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _LanguageCode &&
+            (identical(other.lanuageCode, lanuageCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.lanuageCode, lanuageCode)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(lanuageCode);
+
+  @JsonKey(ignore: true)
+  @override
+  _$LanguageCodeCopyWith<_LanguageCode> get copyWith =>
+      __$LanguageCodeCopyWithImpl<_LanguageCode>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_LanguageCodeToJson(this);
+  }
+}
+
+abstract class _LanguageCode implements LanguageCode {
+  factory _LanguageCode(
+          {@JsonKey(name: "language") required String lanuageCode}) =
+      _$_LanguageCode;
+
+  factory _LanguageCode.fromJson(Map<String, dynamic> json) =
+      _$_LanguageCode.fromJson;
+
+  @override
+  @JsonKey(name: "language")
+  String get lanuageCode => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$LanguageCodeCopyWith<_LanguageCode> get copyWith =>
       throw _privateConstructorUsedError;
 }

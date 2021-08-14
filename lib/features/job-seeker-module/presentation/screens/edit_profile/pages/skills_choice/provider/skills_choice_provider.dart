@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../../data/models/skill.dart';
 import '../../../../../../data/models/skill_category.dart';
 
-final skillsProvider = ChangeNotifierProvider.autoDispose<SkillsNotifier>(
-    (ref) => SkillsNotifier());
+final skillsProvider =
+    ChangeNotifierProvider<SkillsNotifier>((ref) => SkillsNotifier());
 
 class SkillsNotifier extends ChangeNotifier {
   SkillsList? _skillsList;

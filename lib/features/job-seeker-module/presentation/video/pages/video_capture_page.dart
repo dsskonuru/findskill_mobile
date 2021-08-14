@@ -14,7 +14,6 @@ import 'package:video_player/video_player.dart';
 import '../../../../../core/localization/app_localization.dart';
 import '../../../../../core/providers/user_actions_provider.dart';
 import '../../../../../core/router/router.gr.dart';
-import '../../../../../core/theme/theme_data.dart';
 import '../../../../../main.dart';
 import '../provider/video_service_provider.dart';
 
@@ -56,7 +55,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
       reverseDuration: const Duration(milliseconds: 400),
     );
     if (cameras.isNotEmpty) {
-      onNewCameraSelected(cameras[0]);
+      onNewCameraSelected(cameras[1]);
     }
     _galleryImage = Image.asset(
       "assets/png/gallery.png",
@@ -68,6 +67,9 @@ class _VideoCaptureState extends State<VideoCapturePage>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    // if (cameras.isNotEmpty) {
+    //   onNewCameraSelected(cameras[1]);
+    // }
     precacheImage(_galleryImage.image, context);
   }
 
@@ -89,7 +91,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
     if (state != AppLifecycleState.resumed) {
       cameraController.dispose();
     } else {
-      onNewCameraSelected(cameraController.description);
+      onNewCameraSelected(cameras[1]);
     }
   }
 
@@ -103,7 +105,8 @@ class _VideoCaptureState extends State<VideoCapturePage>
               ?
               // * No Camera found
               Text(
-                  AppLocalizations.of(context)!.translate("no camera found"),
+                  AppLocalizations.of(context)!
+                      .translate("No camera was found"),
                   style: Theme.of(context).textTheme.headline6,
                 )
               // * Camera found
@@ -121,15 +124,15 @@ class _VideoCaptureState extends State<VideoCapturePage>
                             padding: const EdgeInsets.only(top: 18, left: 18),
                             onPressed: () => context.router.pop(),
                             color: Colors.white,
-                            icon: const Icon(Icons.cancel_rounded),
+                            icon: const Icon(Icons.close),
                           ),
-                          IconButton(
-                            //TODO: Implement Settings
-                            padding: const EdgeInsets.only(top: 18, right: 18),
-                            onPressed: () {},
-                            color: Colors.white,
-                            icon: const Icon(Icons.settings),
-                          ),
+                          // IconButton(
+                          //   //TODO: Implement Settings
+                          //   padding: const EdgeInsets.only(top: 18, right: 18),
+                          //   onPressed: () {},
+                          //   color: Colors.white,
+                          //   icon: const Icon(Icons.settings),
+                          // ),
                         ],
                       ),
                     ),
@@ -177,8 +180,8 @@ class _VideoCaptureState extends State<VideoCapturePage>
                             child: cameraController != null &&
                                     !cameraController.value.isRecordingVideo
                                 ? Container(
-                                    width: 9.w,
-                                    height: 9.w,
+                                    width: 10.w,
+                                    height: 10.w,
                                     decoration: const BoxDecoration(
                                       color: Colors.red,
                                       shape: BoxShape.circle,
@@ -207,7 +210,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
                             child: InkWell(
                               onTap: () async {
                                 await context.router
-                                    .navigate(const VideoTrimmerRoute());
+                                    .navigate(const VideoPreviewRoute());
                               },
                               child: InkWell(
                                 onTap: () async {
@@ -218,7 +221,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
                                     File video = File(videoX!.path);
                                     final String dir = path.dirname(video.path);
                                     final String fileName =
-                                        '${container.read(userActionsProvider).uid}.mp4';
+                                        '${container.read(userActionsProvider).firebaseUser!.uid}.mp4';
                                     final String newPath =
                                         path.join(dir, fileName);
                                     video = await video.rename(newPath);
@@ -231,13 +234,9 @@ class _VideoCaptureState extends State<VideoCapturePage>
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       height: 12.w,
                                       width: 12.w,
-                                      foregroundDecoration: BoxDecoration(
-                                        border: Border.all(color: vandylBlue),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
                                         child: _galleryImage,
@@ -294,31 +293,28 @@ class _VideoCaptureState extends State<VideoCapturePage>
 
     if (cameraController == null || !cameraController.value.isInitialized) {
       return Text(
-        AppLocalizations.of(context)!.translate("tap a camera"),
-        //'Tap a camera',
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 24.0,
-          fontWeight: FontWeight.w900,
-        ),
+        AppLocalizations.of(context)!.translate("No camera was found"),
+        style: Theme.of(context).textTheme.headline6,
       );
     } else {
       return Listener(
         onPointerDown: (_) => _pointers++,
         onPointerUp: (_) => _pointers--,
-        child: CameraPreview(
-          // TODO: Handle camera disposal
-          controller!,
-          child: LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
-            return GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onScaleStart: _handleScaleStart,
-              onScaleUpdate: _handleScaleUpdate,
-              onTapDown: (details) => onViewFinderTap(details, constraints),
-            );
-          }),
-        ),
+        child: (controller != null)
+            ? CameraPreview(
+                controller!,
+                child: LayoutBuilder(builder:
+                    (BuildContext context, BoxConstraints constraints) {
+                  return GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onScaleStart: _handleScaleStart,
+                    onScaleUpdate: _handleScaleUpdate,
+                    onTapDown: (details) =>
+                        onViewFinderTap(details, constraints),
+                  );
+                }),
+              )
+            : Container(),
       );
     }
   }
@@ -403,7 +399,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
   Future<void> onStopButtonPressed() async {
     _timer.cancel();
     await stopVideoRecording();
-    context.router.push(const VideoPreviewRoute());
+    context.router.navigate(const VideoPreviewRoute());
     // if (mounted) setState(() {});
     // if (video != null) {
     //   videoFile = video;

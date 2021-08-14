@@ -24,8 +24,8 @@ class _SampleVideoPageState extends State<SampleVideoPage> {
     debugPrint(container.read(languageProvider).getSampleVideoPath());
 
     _controller = VideoPlayerController.asset(
-        'assets/video/${container.read(languageProvider).getSampleVideoPath()}')
-      ..initialize().then((_) {
+      'assets/video/${container.read(languageProvider).getSampleVideoPath()}',
+    )..initialize().then((_) {
         setState(() {
           _controller.play();
         });
@@ -39,14 +39,17 @@ class _SampleVideoPageState extends State<SampleVideoPage> {
       body: SafeArea(
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(
                 height: 4.h,
                 child: Center(
                   child: Text(
                     AppLocalizations.of(context)!.translate("Sample Video"),
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme.of(context)
+                        .textTheme
+                        .subtitle2!
+                        .copyWith(fontSize: 18),
                   ),
                 ),
               ),
@@ -54,18 +57,19 @@ class _SampleVideoPageState extends State<SampleVideoPage> {
                 height: 64.h,
                 child: InkWell(
                   onTap: () {
-                    setState(() {
-                      _controller.value.isPlaying
-                          ? _controller.pause()
-                          : _controller.play();
-                    });
+                    setState(
+                      () {
+                        _controller.value.isPlaying
+                            ? _controller.pause()
+                            : _controller.play();
+                      },
+                    );
                   },
                   child: _controller.value.isInitialized
                       ? AspectRatio(
                           aspectRatio: _controller.value.aspectRatio,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30.0)),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
                             child: VideoPlayer(_controller),
                           ),
                         )
@@ -77,7 +81,7 @@ class _SampleVideoPageState extends State<SampleVideoPage> {
                 height: 12.h,
                 child: Center(
                   child: RaisedGradientButton(
-                    width: 60.w,
+                    width: 160.0,
                     onPressed: () {
                       setState(() {
                         _controller.pause();

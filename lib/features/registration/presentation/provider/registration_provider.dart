@@ -4,13 +4,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 
 import '../../../../core/error/failures.dart';
+import '../../../../core/providers/firebase_provider.dart';
+import '../../../../core/services/auth_services.dart';
 import '../../../../main.dart';
 import '../../../job-seeker-module/data/repositories/location_service_repository.dart';
+import '../../../onboarding/presentation/provider/language_provider.dart';
+import '../../data/models/otp_verification.dart';
+import '../../data/models/registration.dart';
 import '../../data/models/user_location.dart';
 
-final registrationProvider =
-    ChangeNotifierProvider.autoDispose<RegistrationNotifier>(
-        (ref) => RegistrationNotifier());
+final registrationProvider = ChangeNotifierProvider<RegistrationNotifier>(
+    (ref) => RegistrationNotifier());
 
 class RegistrationNotifier extends ChangeNotifier {
   String? _userName;
@@ -27,17 +31,12 @@ class RegistrationNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  String? get intlPhoneNumber => userLocation!.countryCode + phoneNumber!;
+
   String? _password;
   String? get password => _password;
   set password(String? password) {
     _password = password;
-    notifyListeners();
-  }
-
-  String? _fullName;
-  String? get fullName => _fullName;
-  set fullName(String? fullName) {
-    _fullName = fullName;
     notifyListeners();
   }
 
@@ -63,13 +62,6 @@ class RegistrationNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool? _isJobseeker;
-  bool? get isJobseeker => _isJobseeker;
-  set isJobseeker(bool? isJobseeker) {
-    _isJobseeker = isJobseeker;
-    notifyListeners();
-  }
-
   Future<void> getUserLocation() async {
     final Either<Failure, UserLocation> locationRunner =
         await container.read(locationProvider).getUserLocation();
@@ -80,22 +72,32 @@ class RegistrationNotifier extends ChangeNotifier {
     return Future.value(null);
   }
 
-  String? _primaryLanguage;
-  String? get primaryLanguage => _primaryLanguage;
-  set primaryLanguage(String? primaryLanguage) {
-    _primaryLanguage = primaryLanguage;
-    notifyListeners();
-  }
-
-  bool jobMenuPressed = false;
-
-  void toggleJobMenuPressed() {
-    if (jobMenuPressed) {
-      jobMenuPressed = false;
-    } else {
-      jobMenuPressed = true;
+  Future<AuthResponse?> registerUser() async {
+    try {
+      final Registration user = Registration(
+        userName: userName!,
+        phoneNumber: phoneNumber!,
+        password: password!,
+        placeName: userLocation!.placeName,
+        district: userLocation!.district,
+        state: userLocation!.state,
+        country: userLocation!.country,
+        latitude: num.parse(userLocation!.latitude.toStringAsFixed(2)),
+        longitude: num.parse(userLocation!.longitude.toStringAsFixed(2)),
+        hasAcceptedTerms: hasAcceptedTerms!,
+        isEmployer: isEmployer!,
+        primaryLanguage: LanguageCode(
+            lanuageCode: container.read(languageProvider).language.code),
+      );
+      Logger.root.fine(user.toJson());
+      final AuthResponse response =
+          await container.read(authClientProvider).register(user);
+      Logger.root.fine(response);
+      return response;
+    } catch (exception, stack) {
+      Logger.root.severe(exception);
+      container.read(crashlyticsProvider).recordError(exception, stack);
+      return null;
     }
-    debugPrint(jobMenuPressed.toString());
-    notifyListeners();
   }
 }

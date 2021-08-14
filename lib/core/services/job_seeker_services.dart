@@ -11,8 +11,8 @@ import '../network/retry_interceptor.dart';
 part 'job_seeker_services.g.dart';
 
 @RestApi(baseUrl: "http://198.23.196.159:8000/")
-abstract class JobSeekerClient {
-  factory JobSeekerClient(Dio dio, {String baseUrl}) = _JobSeekerClient;
+abstract class JobseekerClient {
+  factory JobseekerClient(Dio dio, {String baseUrl}) = _JobseekerClient;
 
   @GET("/skill-category-list?language={languageCode}")
   Future<List<SkillCategory>> skillCategories(
@@ -48,7 +48,7 @@ abstract class JobSeekerClient {
   );
 }
 
-final jobSeekerClientProvider = Provider<JobSeekerClient>(
+final jobseekerClientProvider = Provider<JobseekerClient>(
   (ref) {
     final dio = Dio();
     dio.options.headers["Demo-Header"] = "demo header";
@@ -60,7 +60,7 @@ final jobSeekerClientProvider = Provider<JobSeekerClient>(
         ),
       ),
     );
-    final client = JobSeekerClient(dio);
+    final client = JobseekerClient(dio);
     return client;
   },
 );

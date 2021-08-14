@@ -30,8 +30,8 @@ class VideoServiceNotifier extends ChangeNotifier {
 
   Future<void> uploadVideoFile() async {
     if (video != null) {
-      final String uid = container.read(userActionsProvider).uid!;
-      final String fileName = 'uploads/univerified-videos/$uid-unverified.mp4';
+      final String uid = container.read(userActionsProvider).firebaseUser!.uid;
+      final String fileName = 'univerified-videos/$uid-unverified.mp4';
       final UploadTask videoUploadTask =
           FirebaseStorage.instance.ref(fileName).putFile(video!);
       try {

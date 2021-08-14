@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../../core/localization/app_localization.dart';
@@ -78,8 +77,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       style: Theme.of(context).textTheme.subtitle2,
                     ),
                     SizedBox(height: 1.h),
-                    IntlPhoneField(
+                    TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       style: Theme.of(context).textTheme.bodyText2,
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
@@ -93,15 +94,43 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             color: Colors.grey.withOpacity(0.4),
                           ),
                         ),
-                        hintText: '9876543210',
+                        hintText: "1234567890",
                       ),
-                      initialCountryCode: 'IN',
-                      onChanged: (phone) {
-                        _registrationKey.currentState!.validate();
-                        watch(registrationProvider).phoneNumber =
-                            phone.completeNumber;
+                      autocorrect: false,
+                      initialValue: watch(registrationProvider).phoneNumber,
+                      onChanged: (phoneNumber) =>
+                          watch(registrationProvider).phoneNumber = phoneNumber,
+                      validator: (value) {
+                        value = value.toString();
+                        if (value.length != 10) {
+                          return "Please enter the 10 digit mobile number";
+                        }
+                        return null;
                       },
                     ),
+                    // IntlPhoneField(
+                    //   style: Theme.of(context).textTheme.bodyText2,
+                    //   decoration: InputDecoration(
+                    //     enabledBorder: OutlineInputBorder(
+                    //       borderRadius: BorderRadius.circular(10.0),
+                    //       borderSide: BorderSide(
+                    //         color: Colors.grey.withOpacity(0.4),
+                    //       ),
+                    //     ),
+                    //     focusedBorder: OutlineInputBorder(
+                    //       borderRadius: BorderRadius.circular(10.0),
+                    //       borderSide: BorderSide(
+                    //         color: Colors.grey.withOpacity(0.4),
+                    //       ),
+                    //     ),
+                    //     hintText: '9876543210',
+                    //   ),
+                    //   initialCountryCode: 'IN',
+                    //   onChanged: (phone) {
+                    //     watch(registrationProvider).phoneNumber =
+                    //         phone.completeNumber;
+                    //   },
+                    // ),
                     SizedBox(height: 2.h),
                     // * PASSWORD
                     Text(
@@ -169,9 +198,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             .translate("FirstName LastName"),
                       ),
                       autocorrect: false,
-                      initialValue: watch(registrationProvider).fullName,
+                      initialValue: watch(registrationProvider).userName,
                       onChanged: (name) =>
-                          watch(registrationProvider).fullName = name,
+                          watch(registrationProvider).userName = name,
                       validator: (value) {
                         value = value.toString();
                         if (value.isEmpty) {
@@ -226,6 +255,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           onChanged: (bool? value) {
                             setState(() {
                               isChecked = value!;
+                              watch(registrationProvider).hasAcceptedTerms =
+                                  value;
                             });
                           },
                         ),
@@ -270,8 +301,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           onPressed: () async {
                             if (_registrationKey.currentState!.validate() &&
                                 isChecked) {
-                              final String number =
-                                  watch(registrationProvider).phoneNumber!;
+                              final String number = 
+                                  watch(registrationProvider).intlPhoneNumber!;
                               await watch(phoneAuthProvider)
                                   .verifyPhone(context, number);
                               await context.router.navigate(OtpFormRoute());

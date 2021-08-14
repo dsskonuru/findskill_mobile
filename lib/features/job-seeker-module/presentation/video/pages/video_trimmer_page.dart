@@ -165,7 +165,7 @@ class _VideoTrimmerPageState extends State<VideoTrimmerPage> {
                             // });
 
                             await context.router
-                                .navigate(const VideoPreviewRoute());
+                                .popAndPush(const VideoPreviewRoute());
                             // };
                           },
                           child: Text(

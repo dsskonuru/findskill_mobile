@@ -16,6 +16,22 @@ class _AuthClient implements AuthClient {
   String? baseUrl;
 
   @override
+  Future<AuthResponse> register(registration) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(registration.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AuthResponse>(
+            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/user-register',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AuthResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<LoginResponse> login(userLogin) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

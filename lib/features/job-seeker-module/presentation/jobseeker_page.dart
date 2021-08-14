@@ -16,12 +16,11 @@ import 'screens/refer-and-earn/pages/refer_and_earn_page.dart';
 import 'screens/refer-and-earn/widgets/refer_and_earn_navigator.dart';
 import 'view-jobs/pages/view_jobs_page.dart';
 
-class JobseekerScaffold extends StatefulWidget {
-  @override
-  State<JobseekerScaffold> createState() => _JobseekerScaffoldState();
-}
+class JobseekerPage extends StatelessWidget {
+  // const JobseekerPage({@PathParam('screen') this.screen = 0});
 
-class _JobseekerScaffoldState extends State<JobseekerScaffold> {
+  // final int screen;
+
   @override
   Widget build(BuildContext context) {
     return SimpleHiddenDrawer(
@@ -53,9 +52,7 @@ class _JobseekerScaffoldState extends State<JobseekerScaffold> {
           body: screenCurrent,
           // TODO: Make bottom navigation work
           bottomNavigationBar: BottomNavigationBar(
-            onTap: (value) => setState(() {
-              position = value;
-            }), // new
+            onTap: (value) => controller.setSelectedMenuPosition(value), // new
             currentIndex: position, // new
             items: const [
               BottomNavigationBarItem(
@@ -176,6 +173,8 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
 }
 
 class SignOutNavigator extends StatelessWidget {
+  //TODO: Implement Sign Out
+  // await container.read(authProvider).signOut();
   const SignOutNavigator({
     Key? key,
     required SimpleHiddenDrawerController controller,

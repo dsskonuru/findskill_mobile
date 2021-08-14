@@ -73,10 +73,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       isExpanded: true,
                       icon: const Icon(Icons.arrow_drop_down_outlined),
                       focusColor: Colors.white,
-                      value: watch(languageProvider)
-                          .language
-                          .name
-                          .toLowerCase(), 
+                      value:
+                          watch(languageProvider).language.name.toLowerCase(),
 // TODO: Remove to lowerCase post capitalization of local name
                       elevation: 5,
                       style: Theme.of(context).textTheme.subtitle2,
@@ -116,7 +114,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     children: [
                       Text(
                         AppLocalizations.of(context)!
-                            .translate("Already have an account? "),
+                            .translate("Already have an account?"),
                         style: Theme.of(context).textTheme.caption,
                       ),
                       TextButton(
@@ -127,7 +125,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         onPressed: () =>
                             context.router.push(const LoginRoute()),
                         child: Text(
-                          AppLocalizations.of(context)!.translate("Login"),
+                          AppLocalizations.of(context)!.translate("Log In"),
                           style: Theme.of(context)
                               .textTheme
                               .caption!

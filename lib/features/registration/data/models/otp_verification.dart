@@ -20,7 +20,7 @@ class OtpVerification with _$OtpVerification {
 class AuthResponse with _$AuthResponse {
   @JsonSerializable(explicitToJson: true)
   factory AuthResponse({
-    String? status,
+    bool? status,
     required String detail,
   }) = _AuthResponse;
   factory AuthResponse.fromJson(Map<String, dynamic> json) =>

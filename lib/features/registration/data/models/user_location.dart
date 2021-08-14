@@ -13,8 +13,9 @@ class UserLocation with _$UserLocation {
     required String district,
     required String state,
     required String country,
-    required String latitude,
-    required String longitude,
+    required double latitude,
+    required double longitude,
+    required String countryCode,
   }) = _UserLocation;
   factory UserLocation.fromJson(Map<String, dynamic> json) => _$UserLocationFromJson(json);
 }

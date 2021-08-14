@@ -13,14 +13,14 @@ class SkillsListRemoteDataSource {
   ///
   /// Throws a [ServerException] for all error codes.
 
-  final JobSeekerClient client;
+  final JobseekerClient client;
 
   SkillsListRemoteDataSource({required this.client});
 
   Future<List<Skill>> getSkills(String languageCode, String categoryId) async {
     try {
       final List<Skill> _skillsList = await container
-          .read(jobSeekerClientProvider)
+          .read(jobseekerClientProvider)
           .skillSubCategories(languageCode, categoryId);
       Logger.root.fine('''
         Language : $languageCode  
@@ -39,9 +39,9 @@ class SkillsListRemoteDataSource {
 
 final skillsRemoteProvider = Provider<SkillsListRemoteDataSource>(
   (ref) {
-    final _jobSeekerClient = container.read(jobSeekerClientProvider);
+    final _jobseekerClient = container.read(jobseekerClientProvider);
     final _languagesListRemoteDataSource =
-        SkillsListRemoteDataSource(client: _jobSeekerClient);
+        SkillsListRemoteDataSource(client: _jobseekerClient);
     return _languagesListRemoteDataSource;
   },
 );

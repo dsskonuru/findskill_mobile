@@ -11,7 +11,7 @@ class RaisedGradientButton extends StatelessWidget {
   const RaisedGradientButton({
     Key? key,
     required this.child,
-    this.width = 100.0,
+    this.width = 120.0,
     this.height = 40.0,
     required this.onPressed,
   }) : super(key: key);
@@ -22,7 +22,7 @@ class RaisedGradientButton extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(12.0),
           gradient: LinearGradient(
               colors: [scubaBlue, vandylBlue],
               begin: const FractionalOffset(0.0, 0.0),

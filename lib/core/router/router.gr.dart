@@ -7,32 +7,35 @@
 import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
 
-import '../../features/job-seeker-module/presentation/screens/account_settings/pages/account_settings_page.dart'
+import '../../features/employer-module/employer_page.dart' as _i9;
+import '../../features/job-seeker-module/presentation/jobseeker_page.dart'
     as _i8;
-import '../../features/job-seeker-module/presentation/screens/dashboard/pages/dashboard_page.dart'
+import '../../features/job-seeker-module/presentation/screens/account_settings/pages/account_settings_page.dart'
     as _i10;
-import '../../features/job-seeker-module/presentation/screens/dashboard/pages/under_processing_page.dart'
-    as _i16;
-import '../../features/job-seeker-module/presentation/screens/edit_profile/pages/edit_profile_page.dart'
-    as _i9;
-import '../../features/job-seeker-module/presentation/screens/edit_profile/pages/job_preferences/pages/job_preferences_page.dart'
-    as _i11;
-import '../../features/job-seeker-module/presentation/screens/edit_profile/pages/scan_your_id/pages/scan_your_id_page.dart'
-    as _i14;
-import '../../features/job-seeker-module/presentation/screens/edit_profile/pages/skills_choice/pages/skills_choice_page.dart'
-    as _i15;
-import '../../features/job-seeker-module/presentation/screens/notifications/pages/notifications_page.dart'
+import '../../features/job-seeker-module/presentation/screens/dashboard/pages/dashboard_page.dart'
     as _i12;
-import '../../features/job-seeker-module/presentation/screens/refer-and-earn/pages/refer_and_earn_page.dart'
-    as _i13;
-import '../../features/job-seeker-module/presentation/video/pages/sample_video_page.dart'
-    as _i17;
-import '../../features/job-seeker-module/presentation/video/pages/video_capture_page.dart'
+import '../../features/job-seeker-module/presentation/screens/dashboard/pages/under_processing_page.dart'
     as _i18;
-import '../../features/job-seeker-module/presentation/video/pages/video_preview_page.dart'
-    as _i20;
-import '../../features/job-seeker-module/presentation/video/pages/video_trimmer_page.dart'
+import '../../features/job-seeker-module/presentation/screens/edit_profile/pages/edit_profile_page.dart'
+    as _i11;
+import '../../features/job-seeker-module/presentation/screens/edit_profile/pages/job_preferences/pages/job_preferences_page.dart'
+    as _i13;
+import '../../features/job-seeker-module/presentation/screens/edit_profile/pages/scan_your_id/pages/scan_your_id_page.dart'
+    as _i16;
+import '../../features/job-seeker-module/presentation/screens/edit_profile/pages/skills_choice/pages/skills_choice_page.dart'
+    as _i17;
+import '../../features/job-seeker-module/presentation/screens/notifications/pages/notifications_page.dart'
+    as _i14;
+import '../../features/job-seeker-module/presentation/screens/refer-and-earn/pages/refer_and_earn_page.dart'
+    as _i15;
+import '../../features/job-seeker-module/presentation/video/pages/sample_video_page.dart'
     as _i19;
+import '../../features/job-seeker-module/presentation/video/pages/video_capture_page.dart'
+    as _i20;
+import '../../features/job-seeker-module/presentation/video/pages/video_preview_page.dart'
+    as _i22;
+import '../../features/job-seeker-module/presentation/video/pages/video_trimmer_page.dart'
+    as _i21;
 import '../../features/login/presentation/pages/login_page.dart' as _i5;
 import '../../features/onboarding/presentation/pages/intro_page.dart' as _i4;
 import '../../features/onboarding/presentation/pages/onboarding_page.dart'
@@ -75,7 +78,17 @@ class AppRouter extends _i1.RootStackRouter {
               orElse: () => const OtpFormRouteArgs());
           return _i7.OtpFormPage(key: args.key);
         }),
-    JobSeekerRouter.name: (routeData) => _i1.MaterialPageX<dynamic>(
+    JobseekerRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i8.JobseekerPage();
+        }),
+    EmployerRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return const _i9.EmployerPage();
+        }),
+    JobseekerRouter.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
           return const _i1.EmptyRouterPage();
@@ -88,67 +101,67 @@ class AppRouter extends _i1.RootStackRouter {
     AccountSettingsRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i8.AccountSettingsPage();
+          return const _i10.AccountSettingsPage();
         }),
     EditProfileRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i9.EditProfilePage();
+          return const _i11.EditProfilePage();
         }),
     DashboardRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i10.DashboardPage();
+          return _i12.DashboardPage();
         }),
     JobPreferencesRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i11.JobPreferencesPage();
+          return const _i13.JobPreferencesPage();
         }),
     NotificationsRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i12.NotificationsPage();
+          return _i14.NotificationsPage();
         }),
     ReferAndEarnRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i13.ReferAndEarnPage();
+          return const _i15.ReferAndEarnPage();
         }),
     ScanYourIdRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i14.ScanYourIdPage();
+          return const _i16.ScanYourIdPage();
         }),
     SkillsChoiceRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i15.SkillsChoicePage();
+          return const _i17.SkillsChoicePage();
         }),
     UnderProcessingRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i16.UnderProcessingPage();
+          return const _i18.UnderProcessingPage();
         }),
     SampleVideoRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i17.SampleVideoPage();
+          return _i19.SampleVideoPage();
         }),
     VideoCaptureRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i18.VideoCapturePage();
+          return _i20.VideoCapturePage();
         }),
     VideoTrimmerRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i19.VideoTrimmerPage();
+          return const _i21.VideoTrimmerPage();
         }),
     VideoPreviewRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i20.VideoPreviewPage();
+          return const _i22.VideoPreviewPage();
         })
   };
 
@@ -159,7 +172,9 @@ class AppRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(LoginRoute.name, path: '/login'),
         _i1.RouteConfig(RegistrationRoute.name, path: '/registration'),
         _i1.RouteConfig(OtpFormRoute.name, path: '/otp-verification'),
-        _i1.RouteConfig(JobSeekerRouter.name, path: '/job-seeker', children: [
+        _i1.RouteConfig(JobseekerRoute.name, path: '/js'),
+        _i1.RouteConfig(EmployerRoute.name, path: '/employer'),
+        _i1.RouteConfig(JobseekerRouter.name, path: '/job-seeker', children: [
           _i1.RouteConfig('#redirect',
               path: '', redirectTo: 'home', fullMatch: true),
           _i1.RouteConfig(VideoRouter.name, path: 'video', children: [
@@ -225,11 +240,23 @@ class OtpFormRouteArgs {
   final _i2.Key? key;
 }
 
-class JobSeekerRouter extends _i1.PageRouteInfo {
-  const JobSeekerRouter({List<_i1.PageRouteInfo>? children})
+class JobseekerRoute extends _i1.PageRouteInfo {
+  const JobseekerRoute() : super(name, path: '/js');
+
+  static const String name = 'JobseekerRoute';
+}
+
+class EmployerRoute extends _i1.PageRouteInfo {
+  const EmployerRoute() : super(name, path: '/employer');
+
+  static const String name = 'EmployerRoute';
+}
+
+class JobseekerRouter extends _i1.PageRouteInfo {
+  const JobseekerRouter({List<_i1.PageRouteInfo>? children})
       : super(name, path: '/job-seeker', initialChildren: children);
 
-  static const String name = 'JobSeekerRouter';
+  static const String name = 'JobseekerRouter';
 }
 
 class VideoRouter extends _i1.PageRouteInfo {

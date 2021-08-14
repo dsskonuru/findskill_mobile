@@ -6,8 +6,8 @@ part of 'job_seeker_services.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-class _JobSeekerClient implements JobSeekerClient {
-  _JobSeekerClient(this._dio, {this.baseUrl}) {
+class _JobseekerClient implements JobseekerClient {
+  _JobseekerClient(this._dio, {this.baseUrl}) {
     baseUrl ??= 'http://198.23.196.159:8000/';
   }
 

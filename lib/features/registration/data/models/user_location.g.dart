@@ -12,8 +12,9 @@ _$_UserLocation _$_$_UserLocationFromJson(Map<String, dynamic> json) {
     district: json['district'] as String,
     state: json['state'] as String,
     country: json['country'] as String,
-    latitude: json['latitude'] as String,
-    longitude: json['longitude'] as String,
+    latitude: (json['latitude'] as num).toDouble(),
+    longitude: (json['longitude'] as num).toDouble(),
+    countryCode: json['countryCode'] as String,
   );
 }
 
@@ -25,4 +26,5 @@ Map<String, dynamic> _$_$_UserLocationToJson(_$_UserLocation instance) =>
       'country': instance.country,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
+      'countryCode': instance.countryCode,
     };

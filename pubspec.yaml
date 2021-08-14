@@ -1,9 +1,9 @@
-name: FindSkill
+name: findskill
 description: A new Flutter project.
 
 publish_to: 'none'
 
-version: 0.1.0+1
+version: 0.1.0+3
 
 environment:
   sdk: ">=2.12.0-0 <3.0.0"
@@ -31,7 +31,7 @@ dependencies:
   google_fonts: ^2.1.0
   hidden_drawer_menu: ^3.0.0
   image_picker: ^0.8.3+2
-  intl_phone_field: ^2.0.1
+  # intl_phone_field: ^2.0.1
   json_annotation: ^4.1.0
   location: ^4.3.0
   logging: ^1.0.1
