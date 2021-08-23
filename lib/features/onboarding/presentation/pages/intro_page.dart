@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:findskill/core/progress_tracker/progress_tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -16,9 +17,11 @@ class IntroPage extends StatefulWidget {
 
 class _IntroPageState extends State<IntroPage> {
   late VideoPlayerController _controller;
+  static const ProgressKey pKey = ProgressKey.introduction;
 
   @override
   void initState() {
+    saveProgress(pKey);
     super.initState();
     _controller = VideoPlayerController.asset(
       'assets/video/Onboarding.mp4',
@@ -72,9 +75,10 @@ class _IntroPageState extends State<IntroPage> {
                         style: ButtonStyle(
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          )),
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
                           backgroundColor:
                               MaterialStateProperty.all<Color>(smaltBlue),
                         ),
@@ -83,7 +87,11 @@ class _IntroPageState extends State<IntroPage> {
                             _controller.pause();
                           });
                           watch(registrationProvider).isEmployer = true;
-                          context.router.root.push(const RegistrationRoute());
+                          context.router.push(const RegistrationRoute()
+                              // FindSkillRouter(
+                              //   pageKey: ProgressKey.registration.index,
+                              // ),
+                              );
                         },
                         child: Text(
                           AppLocalizations.of(context)!
@@ -111,10 +119,12 @@ class _IntroPageState extends State<IntroPage> {
                             _controller.pause();
                           });
                           watch(registrationProvider).isEmployer = false;
-                          context.router.root
-                              .push(const JobseekerRouter(children: [
-                            VideoRouter(children: [SampleVideoRoute()])
-                          ]));
+                          // * Sample Video Page
+                          context.router.push(const SampleVideoRoute()
+                              // FindSkillRouter(
+                              //   pageKey: ProgressKey.sampleVideo.index,
+                              // ),
+                              );
                         },
                         child: Text(
                           AppLocalizations.of(context)!

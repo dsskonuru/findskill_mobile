@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fauth;
@@ -81,38 +80,50 @@ class OtpFormNotifier extends ChangeNotifier {
             codeAutoRetrievalTimeout: (String verificationId) {},
           );
 
-  Future<Either<AuthFailure, void>> handleAuth(BuildContext context) async {
+  Future<Either<AuthFailure, String?>> handleAuth(BuildContext context) async {
     try {
       container.read(authProvider).authStateChanges().listen(
         (authUser) async {
           if (authUser == null) {
             container.read(userActionsProvider).user = null;
             Logger.root.fine('User is signed out');
-            await context.router.navigate(const LoginRoute());
+            await context.router.push(const LoginRoute());
+            uid = null;
           } else {
             uid = authUser.uid;
-            await container.read(usersProvider).doc(uid).get().then(
-              (DocumentSnapshot<FirebaseUser> userSnapshot) async {
-                if (userSnapshot.exists) {
-                  Logger.root.fine("User already exsists");
-                  container.read(userActionsProvider).firebaseUser =
-                      userSnapshot.data();
-                } else {
-                  Logger.root.fine("User is added");
-                  await container
-                      .read(usersProvider)
-                      .doc(uid)
-                      .set(container.read(userActionsProvider).firebaseUser!);
-                }
-                container.read(registrationProvider).isEmployer!
-                    ? await context.router.navigate(const EmployerRoute())
-                    : await context.router.navigate(const JobseekerRoute());
-              },
-            );
+            // (container.read(registrationProvider).isEmployer != null &&
+            //         !container.read(registrationProvider).isEmployer!)
+            //     : context.router.push(const EmployerRoute());
+            // await container.read(usersProvider).doc(uid).get().then(
+            //   (DocumentSnapshot<FirebaseUser> userSnapshot) async {
+            //     if (userSnapshot.exists) {
+            //       Logger.root.fine("User already exsists");
+            //       container.read(userActionsProvider).firebaseUser =
+            //           userSnapshot.data();
+            //     } else {
+            //       Logger.root.fine("User is added");
+            //       await container
+            //           .read(usersProvider)
+            //           .doc(uid)
+            //           .set(container.read(userActionsProvider).firebaseUser!);
+            //     }
+            //     container.read(registrationProvider).isEmployer!
+            //         ? await context.router.push(
+            //             FindSkillRouter(
+            //               pageKey: ProgressKey.employerHome.index,
+            //             ),
+            //           )
+            //         : await context.router.push(
+            //             FindSkillRouter(
+            //               pageKey: ProgressKey.jobseekerHome.index,
+            //             ),
+            //           );
+            //   },
+            // );
           }
         },
       );
-      return const Right(null);
+      return Right(uid);
     } catch (error, stackTrace) {
       container.read(crashlyticsProvider).recordError(error, stackTrace);
       return Left(AuthFailure(error.toString()));

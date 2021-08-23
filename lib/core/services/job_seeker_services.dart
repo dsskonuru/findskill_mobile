@@ -1,12 +1,14 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
+import 'package:findskill/core/network/dio_connectivity_request_retrier.dart';
+import 'package:findskill/core/network/retry_interceptor.dart';
+import 'package:findskill/features/job-seeker-module/data/models/job_type_list.dart';
+import 'package:findskill/features/job-seeker-module/data/models/jobseeker_profile.dart';
+import 'package:findskill/features/job-seeker-module/data/models/skill_update.dart';
+import 'package:findskill/features/job-seeker-module/data/models/video_update.dart';
+import 'package:findskill/features/registration/data/models/skills.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:riverpod/riverpod.dart';
-
-import '../../features/job-seeker-module/data/models/skill.dart';
-import '../../features/job-seeker-module/data/models/skill_category.dart';
-import '../network/dio_connectivity_request_retrier.dart';
-import '../network/retry_interceptor.dart';
 
 part 'job_seeker_services.g.dart';
 
@@ -15,7 +17,7 @@ abstract class JobseekerClient {
   factory JobseekerClient(Dio dio, {String baseUrl}) = _JobseekerClient;
 
   @GET("/skill-category-list?language={languageCode}")
-  Future<List<SkillCategory>> skillCategories(
+  Future<List<SkillCategoryResponse>> skillCategories(
     @Path("languageCode") String languageCode,
   );
 
@@ -25,27 +27,40 @@ abstract class JobseekerClient {
     @Path("categoryId") String categoryId,
   );
 
-  @POST("/jobseeker-register")
-  Future<String> register(
-    @Body() Map<String, dynamic> map,
+  @POST("/jobseeker-video-update")
+  Future<VideoResponse> createVideo(
+    @Header("Authorization") String token,
+    @Body() VideoLink videoLink,
+  );
+
+  @PUT("/jobseeker-video-update")
+  Future<VideoResponse> updateVideo(
+    @Header("Authorization") String token,
+    @Body() VideoLink videoLink,
+  );
+
+  @PUT("/jobseeker-skill-update")
+  Future<SkillsResponse> updateSkills(
+    @Header("Authorization") String token,
+    @Body() Skills skills,
   );
 
   @GET("/jobseeker-profile")
-  Future<String> profile(
-    @Body() Map<String, dynamic> map,
+  Future<JobseekerProfileResponse> profile(
+    @Header("Authorization") String token,
   );
 
-  @PUT("/jobseeker-profile-update")
-  Future<String> profileUpdate(
-    @Body() Map<String, dynamic> map,
-  );
+  @GET("/job-type-list")
+  Future<JobTypeList> getJobTypeList();
 
-  @POST("/jobseeker-list?language={languageCode}&skill={skillId}")
-  Future<String> updateStaticString(
-    @Path("languageCode") String languageCode,
-    @Path("categoryId") String categoryId,
-    @Body() Map<String, dynamic> map,
-  );
+  // @PUT("/jobseeker-id-update")
+  // @MultiPart()
+  // Future<Map> idUpdate(
+  //   @Header("Authorization") String token,
+  //   @Part(name: "user_id_type") String idType,
+  //   @Part(contentType: "image/png", name: "front_view") File frontView,
+  //   @Part(contentType: "image/png", name: "back_view") File backView,
+  // );
 }
 
 final jobseekerClientProvider = Provider<JobseekerClient>(

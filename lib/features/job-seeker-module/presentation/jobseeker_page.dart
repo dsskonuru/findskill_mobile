@@ -1,25 +1,36 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../core/localization/app_localization.dart';
+import '../../../core/progress_tracker/progress_tracker.dart';
 import '../../../core/theme/app_bar.dart';
 import '../../../core/theme/theme_data.dart';
-import 'screens/account_settings/pages/account_settings_page.dart';
-import 'screens/account_settings/widgets/account_settings_navigator.dart';
+import 'screens/account-settings/pages/account_settings_page.dart';
+import 'screens/account-settings/widgets/account_settings_navigator.dart';
 import 'screens/dashboard/pages/dashboard_page.dart';
 import 'screens/dashboard/widgets/dashboard_navigator.dart';
-import 'screens/edit_profile/pages/edit_profile_page.dart';
-import 'screens/edit_profile/widgets/edit_profile_navigator.dart';
+import 'screens/edit-profile/pages/edit_profile_page.dart';
+import 'screens/edit-profile/widgets/edit_profile_navigator.dart';
+import 'screens/notifications/pages/notifications_page.dart';
 import 'screens/notifications/widgets/notfications_navigator.dart';
 import 'screens/refer-and-earn/pages/refer_and_earn_page.dart';
 import 'screens/refer-and-earn/widgets/refer_and_earn_navigator.dart';
-import 'view-jobs/pages/view_jobs_page.dart';
 
-class JobseekerPage extends StatelessWidget {
-  // const JobseekerPage({@PathParam('screen') this.screen = 0});
+class JobseekerPage extends StatefulWidget {
+  @override
+  State<JobseekerPage> createState() => _JobseekerPageState();
+}
 
-  // final int screen;
+class _JobseekerPageState extends State<JobseekerPage> {
+  static const ProgressKey pKey = ProgressKey.jobseekerHome;
+
+  @override
+  void initState() {
+    saveProgress(pKey);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +49,7 @@ class JobseekerPage extends StatelessWidget {
             screenCurrent = const AccountSettingsPage();
             break;
           case 3:
-            screenCurrent = NotificationsPage();
+            screenCurrent = const NotificationsPage();
             break;
           case 4:
             screenCurrent = const ReferAndEarnPage();
@@ -51,40 +62,40 @@ class JobseekerPage extends StatelessWidget {
           ),
           body: screenCurrent,
           // TODO: Make bottom navigation work
-          bottomNavigationBar: BottomNavigationBar(
-            onTap: (value) => controller.setSelectedMenuPosition(value), // new
-            currentIndex: position, // new
-            items: const [
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.home,
-                    color: Colors.black,
-                  ),
-                  label: 'HOME',
-                  backgroundColor: Colors.blue),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.notifications,
-                  color: Colors.black,
-                ),
-                label: 'NOTIFICATIONS',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.share,
-                  color: Colors.black,
-                ),
-                label: 'REFER & EARN',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.work,
-                  color: Colors.black,
-                ),
-                label: 'VIEW JOBS',
-              ),
-            ],
-          ),
+          // bottomNavigationBar: BottomNavigationBar(
+          //   onTap: (value) => controller.setSelectedMenuPosition(value), // new
+          //   currentIndex: position, // new
+          //   items: const [
+          //     BottomNavigationBarItem(
+          //         icon: Icon(
+          //           Icons.home,
+          //           color: Colors.black,
+          //         ),
+          //         label: 'HOME',
+          //         backgroundColor: Colors.blue),
+          //     BottomNavigationBarItem(
+          //       icon: Icon(
+          //         Icons.notifications,
+          //         color: Colors.black,
+          //       ),
+          //       label: 'NOTIFICATIONS',
+          //     ),
+          //     BottomNavigationBarItem(
+          //       icon: Icon(
+          //         Icons.share,
+          //         color: Colors.black,
+          //       ),
+          //       label: 'REFER & EARN',
+          //     ),
+          //     BottomNavigationBarItem(
+          //       icon: Icon(
+          //         Icons.work,
+          //         color: Colors.black,
+          //       ),
+          //       label: 'VIEW JOBS',
+          //     ),
+          //   ],
+          // ),
         );
       },
     );
@@ -158,7 +169,7 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
                     NotificationsNavigator(controller: _controller),
                     ReferAndEarnNavigator(controller: _controller),
                     SizedBox(height: 10.h),
-                    SignOutNavigator(controller: _controller),
+                    const SignOutNavigator(),
                     SizedBox(height: 12.h),
                     SwitchProfileNavigator(controller: _controller),
                   ],
@@ -177,11 +188,7 @@ class SignOutNavigator extends StatelessWidget {
   // await container.read(authProvider).signOut();
   const SignOutNavigator({
     Key? key,
-    required SimpleHiddenDrawerController controller,
-  })  : _controller = controller,
-        super(key: key);
-
-  final SimpleHiddenDrawerController _controller;
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -195,7 +202,7 @@ class SignOutNavigator extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                _controller.setSelectedMenuPosition(4);
+                context.router.popUntilRoot();
               },
               child: Text(
                 AppLocalizations.of(context)!.translate("SIGN OUT"),

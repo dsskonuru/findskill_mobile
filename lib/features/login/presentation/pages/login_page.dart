@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:findskill/core/progress_tracker/progress_tracker.dart';
+import 'package:findskill/features/login/presentation/providers/login_form_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,7 +11,7 @@ import '../../../../core/router/router.gr.dart';
 import '../../../../core/theme/app_bar.dart';
 import '../../../../core/theme/raised_gradient_button.dart';
 import '../../data/models/user_login.dart';
-import '../provider/login_form_provider.dart';
+
 
 // TODO: Check if primarily JS / Emp
 class LoginPage extends StatefulWidget {
@@ -24,9 +26,12 @@ class _LoginPageState extends State<LoginPage> {
   late Image jobseekerImage;
   late Image employerImage;
 
+  static const ProgressKey pKey = ProgressKey.login;
+
   @override
   void initState() {
     super.initState();
+    saveProgress(pKey);
     jobseekerImage = Image.asset(
       "assets/png/jobseeker.png",
       fit: BoxFit.scaleDown,
@@ -77,23 +82,19 @@ class _LoginPageState extends State<LoginPage> {
                           Flexible(
                             child: InkWell(
                               onTap: () => context.router.push(
-                                const JobseekerRouter(
-                                  children: [
-                                    VideoRouter(
-                                      children: [
-                                        SampleVideoRoute(),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                const SampleVideoRoute()
+                                // FindSkillRouter(
+                                //   pageKey: ProgressKey.sampleVideo.index,
+                                // ),
                               ),
                               child: Column(
                                 children: [
                                   Container(
                                     decoration: const BoxDecoration(
                                       color: Color.fromRGBO(204, 204, 204, 1),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(20)),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(20),
+                                      ),
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.all(12.0),
@@ -134,8 +135,12 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(width: 4.w),
                           Flexible(
                             child: InkWell(
-                              onTap: () => context.router.root
-                                  .push(const RegistrationRoute()),
+                              onTap: () => context.router.push(
+                                const RegistrationRoute()
+                                // FindSkillRouter(
+                                //   pageKey: ProgressKey.registration.index,
+                                // ),
+                              ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -227,9 +232,9 @@ class _LoginPageState extends State<LoginPage> {
                             onChanged: (phoneNumber) => watch(loginFormProvider)
                                 .phoneNumber = phoneNumber,
                             validator: (value) {
-                              value = value.toString();
-                              if (value.length != 10) {
-                                return "Please enter the 10 digit mobile number";
+                              if (value != null &&
+                                  int.tryParse(value) != null) {
+                                return "Please enter a valid mobile number";
                               }
                               return null;
                             },
@@ -265,14 +270,17 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(height: 2.h),
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: RaisedGradientButton(
+                            child: GradientButton(
                               onPressed: () async {
-                                // TODO: Validate the form first
+                                // TODO: Validate the form first and navigate based on response
                                 final LoginResponse? response =
                                     await watch(loginFormProvider).login();
                                 if (response != null) {
-                                  return context.router.navigate(
-                                    const JobseekerRoute(),
+                                  return context.router.push(
+                                    const JobseekerRoute()
+                                    // FindSkillRouter(
+                                    //   pageKey: ProgressKey.jobseekerHome.index,
+                                    // ),
                                   );
                                 }
                               },

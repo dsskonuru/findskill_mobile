@@ -1,14 +1,14 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
+import 'package:findskill/core/network/dio_connectivity_request_retrier.dart';
+import 'package:findskill/core/network/retry_interceptor.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:riverpod/riverpod.dart';
 
-import '../../features/login/data/models/user_login.dart';
-import '../../features/onboarding/data/models/language.dart';
-import '../../features/registration/data/models/otp_verification.dart';
-import '../../features/registration/data/models/registration.dart';
-import '../network/dio_connectivity_request_retrier.dart';
-import '../network/retry_interceptor.dart';
+import '../../../features/login/data/models/user_login.dart';
+import '../../../features/onboarding/data/models/language.dart';
+import '../../../features/registration/data/models/otp_verification.dart';
+import '../../../features/registration/data/models/registration.dart';
 
 part 'auth_services.g.dart';
 

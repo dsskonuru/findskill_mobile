@@ -1,10 +1,9 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
+import 'package:findskill/core/network/dio_connectivity_request_retrier.dart';
+import 'package:findskill/core/network/retry_interceptor.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:riverpod/riverpod.dart';
-
-import '../network/dio_connectivity_request_retrier.dart';
-import '../network/retry_interceptor.dart';
 
 part 'employer_services.g.dart';
 

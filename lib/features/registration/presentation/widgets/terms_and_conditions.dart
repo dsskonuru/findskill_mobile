@@ -50,7 +50,7 @@ class PopupDialog extends StatelessWidget {
       ),
       actions: <Widget>[
         Center(
-          child: RaisedGradientButton(
+          child: GradientButton(
             onPressed: () {
               context.router.pop();
             },

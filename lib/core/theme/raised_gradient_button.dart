@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'theme_data.dart';
 
-class RaisedGradientButton extends StatelessWidget {
+class GradientButton extends StatelessWidget {
   final Widget child;
   final double width;
   final double height;
   final Function onPressed;
 
-  const RaisedGradientButton({
+  const GradientButton({
     Key? key,
     required this.child,
     this.width = 120.0,

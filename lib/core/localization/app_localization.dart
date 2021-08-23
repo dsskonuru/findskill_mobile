@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:findskill/core/services/auth_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
@@ -7,7 +8,6 @@ import 'package:logging/logging.dart';
 import '../../features/onboarding/presentation/provider/language_provider.dart';
 import '../../main.dart';
 import '../providers/firebase_provider.dart';
-import '../services/auth_services.dart';
 
 class AppLocalizations {
   final Locale locale;

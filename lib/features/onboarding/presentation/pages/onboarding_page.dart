@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:findskill/core/progress_tracker/progress_tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,9 +23,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
   late Image findskillLogoSideText;
   late Image onbordingImage;
 
+  static const ProgressKey pKey = ProgressKey.onboarding;
+
   @override
   void initState() {
     super.initState();
+    saveProgress(pKey);
     findskillLogoSideText = Image.asset(
       "assets/png/findskill-logo-side-text.png",
       fit: BoxFit.scaleDown,
@@ -100,8 +104,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   SizedBox(height: 2.h),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: RaisedGradientButton(
-                      onPressed: () => context.router.push(const IntroRoute()),
+                    child: GradientButton(
+                      onPressed: () => context.router.push(
+                        const IntroRoute(),
+                        // FindSkillRouter(
+                        //   pageKey: ProgressKey.introduction.index,
+                        // ),
+                      ),
                       child: Text(
                         AppLocalizations.of(context)!.translate("Register"),
                         style: Theme.of(context).textTheme.button,
@@ -122,8 +131,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           padding: EdgeInsets.zero,
                           alignment: Alignment.center,
                         ),
-                        onPressed: () =>
-                            context.router.push(const LoginRoute()),
+                        onPressed: () => context.router.push(
+                          const LoginRoute()
+                          // FindSkillRouter(
+                          //   pageKey: ProgressKey.login.index,
+                          // ),
+                        ),
                         child: Text(
                           AppLocalizations.of(context)!.translate("Log In"),
                           style: Theme.of(context)

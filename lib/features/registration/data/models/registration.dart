@@ -32,5 +32,22 @@ class LanguageCode with _$LanguageCode {
   factory LanguageCode({
     @JsonKey(name: "language") required String lanuageCode,
   }) = _LanguageCode;
-  factory LanguageCode.fromJson(Map<String, dynamic> json) => _$LanguageCodeFromJson(json);
+  factory LanguageCode.fromJson(Map<String, dynamic> json) =>
+      _$LanguageCodeFromJson(json);
+}
+
+@freezed
+class UserLocation with _$UserLocation {
+  @JsonSerializable(explicitToJson: true)
+  factory UserLocation({
+    @JsonKey(name: "place_name") required String placeName,
+    required String district,
+    required String state,
+    required String country,
+    required double latitude,
+    required double longitude,
+    required String countryCode,
+  }) = _UserLocation;
+  factory UserLocation.fromJson(Map<String, dynamic> json) =>
+      _$UserLocationFromJson(json);
 }

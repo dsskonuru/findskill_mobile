@@ -1,34 +1,17 @@
-// import 'package:findskill/core/services/auth_services.dart';
-// import 'package:findskill/features/registration/data/models/registration.dart';
-// import 'package:findskill/features/registration/data/models/user_location.dart';
+// import 'package:findskill/core/services/job_seeker_services.dart';
+// import 'package:findskill/features/job-seeker-module/data/models/skill_update.dart';
+// import 'package:findskill/features/job-seeker-module/data/models/video_update.dart';
 // import 'package:findskill/main.dart';
 // import 'package:flutter/material.dart';
 // import 'package:logging/logging.dart';
 
-// import 'registration/data/models/otp_verification.dart';
-
-// UserLocation userLocation = UserLocation(
-//   placeName: "India",
-//   district: "Bleh",
-//   state: "Blue",
-//   country: "Blah",
-//   latitude: 90.0,
-//   longitude: 98.1,
-// );
-
-// Registration userRegister = Registration(
-//   userName: "LOL1",
-//   phoneNumber: "+916932201755",
-//   password: "LOLOLOLOL",
-//   placeName: userLocation.placeName,
-//   district: userLocation.district,
-//   state: userLocation.state,
-//   country: userLocation.country,
-//   latitude: userLocation.latitude,
-//   longitude: userLocation.longitude,
-//   hasAcceptedTerms: true,
-//   isEmployer: true,
-//   primaryLanguage: LanguageCode(lanuageCode: 'en'),
+// String token =
+//     "Token 668aac55f3bc80b3de726baf4311c3ccdf8910d4217692f1e3edda00ba818687";
+// SkillUpdate skills = SkillUpdate(
+//   skills: [
+//     "cc43d2dd-fb7b-418b-b531-f4f50b987a50",
+//     "baaa79e0-28a9-4005-afc9-42cf64dc628b",
+//   ],
 // );
 
 // class DummyPage extends StatelessWidget {
@@ -41,11 +24,14 @@
 //       children: [
 //         ElevatedButton(
 //           onPressed: () async {
-//             final AuthResponse response =
-//                 await container.read(authClientProvider).register(userRegister);
+//             final SkillUpdateResponse response =
+//                 await container.read(jobseekerClientProvider).updateSkills(
+//                       token,
+//                       skills,
+//                     );
 //             Logger.root.finest(response);
 //           },
-//           child: const Text('Register User'),
+//           child: const Text('Update Skills'),
 //         ),
 //       ],
 //     );

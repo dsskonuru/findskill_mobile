@@ -1,17 +1,18 @@
 import 'package:dartz/dartz.dart';
+import 'package:findskill/core/services/auth_services.dart';
+
+import 'package:findskill/features/registration/data/repositories/location_service_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 
 import '../../../../core/error/failures.dart';
 import '../../../../core/providers/firebase_provider.dart';
-import '../../../../core/services/auth_services.dart';
 import '../../../../main.dart';
-import '../../../job-seeker-module/data/repositories/location_service_repository.dart';
+
 import '../../../onboarding/presentation/provider/language_provider.dart';
 import '../../data/models/otp_verification.dart';
 import '../../data/models/registration.dart';
-import '../../data/models/user_location.dart';
 
 final registrationProvider = ChangeNotifierProvider<RegistrationNotifier>(
     (ref) => RegistrationNotifier());
@@ -55,12 +56,14 @@ class RegistrationNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool? _isEmployer;
+  bool? _isEmployer = false;
   bool? get isEmployer => _isEmployer;
   set isEmployer(bool? isEmployer) {
     _isEmployer = isEmployer;
     notifyListeners();
   }
+
+  // TODO: Check video status
 
   Future<void> getUserLocation() async {
     final Either<Failure, UserLocation> locationRunner =

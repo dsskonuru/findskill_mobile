@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:findskill/core/progress_tracker/progress_tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -22,6 +23,13 @@ class RegistrationPage extends StatefulWidget {
 class _RegistrationPageState extends State<RegistrationPage> {
   final GlobalKey<FormState> _registrationKey = GlobalKey<FormState>();
   bool isChecked = false;
+  static const ProgressKey pKey = ProgressKey.registration;
+
+  @override
+  void initState() {
+    saveProgress(pKey);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,8 +110,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           watch(registrationProvider).phoneNumber = phoneNumber,
                       validator: (value) {
                         value = value.toString();
-                        if (value.length != 10) {
-                          return "Please enter the 10 digit mobile number";
+                        if (int.tryParse(value) == null) {
+                          return "Please enter a valid mobile number";
                         }
                         return null;
                       },
@@ -297,21 +305,27 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
 
                     Center(
-                      child: RaisedGradientButton(
-                          onPressed: () async {
-                            if (_registrationKey.currentState!.validate() &&
-                                isChecked) {
-                              final String number = 
-                                  watch(registrationProvider).intlPhoneNumber!;
-                              await watch(phoneAuthProvider)
-                                  .verifyPhone(context, number);
-                              await context.router.navigate(OtpFormRoute());
-                            }
-                          },
-                          child: Text(
-                            AppLocalizations.of(context)!.translate("Register"),
-                            style: Theme.of(context).textTheme.button,
-                          )),
+                      child: GradientButton(
+                        onPressed: () async {
+                          if (_registrationKey.currentState!.validate() &&
+                              isChecked) {
+                            final String number =
+                                watch(registrationProvider).intlPhoneNumber!;
+                            await watch(phoneAuthProvider)
+                                .verifyPhone(context, number);
+                            await context.router.push(
+                              const OtpVerificationRoute()
+                              // FindSkillRouter(
+                              //   pageKey: ProgressKey.otpVerification.index,
+                              // ),
+                            );
+                          }
+                        },
+                        child: Text(
+                          AppLocalizations.of(context)!.translate("Register"),
+                          style: Theme.of(context).textTheme.button,
+                        ),
+                      ),
                     )
                   ],
                 ),
