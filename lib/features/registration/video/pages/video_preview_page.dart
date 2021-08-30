@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:findskill/core/progress_tracker/progress_tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../../core/localization/app_localization.dart';
+import '../../../../../core/progress_tracker/progress_tracker.dart';
 import '../../../../../core/router/router.gr.dart';
 import '../../../../../core/theme/app_bar.dart';
 import '../../../../../core/theme/raised_gradient_button.dart';
@@ -79,11 +79,9 @@ class _VideoPreviewPageState extends State<VideoPreviewPage> {
                             Align(
                               child: InkWell(
                                 onTap: () {
-                                  setState(() {
-                                    _controller.value.isPlaying
-                                        ? _controller.pause()
-                                        : _controller.play();
-                                  });
+                                  setState(() => _controller.value.isPlaying
+                                      ? _controller.pause()
+                                      : _controller.play());
                                 },
                                 child: Container(
                                   height: 18.w,
@@ -193,11 +191,10 @@ class _VideoPreviewPageState extends State<VideoPreviewPage> {
                 child: Center(
                   child: GradientButton(
                     width: 38.w,
-                    onPressed: () {
-                      setState(() {
-                        _controller.pause();
-                      });
-                      context.router.push(const RegistrationRoute()
+                    onPressed: () async {
+                      setState(() {});
+                      await _controller.pause();
+                      await context.router.push(const RegistrationRoute()
                           // FindSkillRouter(
                           //     pageKey: ProgressKey.registration.index),
                           );

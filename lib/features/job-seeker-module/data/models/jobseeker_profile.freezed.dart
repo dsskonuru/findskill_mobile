@@ -483,7 +483,7 @@ class _$JobseekerProfileTearOff {
       @JsonKey(name: "minimum_rate") required String minimumRate,
       @JsonKey(name: "contract_type") required String contractType,
       @JsonKey(name: "job_type") required String jobType,
-      required Skills skill}) {
+      required List<String> skill}) {
     return _JobseekerProfile(
       video: video,
       thumbnail: thumbnail,
@@ -515,7 +515,7 @@ mixin _$JobseekerProfile {
   String get contractType => throw _privateConstructorUsedError;
   @JsonKey(name: "job_type")
   String get jobType => throw _privateConstructorUsedError;
-  Skills get skill => throw _privateConstructorUsedError;
+  List<String> get skill => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -535,9 +535,7 @@ abstract class $JobseekerProfileCopyWith<$Res> {
       @JsonKey(name: "minimum_rate") String minimumRate,
       @JsonKey(name: "contract_type") String contractType,
       @JsonKey(name: "job_type") String jobType,
-      Skills skill});
-
-  $SkillsCopyWith<$Res> get skill;
+      List<String> skill});
 }
 
 /// @nodoc
@@ -587,15 +585,8 @@ class _$JobseekerProfileCopyWithImpl<$Res>
       skill: skill == freezed
           ? _value.skill
           : skill // ignore: cast_nullable_to_non_nullable
-              as Skills,
+              as List<String>,
     ));
-  }
-
-  @override
-  $SkillsCopyWith<$Res> get skill {
-    return $SkillsCopyWith<$Res>(_value.skill, (value) {
-      return _then(_value.copyWith(skill: value));
-    });
   }
 }
 
@@ -613,10 +604,7 @@ abstract class _$JobseekerProfileCopyWith<$Res>
       @JsonKey(name: "minimum_rate") String minimumRate,
       @JsonKey(name: "contract_type") String contractType,
       @JsonKey(name: "job_type") String jobType,
-      Skills skill});
-
-  @override
-  $SkillsCopyWith<$Res> get skill;
+      List<String> skill});
 }
 
 /// @nodoc
@@ -668,7 +656,7 @@ class __$JobseekerProfileCopyWithImpl<$Res>
       skill: skill == freezed
           ? _value.skill
           : skill // ignore: cast_nullable_to_non_nullable
-              as Skills,
+              as List<String>,
     ));
   }
 }
@@ -706,7 +694,7 @@ class _$_JobseekerProfile implements _JobseekerProfile {
   @JsonKey(name: "job_type")
   final String jobType;
   @override
-  final Skills skill;
+  final List<String> skill;
 
   @override
   String toString() {
@@ -768,7 +756,7 @@ abstract class _JobseekerProfile implements JobseekerProfile {
       @JsonKey(name: "minimum_rate") required String minimumRate,
       @JsonKey(name: "contract_type") required String contractType,
       @JsonKey(name: "job_type") required String jobType,
-      required Skills skill}) = _$_JobseekerProfile;
+      required List<String> skill}) = _$_JobseekerProfile;
 
   factory _JobseekerProfile.fromJson(Map<String, dynamic> json) =
       _$_JobseekerProfile.fromJson;
@@ -790,162 +778,10 @@ abstract class _JobseekerProfile implements JobseekerProfile {
   @JsonKey(name: "job_type")
   String get jobType => throw _privateConstructorUsedError;
   @override
-  Skills get skill => throw _privateConstructorUsedError;
+  List<String> get skill => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$JobseekerProfileCopyWith<_JobseekerProfile> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-UserLanguages _$UserLanguagesFromJson(Map<String, dynamic> json) {
-  return _UserLanguages.fromJson(json);
-}
-
-/// @nodoc
-class _$UserLanguagesTearOff {
-  const _$UserLanguagesTearOff();
-
-  _UserLanguages call({required List<UserLanguage> userLanguages}) {
-    return _UserLanguages(
-      userLanguages: userLanguages,
-    );
-  }
-
-  UserLanguages fromJson(Map<String, Object> json) {
-    return UserLanguages.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $UserLanguages = _$UserLanguagesTearOff();
-
-/// @nodoc
-mixin _$UserLanguages {
-  List<UserLanguage> get userLanguages => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $UserLanguagesCopyWith<UserLanguages> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $UserLanguagesCopyWith<$Res> {
-  factory $UserLanguagesCopyWith(
-          UserLanguages value, $Res Function(UserLanguages) then) =
-      _$UserLanguagesCopyWithImpl<$Res>;
-  $Res call({List<UserLanguage> userLanguages});
-}
-
-/// @nodoc
-class _$UserLanguagesCopyWithImpl<$Res>
-    implements $UserLanguagesCopyWith<$Res> {
-  _$UserLanguagesCopyWithImpl(this._value, this._then);
-
-  final UserLanguages _value;
-  // ignore: unused_field
-  final $Res Function(UserLanguages) _then;
-
-  @override
-  $Res call({
-    Object? userLanguages = freezed,
-  }) {
-    return _then(_value.copyWith(
-      userLanguages: userLanguages == freezed
-          ? _value.userLanguages
-          : userLanguages // ignore: cast_nullable_to_non_nullable
-              as List<UserLanguage>,
-    ));
-  }
-}
-
-/// @nodoc
-abstract class _$UserLanguagesCopyWith<$Res>
-    implements $UserLanguagesCopyWith<$Res> {
-  factory _$UserLanguagesCopyWith(
-          _UserLanguages value, $Res Function(_UserLanguages) then) =
-      __$UserLanguagesCopyWithImpl<$Res>;
-  @override
-  $Res call({List<UserLanguage> userLanguages});
-}
-
-/// @nodoc
-class __$UserLanguagesCopyWithImpl<$Res>
-    extends _$UserLanguagesCopyWithImpl<$Res>
-    implements _$UserLanguagesCopyWith<$Res> {
-  __$UserLanguagesCopyWithImpl(
-      _UserLanguages _value, $Res Function(_UserLanguages) _then)
-      : super(_value, (v) => _then(v as _UserLanguages));
-
-  @override
-  _UserLanguages get _value => super._value as _UserLanguages;
-
-  @override
-  $Res call({
-    Object? userLanguages = freezed,
-  }) {
-    return _then(_UserLanguages(
-      userLanguages: userLanguages == freezed
-          ? _value.userLanguages
-          : userLanguages // ignore: cast_nullable_to_non_nullable
-              as List<UserLanguage>,
-    ));
-  }
-}
-
-/// @nodoc
-
-@JsonSerializable(explicitToJson: true)
-class _$_UserLanguages implements _UserLanguages {
-  _$_UserLanguages({required this.userLanguages});
-
-  factory _$_UserLanguages.fromJson(Map<String, dynamic> json) =>
-      _$_$_UserLanguagesFromJson(json);
-
-  @override
-  final List<UserLanguage> userLanguages;
-
-  @override
-  String toString() {
-    return 'UserLanguages(userLanguages: $userLanguages)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _UserLanguages &&
-            (identical(other.userLanguages, userLanguages) ||
-                const DeepCollectionEquality()
-                    .equals(other.userLanguages, userLanguages)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(userLanguages);
-
-  @JsonKey(ignore: true)
-  @override
-  _$UserLanguagesCopyWith<_UserLanguages> get copyWith =>
-      __$UserLanguagesCopyWithImpl<_UserLanguages>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$_$_UserLanguagesToJson(this);
-  }
-}
-
-abstract class _UserLanguages implements UserLanguages {
-  factory _UserLanguages({required List<UserLanguage> userLanguages}) =
-      _$_UserLanguages;
-
-  factory _UserLanguages.fromJson(Map<String, dynamic> json) =
-      _$_UserLanguages.fromJson;
-
-  @override
-  List<UserLanguage> get userLanguages => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  _$UserLanguagesCopyWith<_UserLanguages> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -960,8 +796,7 @@ class _$UserLanguageTearOff {
   _UserLanguage call(
       {required String language,
       required List<String> proficiency,
-      @JsonKey(name: "is_primary_language")
-          required String isPrimaryLanguage}) {
+      @JsonKey(name: "is_primary_language") required bool isPrimaryLanguage}) {
     return _UserLanguage(
       language: language,
       proficiency: proficiency,
@@ -982,7 +817,7 @@ mixin _$UserLanguage {
   String get language => throw _privateConstructorUsedError;
   List<String> get proficiency => throw _privateConstructorUsedError;
   @JsonKey(name: "is_primary_language")
-  String get isPrimaryLanguage => throw _privateConstructorUsedError;
+  bool get isPrimaryLanguage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -998,7 +833,7 @@ abstract class $UserLanguageCopyWith<$Res> {
   $Res call(
       {String language,
       List<String> proficiency,
-      @JsonKey(name: "is_primary_language") String isPrimaryLanguage});
+      @JsonKey(name: "is_primary_language") bool isPrimaryLanguage});
 }
 
 /// @nodoc
@@ -1027,7 +862,7 @@ class _$UserLanguageCopyWithImpl<$Res> implements $UserLanguageCopyWith<$Res> {
       isPrimaryLanguage: isPrimaryLanguage == freezed
           ? _value.isPrimaryLanguage
           : isPrimaryLanguage // ignore: cast_nullable_to_non_nullable
-              as String,
+              as bool,
     ));
   }
 }
@@ -1042,7 +877,7 @@ abstract class _$UserLanguageCopyWith<$Res>
   $Res call(
       {String language,
       List<String> proficiency,
-      @JsonKey(name: "is_primary_language") String isPrimaryLanguage});
+      @JsonKey(name: "is_primary_language") bool isPrimaryLanguage});
 }
 
 /// @nodoc
@@ -1073,7 +908,7 @@ class __$UserLanguageCopyWithImpl<$Res> extends _$UserLanguageCopyWithImpl<$Res>
       isPrimaryLanguage: isPrimaryLanguage == freezed
           ? _value.isPrimaryLanguage
           : isPrimaryLanguage // ignore: cast_nullable_to_non_nullable
-              as String,
+              as bool,
     ));
   }
 }
@@ -1096,7 +931,7 @@ class _$_UserLanguage implements _UserLanguage {
   final List<String> proficiency;
   @override
   @JsonKey(name: "is_primary_language")
-  final String isPrimaryLanguage;
+  final bool isPrimaryLanguage;
 
   @override
   String toString() {
@@ -1141,7 +976,7 @@ abstract class _UserLanguage implements UserLanguage {
       {required String language,
       required List<String> proficiency,
       @JsonKey(name: "is_primary_language")
-          required String isPrimaryLanguage}) = _$_UserLanguage;
+          required bool isPrimaryLanguage}) = _$_UserLanguage;
 
   factory _UserLanguage.fromJson(Map<String, dynamic> json) =
       _$_UserLanguage.fromJson;
@@ -1152,7 +987,7 @@ abstract class _UserLanguage implements UserLanguage {
   List<String> get proficiency => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "is_primary_language")
-  String get isPrimaryLanguage => throw _privateConstructorUsedError;
+  bool get isPrimaryLanguage => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UserLanguageCopyWith<_UserLanguage> get copyWith =>
@@ -1173,7 +1008,7 @@ class _$JobseekerProfileResponseTearOff {
       @JsonKey(name: "jobseeker_profile")
           required JobseekerProfile jobseekerProfile,
       @JsonKey(name: "user_language")
-          required UserLanguages userLanguages}) {
+          required List<UserLanguage> userLanguages}) {
     return _JobseekerProfileResponse(
       jobseeker: jobseeker,
       jobseekerProfile: jobseekerProfile,
@@ -1195,7 +1030,7 @@ mixin _$JobseekerProfileResponse {
   @JsonKey(name: "jobseeker_profile")
   JobseekerProfile get jobseekerProfile => throw _privateConstructorUsedError;
   @JsonKey(name: "user_language")
-  UserLanguages get userLanguages => throw _privateConstructorUsedError;
+  List<UserLanguage> get userLanguages => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1211,11 +1046,10 @@ abstract class $JobseekerProfileResponseCopyWith<$Res> {
   $Res call(
       {User jobseeker,
       @JsonKey(name: "jobseeker_profile") JobseekerProfile jobseekerProfile,
-      @JsonKey(name: "user_language") UserLanguages userLanguages});
+      @JsonKey(name: "user_language") List<UserLanguage> userLanguages});
 
   $UserCopyWith<$Res> get jobseeker;
   $JobseekerProfileCopyWith<$Res> get jobseekerProfile;
-  $UserLanguagesCopyWith<$Res> get userLanguages;
 }
 
 /// @nodoc
@@ -1245,7 +1079,7 @@ class _$JobseekerProfileResponseCopyWithImpl<$Res>
       userLanguages: userLanguages == freezed
           ? _value.userLanguages
           : userLanguages // ignore: cast_nullable_to_non_nullable
-              as UserLanguages,
+              as List<UserLanguage>,
     ));
   }
 
@@ -1262,13 +1096,6 @@ class _$JobseekerProfileResponseCopyWithImpl<$Res>
       return _then(_value.copyWith(jobseekerProfile: value));
     });
   }
-
-  @override
-  $UserLanguagesCopyWith<$Res> get userLanguages {
-    return $UserLanguagesCopyWith<$Res>(_value.userLanguages, (value) {
-      return _then(_value.copyWith(userLanguages: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -1281,14 +1108,12 @@ abstract class _$JobseekerProfileResponseCopyWith<$Res>
   $Res call(
       {User jobseeker,
       @JsonKey(name: "jobseeker_profile") JobseekerProfile jobseekerProfile,
-      @JsonKey(name: "user_language") UserLanguages userLanguages});
+      @JsonKey(name: "user_language") List<UserLanguage> userLanguages});
 
   @override
   $UserCopyWith<$Res> get jobseeker;
   @override
   $JobseekerProfileCopyWith<$Res> get jobseekerProfile;
-  @override
-  $UserLanguagesCopyWith<$Res> get userLanguages;
 }
 
 /// @nodoc
@@ -1321,7 +1146,7 @@ class __$JobseekerProfileResponseCopyWithImpl<$Res>
       userLanguages: userLanguages == freezed
           ? _value.userLanguages
           : userLanguages // ignore: cast_nullable_to_non_nullable
-              as UserLanguages,
+              as List<UserLanguage>,
     ));
   }
 }
@@ -1345,7 +1170,7 @@ class _$_JobseekerProfileResponse implements _JobseekerProfileResponse {
   final JobseekerProfile jobseekerProfile;
   @override
   @JsonKey(name: "user_language")
-  final UserLanguages userLanguages;
+  final List<UserLanguage> userLanguages;
 
   @override
   String toString() {
@@ -1388,11 +1213,12 @@ class _$_JobseekerProfileResponse implements _JobseekerProfileResponse {
 
 abstract class _JobseekerProfileResponse implements JobseekerProfileResponse {
   factory _JobseekerProfileResponse(
-      {required User jobseeker,
-      @JsonKey(name: "jobseeker_profile")
-          required JobseekerProfile jobseekerProfile,
-      @JsonKey(name: "user_language")
-          required UserLanguages userLanguages}) = _$_JobseekerProfileResponse;
+          {required User jobseeker,
+          @JsonKey(name: "jobseeker_profile")
+              required JobseekerProfile jobseekerProfile,
+          @JsonKey(name: "user_language")
+              required List<UserLanguage> userLanguages}) =
+      _$_JobseekerProfileResponse;
 
   factory _JobseekerProfileResponse.fromJson(Map<String, dynamic> json) =
       _$_JobseekerProfileResponse.fromJson;
@@ -1404,7 +1230,7 @@ abstract class _JobseekerProfileResponse implements JobseekerProfileResponse {
   JobseekerProfile get jobseekerProfile => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "user_language")
-  UserLanguages get userLanguages => throw _privateConstructorUsedError;
+  List<UserLanguage> get userLanguages => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$JobseekerProfileResponseCopyWith<_JobseekerProfileResponse> get copyWith =>

@@ -21,7 +21,8 @@ class _$RegistrationTearOff {
   const _$RegistrationTearOff();
 
   _Registration call(
-      {@JsonKey(name: "user_name") required String userName,
+      {@JsonKey(name: "first_name") required String firstName,
+      @JsonKey(name: "last_name") required String lastName,
       @JsonKey(name: "phone_number") required String phoneNumber,
       required String password,
       @JsonKey(name: "place_name") required String placeName,
@@ -32,9 +33,11 @@ class _$RegistrationTearOff {
       required num longitude,
       @JsonKey(name: "terms_accept") required bool hasAcceptedTerms,
       @JsonKey(name: "is_employer") required bool isEmployer,
+      @JsonKey(name: "is_jobseeker") required bool isJobseeker,
       @JsonKey(name: "user_language") required LanguageCode primaryLanguage}) {
     return _Registration(
-      userName: userName,
+      firstName: firstName,
+      lastName: lastName,
       phoneNumber: phoneNumber,
       password: password,
       placeName: placeName,
@@ -45,6 +48,7 @@ class _$RegistrationTearOff {
       longitude: longitude,
       hasAcceptedTerms: hasAcceptedTerms,
       isEmployer: isEmployer,
+      isJobseeker: isJobseeker,
       primaryLanguage: primaryLanguage,
     );
   }
@@ -59,8 +63,10 @@ const $Registration = _$RegistrationTearOff();
 
 /// @nodoc
 mixin _$Registration {
-  @JsonKey(name: "user_name")
-  String get userName => throw _privateConstructorUsedError;
+  @JsonKey(name: "first_name")
+  String get firstName => throw _privateConstructorUsedError;
+  @JsonKey(name: "last_name")
+  String get lastName => throw _privateConstructorUsedError;
   @JsonKey(name: "phone_number")
   String get phoneNumber => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
@@ -75,6 +81,8 @@ mixin _$Registration {
   bool get hasAcceptedTerms => throw _privateConstructorUsedError;
   @JsonKey(name: "is_employer")
   bool get isEmployer => throw _privateConstructorUsedError;
+  @JsonKey(name: "is_jobseeker")
+  bool get isJobseeker => throw _privateConstructorUsedError;
   @JsonKey(name: "user_language")
   LanguageCode get primaryLanguage => throw _privateConstructorUsedError;
 
@@ -90,7 +98,8 @@ abstract class $RegistrationCopyWith<$Res> {
           Registration value, $Res Function(Registration) then) =
       _$RegistrationCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: "user_name") String userName,
+      {@JsonKey(name: "first_name") String firstName,
+      @JsonKey(name: "last_name") String lastName,
       @JsonKey(name: "phone_number") String phoneNumber,
       String password,
       @JsonKey(name: "place_name") String placeName,
@@ -101,6 +110,7 @@ abstract class $RegistrationCopyWith<$Res> {
       num longitude,
       @JsonKey(name: "terms_accept") bool hasAcceptedTerms,
       @JsonKey(name: "is_employer") bool isEmployer,
+      @JsonKey(name: "is_jobseeker") bool isJobseeker,
       @JsonKey(name: "user_language") LanguageCode primaryLanguage});
 
   $LanguageCodeCopyWith<$Res> get primaryLanguage;
@@ -116,7 +126,8 @@ class _$RegistrationCopyWithImpl<$Res> implements $RegistrationCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? userName = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
     Object? phoneNumber = freezed,
     Object? password = freezed,
     Object? placeName = freezed,
@@ -127,12 +138,17 @@ class _$RegistrationCopyWithImpl<$Res> implements $RegistrationCopyWith<$Res> {
     Object? longitude = freezed,
     Object? hasAcceptedTerms = freezed,
     Object? isEmployer = freezed,
+    Object? isJobseeker = freezed,
     Object? primaryLanguage = freezed,
   }) {
     return _then(_value.copyWith(
-      userName: userName == freezed
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
+      firstName: firstName == freezed
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: lastName == freezed
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String,
       phoneNumber: phoneNumber == freezed
           ? _value.phoneNumber
@@ -173,6 +189,10 @@ class _$RegistrationCopyWithImpl<$Res> implements $RegistrationCopyWith<$Res> {
       isEmployer: isEmployer == freezed
           ? _value.isEmployer
           : isEmployer // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isJobseeker: isJobseeker == freezed
+          ? _value.isJobseeker
+          : isJobseeker // ignore: cast_nullable_to_non_nullable
               as bool,
       primaryLanguage: primaryLanguage == freezed
           ? _value.primaryLanguage
@@ -197,7 +217,8 @@ abstract class _$RegistrationCopyWith<$Res>
       __$RegistrationCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: "user_name") String userName,
+      {@JsonKey(name: "first_name") String firstName,
+      @JsonKey(name: "last_name") String lastName,
       @JsonKey(name: "phone_number") String phoneNumber,
       String password,
       @JsonKey(name: "place_name") String placeName,
@@ -208,6 +229,7 @@ abstract class _$RegistrationCopyWith<$Res>
       num longitude,
       @JsonKey(name: "terms_accept") bool hasAcceptedTerms,
       @JsonKey(name: "is_employer") bool isEmployer,
+      @JsonKey(name: "is_jobseeker") bool isJobseeker,
       @JsonKey(name: "user_language") LanguageCode primaryLanguage});
 
   @override
@@ -226,7 +248,8 @@ class __$RegistrationCopyWithImpl<$Res> extends _$RegistrationCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? userName = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
     Object? phoneNumber = freezed,
     Object? password = freezed,
     Object? placeName = freezed,
@@ -237,12 +260,17 @@ class __$RegistrationCopyWithImpl<$Res> extends _$RegistrationCopyWithImpl<$Res>
     Object? longitude = freezed,
     Object? hasAcceptedTerms = freezed,
     Object? isEmployer = freezed,
+    Object? isJobseeker = freezed,
     Object? primaryLanguage = freezed,
   }) {
     return _then(_Registration(
-      userName: userName == freezed
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
+      firstName: firstName == freezed
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: lastName == freezed
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String,
       phoneNumber: phoneNumber == freezed
           ? _value.phoneNumber
@@ -284,6 +312,10 @@ class __$RegistrationCopyWithImpl<$Res> extends _$RegistrationCopyWithImpl<$Res>
           ? _value.isEmployer
           : isEmployer // ignore: cast_nullable_to_non_nullable
               as bool,
+      isJobseeker: isJobseeker == freezed
+          ? _value.isJobseeker
+          : isJobseeker // ignore: cast_nullable_to_non_nullable
+              as bool,
       primaryLanguage: primaryLanguage == freezed
           ? _value.primaryLanguage
           : primaryLanguage // ignore: cast_nullable_to_non_nullable
@@ -297,7 +329,8 @@ class __$RegistrationCopyWithImpl<$Res> extends _$RegistrationCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$_Registration implements _Registration {
   _$_Registration(
-      {@JsonKey(name: "user_name") required this.userName,
+      {@JsonKey(name: "first_name") required this.firstName,
+      @JsonKey(name: "last_name") required this.lastName,
       @JsonKey(name: "phone_number") required this.phoneNumber,
       required this.password,
       @JsonKey(name: "place_name") required this.placeName,
@@ -308,14 +341,18 @@ class _$_Registration implements _Registration {
       required this.longitude,
       @JsonKey(name: "terms_accept") required this.hasAcceptedTerms,
       @JsonKey(name: "is_employer") required this.isEmployer,
+      @JsonKey(name: "is_jobseeker") required this.isJobseeker,
       @JsonKey(name: "user_language") required this.primaryLanguage});
 
   factory _$_Registration.fromJson(Map<String, dynamic> json) =>
       _$_$_RegistrationFromJson(json);
 
   @override
-  @JsonKey(name: "user_name")
-  final String userName;
+  @JsonKey(name: "first_name")
+  final String firstName;
+  @override
+  @JsonKey(name: "last_name")
+  final String lastName;
   @override
   @JsonKey(name: "phone_number")
   final String phoneNumber;
@@ -341,21 +378,27 @@ class _$_Registration implements _Registration {
   @JsonKey(name: "is_employer")
   final bool isEmployer;
   @override
+  @JsonKey(name: "is_jobseeker")
+  final bool isJobseeker;
+  @override
   @JsonKey(name: "user_language")
   final LanguageCode primaryLanguage;
 
   @override
   String toString() {
-    return 'Registration(userName: $userName, phoneNumber: $phoneNumber, password: $password, placeName: $placeName, district: $district, state: $state, country: $country, latitude: $latitude, longitude: $longitude, hasAcceptedTerms: $hasAcceptedTerms, isEmployer: $isEmployer, primaryLanguage: $primaryLanguage)';
+    return 'Registration(firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, password: $password, placeName: $placeName, district: $district, state: $state, country: $country, latitude: $latitude, longitude: $longitude, hasAcceptedTerms: $hasAcceptedTerms, isEmployer: $isEmployer, isJobseeker: $isJobseeker, primaryLanguage: $primaryLanguage)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Registration &&
-            (identical(other.userName, userName) ||
+            (identical(other.firstName, firstName) ||
                 const DeepCollectionEquality()
-                    .equals(other.userName, userName)) &&
+                    .equals(other.firstName, firstName)) &&
+            (identical(other.lastName, lastName) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastName, lastName)) &&
             (identical(other.phoneNumber, phoneNumber) ||
                 const DeepCollectionEquality()
                     .equals(other.phoneNumber, phoneNumber)) &&
@@ -385,6 +428,9 @@ class _$_Registration implements _Registration {
             (identical(other.isEmployer, isEmployer) ||
                 const DeepCollectionEquality()
                     .equals(other.isEmployer, isEmployer)) &&
+            (identical(other.isJobseeker, isJobseeker) ||
+                const DeepCollectionEquality()
+                    .equals(other.isJobseeker, isJobseeker)) &&
             (identical(other.primaryLanguage, primaryLanguage) ||
                 const DeepCollectionEquality()
                     .equals(other.primaryLanguage, primaryLanguage)));
@@ -393,7 +439,8 @@ class _$_Registration implements _Registration {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(userName) ^
+      const DeepCollectionEquality().hash(firstName) ^
+      const DeepCollectionEquality().hash(lastName) ^
       const DeepCollectionEquality().hash(phoneNumber) ^
       const DeepCollectionEquality().hash(password) ^
       const DeepCollectionEquality().hash(placeName) ^
@@ -404,6 +451,7 @@ class _$_Registration implements _Registration {
       const DeepCollectionEquality().hash(longitude) ^
       const DeepCollectionEquality().hash(hasAcceptedTerms) ^
       const DeepCollectionEquality().hash(isEmployer) ^
+      const DeepCollectionEquality().hash(isJobseeker) ^
       const DeepCollectionEquality().hash(primaryLanguage);
 
   @JsonKey(ignore: true)
@@ -419,8 +467,10 @@ class _$_Registration implements _Registration {
 
 abstract class _Registration implements Registration {
   factory _Registration(
-      {@JsonKey(name: "user_name")
-          required String userName,
+      {@JsonKey(name: "first_name")
+          required String firstName,
+      @JsonKey(name: "last_name")
+          required String lastName,
       @JsonKey(name: "phone_number")
           required String phoneNumber,
       required String password,
@@ -435,6 +485,8 @@ abstract class _Registration implements Registration {
           required bool hasAcceptedTerms,
       @JsonKey(name: "is_employer")
           required bool isEmployer,
+      @JsonKey(name: "is_jobseeker")
+          required bool isJobseeker,
       @JsonKey(name: "user_language")
           required LanguageCode primaryLanguage}) = _$_Registration;
 
@@ -442,8 +494,11 @@ abstract class _Registration implements Registration {
       _$_Registration.fromJson;
 
   @override
-  @JsonKey(name: "user_name")
-  String get userName => throw _privateConstructorUsedError;
+  @JsonKey(name: "first_name")
+  String get firstName => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "last_name")
+  String get lastName => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "phone_number")
   String get phoneNumber => throw _privateConstructorUsedError;
@@ -468,6 +523,9 @@ abstract class _Registration implements Registration {
   @override
   @JsonKey(name: "is_employer")
   bool get isEmployer => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "is_jobseeker")
+  bool get isJobseeker => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "user_language")
   LanguageCode get primaryLanguage => throw _privateConstructorUsedError;
@@ -935,5 +993,533 @@ abstract class _UserLocation implements UserLocation {
   @override
   @JsonKey(ignore: true)
   _$UserLocationCopyWith<_UserLocation> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+OtpVerification _$OtpVerificationFromJson(Map<String, dynamic> json) {
+  return _OtpVerification.fromJson(json);
+}
+
+/// @nodoc
+class _$OtpVerificationTearOff {
+  const _$OtpVerificationTearOff();
+
+  _OtpVerification call(
+      {@JsonKey(name: "phone_number") required String phoneNumber,
+      @JsonKey(name: "is_verified") required bool isVerified}) {
+    return _OtpVerification(
+      phoneNumber: phoneNumber,
+      isVerified: isVerified,
+    );
+  }
+
+  OtpVerification fromJson(Map<String, Object> json) {
+    return OtpVerification.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $OtpVerification = _$OtpVerificationTearOff();
+
+/// @nodoc
+mixin _$OtpVerification {
+  @JsonKey(name: "phone_number")
+  String get phoneNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: "is_verified")
+  bool get isVerified => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $OtpVerificationCopyWith<OtpVerification> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $OtpVerificationCopyWith<$Res> {
+  factory $OtpVerificationCopyWith(
+          OtpVerification value, $Res Function(OtpVerification) then) =
+      _$OtpVerificationCopyWithImpl<$Res>;
+  $Res call(
+      {@JsonKey(name: "phone_number") String phoneNumber,
+      @JsonKey(name: "is_verified") bool isVerified});
+}
+
+/// @nodoc
+class _$OtpVerificationCopyWithImpl<$Res>
+    implements $OtpVerificationCopyWith<$Res> {
+  _$OtpVerificationCopyWithImpl(this._value, this._then);
+
+  final OtpVerification _value;
+  // ignore: unused_field
+  final $Res Function(OtpVerification) _then;
+
+  @override
+  $Res call({
+    Object? phoneNumber = freezed,
+    Object? isVerified = freezed,
+  }) {
+    return _then(_value.copyWith(
+      phoneNumber: phoneNumber == freezed
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      isVerified: isVerified == freezed
+          ? _value.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$OtpVerificationCopyWith<$Res>
+    implements $OtpVerificationCopyWith<$Res> {
+  factory _$OtpVerificationCopyWith(
+          _OtpVerification value, $Res Function(_OtpVerification) then) =
+      __$OtpVerificationCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {@JsonKey(name: "phone_number") String phoneNumber,
+      @JsonKey(name: "is_verified") bool isVerified});
+}
+
+/// @nodoc
+class __$OtpVerificationCopyWithImpl<$Res>
+    extends _$OtpVerificationCopyWithImpl<$Res>
+    implements _$OtpVerificationCopyWith<$Res> {
+  __$OtpVerificationCopyWithImpl(
+      _OtpVerification _value, $Res Function(_OtpVerification) _then)
+      : super(_value, (v) => _then(v as _OtpVerification));
+
+  @override
+  _OtpVerification get _value => super._value as _OtpVerification;
+
+  @override
+  $Res call({
+    Object? phoneNumber = freezed,
+    Object? isVerified = freezed,
+  }) {
+    return _then(_OtpVerification(
+      phoneNumber: phoneNumber == freezed
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      isVerified: isVerified == freezed
+          ? _value.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$_OtpVerification implements _OtpVerification {
+  _$_OtpVerification(
+      {@JsonKey(name: "phone_number") required this.phoneNumber,
+      @JsonKey(name: "is_verified") required this.isVerified});
+
+  factory _$_OtpVerification.fromJson(Map<String, dynamic> json) =>
+      _$_$_OtpVerificationFromJson(json);
+
+  @override
+  @JsonKey(name: "phone_number")
+  final String phoneNumber;
+  @override
+  @JsonKey(name: "is_verified")
+  final bool isVerified;
+
+  @override
+  String toString() {
+    return 'OtpVerification(phoneNumber: $phoneNumber, isVerified: $isVerified)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _OtpVerification &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                const DeepCollectionEquality()
+                    .equals(other.phoneNumber, phoneNumber)) &&
+            (identical(other.isVerified, isVerified) ||
+                const DeepCollectionEquality()
+                    .equals(other.isVerified, isVerified)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(phoneNumber) ^
+      const DeepCollectionEquality().hash(isVerified);
+
+  @JsonKey(ignore: true)
+  @override
+  _$OtpVerificationCopyWith<_OtpVerification> get copyWith =>
+      __$OtpVerificationCopyWithImpl<_OtpVerification>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_OtpVerificationToJson(this);
+  }
+}
+
+abstract class _OtpVerification implements OtpVerification {
+  factory _OtpVerification(
+          {@JsonKey(name: "phone_number") required String phoneNumber,
+          @JsonKey(name: "is_verified") required bool isVerified}) =
+      _$_OtpVerification;
+
+  factory _OtpVerification.fromJson(Map<String, dynamic> json) =
+      _$_OtpVerification.fromJson;
+
+  @override
+  @JsonKey(name: "phone_number")
+  String get phoneNumber => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "is_verified")
+  bool get isVerified => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$OtpVerificationCopyWith<_OtpVerification> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+AuthResponse _$AuthResponseFromJson(Map<String, dynamic> json) {
+  return _AuthResponse.fromJson(json);
+}
+
+/// @nodoc
+class _$AuthResponseTearOff {
+  const _$AuthResponseTearOff();
+
+  _AuthResponse call({bool? status, required String detail}) {
+    return _AuthResponse(
+      status: status,
+      detail: detail,
+    );
+  }
+
+  AuthResponse fromJson(Map<String, Object> json) {
+    return AuthResponse.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $AuthResponse = _$AuthResponseTearOff();
+
+/// @nodoc
+mixin _$AuthResponse {
+  bool? get status => throw _privateConstructorUsedError;
+  String get detail => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AuthResponseCopyWith<AuthResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AuthResponseCopyWith<$Res> {
+  factory $AuthResponseCopyWith(
+          AuthResponse value, $Res Function(AuthResponse) then) =
+      _$AuthResponseCopyWithImpl<$Res>;
+  $Res call({bool? status, String detail});
+}
+
+/// @nodoc
+class _$AuthResponseCopyWithImpl<$Res> implements $AuthResponseCopyWith<$Res> {
+  _$AuthResponseCopyWithImpl(this._value, this._then);
+
+  final AuthResponse _value;
+  // ignore: unused_field
+  final $Res Function(AuthResponse) _then;
+
+  @override
+  $Res call({
+    Object? status = freezed,
+    Object? detail = freezed,
+  }) {
+    return _then(_value.copyWith(
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      detail: detail == freezed
+          ? _value.detail
+          : detail // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$AuthResponseCopyWith<$Res>
+    implements $AuthResponseCopyWith<$Res> {
+  factory _$AuthResponseCopyWith(
+          _AuthResponse value, $Res Function(_AuthResponse) then) =
+      __$AuthResponseCopyWithImpl<$Res>;
+  @override
+  $Res call({bool? status, String detail});
+}
+
+/// @nodoc
+class __$AuthResponseCopyWithImpl<$Res> extends _$AuthResponseCopyWithImpl<$Res>
+    implements _$AuthResponseCopyWith<$Res> {
+  __$AuthResponseCopyWithImpl(
+      _AuthResponse _value, $Res Function(_AuthResponse) _then)
+      : super(_value, (v) => _then(v as _AuthResponse));
+
+  @override
+  _AuthResponse get _value => super._value as _AuthResponse;
+
+  @override
+  $Res call({
+    Object? status = freezed,
+    Object? detail = freezed,
+  }) {
+    return _then(_AuthResponse(
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      detail: detail == freezed
+          ? _value.detail
+          : detail // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$_AuthResponse implements _AuthResponse {
+  _$_AuthResponse({this.status, required this.detail});
+
+  factory _$_AuthResponse.fromJson(Map<String, dynamic> json) =>
+      _$_$_AuthResponseFromJson(json);
+
+  @override
+  final bool? status;
+  @override
+  final String detail;
+
+  @override
+  String toString() {
+    return 'AuthResponse(status: $status, detail: $detail)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _AuthResponse &&
+            (identical(other.status, status) ||
+                const DeepCollectionEquality().equals(other.status, status)) &&
+            (identical(other.detail, detail) ||
+                const DeepCollectionEquality().equals(other.detail, detail)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(status) ^
+      const DeepCollectionEquality().hash(detail);
+
+  @JsonKey(ignore: true)
+  @override
+  _$AuthResponseCopyWith<_AuthResponse> get copyWith =>
+      __$AuthResponseCopyWithImpl<_AuthResponse>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_AuthResponseToJson(this);
+  }
+}
+
+abstract class _AuthResponse implements AuthResponse {
+  factory _AuthResponse({bool? status, required String detail}) =
+      _$_AuthResponse;
+
+  factory _AuthResponse.fromJson(Map<String, dynamic> json) =
+      _$_AuthResponse.fromJson;
+
+  @override
+  bool? get status => throw _privateConstructorUsedError;
+  @override
+  String get detail => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$AuthResponseCopyWith<_AuthResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+FirebaseUser _$FirebaseUserFromJson(Map<String, dynamic> json) {
+  return _FirebaseUser.fromJson(json);
+}
+
+/// @nodoc
+class _$FirebaseUserTearOff {
+  const _$FirebaseUserTearOff();
+
+  _FirebaseUser call({required String phoneNumber, required String uid}) {
+    return _FirebaseUser(
+      phoneNumber: phoneNumber,
+      uid: uid,
+    );
+  }
+
+  FirebaseUser fromJson(Map<String, Object> json) {
+    return FirebaseUser.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $FirebaseUser = _$FirebaseUserTearOff();
+
+/// @nodoc
+mixin _$FirebaseUser {
+  String get phoneNumber => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $FirebaseUserCopyWith<FirebaseUser> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $FirebaseUserCopyWith<$Res> {
+  factory $FirebaseUserCopyWith(
+          FirebaseUser value, $Res Function(FirebaseUser) then) =
+      _$FirebaseUserCopyWithImpl<$Res>;
+  $Res call({String phoneNumber, String uid});
+}
+
+/// @nodoc
+class _$FirebaseUserCopyWithImpl<$Res> implements $FirebaseUserCopyWith<$Res> {
+  _$FirebaseUserCopyWithImpl(this._value, this._then);
+
+  final FirebaseUser _value;
+  // ignore: unused_field
+  final $Res Function(FirebaseUser) _then;
+
+  @override
+  $Res call({
+    Object? phoneNumber = freezed,
+    Object? uid = freezed,
+  }) {
+    return _then(_value.copyWith(
+      phoneNumber: phoneNumber == freezed
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$FirebaseUserCopyWith<$Res>
+    implements $FirebaseUserCopyWith<$Res> {
+  factory _$FirebaseUserCopyWith(
+          _FirebaseUser value, $Res Function(_FirebaseUser) then) =
+      __$FirebaseUserCopyWithImpl<$Res>;
+  @override
+  $Res call({String phoneNumber, String uid});
+}
+
+/// @nodoc
+class __$FirebaseUserCopyWithImpl<$Res> extends _$FirebaseUserCopyWithImpl<$Res>
+    implements _$FirebaseUserCopyWith<$Res> {
+  __$FirebaseUserCopyWithImpl(
+      _FirebaseUser _value, $Res Function(_FirebaseUser) _then)
+      : super(_value, (v) => _then(v as _FirebaseUser));
+
+  @override
+  _FirebaseUser get _value => super._value as _FirebaseUser;
+
+  @override
+  $Res call({
+    Object? phoneNumber = freezed,
+    Object? uid = freezed,
+  }) {
+    return _then(_FirebaseUser(
+      phoneNumber: phoneNumber == freezed
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$_FirebaseUser implements _FirebaseUser {
+  _$_FirebaseUser({required this.phoneNumber, required this.uid});
+
+  factory _$_FirebaseUser.fromJson(Map<String, dynamic> json) =>
+      _$_$_FirebaseUserFromJson(json);
+
+  @override
+  final String phoneNumber;
+  @override
+  final String uid;
+
+  @override
+  String toString() {
+    return 'FirebaseUser(phoneNumber: $phoneNumber, uid: $uid)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _FirebaseUser &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                const DeepCollectionEquality()
+                    .equals(other.phoneNumber, phoneNumber)) &&
+            (identical(other.uid, uid) ||
+                const DeepCollectionEquality().equals(other.uid, uid)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(phoneNumber) ^
+      const DeepCollectionEquality().hash(uid);
+
+  @JsonKey(ignore: true)
+  @override
+  _$FirebaseUserCopyWith<_FirebaseUser> get copyWith =>
+      __$FirebaseUserCopyWithImpl<_FirebaseUser>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_FirebaseUserToJson(this);
+  }
+}
+
+abstract class _FirebaseUser implements FirebaseUser {
+  factory _FirebaseUser({required String phoneNumber, required String uid}) =
+      _$_FirebaseUser;
+
+  factory _FirebaseUser.fromJson(Map<String, dynamic> json) =
+      _$_FirebaseUser.fromJson;
+
+  @override
+  String get phoneNumber => throw _privateConstructorUsedError;
+  @override
+  String get uid => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$FirebaseUserCopyWith<_FirebaseUser> get copyWith =>
       throw _privateConstructorUsedError;
 }

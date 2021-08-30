@@ -16,20 +16,53 @@ class _JobseekerClient implements JobseekerClient {
   String? baseUrl;
 
   @override
-  Future<List<SkillCategoryResponse>> skillCategories(languageCode) async {
+  Future<VideoResponse> createVideo(token, video) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = video;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<VideoResponse>(Options(
+                method: 'POST',
+                headers: <String, dynamic>{r'Authorization': token},
+                extra: _extra)
+            .compose(_dio.options, '/jobseeker-video-update',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VideoResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<VideoResponse> updateVideo(token, video) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = video;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<VideoResponse>(Options(
+                method: 'PUT',
+                headers: <String, dynamic>{r'Authorization': token},
+                extra: _extra)
+            .compose(_dio.options, '/jobseeker-video-update',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VideoResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<SkillCategory>> skillCategories(languageCode) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<SkillCategoryResponse>>(
+        _setStreamType<List<SkillCategory>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(
                     _dio.options, '/skill-category-list?language=$languageCode',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
-        .map((dynamic i) =>
-            SkillCategoryResponse.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => SkillCategory.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }
@@ -53,47 +86,11 @@ class _JobseekerClient implements JobseekerClient {
   }
 
   @override
-  Future<VideoResponse> createVideo(token, videoLink) async {
+  Future<SkillsResponse> updateSkills(token, skill) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(videoLink.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<VideoResponse>(Options(
-                method: 'POST',
-                headers: <String, dynamic>{r'Authorization': token},
-                extra: _extra)
-            .compose(_dio.options, '/jobseeker-video-update',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = VideoResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<VideoResponse> updateVideo(token, videoLink) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(videoLink.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<VideoResponse>(Options(
-                method: 'PUT',
-                headers: <String, dynamic>{r'Authorization': token},
-                extra: _extra)
-            .compose(_dio.options, '/jobseeker-video-update',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = VideoResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<SkillsResponse> updateSkills(token, skills) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(skills.toJson());
+    _data.addAll(skill.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<SkillsResponse>(Options(
                 method: 'PUT',
@@ -103,6 +100,67 @@ class _JobseekerClient implements JobseekerClient {
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = SkillsResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<JobTypes> getJobTypes() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<JobTypes>(
+            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/job-type-list',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = JobTypes.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<PreferencesResponse> updatePreferences(token, preferences) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(preferences.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PreferencesResponse>(Options(
+                method: 'PUT',
+                headers: <String, dynamic>{r'Authorization': token},
+                extra: _extra)
+            .compose(_dio.options, '/job-preference-update',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PreferencesResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<IdResponse> updateId(token, idType, frontView, backView) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry('user_id_type', idType));
+    _data.files.add(MapEntry(
+        'front_view',
+        MultipartFile.fromFileSync(frontView.path,
+            filename: frontView.path.split(Platform.pathSeparator).last,
+            contentType: MediaType.parse('image/jpeg'))));
+    _data.files.add(MapEntry(
+        'back_view',
+        MultipartFile.fromFileSync(backView.path,
+            filename: backView.path.split(Platform.pathSeparator).last,
+            contentType: MediaType.parse('image/jpeg'))));
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<IdResponse>(Options(
+                method: 'PUT',
+                headers: <String, dynamic>{r'Authorization': token},
+                extra: _extra)
+            .compose(_dio.options, '/jobseeker-id-update',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = IdResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -120,21 +178,6 @@ class _JobseekerClient implements JobseekerClient {
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = JobseekerProfileResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<JobTypeList> getJobTypeList() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<JobTypeList>(
-            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/job-type-list',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = JobTypeList.fromJson(_result.data!);
     return value;
   }
 

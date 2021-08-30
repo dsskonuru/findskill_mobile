@@ -16,6 +16,8 @@ class UserLogin with _$UserLogin {
       _$UserLoginFromJson(json);
 }
 
+// TODO: Check !!!
+
 @freezed
 class LoginResponse with _$LoginResponse {
   @JsonSerializable(explicitToJson: true)
@@ -24,7 +26,7 @@ class LoginResponse with _$LoginResponse {
     @JsonKey(name: "phone_number") required String phoneNumber,
     @JsonKey(name: "user_id") required String userId,
     @JsonKey(name: "is_logged_in") required bool isLoggedIn,
-    @JsonKey(name: "user_name") required String userName,
+    @JsonKey(name: "user_name") required String firstName,
     @JsonKey(name: "place_name") required String placeName,
     required String gender,
   }) = _LoginResponse;

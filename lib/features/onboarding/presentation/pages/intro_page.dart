@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:findskill/core/progress_tracker/progress_tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../core/localization/app_localization.dart';
+import '../../../../core/progress_tracker/progress_tracker.dart';
 import '../../../../core/router/router.gr.dart';
 import '../../../../core/theme/theme_data.dart';
 import '../../../registration/presentation/provider/registration_provider.dart';
@@ -61,7 +61,10 @@ class _IntroPageState extends State<IntroPage> {
                   child: _controller.value.isInitialized
                       ? AspectRatio(
                           aspectRatio: _controller.value.aspectRatio,
-                          child: VideoPlayer(_controller),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: VideoPlayer(_controller),
+                          ),
                         )
                       : Container(),
                 ),
@@ -120,7 +123,7 @@ class _IntroPageState extends State<IntroPage> {
                           });
                           watch(registrationProvider).isEmployer = false;
                           // * Sample Video Page
-                          context.router.push(const SampleVideoRoute()
+                          context.router.popAndPush(const SampleVideoRoute()
                               // FindSkillRouter(
                               //   pageKey: ProgressKey.sampleVideo.index,
                               // ),

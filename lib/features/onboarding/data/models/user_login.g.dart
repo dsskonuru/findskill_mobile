@@ -25,7 +25,7 @@ _$_LoginResponse _$_$_LoginResponseFromJson(Map<String, dynamic> json) {
     phoneNumber: json['phone_number'] as String,
     userId: json['user_id'] as String,
     isLoggedIn: json['is_logged_in'] as bool,
-    userName: json['user_name'] as String,
+    firstName: json['user_name'] as String,
     placeName: json['place_name'] as String,
     gender: json['gender'] as String,
   );
@@ -37,7 +37,7 @@ Map<String, dynamic> _$_$_LoginResponseToJson(_$_LoginResponse instance) =>
       'phone_number': instance.phoneNumber,
       'user_id': instance.userId,
       'is_logged_in': instance.isLoggedIn,
-      'user_name': instance.userName,
+      'user_name': instance.firstName,
       'place_name': instance.placeName,
       'gender': instance.gender,
     };

@@ -1,7 +1,8 @@
-import 'package:findskill/core/localization/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
+import '../../../../../../core/localization/app_localization.dart';
 
 
 class NotificationsNavigator extends StatelessWidget {

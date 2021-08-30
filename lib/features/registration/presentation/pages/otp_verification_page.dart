@@ -1,21 +1,16 @@
 import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:dartz/dartz.dart' as dz;
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../../core/error/failures.dart';
 import '../../../../core/localization/app_localization.dart';
 import '../../../../core/progress_tracker/progress_tracker.dart';
 import '../../../../core/router/router.gr.dart';
 import '../../../../core/theme/app_bar.dart';
 import '../../../../core/theme/raised_gradient_button.dart';
-import '../../../video/provider/video_service_provider.dart';
-import '../../data/models/otp_verification.dart';
-import '../provider/phone_auth_provider.dart';
+import '../provider/otp_verification_provider.dart';
 import '../provider/registration_provider.dart';
 import '../widgets/pin_input.dart';
 
@@ -88,7 +83,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                         if (btnState == ButtonState.Idle) {
                           final String number =
                               watch(registrationProvider).phoneNumber!;
-                          await watch(phoneAuthProvider)
+                          await watch(otpVerificationProvider)
                               .verifyPhone(context, number);
                           startTimer(30);
                         }
@@ -98,38 +93,21 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                   SizedBox(height: 2.h),
                   GradientButton(
                     onPressed: () async {
+                      // TODO: Handle else cases
                       if (_otpFormKey.currentState!.validate()) {
-                        final dz.Either<AuthFailure, UserCredential>
-                            authRunner =
-                            await context.read(phoneAuthProvider).signInWithOTP(
-                                  watch(phoneAuthProvider).smsCode!,
-                                  watch(phoneAuthProvider).verificationId!,
-                                );
-                        authRunner.fold(
-                          (failure) {
-                            Logger.root.severe("Unable to Sign In");
-                          },
-                          (_) async {
-                            final dz.Either<AuthFailure, String?> authHandler =
-                                await watch(phoneAuthProvider)
-                                    .handleAuth(context);
-                            if (authHandler.isRight()) {
-                              final String? authResponse =
-                                  authHandler.getOrElse(() => null);
-                              if (authResponse != null) {
-                                final AuthResponse? registerResponse =
-                                    await watch(registrationProvider)
-                                        .registerUser();
-                                if (registerResponse != null) {
-                                  await watch(videoServiceProvider)
-                                      .uploadVideoFile();
-                                }
-                              }
-                            }
+                        final authRunner = await context
+                            .read(otpVerificationProvider)
+                            .signInWithOTP();
+                        if (authRunner != null) {
+                          Logger.root.severe("Unable to Sign In");
+                        } else {
+                          final bool hasRegistered =
+                              await watch(registrationProvider).registerUser();
+                          if (hasRegistered) {
                             await context.router
                                 .push(const SkillsChoiceRoute());
-                          },
-                        );
+                          }
+                        }
                       }
                     },
                     child: Text(

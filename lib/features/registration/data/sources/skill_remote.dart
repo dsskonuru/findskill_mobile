@@ -1,12 +1,11 @@
-import 'package:findskill/core/services/job_seeker_services.dart';
-import 'package:findskill/features/registration/data/models/skills.dart';
 import 'package:logging/logging.dart';
 import 'package:riverpod/riverpod.dart';
 
 import '../../../../../core/error/exceptions.dart';
 import '../../../../../core/providers/firebase_provider.dart';
-
 import '../../../../../main.dart';
+import '../../../../core/services/job_seeker_services.dart';
+import '../../../job-seeker-module/data/models/jobseeker_module.dart';
 
 class SkillsListRemoteDataSource {
   /// Calls the following endpoint :

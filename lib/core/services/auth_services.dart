@@ -1,14 +1,14 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
-import 'package:findskill/core/network/dio_connectivity_request_retrier.dart';
-import 'package:findskill/core/network/retry_interceptor.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:riverpod/riverpod.dart';
 
-import '../../../features/login/data/models/user_login.dart';
 import '../../../features/onboarding/data/models/language.dart';
-import '../../../features/registration/data/models/otp_verification.dart';
 import '../../../features/registration/data/models/registration.dart';
+import '../../features/job-seeker-module/data/models/jobseeker_module.dart';
+import '../../features/onboarding/data/models/user_login.dart';
+import '../network/dio_connectivity_request_retrier.dart';
+import '../network/retry_interceptor.dart';
 
 part 'auth_services.g.dart';
 
@@ -21,10 +21,12 @@ abstract class AuthClient {
 
   @POST("/login")
   Future<LoginResponse> login(@Body() UserLogin userLogin);
-  // ! try catch to show incorrect password
 
   @GET("/language-list")
   Future<LanguagesList> getLanguagesList();
+
+  @GET("/id-types-list")
+  Future<List<IdType>> getIdTypes(@Header("Authorization") String token);
 
   @GET("/static-string?language={languageCode}") // Language JSON
   Future<String> getLanguageMap(@Path("languageCode") String languageCode);
@@ -34,10 +36,6 @@ abstract class AuthClient {
 
   @GET("/logout")
   Future<AuthResponse> logout(@Header("Authorization") String token);
-
-  @GET("/id-types-list")
-  Future<String> idTypesList(@Header("Authorization") String token);
-  // TODO: Once check the backend
 }
 
 final authClientProvider = Provider<AuthClient>(

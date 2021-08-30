@@ -1,16 +1,15 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:findskill/core/progress_tracker/progress_tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../core/localization/app_localization.dart';
-import '../../../../core/providers/user_actions_provider.dart';
+import '../../../../core/progress_tracker/progress_tracker.dart';
+import '../../../../core/providers/language_provider.dart';
 import '../../../../core/router/router.gr.dart';
 import '../../../../core/theme/raised_gradient_button.dart';
 import '../../../../core/theme/theme_data.dart';
-import '../provider/language_provider.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({Key? key}) : super(key: key);
@@ -96,7 +95,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       ).toList(),
 
                       onChanged: (String? languageName) async {
-                        await watch(userActionsProvider)
+                        await watch(languageProvider)
                             .changeLanguage(languageName!, context);
                       },
                     ),
@@ -131,12 +130,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           padding: EdgeInsets.zero,
                           alignment: Alignment.center,
                         ),
-                        onPressed: () => context.router.push(
-                          const LoginRoute()
-                          // FindSkillRouter(
-                          //   pageKey: ProgressKey.login.index,
-                          // ),
-                        ),
+                        onPressed: () => context.router.push(const LoginRoute()
+                            // FindSkillRouter(
+                            //   pageKey: ProgressKey.login.index,
+                            // ),
+                            ),
                         child: Text(
                           AppLocalizations.of(context)!.translate("Log In"),
                           style: Theme.of(context)

@@ -1,14 +1,12 @@
 import 'package:dartz/dartz.dart';
-import 'package:findskill/core/services/location_service.dart';
-import 'package:findskill/features/registration/data/models/registration.dart';
-import 'package:findskill/features/registration/data/sources/location_service_data_source.dart';
-
 import 'package:location/location.dart';
 import 'package:riverpod/riverpod.dart';
 
 import '../../../../../core/error/failures.dart';
-
 import '../../../../../main.dart';
+import '../../../../core/services/location_service.dart';
+import '../models/registration.dart';
+import '../sources/location_service_data_source.dart';
 
 class LocationServiceRepository {
   final LocationServiceDataSource locationServiceDataSource;

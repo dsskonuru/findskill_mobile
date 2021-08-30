@@ -1,28 +1,21 @@
-import 'package:dartz/dartz.dart';
-import 'package:findskill/core/error/failures.dart';
-import 'package:findskill/features/onboarding/presentation/provider/language_provider.dart';
-import 'package:findskill/features/registration/data/models/skills.dart';
-import 'package:findskill/features/registration/data/repositories/skill_category_repository.dart';
-import 'package:findskill/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 
-import '../../data/repositories/skill_repository.dart';
+import '../../../../core/providers/firebase_provider.dart';
+import '../../../../core/providers/language_provider.dart';
+import '../../../../core/providers/user_actions_provider.dart';
+import '../../../../core/services/job_seeker_services.dart';
+import '../../../../main.dart';
+import '../../../job-seeker-module/data/models/jobseeker_module.dart';
 
 final skillsChoiceProvider =
     ChangeNotifierProvider<SkillsNotifier>((ref) => SkillsNotifier());
 
 class SkillsNotifier extends ChangeNotifier {
-  List<SkillCategoryResponse>? _skillCategoriesList;
-  List<SkillCategoryResponse>? get skillCategoriesList => _skillCategoriesList;
-  set skillCategoriesList(List<SkillCategoryResponse>? skillCategoriesList) {
-    _skillCategoriesList = skillCategoriesList;
-    notifyListeners();
-  }
-
-  List<Skill>? _selectedSkills;
-  List<Skill>? get selectedSkills => _selectedSkills;
-  set selectedSkills(List<Skill>? selectedSkills) {
+  List<String>? _selectedSkills;
+  List<String>? get selectedSkills => _selectedSkills;
+  set selectedSkills(List<String>? selectedSkills) {
     _selectedSkills = selectedSkills;
     notifyListeners();
   }
@@ -34,27 +27,44 @@ class SkillsNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  // TODO: Handle unused skill repositories
   Future<void> fetchSkillsMap() async {
-    final Either<Failure, List<SkillCategoryResponse>> skillCategoriesRunner =
-        await container
-            .read(skillCategoryProvider)
-            .getSkillCategories(container.read(languageProvider).language.code);
-    final List<SkillCategoryResponse> skillCategories =
-        skillCategoriesRunner.getOrElse(() => []);
-    skillCategoriesList = skillCategories;
+    final String languageCode = container.read(languageProvider).language.code;
+    final List<SkillCategory> skillCategories = await container
+        .read(jobseekerClientProvider)
+        .skillCategories(languageCode);
+    Logger.root.fine('''
+        Language : ${container.read(languageProvider).language.code}  
+        Skill Sub Categories from API : ${skillCategories.toString()}
+        ''');
     for (final skillCategory in skillCategories) {
-      final Either<Failure, List<Skill>> skillsRunner = await container
-          .read(skillsProvider)
-          .getSkills(
-              container.read(languageProvider).language.code, skillCategory.id);
-      final List<Skill> skills = skillsRunner.getOrElse(() => []);
+      final List<Skill> skills = await container
+          .read(jobseekerClientProvider)
+          .skillSubCategories(languageCode, skillCategory.id);
+      Logger.root.fine('''
+        Language : $languageCode  
+        Category ID: ${skillCategory.id}
+        Skill Sub Categories from API : ${skills.toString}
+        ''');
       skillsMap[skillCategory.id] = skills;
     }
     return;
   }
 
-  Future<void> submit() async {
-    // TODO: Call the submit API
-    // container.read(jobseekerClientProvider).updateSkills(token, skills);
+  Future<bool> submit() async {
+    try {
+      final SkillsResponse response =
+          await container.read(jobseekerClientProvider).updateSkills(
+                // "Token 0b553d5dcd3dcf64fb35af547a605b6e4e5d0c49362df35d909290b71b578136",
+                "Token ${container.read(userActionsProvider).loginResponse!.token}",
+                SkillsUpdate(skill: selectedSkills!),
+              );
+      Logger.root.fine(response);
+      return response.status;
+    } catch (exception, stack) {
+      Logger.root.severe("Skills Update failed", exception, stack);
+      container.read(crashlyticsProvider).recordError(exception, stack);
+      return false;
+    }
   }
 }

@@ -1,28 +1,49 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 
-import '../../features/login/data/models/user_login.dart';
-import '../../features/onboarding/data/models/language.dart';
-import '../../features/onboarding/presentation/provider/language_provider.dart';
-import '../../features/registration/data/models/firebase_user.dart';
+import '../../features/job-seeker-module/data/models/jobseeker_profile.dart';
+import '../../features/onboarding/data/models/user_login.dart';
+import '../../features/registration/data/models/registration.dart';
+import '../../features/registration/data/repositories/location_service_repository.dart';
 import '../../main.dart';
+import '../error/failures.dart';
+import '../services/auth_services.dart';
+import '../services/job_seeker_services.dart';
 
 final userActionsProvider = ChangeNotifierProvider((ref) => UserNotifier());
 
 class UserNotifier extends ChangeNotifier {
-  Language? _primaryLanguage;
-  Language? get primaryLanguage => _primaryLanguage;
-  set primaryLanguage(Language? primaryLanguage) {
-    _primaryLanguage = primaryLanguage;
+  String? _phoneNumber;
+  String? get phoneNumber => _phoneNumber;
+  set phoneNumber(String? phoneNumber) {
+    _phoneNumber = phoneNumber;
     notifyListeners();
   }
 
-  // TODO: Merge into single User Class
-  UserLogin? _userLogin;
-  UserLogin? get user => _userLogin;
-  set user(UserLogin? userLogin) {
-    _userLogin = userLogin;
+  LoginResponse? _loginResponse;
+  LoginResponse? get loginResponse => _loginResponse;
+  set loginResponse(LoginResponse? loginResponse) {
+    Logger.root.fine(loginResponse);
+    _loginResponse = loginResponse;
+    notifyListeners();
+  }
+
+  JobseekerProfileResponse? _jobseekerProfileResponse;
+  JobseekerProfileResponse? get jobseekerProfileResponse =>
+      _jobseekerProfileResponse;
+  set jobseekerProfileResponse(
+      JobseekerProfileResponse? jobseekerProfileResponse) {
+    Logger.root.fine(jobseekerProfileResponse);
+    _jobseekerProfileResponse = jobseekerProfileResponse;
+    notifyListeners();
+  }
+
+  String? _password;
+  String? get password => _password;
+  set password(String? password) {
+    _password = password;
     notifyListeners();
   }
 
@@ -33,25 +54,50 @@ class UserNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  // TODO: resolve primary language here and language from provider
-  Future<void> changeLanguage(String languageName, BuildContext context) async {
-    String languageCode = 'en';
-    for (final language in container.read(languageProvider).languages.list) {
-      if (language.name == languageName) {
-        languageCode = language.code;
-        break;
-      }
-    }
-    Logger.root.fine('Selected Language Code: $languageCode');
-    container.read(languageProvider).language =
-        container.read(languageProvider).languages.list.firstWhere(
-              (language) => language.code == languageCode,
-              orElse: () => initLanguage,
-            );
-    container.read(userActionsProvider).primaryLanguage =
-        container.read(languageProvider).language;
+  UserLocation? _userLocation;
+  UserLocation? get userLocation => _userLocation;
+  set userLocation(UserLocation? userLocation) {
+    _userLocation = userLocation;
+    Logger.root.fine(userLocation);
+    notifyListeners();
+  }
 
-    final _locale = Locale(container.read(languageProvider).language.code);
-    FindSkillApp.setLocale(context, _locale);
+  Future<void> getUserLocation() async {
+    final Either<Failure, UserLocation> locationRunner =
+        await container.read(locationProvider).getUserLocation();
+    locationRunner.fold(
+      (failure) => Logger.root.severe("Unable to fetch location"),
+      (location) => userLocation = location,
+    );
+    return Future.value(null);
+  }
+
+  String? get intlPhoneNumber => userLocation!.countryCode + phoneNumber!;
+
+  Future<bool> login() async {
+    try {
+      await getUserLocation();
+      loginResponse = await container
+          .read(authClientProvider)
+          .login(UserLogin(phoneNumber: intlPhoneNumber!, password: password!));
+      Logger.root.fine(loginResponse);
+      return loginResponse!.isLoggedIn;
+    } catch (exception, stackTrace) {
+      Logger.root.severe("Unable to login the user", exception, stackTrace);
+      return false;
+    }
+  }
+
+  Future<bool> getProfile() async {
+    try {
+      jobseekerProfileResponse = await container
+          .read(jobseekerClientProvider)
+          .profile("Token ${loginResponse!.token}");
+      Logger.root.fine(jobseekerProfileResponse);
+      return true;
+    } catch (exception, stackTrace) {
+      Logger.root.severe("Unable to get user profile", exception, stackTrace);
+      return false;
+    }
   }
 }

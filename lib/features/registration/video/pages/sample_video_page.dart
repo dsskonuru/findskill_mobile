@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:findskill/core/progress_tracker/progress_tracker.dart';
-import 'package:findskill/features/onboarding/presentation/provider/language_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../../core/localization/app_localization.dart';
+import '../../../../../core/progress_tracker/progress_tracker.dart';
+import '../../../../../core/providers/language_provider.dart';
 import '../../../../../core/router/router.gr.dart';
 import '../../../../../core/theme/app_bar.dart';
 import '../../../../../core/theme/raised_gradient_button.dart';
@@ -89,7 +89,7 @@ class _SampleVideoPageState extends State<SampleVideoPage> {
                       setState(() {
                         _controller.pause();
                       });
-                      context.router.push(
+                      context.router.popAndPush(
                         const VideoCaptureRoute()
                         // FindSkillRouter(
                         //     pageKey: ProgressKey.videoCapture.index),

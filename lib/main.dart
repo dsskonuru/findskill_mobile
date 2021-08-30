@@ -8,10 +8,10 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/localization/app_localization.dart';
+import 'core/providers/language_provider.dart';
 import 'core/providers/shared_preferences_provider.dart';
 import 'core/router/router.gr.dart';
 import 'core/theme/theme_data.dart';
-import 'features/onboarding/presentation/provider/language_provider.dart';
 
 List<CameraDescription> cameras = [];
 final container = ProviderContainer();

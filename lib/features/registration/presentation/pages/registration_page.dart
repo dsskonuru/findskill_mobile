@@ -1,15 +1,15 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:findskill/core/progress_tracker/progress_tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../../core/localization/app_localization.dart';
+import '../../../../core/progress_tracker/progress_tracker.dart';
 import '../../../../core/router/router.gr.dart';
 import '../../../../core/theme/app_bar.dart';
 import '../../../../core/theme/raised_gradient_button.dart';
 import '../../../../core/theme/theme_data.dart';
-import '../provider/phone_auth_provider.dart';
+import '../provider/otp_verification_provider.dart';
 import '../provider/registration_provider.dart';
 import '../widgets/terms_and_conditions.dart';
 
@@ -172,16 +172,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           watch(registrationProvider).password = password,
                       validator: (value) {
                         value = value.toString();
-                        if (value.length <= 8) {
-                          return "Password too short";
-                        }
+                        // if (value.length <= 8) {
+                        //   return "Password too short";
+                        // }
                         return null;
                       },
                     ),
                     SizedBox(height: 2.h),
-                    // * FULL NAME
+                    // * FIRST NAME
                     Text(
-                      AppLocalizations.of(context)!.translate("Name"),
+                      AppLocalizations.of(context)!.translate("First Name"),
                       style: Theme.of(context).textTheme.subtitle2,
                     ),
                     SizedBox(height: 1.h),
@@ -203,16 +203,55 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           ),
                         ),
                         hintText: AppLocalizations.of(context)!
-                            .translate("FirstName LastName"),
+                            .translate("First Name"),
                       ),
                       autocorrect: false,
-                      initialValue: watch(registrationProvider).userName,
+                      initialValue: watch(registrationProvider).firstName,
                       onChanged: (name) =>
-                          watch(registrationProvider).userName = name,
+                          watch(registrationProvider).firstName = name,
                       validator: (value) {
                         value = value.toString();
                         if (value.isEmpty) {
-                          return "Please enter your full name";
+                          return "Please enter your first name";
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 2.h),
+                    // * LAST NAME
+                    Text(
+                      AppLocalizations.of(context)!.translate("Last Name"),
+                      style: Theme.of(context).textTheme.subtitle2,
+                    ),
+                    SizedBox(height: 1.h),
+                    TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      style: Theme.of(context).textTheme.bodyText2,
+                      keyboardType: TextInputType.visiblePassword,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide(
+                            color: Colors.grey.withOpacity(0.4),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide(
+                            color: Colors.grey.withOpacity(0.4),
+                          ),
+                        ),
+                        hintText: AppLocalizations.of(context)!
+                            .translate("Last Name"),
+                      ),
+                      autocorrect: false,
+                      initialValue: watch(registrationProvider).lastName,
+                      onChanged: (name) =>
+                          watch(registrationProvider).lastName = name,
+                      validator: (value) {
+                        value = value.toString();
+                        if (value.isEmpty) {
+                          return "Please enter your last name";
                         }
                         return null;
                       },
@@ -311,14 +350,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               isChecked) {
                             final String number =
                                 watch(registrationProvider).intlPhoneNumber!;
-                            await watch(phoneAuthProvider)
+                            await watch(otpVerificationProvider)
                                 .verifyPhone(context, number);
-                            await context.router.push(
-                              const OtpVerificationRoute()
-                              // FindSkillRouter(
-                              //   pageKey: ProgressKey.otpVerification.index,
-                              // ),
-                            );
+                            await context.router
+                                .push(const OtpVerificationRoute());
+                            // FindSkillRouter(
+                            //   pageKey: ProgressKey.otpVerification.index,
+                            // ),
                           }
                         },
                         child: Text(

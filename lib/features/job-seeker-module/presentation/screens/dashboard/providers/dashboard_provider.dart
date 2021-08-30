@@ -1,15 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 final dashboardProvider =
     ChangeNotifierProvider<DashboardNotifier>((ref) => DashboardNotifier());
 
 class DashboardNotifier extends ChangeNotifier {
-  String? _username = "John Doe";
-  String? get username => _username;
-  set username(String? username) {
-    _username = username;
+  String? _firstname = "John Doe";
+  String? get firstname => _firstname;
+  set firstname(String? firstname) {
+    _firstname = firstname;
     notifyListeners();
   }
 
@@ -44,7 +43,7 @@ class DashboardNotifier extends ChangeNotifier {
   Future<void> fetchProfile() async {
     // TODO: ADD TOKEN POST LOGIN
     // try {
-    //   final JobseekerProfileResponse jobTypeList =
+    //   final JobseekerProfileResponse JobTypes =
     //       await container.read(jobseekerClientProvider).profile("");
     // } catch (e, s) {}
     // if (contractTypes != null &&

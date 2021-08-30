@@ -1,9 +1,9 @@
-import 'package:findskill/core/localization/app_localization.dart';
-import 'package:findskill/core/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../../../../core/localization/app_localization.dart';
+import '../../../../../../core/theme/theme_data.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -33,7 +33,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
   void dispose() {
     super.dispose();
     // _controller.dispose();
-    
   }
 
   @override

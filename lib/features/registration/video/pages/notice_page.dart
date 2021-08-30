@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../../core/localization/app_localization.dart';
-import '../../../core/router/router.gr.dart';
-import '../../../core/theme/app_bar.dart';
-import '../../../core/theme/raised_gradient_button.dart';
-import '../../../main.dart';
-import '../../onboarding/presentation/provider/language_provider.dart';
+import '../../../../../core/localization/app_localization.dart';
+import '../../../../../core/providers/language_provider.dart';
+import '../../../../../core/router/router.gr.dart';
+import '../../../../../core/theme/app_bar.dart';
+import '../../../../../core/theme/raised_gradient_button.dart';
+import '../../../../../main.dart';
+
 
 class NoticePage extends StatefulWidget {
   @override

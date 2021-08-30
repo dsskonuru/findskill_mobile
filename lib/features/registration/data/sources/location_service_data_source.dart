@@ -1,13 +1,12 @@
-import 'package:findskill/core/services/location_service.dart';
-import 'package:findskill/features/registration/data/models/registration.dart';
-import 'package:findskill/features/registration/data/repositories/country_codes.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:location/location.dart';
 import 'package:riverpod/riverpod.dart';
 
 import '../../../../../core/error/failures.dart';
-
 import '../../../../../main.dart';
+import '../../../../core/services/location_service.dart';
+import '../models/registration.dart';
+import '../repositories/country_codes.dart';
 
 class LocationServiceDataSource {
   final LocationService locationService;

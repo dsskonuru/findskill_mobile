@@ -3,20 +3,20 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
-import 'package:findskill/core/progress_tracker/progress_tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logging/logging.dart';
-import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../../core/localization/app_localization.dart';
-import '../../../../../core/providers/user_actions_provider.dart';
 import '../../../../../core/router/router.gr.dart';
 import '../../../../../main.dart';
+import '../../../../core/progress_tracker/progress_tracker.dart';
 import '../provider/video_service_provider.dart';
+
 
 class VideoCapturePage extends StatefulWidget {
   @override
@@ -27,6 +27,8 @@ class VideoCapturePage extends StatefulWidget {
 
 class _VideoCaptureState extends State<VideoCapturePage>
     with WidgetsBindingObserver, TickerProviderStateMixin {
+  static const ProgressKey pKey = ProgressKey.videoCapture;
+
   final ImagePicker _picker = ImagePicker();
   CameraController? controller;
 
@@ -45,7 +47,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
   int _counter = 30;
   bool a = true;
   int _pointers = 0;
-  static const ProgressKey pKey = ProgressKey.videoCapture;
+
   @override
   void initState() {
     super.initState();
@@ -69,9 +71,6 @@ class _VideoCaptureState extends State<VideoCapturePage>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // if (cameras.isNotEmpty) {
-    //   onNewCameraSelected(cameras[1]);
-    // }
     precacheImage(_galleryImage.image, context);
   }
 
@@ -86,7 +85,6 @@ class _VideoCaptureState extends State<VideoCapturePage>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     final CameraController? cameraController = controller;
-    // App state changed before we got the chance to initialize.
     if (cameraController == null || !cameraController.value.isInitialized) {
       return;
     }
@@ -104,19 +102,15 @@ class _VideoCaptureState extends State<VideoCapturePage>
       builder: (context, watch, child) {
         return Scaffold(
           body: cameras.isEmpty
-              ?
-              // * No Camera found
-              Text(
+              ? Text(
                   AppLocalizations.of(context)!
                       .translate("No camera was found"),
                   style: Theme.of(context).textTheme.headline6,
                 )
-              // * Camera found
               : Stack(
                   alignment: Alignment.center,
                   children: <Widget>[
                     _cameraWidget(),
-                    // * Top Center
                     Align(
                       alignment: Alignment.topCenter,
                       child: Row(
@@ -138,7 +132,6 @@ class _VideoCaptureState extends State<VideoCapturePage>
                         ],
                       ),
                     ),
-                    // * Bottom Left
                     Align(
                       alignment: Alignment.bottomLeft,
                       child: Padding(
@@ -159,7 +152,6 @@ class _VideoCaptureState extends State<VideoCapturePage>
                         ),
                       ),
                     ),
-                    // * Bottom Center
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Padding(
@@ -200,7 +192,6 @@ class _VideoCaptureState extends State<VideoCapturePage>
                         ),
                       ),
                     ),
-                    // * Bottom Right
                     if (!isVideoRecording)
                       Align(
                         alignment: Alignment.bottomRight,
@@ -211,57 +202,51 @@ class _VideoCaptureState extends State<VideoCapturePage>
                             width: 18.w,
                             child: InkWell(
                               onTap: () async {
-                                await context.router.push(
+                                final XFile? videoX = await _picker.pickVideo(
+                                    source: ImageSource.gallery);
+                                final Directory appDirectory =
+                                    await getApplicationDocumentsDirectory();
+                                final String videoDirectory =
+                                    '${appDirectory.path}/Videos';
+                                await Directory(videoDirectory)
+                                    .create(recursive: true);
+                                final String filePath =
+                                    '$videoDirectory/video_file.mp4';
+                                File video = File(videoX!.path);
+                                video = await video.rename(filePath);
+                                container.read(videoServiceProvider).video =
+                                    video;
+                                await context.router.popAndPush(
                                   const VideoPreviewRoute(),
                                   // FindSkillRouter(
                                   //     pageKey: ProgressKey.videoPreview.index),
                                 );
                               },
-                              child: InkWell(
-                                onTap: () async {
-                                  try {
-                                    final XFile? videoX = await _picker
-                                        .pickVideo(source: ImageSource.gallery);
-
-                                    File video = File(videoX!.path);
-                                    final String dir = path.dirname(video.path);
-                                    final String fileName =
-                                        '${container.read(userActionsProvider).firebaseUser!.uid}.mp4';
-                                    final String newPath =
-                                        path.join(dir, fileName);
-                                    video = await video.rename(newPath);
-                                    container.read(videoServiceProvider).video =
-                                        video;
-                                  } catch (e) {
-                                    Logger.root.severe(e);
-                                  }
-                                },
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                      height: 12.w,
-                                      width: 12.w,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: _galleryImage,
-                                      ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 12.w,
+                                    width: 12.w,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: _galleryImage,
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(2.0),
-                                      child: Text(
-                                        AppLocalizations.of(context)!
-                                            .translate("Upload"),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .caption!
-                                            .copyWith(
-                                                color: Colors.white,
-                                                fontSize: 10.0),
-                                      ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: Text(
+                                      AppLocalizations.of(context)!
+                                          .translate("Upload"),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .caption!
+                                          .copyWith(
+                                              color: Colors.white,
+                                              fontSize: 10.0),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -292,7 +277,6 @@ class _VideoCaptureState extends State<VideoCapturePage>
     );
   }
 
-  /// Display the preview from the camera (or a message if the preview is not available).
   Widget _cameraWidget() {
     final CameraController? cameraController = controller;
 
@@ -332,10 +316,8 @@ class _VideoCaptureState extends State<VideoCapturePage>
     if (controller == null || _pointers != 2) {
       return;
     }
-
     _currentScale = (_baseScale * details.scale)
         .clamp(_minAvailableZoom, _maxAvailableZoom);
-
     await controller!.setZoomLevel(_currentScale);
   }
 
@@ -343,9 +325,7 @@ class _VideoCaptureState extends State<VideoCapturePage>
     if (controller == null) {
       return;
     }
-
     final CameraController cameraController = controller!;
-
     final offset = Offset(
       details.localPosition.dx / constraints.maxWidth,
       details.localPosition.dy / constraints.maxHeight,
@@ -404,39 +384,21 @@ class _VideoCaptureState extends State<VideoCapturePage>
   Future<void> onStopButtonPressed() async {
     _timer.cancel();
     await stopVideoRecording();
-    context.router.push(
+    context.router.popAndPush(
       const VideoPreviewRoute(),
       // FindSkillRouter(pageKey: ProgressKey.videoPreview.index),
     );
   }
 
-  void onPauseButtonPressed() {
-    pauseVideoRecording().then((_) {
-      if (mounted) setState(() {});
-      Logger.root.fine('Video recording paused');
-    });
-  }
-
-  void onResumeButtonPressed() {
-    resumeVideoRecording().then((_) {
-      if (mounted) setState(() {});
-      Logger.root.fine('Video recording resumed');
-    });
-  }
-
   Future<void> startVideoRecording() async {
     final CameraController? cameraController = controller;
-
     if (cameraController == null || !cameraController.value.isInitialized) {
       Logger.root.severe('Error: select a camera first.');
       return;
     }
-
     if (cameraController.value.isRecordingVideo) {
-      // A recording is already started, do nothing.
       return;
     }
-
     try {
       await cameraController.startVideoRecording();
     } on CameraException catch (e) {
@@ -447,88 +409,20 @@ class _VideoCaptureState extends State<VideoCapturePage>
 
   Future<void> stopVideoRecording() async {
     final CameraController? cameraController = controller;
-
     if (cameraController == null || !cameraController.value.isRecordingVideo) {
       return;
     }
-
     try {
       final XFile videoX = await cameraController.stopVideoRecording();
-
+      final Directory appDirectory = await getApplicationDocumentsDirectory();
+      final String videoDirectory = '${appDirectory.path}/Videos';
+      await Directory(videoDirectory).create(recursive: true);
+      final String filePath = '$videoDirectory/video_file.mp4';
       File video = File(videoX.path);
-      final String dir = path.dirname(video.path);
-      // final String fileName = '${container.read(userActionsProvider).uid}.mp4';
-      const String fileName = 'video_file.mp4';
-      final String newPath = path.join(dir, fileName);
-      video = await video.rename(newPath);
+      video = await video.rename(filePath);
       container.read(videoServiceProvider).video = video;
-
-      // return video;
     } on CameraException catch (e) {
       Logger.root.severe(e);
-      // return null;
     }
   }
-
-  Future<void> pauseVideoRecording() async {
-    final CameraController? cameraController = controller;
-
-    if (cameraController == null || !cameraController.value.isRecordingVideo) {
-      return;
-    }
-
-    try {
-      await cameraController.pauseVideoRecording();
-    } on CameraException catch (e) {
-      Logger.root.severe(e);
-      rethrow;
-    }
-  }
-
-  Future<void> resumeVideoRecording() async {
-    final CameraController? cameraController = controller;
-
-    if (cameraController == null || !cameraController.value.isRecordingVideo) {
-      return;
-    }
-
-    try {
-      await cameraController.resumeVideoRecording();
-    } on CameraException catch (e) {
-      Logger.root.severe(e);
-      rethrow;
-    }
-  }
-
-//   Future<void> _startVideoPlayer() async {
-//     if (videoFile == null) {
-//       return;
-//     }
-
-//     final VideoPlayerController vController =
-//         VideoPlayerController.file(File(videoFile!.path));
-
-//     videoPlayerListener = () {
-//       if (videoController != null) {
-//         // Refreshing the state to update video player with the correct ratio.
-//         if (mounted) setState(() {});
-//         videoController!.removeListener(videoPlayerListener!);
-//       }
-//     };
-
-//     vController.addListener(videoPlayerListener!);
-//     await vController.initialize();
-//     await vController.setLooping(false);
-//     await vController.pause();
-
-//     await videoController?.dispose();
-//     if (mounted) {
-//       setState(
-//         () {
-//           videoController = vController;
-//         },
-//       );
-//     }
-//     // await vController.play();
-//   }
 }

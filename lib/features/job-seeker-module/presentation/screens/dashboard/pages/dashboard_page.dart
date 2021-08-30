@@ -1,10 +1,10 @@
-import 'package:findskill/core/theme/theme_data.dart';
-import 'package:findskill/features/job-seeker-module/presentation/screens/dashboard/providers/dashboard_provider.dart';
-import 'package:findskill/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../../../../core/theme/theme_data.dart';
+import '../../../../../../main.dart';
+import '../providers/dashboard_provider.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -33,7 +33,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   style: Theme.of(context).textTheme.headline6,
                   children: <TextSpan>[
                     TextSpan(
-                      text: watch(dashboardProvider).username,
+                      text: watch(dashboardProvider).firstname,
                       style: Theme.of(context)
                           .textTheme
                           .headline6!
@@ -81,7 +81,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                         RichText(
                                           text: TextSpan(
                                             text:
-                                                "${watch(dashboardProvider).username}\n",
+                                                "${watch(dashboardProvider).firstname}\n",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .subtitle2,

@@ -1,15 +1,15 @@
-import 'package:findskill/features/registration/data/models/skills.dart';
-import 'package:findskill/features/registration/presentation/provider/skills_choice_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/theme_data.dart';
+import '../../../job-seeker-module/data/models/jobseeker_module.dart';
+import '../provider/skills_choice_provider.dart';
 
 class SkillSelectChip extends StatelessWidget {
   const SkillSelectChip({Key? key, required this.skills}) : super(key: key);
 
   final List<Skill> skills;
-  
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> choices = [];
@@ -45,7 +45,7 @@ class _ChipState extends State<SkillChip> {
       builder: (context, watch, child) {
         final bool isSelected = watch(skillsChoiceProvider)
                 .selectedSkills
-                ?.contains(widget.skill) ??
+                ?.contains(widget.skill.skillId) ??
             false;
         return InkWell(
           onTap: () {
@@ -57,12 +57,12 @@ class _ChipState extends State<SkillChip> {
                 if (isSelected) {
                   watch(skillsChoiceProvider)
                       .selectedSkills!
-                      .remove(widget.skill);
+                      .remove(widget.skill.skillId);
                 } else {
                   if (watch(skillsChoiceProvider).selectedSkills!.length < 3) {
                     watch(skillsChoiceProvider)
                         .selectedSkills!
-                        .add(widget.skill);
+                        .add(widget.skill.skillId);
                   }
                 }
               },

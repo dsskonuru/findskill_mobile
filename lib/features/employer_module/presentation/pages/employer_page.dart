@@ -1,5 +1,6 @@
-import 'package:findskill/core/progress_tracker/progress_tracker.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../core/progress_tracker/progress_tracker.dart';
 
 class EmployerPage extends StatefulWidget {
   const EmployerPage({Key? key}) : super(key: key);

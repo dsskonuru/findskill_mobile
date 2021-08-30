@@ -1,16 +1,16 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:findskill/core/progress_tracker/progress_tracker.dart';
-import 'package:findskill/core/theme/app_bar.dart';
-import 'package:findskill/core/theme/raised_gradient_button.dart';
-import 'package:findskill/core/theme/theme_data.dart';
-import 'package:findskill/features/registration/presentation/provider/job_preference_choice_provider.dart';
-import 'package:findskill/features/registration/presentation/widgets/job_preference_chips.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../core/localization/app_localization.dart';
+import '../../../../core/progress_tracker/progress_tracker.dart';
 import '../../../../core/router/router.gr.dart';
+import '../../../../core/theme/app_bar.dart';
+import '../../../../core/theme/raised_gradient_button.dart';
+import '../../../../core/theme/theme_data.dart';
+import '../provider/job_preferences_provider.dart';
+import '../widgets/job_preference_chips.dart';
 
 class JobPreferencesPage extends StatefulWidget {
   const JobPreferencesPage({Key? key}) : super(key: key);
@@ -50,9 +50,9 @@ class JobseekerPreferencesScreen extends ConsumerWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data!) {
           final List<String> contractTypes =
-              watch(jobseekerPreferenceChoiceProvider).contractTypes!;
+              watch(jobseekerPreferencesProvider).contractTypes!;
           final List<String> jobTypes =
-              watch(jobseekerPreferenceChoiceProvider).jobTypes!;
+              watch(jobseekerPreferencesProvider).jobTypes!;
           return Padding(
             padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 5.w),
             child: SingleChildScrollView(
@@ -120,7 +120,7 @@ class JobseekerPreferencesScreen extends ConsumerWidget {
                             ),
                             TextFormField(
                               onChanged: (value) =>
-                                  watch(jobseekerPreferenceChoiceProvider)
+                                  watch(jobseekerPreferencesProvider)
                                       .minimumRate = int.tryParse(value),
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
@@ -176,7 +176,7 @@ class JobseekerPreferencesScreen extends ConsumerWidget {
                             ),
                             TextFormField(
                               onChanged: (value) =>
-                                  watch(jobseekerPreferenceChoiceProvider)
+                                  watch(jobseekerPreferencesProvider)
                                       .maximumRate = int.tryParse(value),
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
@@ -227,7 +227,7 @@ class JobseekerPreferencesScreen extends ConsumerWidget {
                   SizedBox(height: 2.h),
                   Text(
                     AppLocalizations.of(context)!.translate(
-                        "Rs ${8 * (watch(jobseekerPreferenceChoiceProvider).minimumRate ?? 100)} to ${8 * (watch(jobseekerPreferenceChoiceProvider).maximumRate ?? 500)} per day"),
+                        "Rs ${8 * (watch(jobseekerPreferencesProvider).minimumRate ?? 100)} to ${8 * (watch(jobseekerPreferencesProvider).maximumRate ?? 500)} per day"),
                     style: Theme.of(context)
                         .textTheme
                         .overline!
@@ -235,7 +235,7 @@ class JobseekerPreferencesScreen extends ConsumerWidget {
                   ),
                   Text(
                     AppLocalizations.of(context)!.translate(
-                        "Rs ${200 * (watch(jobseekerPreferenceChoiceProvider).minimumRate ?? 100)} to ${200 * (watch(jobseekerPreferenceChoiceProvider).maximumRate ?? 500)} per month"),
+                        "Rs ${200 * (watch(jobseekerPreferencesProvider).minimumRate ?? 100)} to ${200 * (watch(jobseekerPreferencesProvider).maximumRate ?? 500)} per month"),
                     style: Theme.of(context)
                         .textTheme
                         .overline!
@@ -245,22 +245,11 @@ class JobseekerPreferencesScreen extends ConsumerWidget {
                   Center(
                     child: GradientButton(
                       onPressed: () async {
-                        if (watch(jobseekerPreferenceChoiceProvider)
-                                    .selectedJobType !=
-                                null &&
-                            watch(jobseekerPreferenceChoiceProvider)
-                                    .selectedContractType !=
-                                null &&
-                            watch(jobseekerPreferenceChoiceProvider)
-                                    .maximumRate !=
-                                null &&
-                            watch(jobseekerPreferenceChoiceProvider)
-                                    .minimumRate !=
-                                null) {
-                          context.router.push(const ScanYourIdRoute());
+                        final bool response =
+                            await watch(jobseekerPreferencesProvider).submit();
+                        if (response) {
+                          await context.router.push(const ScanYourIdRoute());
                         }
-                        // await watch(jobseekerPreferenceChoiceProvider)
-                        //       .submit();
                       },
                       child: Text(
                         AppLocalizations.of(context)!.translate(buttonText),
@@ -277,7 +266,7 @@ class JobseekerPreferencesScreen extends ConsumerWidget {
           return const Center(child: CircularProgressIndicator.adaptive());
         }
       },
-      future: watch(jobseekerPreferenceChoiceProvider).fetchJobTypeList(),
+      future: watch(jobseekerPreferencesProvider).fetchJobTypes(),
     );
   }
 }

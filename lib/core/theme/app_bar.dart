@@ -4,8 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../features/onboarding/data/models/language.dart';
-import '../../features/onboarding/presentation/provider/language_provider.dart';
-import '../providers/user_actions_provider.dart';
+import '../providers/language_provider.dart';
 import 'theme_data.dart';
 
 class FindSkillAppBar extends ConsumerWidget implements PreferredSizeWidget {
@@ -51,8 +50,9 @@ class FindSkillAppBar extends ConsumerWidget implements PreferredSizeWidget {
             ),
             child: IconButton(
               color: Colors.white,
-              onPressed:
-                  enableMenu ? onNavigationSelection : () => context.router.pop(),
+              onPressed: enableMenu
+                  ? onNavigationSelection
+                  : () => context.router.pop(),
               icon: enableMenu
                   ? const Icon(Icons.menu)
                   : const Icon(Icons.arrow_back_ios_new),
@@ -92,7 +92,7 @@ class FindSkillAppBar extends ConsumerWidget implements PreferredSizeWidget {
                         ))
                     .toList();
               },
-              onSelected: (_languageName) => watch(userActionsProvider)
+              onSelected: (_languageName) => watch(languageProvider)
                   .changeLanguage(_languageName, context),
             ),
           ),

@@ -1,6 +1,4 @@
 // ignore_for_file: file_names, invalid_annotation_target
-
-import 'package:findskill/features/job-seeker-module/data/models/skill_update.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'jobseeker_profile.freezed.dart';
@@ -37,20 +35,10 @@ class JobseekerProfile with _$JobseekerProfile {
     @JsonKey(name: "minimum_rate") required String minimumRate,
     @JsonKey(name: "contract_type") required String contractType,
     @JsonKey(name: "job_type") required String jobType,
-    required Skills skill,
+    required List<String> skill,
   }) = _JobseekerProfile;
   factory JobseekerProfile.fromJson(Map<String, dynamic> json) =>
       _$JobseekerProfileFromJson(json);
-}
-
-@freezed
-class UserLanguages with _$UserLanguages {
-  @JsonSerializable(explicitToJson: true)
-  factory UserLanguages({
-    required List<UserLanguage> userLanguages,
-  }) = _UserLanguages;
-  factory UserLanguages.fromJson(Map<String, dynamic> json) =>
-      _$UserLanguagesFromJson(json);
 }
 
 @freezed
@@ -59,7 +47,7 @@ class UserLanguage with _$UserLanguage {
   factory UserLanguage({
     required String language,
     required List<String> proficiency,
-    @JsonKey(name: "is_primary_language") required String isPrimaryLanguage,
+    @JsonKey(name: "is_primary_language") required bool isPrimaryLanguage,
   }) = _UserLanguage;
   factory UserLanguage.fromJson(Map<String, dynamic> json) =>
       _$UserLanguageFromJson(json);
@@ -72,7 +60,7 @@ class JobseekerProfileResponse with _$JobseekerProfileResponse {
     required User jobseeker,
     @JsonKey(name: "jobseeker_profile")
         required JobseekerProfile jobseekerProfile,
-    @JsonKey(name: "user_language") required UserLanguages userLanguages,
+    @JsonKey(name: "user_language") required List<UserLanguage> userLanguages,
   }) = _JobseekerProfileResponse;
   factory JobseekerProfileResponse.fromJson(Map<String, dynamic> json) =>
       _$JobseekerProfileResponseFromJson(json);

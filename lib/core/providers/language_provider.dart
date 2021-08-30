@@ -4,13 +4,14 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 
-import '../../../../core/error/failures.dart';
-import '../../../../core/providers/shared_preferences_provider.dart';
-import '../../../../main.dart';
-import '../../data/models/language.dart';
-import '../../data/repositories/languages_list_repository.dart';
-import '../../data/repositories/languages_map_repository.dart';
+import '../../features/onboarding/data/models/language.dart';
+import '../../features/onboarding/data/repositories/languages_list_repository.dart';
+import '../../features/onboarding/data/repositories/languages_map_repository.dart';
+import '../../main.dart';
+import '../error/failures.dart';
+import 'shared_preferences_provider.dart';
 
 const String cachedLanguage = 'CACHED_LANGUAGE';
 const String cachedLanguages = 'CACHED_LANGUAGES';
@@ -88,6 +89,16 @@ class LanguageNotifier extends ChangeNotifier {
       _languageNamesList.add(language.name); // TODO: Capitalize Local names
     }
     return _languageNamesList;
+  }
+
+  Future<void> changeLanguage(String languageName, BuildContext context) async {
+    language = languages.list.firstWhere(
+      (language) => language.name == languageName,
+      orElse: () => initLanguage,
+    );
+    Logger.root.fine('Selected Language Code: ${language.code}');
+    final _locale = Locale(language.code);
+    FindSkillApp.setLocale(context, _locale);
   }
 
   String getSampleVideoPath() {

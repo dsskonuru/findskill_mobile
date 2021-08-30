@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/theme_data.dart';
-import '../provider/job_preference_choice_provider.dart';
+import '../provider/job_preferences_provider.dart';
 
 enum Preference {
   contract,
@@ -50,26 +50,23 @@ class _ChipState extends State<PreferenceChip> {
     return Consumer(
       builder: (context, watch, child) {
         final bool isSelected = (widget.type == Preference.contract)
-            ? watch(jobseekerPreferenceChoiceProvider).selectedContractType ==
+            ? watch(jobseekerPreferencesProvider).contractType ==
                 widget.preference
-            : watch(jobseekerPreferenceChoiceProvider).selectedJobType ==
-                widget.preference;
+            : watch(jobseekerPreferencesProvider).jobType == widget.preference;
         return InkWell(
           onTap: () {
             setState(
               () {
                 if (isSelected) {
                   (widget.type == Preference.contract)
-                      ? watch(jobseekerPreferenceChoiceProvider)
-                          .selectedContractType = null
-                      : watch(jobseekerPreferenceChoiceProvider)
-                          .selectedJobType = null;
+                      ? watch(jobseekerPreferencesProvider).contractType = null
+                      : watch(jobseekerPreferencesProvider).jobType = null;
                 } else {
                   (widget.type == Preference.contract)
-                      ? watch(jobseekerPreferenceChoiceProvider)
-                          .selectedContractType = widget.preference
-                      : watch(jobseekerPreferenceChoiceProvider)
-                          .selectedJobType = widget.preference;
+                      ? watch(jobseekerPreferencesProvider).contractType =
+                          widget.preference
+                      : watch(jobseekerPreferencesProvider).jobType =
+                          widget.preference;
                 }
               },
             );

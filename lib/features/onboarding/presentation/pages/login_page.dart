@@ -1,17 +1,15 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:findskill/core/progress_tracker/progress_tracker.dart';
-import 'package:findskill/features/login/presentation/providers/login_form_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../core/localization/app_localization.dart';
+import '../../../../core/progress_tracker/progress_tracker.dart';
+import '../../../../core/providers/user_actions_provider.dart';
 import '../../../../core/router/router.gr.dart';
 import '../../../../core/theme/app_bar.dart';
 import '../../../../core/theme/raised_gradient_button.dart';
-import '../../data/models/user_login.dart';
-
 
 // TODO: Check if primarily JS / Emp
 class LoginPage extends StatefulWidget {
@@ -82,11 +80,11 @@ class _LoginPageState extends State<LoginPage> {
                           Flexible(
                             child: InkWell(
                               onTap: () => context.router.push(
-                                const SampleVideoRoute()
-                                // FindSkillRouter(
-                                //   pageKey: ProgressKey.sampleVideo.index,
-                                // ),
-                              ),
+                                  const SampleVideoRoute()
+                                  // FindSkillRouter(
+                                  //   pageKey: ProgressKey.sampleVideo.index,
+                                  // ),
+                                  ),
                               child: Column(
                                 children: [
                                   Container(
@@ -136,11 +134,11 @@ class _LoginPageState extends State<LoginPage> {
                           Flexible(
                             child: InkWell(
                               onTap: () => context.router.push(
-                                const RegistrationRoute()
-                                // FindSkillRouter(
-                                //   pageKey: ProgressKey.registration.index,
-                                // ),
-                              ),
+                                  const RegistrationRoute()
+                                  // FindSkillRouter(
+                                  //   pageKey: ProgressKey.registration.index,
+                                  // ),
+                                  ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -228,12 +226,14 @@ class _LoginPageState extends State<LoginPage> {
                               hintText: "1234567890",
                             ),
                             autocorrect: false,
-                            initialValue: watch(loginFormProvider).phoneNumber,
-                            onChanged: (phoneNumber) => watch(loginFormProvider)
-                                .phoneNumber = phoneNumber,
+                            initialValue:
+                                watch(userActionsProvider).phoneNumber,
+                            onChanged: (phoneNumber) =>
+                                watch(userActionsProvider).phoneNumber =
+                                    phoneNumber,
                             validator: (value) {
-                              if (value != null &&
-                                  int.tryParse(value) != null) {
+                              if (value == null &&
+                                  int.tryParse(value!) == null) {
                                 return "Please enter a valid mobile number";
                               }
                               return null;
@@ -257,13 +257,12 @@ class _LoginPageState extends State<LoginPage> {
                             obscureText: true,
                             autocorrect: false,
                             onChanged: (password) => context
-                                .read(loginFormProvider)
+                                .read(userActionsProvider)
                                 .password = password,
                             validator: (value) {
-                              value = value.toString();
-                              if (value.length <= 8) {
-                                return "Password too short";
-                              }
+                              // if (value.length <= 8) {
+                              //   return "Password too short";
+                              // }
                               return null;
                             },
                           ),
@@ -272,16 +271,21 @@ class _LoginPageState extends State<LoginPage> {
                             alignment: Alignment.centerLeft,
                             child: GradientButton(
                               onPressed: () async {
-                                // TODO: Validate the form first and navigate based on response
-                                final LoginResponse? response =
-                                    await watch(loginFormProvider).login();
-                                if (response != null) {
-                                  return context.router.push(
-                                    const JobseekerRoute()
+                                if (_loginFormKey.currentState!.validate()) {
+                                  await watch(userActionsProvider)
+                                      .getUserLocation();
+                                  final bool hasLoggedIn =
+                                      await watch(userActionsProvider).login();
+                                  final bool gotProfile =
+                                      await watch(userActionsProvider)
+                                          .getProfile();
+                                  if (hasLoggedIn && gotProfile) {
+                                    await context.router
+                                        .push(const JobseekerRoute());
                                     // FindSkillRouter(
                                     //   pageKey: ProgressKey.jobseekerHome.index,
                                     // ),
-                                  );
+                                  }
                                 }
                               },
                               child: Text(

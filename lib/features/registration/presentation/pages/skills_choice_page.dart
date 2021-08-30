@@ -1,18 +1,18 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:findskill/core/localization/app_localization.dart';
-import 'package:findskill/core/progress_tracker/progress_tracker.dart';
-import 'package:findskill/core/theme/raised_gradient_button.dart';
-import 'package:findskill/core/theme/theme_data.dart';
-import 'package:findskill/features/registration/data/models/skills.dart';
-import 'package:findskill/features/registration/presentation/widgets/skill_chips.dart';
-import 'package:findskill/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../../core/localization/app_localization.dart';
+import '../../../../core/progress_tracker/progress_tracker.dart';
 import '../../../../core/router/router.gr.dart';
 import '../../../../core/theme/app_bar.dart';
+import '../../../../core/theme/raised_gradient_button.dart';
+import '../../../../core/theme/theme_data.dart';
+import '../../../../main.dart';
+import '../../../job-seeker-module/data/models/jobseeker_module.dart';
 import '../provider/skills_choice_provider.dart';
+import '../widgets/skill_chips.dart';
 
 class SkillsChoicePage extends StatefulWidget {
   const SkillsChoicePage({Key? key}) : super(key: key);
@@ -27,7 +27,6 @@ class _SkillsChoicePageState extends State<SkillsChoicePage> {
   @override
   void initState() {
     saveProgress(pKey);
-
     super.initState();
   }
 
@@ -51,8 +50,8 @@ class SkillsChoiceScreen extends ConsumerWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           final String buttonText = isPage ? "Next" : "Update";
-          final List<SkillCategoryResponse> skillCategories =
-              watch(skillsChoiceProvider).skillCategoriesList!;
+          final List<String> skillCategories =
+              watch(skillsChoiceProvider).skillsMap.keys.toList();
           final Map<String, List<Skill>> skillsMap =
               watch(skillsChoiceProvider).skillsMap;
           return Padding(
@@ -74,9 +73,8 @@ class SkillsChoiceScreen extends ConsumerWidget {
                   child: ListView.builder(
                     itemCount: skillCategories.length,
                     itemBuilder: (context, index) {
-                      final SkillCategoryResponse skillCategory =
-                          skillCategories[index];
-                      final List<Skill> skills = skillsMap[skillCategory.id]!;
+                      final String skillCategory = skillCategories[index];
+                      final List<Skill> skills = skillsMap[skillCategory]!;
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -96,9 +94,13 @@ class SkillsChoiceScreen extends ConsumerWidget {
                   ),
                 ),
                 GradientButton(
+                  // TODO: Handle else
                   onPressed: () async {
-                    // await watch(skillsChoiceProvider).submit();
-                    await context.router.push(const JobPreferencesRoute());
+                    final bool response =
+                        await watch(skillsChoiceProvider).submit();
+                    if (response) {
+                      await context.router.push(const JobPreferencesRoute());
+                    }
                   },
                   child: Text(
                     AppLocalizations.of(context)!.translate(buttonText),

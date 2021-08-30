@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
-import '../provider/phone_auth_provider.dart';
+import '../provider/otp_verification_provider.dart';
 
 class PinInputField extends StatefulWidget {
   @override
@@ -28,7 +28,7 @@ class _PinInputFieldState extends State<PinInputField> {
       followingFieldDecoration: pinPutDecoration,
       pinAnimationType: PinAnimationType.scale,
       textStyle: Theme.of(context).textTheme.bodyText2,
-      onChanged: (pin) => context.read(phoneAuthProvider).smsCode = pin,
+      onChanged: (pin) => context.read(otpVerificationProvider).smsCode = pin,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Please provide the PIN';

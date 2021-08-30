@@ -63,6 +63,25 @@ class _AuthClient implements AuthClient {
   }
 
   @override
+  Future<List<IdType>> getIdTypes(token) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<IdType>>(Options(
+                method: 'GET',
+                headers: <String, dynamic>{r'Authorization': token},
+                extra: _extra)
+            .compose(_dio.options, '/id-types-list',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => IdType.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
   Future<String> getLanguageMap(languageCode) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -106,22 +125,6 @@ class _AuthClient implements AuthClient {
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = AuthResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<String> idTypesList(token) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
-            method: 'GET',
-            headers: <String, dynamic>{r'Authorization': token},
-            extra: _extra)
-        .compose(_dio.options, '/id-types-list',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data!;
     return value;
   }
 

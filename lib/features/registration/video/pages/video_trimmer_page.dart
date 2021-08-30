@@ -1,14 +1,12 @@
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:findskill/core/progress_tracker/progress_tracker.dart';
 import 'package:flutter/material.dart';
-import 'package:logging/logging.dart';
-import 'package:path/path.dart' as path;
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_trimmer/video_trimmer.dart';
 
 import '../../../../../core/localization/app_localization.dart';
+import '../../../../../core/progress_tracker/progress_tracker.dart';
 import '../../../../../core/router/router.gr.dart';
 import '../../../../../core/theme/raised_gradient_button.dart';
 import '../../../../../main.dart';
@@ -27,9 +25,9 @@ class _VideoTrimmerPageState extends State<VideoTrimmerPage> {
   double _startValue = 0.0;
   double _endValue = 0.0;
 
+  bool _progressVisibility = false;
   // ignore: unused_field
   bool _isPlaying = false;
-  // bool _progressVisibility = false;
 
   String getVideoLength() {
     return (((_endValue - _startValue) % 60000) / 1000).toStringAsFixed(2);
@@ -88,11 +86,11 @@ class _VideoTrimmerPageState extends State<VideoTrimmerPage> {
                     alignment: Alignment.topCenter,
                     child: Column(
                       children: [
-                        // Visibility(
-                        //   visible: _progressVisibility,
-                        //   child: const LinearProgressIndicator(
-                        //       backgroundColor: Colors.red),
-                        // ),
+                        Visibility(
+                          visible: _progressVisibility,
+                          child: const LinearProgressIndicator(
+                              backgroundColor: Colors.red),
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -149,24 +147,19 @@ class _VideoTrimmerPageState extends State<VideoTrimmerPage> {
                         SizedBox(height: 10.h),
                         GradientButton(
                           onPressed: () async {
+                            setState(() => _progressVisibility = true);
                             final String trimmedOutputPath =
                                 await _trimmer.saveTrimmedVideo(
-                                    startValue: _startValue,
-                                    endValue: _endValue);
-
-                            File video = File(trimmedOutputPath);
-                            final String dir = path.dirname(video.path);
-                            final String newPath =
-                                path.join(dir, 'video_file.mp4');
-                            video = await video.rename(newPath);
-
-                            Logger.root.fine(video.path);
+                              startValue: _startValue,
+                              endValue: _endValue,
+                              storageDir:
+                                  StorageDir.applicationDocumentsDirectory,
+                              videoFolderName: "Videos",
+                              videoFileName: "video_file_trimmed",
+                            );
+                            final File video = File(trimmedOutputPath);
                             container.read(videoServiceProvider).video = video;
-
-                            // setState(() {
-                            //   _progressVisibility = false;
-                            // });
-
+                            setState(() => _progressVisibility = false);
                             await context.router.push(const VideoPreviewRoute()
                                 // FindSkillRouter(
                                 //   pageKey: ProgressKey.videoPreview.index)

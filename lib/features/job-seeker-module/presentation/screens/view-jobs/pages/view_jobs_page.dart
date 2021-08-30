@@ -1,14 +1,14 @@
 // TODO: Build the UI along with appropriate tests for Notifications Page @dheerajv09
 
-import 'package:findskill/core/localization/app_localization.dart';
-import 'package:findskill/core/theme/app_bar.dart';
-import 'package:findskill/core/theme/raised_gradient_button.dart';
-import 'package:findskill/features/onboarding/presentation/provider/language_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../../../../main.dart';
+import '../../../../../../core/localization/app_localization.dart';
+import '../../../../../../core/providers/language_provider.dart';
+import '../../../../../../core/theme/app_bar.dart';
+import '../../../../../../core/theme/raised_gradient_button.dart';
 
 class NotificationsPage extends StatefulWidget {
   @override

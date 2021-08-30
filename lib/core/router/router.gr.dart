@@ -11,8 +11,8 @@ import '../../features/employer_module/presentation/pages/employer_page.dart'
     as _i16;
 import '../../features/job-seeker-module/presentation/jobseeker_page.dart'
     as _i15;
-import '../../features/login/presentation/pages/login_page.dart' as _i5;
 import '../../features/onboarding/presentation/pages/intro_page.dart' as _i4;
+import '../../features/onboarding/presentation/pages/login_page.dart' as _i5;
 import '../../features/onboarding/presentation/pages/onboarding_page.dart'
     as _i3;
 import '../../features/registration/presentation/pages/job_preferences_page.dart'
@@ -25,11 +25,11 @@ import '../../features/registration/presentation/pages/scan_your_id_page.dart'
     as _i13;
 import '../../features/registration/presentation/pages/skills_choice_page.dart'
     as _i14;
+import '../../features/registration/video/pages/sample_video_page.dart' as _i6;
+import '../../features/registration/video/pages/video_capture_page.dart' as _i7;
+import '../../features/registration/video/pages/video_preview_page.dart' as _i9;
+import '../../features/registration/video/pages/video_trimmer_page.dart' as _i8;
 import '../../features/under_processing_page.dart' as _i17;
-import '../../features/video/pages/sample_video_page.dart' as _i6;
-import '../../features/video/pages/video_capture_page.dart' as _i7;
-import '../../features/video/pages/video_preview_page.dart' as _i9;
-import '../../features/video/pages/video_trimmer_page.dart' as _i8;
 
 class AppRouter extends _i1.RootStackRouter {
   AppRouter([_i2.GlobalKey<_i2.NavigatorState>? navigatorKey])

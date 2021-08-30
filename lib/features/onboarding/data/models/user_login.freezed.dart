@@ -203,7 +203,7 @@ class _$LoginResponseTearOff {
       @JsonKey(name: "phone_number") required String phoneNumber,
       @JsonKey(name: "user_id") required String userId,
       @JsonKey(name: "is_logged_in") required bool isLoggedIn,
-      @JsonKey(name: "user_name") required String userName,
+      @JsonKey(name: "user_name") required String firstName,
       @JsonKey(name: "place_name") required String placeName,
       required String gender}) {
     return _LoginResponse(
@@ -211,7 +211,7 @@ class _$LoginResponseTearOff {
       phoneNumber: phoneNumber,
       userId: userId,
       isLoggedIn: isLoggedIn,
-      userName: userName,
+      firstName: firstName,
       placeName: placeName,
       gender: gender,
     );
@@ -235,7 +235,7 @@ mixin _$LoginResponse {
   @JsonKey(name: "is_logged_in")
   bool get isLoggedIn => throw _privateConstructorUsedError;
   @JsonKey(name: "user_name")
-  String get userName => throw _privateConstructorUsedError;
+  String get firstName => throw _privateConstructorUsedError;
   @JsonKey(name: "place_name")
   String get placeName => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
@@ -256,7 +256,7 @@ abstract class $LoginResponseCopyWith<$Res> {
       @JsonKey(name: "phone_number") String phoneNumber,
       @JsonKey(name: "user_id") String userId,
       @JsonKey(name: "is_logged_in") bool isLoggedIn,
-      @JsonKey(name: "user_name") String userName,
+      @JsonKey(name: "user_name") String firstName,
       @JsonKey(name: "place_name") String placeName,
       String gender});
 }
@@ -276,7 +276,7 @@ class _$LoginResponseCopyWithImpl<$Res>
     Object? phoneNumber = freezed,
     Object? userId = freezed,
     Object? isLoggedIn = freezed,
-    Object? userName = freezed,
+    Object? firstName = freezed,
     Object? placeName = freezed,
     Object? gender = freezed,
   }) {
@@ -297,9 +297,9 @@ class _$LoginResponseCopyWithImpl<$Res>
           ? _value.isLoggedIn
           : isLoggedIn // ignore: cast_nullable_to_non_nullable
               as bool,
-      userName: userName == freezed
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
+      firstName: firstName == freezed
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
               as String,
       placeName: placeName == freezed
           ? _value.placeName
@@ -325,7 +325,7 @@ abstract class _$LoginResponseCopyWith<$Res>
       @JsonKey(name: "phone_number") String phoneNumber,
       @JsonKey(name: "user_id") String userId,
       @JsonKey(name: "is_logged_in") bool isLoggedIn,
-      @JsonKey(name: "user_name") String userName,
+      @JsonKey(name: "user_name") String firstName,
       @JsonKey(name: "place_name") String placeName,
       String gender});
 }
@@ -347,7 +347,7 @@ class __$LoginResponseCopyWithImpl<$Res>
     Object? phoneNumber = freezed,
     Object? userId = freezed,
     Object? isLoggedIn = freezed,
-    Object? userName = freezed,
+    Object? firstName = freezed,
     Object? placeName = freezed,
     Object? gender = freezed,
   }) {
@@ -368,9 +368,9 @@ class __$LoginResponseCopyWithImpl<$Res>
           ? _value.isLoggedIn
           : isLoggedIn // ignore: cast_nullable_to_non_nullable
               as bool,
-      userName: userName == freezed
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
+      firstName: firstName == freezed
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
               as String,
       placeName: placeName == freezed
           ? _value.placeName
@@ -393,7 +393,7 @@ class _$_LoginResponse implements _LoginResponse {
       @JsonKey(name: "phone_number") required this.phoneNumber,
       @JsonKey(name: "user_id") required this.userId,
       @JsonKey(name: "is_logged_in") required this.isLoggedIn,
-      @JsonKey(name: "user_name") required this.userName,
+      @JsonKey(name: "user_name") required this.firstName,
       @JsonKey(name: "place_name") required this.placeName,
       required this.gender});
 
@@ -413,7 +413,7 @@ class _$_LoginResponse implements _LoginResponse {
   final bool isLoggedIn;
   @override
   @JsonKey(name: "user_name")
-  final String userName;
+  final String firstName;
   @override
   @JsonKey(name: "place_name")
   final String placeName;
@@ -422,7 +422,7 @@ class _$_LoginResponse implements _LoginResponse {
 
   @override
   String toString() {
-    return 'LoginResponse(token: $token, phoneNumber: $phoneNumber, userId: $userId, isLoggedIn: $isLoggedIn, userName: $userName, placeName: $placeName, gender: $gender)';
+    return 'LoginResponse(token: $token, phoneNumber: $phoneNumber, userId: $userId, isLoggedIn: $isLoggedIn, firstName: $firstName, placeName: $placeName, gender: $gender)';
   }
 
   @override
@@ -439,9 +439,9 @@ class _$_LoginResponse implements _LoginResponse {
             (identical(other.isLoggedIn, isLoggedIn) ||
                 const DeepCollectionEquality()
                     .equals(other.isLoggedIn, isLoggedIn)) &&
-            (identical(other.userName, userName) ||
+            (identical(other.firstName, firstName) ||
                 const DeepCollectionEquality()
-                    .equals(other.userName, userName)) &&
+                    .equals(other.firstName, firstName)) &&
             (identical(other.placeName, placeName) ||
                 const DeepCollectionEquality()
                     .equals(other.placeName, placeName)) &&
@@ -456,7 +456,7 @@ class _$_LoginResponse implements _LoginResponse {
       const DeepCollectionEquality().hash(phoneNumber) ^
       const DeepCollectionEquality().hash(userId) ^
       const DeepCollectionEquality().hash(isLoggedIn) ^
-      const DeepCollectionEquality().hash(userName) ^
+      const DeepCollectionEquality().hash(firstName) ^
       const DeepCollectionEquality().hash(placeName) ^
       const DeepCollectionEquality().hash(gender);
 
@@ -477,7 +477,7 @@ abstract class _LoginResponse implements LoginResponse {
       @JsonKey(name: "phone_number") required String phoneNumber,
       @JsonKey(name: "user_id") required String userId,
       @JsonKey(name: "is_logged_in") required bool isLoggedIn,
-      @JsonKey(name: "user_name") required String userName,
+      @JsonKey(name: "user_name") required String firstName,
       @JsonKey(name: "place_name") required String placeName,
       required String gender}) = _$_LoginResponse;
 
@@ -497,7 +497,7 @@ abstract class _LoginResponse implements LoginResponse {
   bool get isLoggedIn => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "user_name")
-  String get userName => throw _privateConstructorUsedError;
+  String get firstName => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "place_name")
   String get placeName => throw _privateConstructorUsedError;

@@ -4,7 +4,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:riverpod/riverpod.dart';
 
-import '../../features/registration/data/models/firebase_user.dart';
+import '../../features/registration/data/models/registration.dart';
 
 final crashlyticsProvider =
     Provider<FirebaseCrashlytics>((ref) => FirebaseCrashlytics.instance);

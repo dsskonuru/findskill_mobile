@@ -48,7 +48,7 @@ _$_JobseekerProfile _$_$_JobseekerProfileFromJson(Map<String, dynamic> json) {
     minimumRate: json['minimum_rate'] as String,
     contractType: json['contract_type'] as String,
     jobType: json['job_type'] as String,
-    skill: Skills.fromJson(json['skill'] as Map<String, dynamic>),
+    skill: (json['skill'] as List<dynamic>).map((e) => e as String).toList(),
   );
 }
 
@@ -61,20 +61,7 @@ Map<String, dynamic> _$_$_JobseekerProfileToJson(
       'minimum_rate': instance.minimumRate,
       'contract_type': instance.contractType,
       'job_type': instance.jobType,
-      'skill': instance.skill.toJson(),
-    };
-
-_$_UserLanguages _$_$_UserLanguagesFromJson(Map<String, dynamic> json) {
-  return _$_UserLanguages(
-    userLanguages: (json['userLanguages'] as List<dynamic>)
-        .map((e) => UserLanguage.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
-
-Map<String, dynamic> _$_$_UserLanguagesToJson(_$_UserLanguages instance) =>
-    <String, dynamic>{
-      'userLanguages': instance.userLanguages.map((e) => e.toJson()).toList(),
+      'skill': instance.skill,
     };
 
 _$_UserLanguage _$_$_UserLanguageFromJson(Map<String, dynamic> json) {
@@ -82,7 +69,7 @@ _$_UserLanguage _$_$_UserLanguageFromJson(Map<String, dynamic> json) {
     language: json['language'] as String,
     proficiency:
         (json['proficiency'] as List<dynamic>).map((e) => e as String).toList(),
-    isPrimaryLanguage: json['is_primary_language'] as String,
+    isPrimaryLanguage: json['is_primary_language'] as bool,
   );
 }
 
@@ -99,8 +86,9 @@ _$_JobseekerProfileResponse _$_$_JobseekerProfileResponseFromJson(
     jobseeker: User.fromJson(json['jobseeker'] as Map<String, dynamic>),
     jobseekerProfile: JobseekerProfile.fromJson(
         json['jobseeker_profile'] as Map<String, dynamic>),
-    userLanguages:
-        UserLanguages.fromJson(json['user_language'] as Map<String, dynamic>),
+    userLanguages: (json['user_language'] as List<dynamic>)
+        .map((e) => UserLanguage.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
@@ -109,5 +97,5 @@ Map<String, dynamic> _$_$_JobseekerProfileResponseToJson(
     <String, dynamic>{
       'jobseeker': instance.jobseeker.toJson(),
       'jobseeker_profile': instance.jobseekerProfile.toJson(),
-      'user_language': instance.userLanguages.toJson(),
+      'user_language': instance.userLanguages.map((e) => e.toJson()).toList(),
     };
