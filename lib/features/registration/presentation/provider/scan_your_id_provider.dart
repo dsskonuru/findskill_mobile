@@ -60,8 +60,8 @@ class ScanYourIdsNotifier extends ChangeNotifier {
   Future<void> fetchIdTypes() async {
     try {
       idTypes = await container.read(authClientProvider).getIdTypes(
-            "Token c1589920cafe4cd3bcd1a45ee53d7bccb5938dc5560364bf5c248ab0f2c62195",
-            // "Token ${container.read(userActionsProvider).loginResponse!.token}",
+            // "Token c1589920cafe4cd3bcd1a45ee53d7bccb5938dc5560364bf5c248ab0f2c62195",
+            "Token ${container.read(userActionsProvider).loginResponse!.token}",
           );
       return;
     } catch (exception, stack) {
